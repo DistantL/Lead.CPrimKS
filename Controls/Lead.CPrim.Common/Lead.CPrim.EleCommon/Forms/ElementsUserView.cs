@@ -77,21 +77,25 @@ namespace Lead.CPrim.EleCommon.Forms
 
             for (int j = 0; j < dgvDi.Columns.Count; j++)
             {
+                dgvDi.Columns[j].Width = j < 2 ? 240 : (j == 2 ? 70 : 50);
                 dgvDi.Columns[j].MinimumWidth = j < 2 ? 240 : (j == 2 ? 70 : 50);
             }
 
             for (int j = 0; j < dgvDo.Columns.Count; j++)
             {
+                dgvDo.Columns[j].Width = j < 2 ? 240 : (j == 2 ? 70 : 50);
                 dgvDo.Columns[j].MinimumWidth = j < 2 ? 240 : (j == 2 ? 70 : 50);
             }
 
             for (int j = 0; j < dgvCylinder.Columns.Count; j++)
             {
+                dgvCylinder.Columns[j].Width = j < 2 ? 240 : ((j == 2 || j == 3) ? 50 : 70);
                 dgvCylinder.Columns[j].MinimumWidth = j < 2 ? 240 : ((j == 2 || j == 3) ? 50 : 70);
             }
 
             for (int j = 0; j < dgvLight.Columns.Count; j++)
             {
+                dgvLight.Columns[j].Width = j < 2 ? 240 : 100;
                 dgvLight.Columns[j].MinimumWidth = j < 2 ? 240 : 100;
             }
         }

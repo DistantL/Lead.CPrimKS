@@ -83,14 +83,17 @@ namespace Lead.CPrim.EleCommon.Forms
             {
                 if (j == 0 || j == 1)
                 {
+                    dgvEleCylinder.Columns[j].Width = 200;
                     dgvEleCylinder.Columns[j].MinimumWidth = 200;
                 }
                 else if (j == 4 || j == 5 || j == 6 || j == 21)
                 {
+                    dgvEleCylinder.Columns[j].Width = 100;
                     dgvEleCylinder.Columns[j].MinimumWidth = 100;
                 }
                 else
                 {
+                    dgvEleCylinder.Columns[j].Width = 50;
                     dgvEleCylinder.Columns[j].MinimumWidth = 50;
                 }
             }
@@ -99,14 +102,17 @@ namespace Lead.CPrim.EleCommon.Forms
             {
                 if (j == 0 || j == 1)
                 {
+                    dgvEleDi.Columns[j].Width = 200;
                     dgvEleDi.Columns[j].MinimumWidth = 200;
                 }
                 else if (j == 4 || j == 5 || j == 12)
                 {
+                    dgvEleDi.Columns[j].Width = 100;
                     dgvEleDi.Columns[j].MinimumWidth = 100;
                 }
                 else
                 {
+                    dgvEleDi.Columns[j].Width = 60;
                     dgvEleDi.Columns[j].MinimumWidth = 60;
                 }
             }
@@ -115,14 +121,17 @@ namespace Lead.CPrim.EleCommon.Forms
             {
                 if (j == 0 || j == 1)
                 {
+                    dgvEleDo.Columns[j].Width = 200;
                     dgvEleDo.Columns[j].MinimumWidth = 200;
                 }
                 else if (j == 4 || j == 5 || j == 11)
                 {
+                    dgvEleDo.Columns[j].Width = 100;
                     dgvEleDo.Columns[j].MinimumWidth = 100;
                 }
                 else
                 {
+                    dgvEleDo.Columns[j].Width = 60;
                     dgvEleDo.Columns[j].MinimumWidth = 60;
                 }
             }
