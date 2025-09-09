@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{58A1F08B-6804-43B5-AA22-5637DAC214B0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lead.CPrim.PrimOPC</RootNamespace>
+    <AssemblyName>Lead.CPrim.PrimOPC</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Lead.CPrim\InnerLibs\VisioPrims\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Opc.Ua.Client">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Third\OPC\Opc.Ua.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Opc.Ua.Core">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Third\OPC\Opc.Ua.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="OpcUaHelper">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Third\OPC\OpcUaHelper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NodeConfig.cs" />
+    <Compile Include="OpcUAHelper\FormUtils.cs" />
+    <Compile Include="OPCConfig.cs" />
+    <Compile Include="OpcUAHelper\OpcHelper.cs" />
+    <Compile Include="PrimCreator.cs" />
+    <Compile Include="Controls\PrimDebugControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PrimDebugControl.Designer.cs">
+      <DependentUpon>PrimDebugControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrimOPC.cs" />
+    <Compile Include="Controls\PrimOutputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PrimOutputControl.Designer.cs">
+      <DependentUpon>PrimOutputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controls\PrimConfigControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PrimConfigControl.Designer.cs">
+      <DependentUpon>PrimConfigControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrimTypeAttributes.cs" />
+    <Compile Include="ResourceDefault.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceDefault.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\PrimConfigControl.resx">
+      <DependentUpon>PrimConfigControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PrimDebugControl.resx">
+      <DependentUpon>PrimDebugControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PrimOutputControl.resx">
+      <DependentUpon>PrimOutputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceDefault.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceDefault.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\haitun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\haitun32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Activity_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\brackets_Square_16xMD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Class_489.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\ClassIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Cloud_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Copy_6524.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Delegate_8339.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\docview_xaml_on_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Enum_582.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Event_594.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Event_594_exp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\glasses_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\grid_Data_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\lightningBolt_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\ListView_687.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Method_636.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Module_648.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Structure_507.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Table_748.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Tag_7213.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\usbcontroller.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\VirtualMachine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.Communicate\Lead.CPrim.Interfaces.Communicate.csproj">
+      <Project>{5a19935d-a8f3-4fc2-acc4-acfdf1c0dcea}</Project>
+      <Name>Lead.CPrim.Interfaces.Communicate</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces\Lead.CPrim.Interfaces.csproj">
+      <Project>{f83c7fbb-7e02-416e-afa4-a7c3e5d0d0e4}</Project>
+      <Name>Lead.CPrim.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\Lead.CPrim.ProxyTools\Lead.CPrim.ProxyTools.csproj">
+      <Project>{8399EDFF-87F1-40E7-A251-5A49CDAF6F10}</Project>
+      <Name>Lead.CPrim.ProxyTools</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EleCartesian_ConfigUI_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="EleCartesian_ConfigUI_Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="EleCartesian_ConfigUI_Type" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="EleCartesian_ConfigUI_State" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="EleCartesian_ConfigUI_DevName" xml:space="preserve">
+    <value>设备名称</value>
+  </data>
+  <data name="EleCartesian_ConfigUI_VelocityMode" xml:space="preserve">
+    <value>速度模式</value>
+  </data>
+  <data name="EleCartesian_ConfigUI_AxisNum" xml:space="preserve">
+    <value>轴号</value>
+  </data>
+  <data name="EleCartesian_ConfigUI_AxisConfig" xml:space="preserve">
+    <value>轴配置</value>
+  </data>
+  <data name="EleCartesian_ConfigUI_AxisStatus" xml:space="preserve">
+    <value>轴状态</value>
+  </data>
+  <data name="EleCartesian_ConfigUI_Interpolation" xml:space="preserve">
+    <value>插补</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_AxisName" xml:space="preserve">
+    <value>轴名称</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_Name" xml:space="preserve">
+    <value>名称:</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_ID" xml:space="preserve">
+    <value>识别码:</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_DriveType" xml:space="preserve">
+    <value>驱动类型:</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_ControlType" xml:space="preserve">
+    <value>控制类型:</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_FeedBackType" xml:space="preserve">
+    <value>反馈类型:</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_LeadRange" xml:space="preserve">
+    <value>导程:</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_PulsePerRoll" xml:space="preserve">
+    <value>脉冲当量:</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_HomeIndex" xml:space="preserve">
+    <value>原点位序号:</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_SafePosition" xml:space="preserve">
+    <value>安全位置:</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_SafeIndex" xml:space="preserve">
+    <value>安全位序号:</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_Enable" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_Simulate" xml:space="preserve">
+    <value>仿真</value>
+  </data>
+  <data name="EleCartesian_SingleAxisStatusControl_AxisName" xml:space="preserve">
+    <value>轴名称</value>
+  </data>
+  <data name="EleCartesian_SingleAxisStatusControl_Monitor" xml:space="preserve">
+    <value>监控</value>
+  </data>
+  <data name="EleCartesian_SingleAxisStatusControl_CommandPosition" xml:space="preserve">
+    <value>指令位置</value>
+  </data>
+  <data name="EleCartesian_SingleAxisStatusControl_CommandVelocity" xml:space="preserve">
+    <value>指令速度</value>
+  </data>
+  <data name="EleCartesian_SingleAxisStatusControl_ActualPosition" xml:space="preserve">
+    <value>实际位置</value>
+  </data>
+  <data name="EleCartesian_SingleAxisStatusControl_ActualVelocity" xml:space="preserve">
+    <value>实际速度</value>
+  </data>
+  <data name="EleCartesian_SingleAxisStatusControl_Debug" xml:space="preserve">
+    <value>调试</value>
+  </data>
+  <data name="EleCartesian_SingleAxisStatusControl_ServoOn" xml:space="preserve">
+    <value>伺服开</value>
+  </data>
+  <data name="EleCartesian_SingleAxisStatusControl_Reset" xml:space="preserve">
+    <value>复位</value>
+  </data>
+  <data name="EleCartesian_SingleAxisStatusControl_Position" xml:space="preserve">
+    <value>位置:</value>
+  </data>
+  <data name="EleCartesian_SingleAxisStatusControl_MovePosition" xml:space="preserve">
+    <value>运动</value>
+  </data>
+  <data name="EleCartesian_SingleAxisStatusControl_SettingPosition" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_DeviceNotFound" xml:space="preserve">
+    <value>名称为{0}的设备没有找到！</value>
+  </data>
+  <data name="EleCartesian_ConfigUI_CannotModifyParameters" xml:space="preserve">
+    <value>当前元素正在运行中，不允许修改参数，请切换至非运行状态。</value>
+  </data>
+  <data name="EleCartesian_ConfigUI_NotSettingAxisNumber" xml:space="preserve">
+    <value>轴数未设置。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_IdIsIncorrect" xml:space="preserve">
+    <value>{0} 的Id填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_LeadIsIncorrect" xml:space="preserve">
+    <value>{0} 的Lead填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_PulsePerRollIsIncorrect" xml:space="preserve">
+    <value>{0} 的PlsPerRoll填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_HomeIndexIsIncorrect" xml:space="preserve">
+    <value>{0} 的HomeIndex填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_SafePositionIsIncorrect" xml:space="preserve">
+    <value>{0} 的SafePos填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_SafeIndexIsIncorrect" xml:space="preserve">
+    <value>{0} 的WaitIndex填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_LimitMessage" xml:space="preserve">
+    <value>{0}的{1}处于限位状态：正限位- {2}，负限位- {3}，软正限位- {4} 软负限位- {5}，或者有一些警报 -  {6}</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_TimeOutHappened" xml:space="preserve">
+    <value>超时。</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_SingleMoveAbsolutelyUnsuccess" xml:space="preserve">
+    <value>{0}的{1}按绝对方式运动至{2}失败。</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_SomeAxisesInLimit" xml:space="preserve">
+    <value>{0}中的某些轴处于极限状态：正限位-</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_Mel" xml:space="preserve">
+    <value>负限位-</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_SPEL" xml:space="preserve">
+    <value>软正限位-</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_SMel" xml:space="preserve">
+    <value>软负限位-</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_HasSomeAlarm" xml:space="preserve">
+    <value>, 或有一些报警-</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_PosErrorHappened" xml:space="preserve">
+    <value>位置错误发生。</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_GroupMoveAbsTo" xml:space="preserve">
+    <value>组按绝对方式运动至</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_Unsuccessfully" xml:space="preserve">
+    <value>失败。</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_SingleHomeUnsuccess" xml:space="preserve">
+    <value>{0}的{1}单独回零点失败。</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_GroupHomeUnsuccess" xml:space="preserve">
+    <value>{0} 轴组回零点失败。</value>
+  </data>
+  <data name="EleCartesian_AxesPointsConfig_Info" xml:space="preserve">
+    <value>轴点位配置</value>
+  </data>
+  <data name="EleCartesian_AxesPointsConfig_ChangePointPosition" xml:space="preserve">
+    <value>你确定改变点位置吗？</value>
+  </data>
+  <data name="EleCartesian_AxesPointsConfig_VelocityIllegal" xml:space="preserve">
+    <value>行：{0}，列：{1}中速度值是非法的！</value>
+  </data>
+  <data name="EleCartesian_AxesPointsConfig_MinVelocityIllegal" xml:space="preserve">
+    <value>行：{0}，列：{1}中最小速度值是非法的！</value>
+  </data>
+  <data name="EleCartesian_AxesPointsConfig_VelocityOverLimit" xml:space="preserve">
+    <value>行：{0}，列：{1}'的速度值超出限制！</value>
+  </data>
+  <data name="EleCartesian_AxesPointsConfig_MinVelocityOverLimit" xml:space="preserve">
+    <value>行：{0}，列：{1}中最小速度值超出限制！</value>
+  </data>
+  <data name="EleCartesian_AxesPointsConfig_SelectedFileNotExist" xml:space="preserve">
+    <value>所选文件不存在！</value>
+  </data>
+  <data name="EleCartesian_ConfigUI_SelectedFileNotExist" xml:space="preserve">
+    <value>所选文件不存在！</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_LimitVelPIsIncorrect" xml:space="preserve">
+    <value>{0}的LimitVelP填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_LimitVelNIsIncorrect" xml:space="preserve">
+    <value>{0}的LimitVelN填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_LimitPosPIsIncorrect" xml:space="preserve">
+    <value>{0}的LimitPosP填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_LimitPosNIsIncorrect" xml:space="preserve">
+    <value>{0}的LimitPosN填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_DefaultStartVelIsIncorrect" xml:space="preserve">
+    <value>{0}的DefaultStartVel填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_DefaultMaxVelIsIncorrect" xml:space="preserve">
+    <value>{0}的DefaultMaxVel填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_DefaultStopVelIsIncorrect" xml:space="preserve">
+    <value>{0}的DefaultStopVel 填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_DefaultAccTimeIsIncorrect" xml:space="preserve">
+    <value>{0}的DefaultAccTime填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_DefaultDecTimeIsIncorrect" xml:space="preserve">
+    <value>{0}的DefaultDecTime填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_DefaultAccIsIncorrect" xml:space="preserve">
+    <value>{0}的DefaultAcc填写有误，请检查。</value>
+  </data>
+  <data name="EleCartesian_SingleAxisConfigControl_DefaultDecIsIncorrect" xml:space="preserve">
+    <value>{0}的LDefaultDec填写有误，请检查。</value>
+  </data>
+</root>

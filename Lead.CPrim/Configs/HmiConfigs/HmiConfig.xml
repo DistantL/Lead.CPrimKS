@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HmiConfigs xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <HmiConfigsName />
+  <HmiPageConfigList>
+    <HmiPageConfig>
+      <PageIdx>1</PageIdx>
+      <PrimNameList>
+        <string>Festo0</string>
+      </PrimNameList>
+    </HmiPageConfig>
+  </HmiPageConfigList>
+</HmiConfigs>

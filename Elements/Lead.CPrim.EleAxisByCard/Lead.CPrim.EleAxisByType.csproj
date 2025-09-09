@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F2E96506-5C43-4A65-B713-FF1C5EF7F6D8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lead.CPrim.EleAxisByType</RootNamespace>
+    <AssemblyName>Lead.CPrim.EleAxisByType</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Lead.CPrim\InnerLibs\Elements\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lead.CPrim.MachineHelper">
+      <HintPath>..\..\Lead.CPrim\InnerLibs\Tasks\Lead.CPrim.MachineHelper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Sys\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EleAxisByCard.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SingleAxisConfigControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SingleAxisConfigControl.Designer.cs">
+      <DependentUpon>SingleAxisConfigControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SingleAxisManualControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SingleAxisManualControl.Designer.cs">
+      <DependentUpon>SingleAxisManualControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SingleAxisStatusControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SingleAxisStatusControl.Designer.cs">
+      <DependentUpon>SingleAxisStatusControl.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.Ele\Lead.CPrim.Interfaces.Ele.csproj">
+      <Project>{6B4508E2-DE29-45C4-89BC-94DA87FEB277}</Project>
+      <Name>Lead.CPrim.Interfaces.Ele</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.IMotionCard\Lead.CPrim.Interfaces.IMotionCard.csproj">
+      <Project>{c14a95d9-5ad2-4b78-92bc-a687f623fda7}</Project>
+      <Name>Lead.CPrim.Interfaces.IMotionCard</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.StateMachine\Lead.CPrim.Interfaces.StateMachine.csproj">
+      <Project>{c25d88dd-7fcc-432e-a8f3-de209f733ab4}</Project>
+      <Name>Lead.CPrim.Interfaces.StateMachine</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.Task\Lead.CPrim.Interfaces.Task.csproj">
+      <Project>{1906f049-9599-4abe-b152-1e27fb5a435d}</Project>
+      <Name>Lead.CPrim.Interfaces.Task</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces\Lead.CPrim.Interfaces.csproj">
+      <Project>{f83c7fbb-7e02-416e-afa4-a7c3e5d0d0e4}</Project>
+      <Name>Lead.CPrim.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Proxy\Lead.CPrim.Global\Lead.CPrim.Global.csproj">
+      <Project>{36f66f1c-499c-4b60-9012-9b843978dd21}</Project>
+      <Name>Lead.CPrim.Global</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\Lead.CPrim.ProxyTools\Lead.CPrim.ProxyTools.csproj">
+      <Project>{8399edff-87f1-40e7-a251-5a49cdaf6f10}</Project>
+      <Name>Lead.CPrim.ProxyTools</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SingleAxisConfigControl.resx">
+      <DependentUpon>SingleAxisConfigControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SingleAxisManualControl.resx">
+      <DependentUpon>SingleAxisManualControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SingleAxisStatusControl.resx">
+      <DependentUpon>SingleAxisStatusControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

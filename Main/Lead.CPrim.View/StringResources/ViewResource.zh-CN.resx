@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="View_MainForm_About" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="View_MainForm_Authorization" xml:space="preserve">
+    <value>授权</value>
+  </data>
+  <data name="View_MainForm_Config" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="View_MainForm_DataInfo" xml:space="preserve">
+    <value>数据信息</value>
+  </data>
+  <data name="View_MainForm_DataParam" xml:space="preserve">
+    <value>数据参数</value>
+  </data>
+  <data name="View_MainForm_Debug" xml:space="preserve">
+    <value>调试</value>
+  </data>
+  <data name="View_MainForm_Element" xml:space="preserve">
+    <value>元件</value>
+  </data>
+  <data name="View_MainForm_Export" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="View_MainForm_File" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="View_MainForm_Help" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="View_MainForm_Hide" xml:space="preserve">
+    <value>隐藏</value>
+  </data>
+  <data name="View_MainForm_Import" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="View_MainForm_Login" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="View_MainForm_Logout" xml:space="preserve">
+    <value>注销</value>
+  </data>
+  <data name="View_MainForm_Manager" xml:space="preserve">
+    <value>管理</value>
+  </data>
+  <data name="View_MainForm_Module" xml:space="preserve">
+    <value>模块</value>
+  </data>
+  <data name="View_MainForm_Open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="View_MainForm_Output" xml:space="preserve">
+    <value>输出</value>
+  </data>
+  <data name="View_MainForm_PassWordChange" xml:space="preserve">
+    <value>更改密码</value>
+  </data>
+  <data name="View_MainForm_Prim" xml:space="preserve">
+    <value>基元</value>
+  </data>
+  <data name="View_MainForm_Project" xml:space="preserve">
+    <value>项目</value>
+  </data>
+  <data name="View_MainForm_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="View_MainForm_SaveAs" xml:space="preserve">
+    <value>另存为</value>
+  </data>
+  <data name="View_MainForm_Show" xml:space="preserve">
+    <value>显示</value>
+  </data>
+  <data name="View_MainForm_Station" xml:space="preserve">
+    <value>工站</value>
+  </data>
+  <data name="View_MainForm_System" xml:space="preserve">
+    <value>系统</value>
+  </data>
+  <data name="View_MainForm_Task" xml:space="preserve">
+    <value>任务</value>
+  </data>
+  <data name="View_MainForm_AlarmForm" xml:space="preserve">
+    <value>报警窗口</value>
+  </data>
+  <data name="View_DevMainForm_Station" xml:space="preserve">
+    <value>工站</value>
+  </data>
+  <data name="View_DevMainForm_Result" xml:space="preserve">
+    <value>结果查询</value>
+  </data>
+  <data name="View_DevMainForm_Alarm" xml:space="preserve">
+    <value>报警记录</value>
+  </data>
+  <data name="View_DevMainForm_Recipe" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="View_DevMainForm_PrimOutput" xml:space="preserve">
+    <value>基元输出</value>
+  </data>
+  <data name="View_DevMainForm_Qualify" xml:space="preserve">
+    <value>质量测试</value>
+  </data>
+  <data name="View_DevMainForm_LeadCustomer" xml:space="preserve">
+    <value>工站</value>
+  </data>
+  <data name="View_DevMainForm_Stop" xml:space="preserve">
+    <value>    停止</value>
+  </data>
+  <data name="View_DevMainForm_Reset" xml:space="preserve">
+    <value>    复位</value>
+  </data>
+  <data name="View_DevMainForm_Start" xml:space="preserve">
+    <value>    开始</value>
+  </data>
+  <data name="View_DevMainForm_Initialization" xml:space="preserve">
+    <value>    初始化</value>
+  </data>
+  <data name="View_MainForm_ClosingTip" xml:space="preserve">
+    <value>您确定要关闭软件吗？</value>
+  </data>
+  <data name="View_MainForm_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="View_DevMainForm_ConfirmPermission" xml:space="preserve">
+    <value>当前用户没有权限，请确认权限。</value>
+  </data>
+  <data name="View_DevMainForm_Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="View_DevConfigForm_FormText" xml:space="preserve">
+    <value>设备配置</value>
+  </data>
+  <data name="View_DevConfigForm_Output" xml:space="preserve">
+    <value>输出</value>
+  </data>
+  <data name="View_DevConfigForm_Recipe" xml:space="preserve">
+    <value>配方</value>
+  </data>
+  <data name="View_DevConfigForm_Communication" xml:space="preserve">
+    <value>通讯</value>
+  </data>
+  <data name="View_DevConfigForm_Calibration" xml:space="preserve">
+    <value>校准</value>
+  </data>
+  <data name="View_DevConfigForm_Connect" xml:space="preserve">
+    <value>连接</value>
+  </data>
+  <data name="View_DevConfigForm_CommunicationConfig" xml:space="preserve">
+    <value>通讯配置</value>
+  </data>
+  <data name="View_DevConfigForm_StationName" xml:space="preserve">
+    <value>工站名称:</value>
+  </data>
+  <data name="View_DevConfigForm_SCType" xml:space="preserve">
+    <value>类型:</value>
+  </data>
+  <data name="View_DevConfigForm_CommunicationMode" xml:space="preserve">
+    <value>通讯模式:</value>
+  </data>
+  <data name="View_DevConfigForm_HeartCycleTime" xml:space="preserve">
+    <value>心跳周期:</value>
+  </data>
+  <data name="View_DevConfigForm_TargetAddress" xml:space="preserve">
+    <value>目标地址:</value>
+  </data>
+  <data name="View_DevConfigForm_TargetPort" xml:space="preserve">
+    <value>目标端口:</value>
+  </data>
+  <data name="View_DevConfigForm_TrigConfig" xml:space="preserve">
+    <value>触发配置</value>
+  </data>
+  <data name="View_DevConfigForm_HeartEnable" xml:space="preserve">
+    <value>心跳启用</value>
+  </data>
+  <data name="View_DevConfigForm_ResultList" xml:space="preserve">
+    <value>结果列表</value>
+  </data>
+  <data name="View_DevConfigForm_LMConfig" xml:space="preserve">
+    <value>LM配置</value>
+  </data>
+  <data name="View_MainForm_ConfirmPermission" xml:space="preserve">
+    <value>当前用户没有权限，请确认权限。</value>
+  </data>
+  <data name="View_MainForm_Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="View_MainForm_ExportProjectFailed" xml:space="preserve">
+    <value>导出文件失败!</value>
+  </data>
+  <data name="View_MainForm_ProjectFile" xml:space="preserve">
+    <value>项目文件</value>
+  </data>
+  <data name="View_MainForm_SaveSuccessfully" xml:space="preserve">
+    <value>保存成功。</value>
+  </data>
+  <data name="View_MainForm_SystemInfo" xml:space="preserve">
+    <value>系统信息</value>
+  </data>
+  <data name="View_MainForm_NotExistSysConfigFile" xml:space="preserve">
+    <value>导入系统配置失败: 找不到系统配置文件。</value>
+  </data>
+  <data name="View_MainForm_XmlLoadFailed" xml:space="preserve">
+    <value>导入系统配置失败: XML导入失败</value>
+  </data>
+  <data name="View_MainForm_CannotBeLoaded" xml:space="preserve">
+    <value>无法导入！</value>
+  </data>
+  <data name="View_MainForm_LoadPrimTypeAttributesFail" xml:space="preserve">
+    <value>导入基元类型特征失败！</value>
+  </data>
+  <data name="View_MainForm_LoadSystemConfigFail" xml:space="preserve">
+    <value>导入系统配置失败！</value>
+  </data>
+  <data name="View_MainForm_LoadProjectConfigFial" xml:space="preserve">
+    <value>导入项目配置失败</value>
+  </data>
+  <data name="View_MainForm_NotFind" xml:space="preserve">
+    <value>未找到！</value>
+  </data>
+  <data name="View_MainForm_SystemInitialize" xml:space="preserve">
+    <value>系统初始化</value>
+  </data>
+  <data name="View_MainForm_NotNeedSwitchToChinese" xml:space="preserve">
+    <value>当前语言是中文，无需切换。</value>
+  </data>
+  <data name="View_MainForm_NotNeedSwitchToEnglish" xml:space="preserve">
+    <value>当前语言是英语，无需切换。</value>
+  </data>
+  <data name="View_MainForm_CloseThenRestartSoftware" xml:space="preserve">
+    <value>请关闭软件，然后重启软件生效。</value>
+  </data>
+  <data name="View_MainForm_Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="View_MainForm_Chinese" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="View_MainForm_English" xml:space="preserve">
+    <value>英语</value>
+  </data>
+  <data name="View_DevMainForm_DeleteSelectedTab" xml:space="preserve">
+    <value>删除选择的表？</value>
+  </data>
+  <data name="View_FrmTips_Continue" xml:space="preserve">
+    <value>继续</value>
+  </data>
+  <data name="View_FrmTips_Next" xml:space="preserve">
+    <value>下一个</value>
+  </data>
+  <data name="View_FrmTips_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="View_PassWordForm_FormText" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="View_PassWordForm_Password" xml:space="preserve">
+    <value>    密码：</value>
+  </data>
+  <data name="View_PassWordForm_Confirm" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="View_PassWordForm_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="View_MainForm_LoadSystemConfig" xml:space="preserve">
+    <value>-加载系统配置</value>
+  </data>
+  <data name="View_MainForm_CreatePrim" xml:space="preserve">
+    <value>-创建基元</value>
+  </data>
+  <data name="View_MainForm_LoadProjectConfigs" xml:space="preserve">
+    <value>-加载工程配置</value>
+  </data>
+  <data name="View_MainForm_SubTaskStopFailed" xml:space="preserve">
+    <value>停止子任务失败！</value>
+  </data>
+  <data name="View_MainForm_SubTaskStopSucceed" xml:space="preserve">
+    <value>停止子任务成功！</value>
+  </data>
+  <data name="View_MainForm_SystemTaskStopFailed" xml:space="preserve">
+    <value>停止系统任务失败！</value>
+  </data>
+  <data name="View_MainForm_SystemTaskStopSucceed" xml:space="preserve">
+    <value>停止系统任务成功！</value>
+  </data>
+  <data name="View_WelcomeForm_NoSystemConfigFile" xml:space="preserve">
+    <value>无系统配置文件，加载系统配置失败。</value>
+  </data>
+  <data name="View_WelcomeForm_XmlLoadFail" xml:space="preserve">
+    <value>XML加载失败，加载系统配置失败。</value>
+  </data>
+  <data name="View_WelcomeForm_CannotBeLoaded" xml:space="preserve">
+    <value>无法加载！</value>
+  </data>
+  <data name="View_WelcomeForm_LoadPrimTypeAttributesFail" xml:space="preserve">
+    <value>加载基元类型属性失败！</value>
+  </data>
+  <data name="View_WelcomeForm_LoadSystemConfigFail" xml:space="preserve">
+    <value>加载系统配置失败！</value>
+  </data>
+  <data name="View_WelcomeForm_LoadProjectConfigFail" xml:space="preserve">
+    <value>加载项目配置失败！</value>
+  </data>
+  <data name="View_WelcomeForm_NotFind" xml:space="preserve">
+    <value>未发现！</value>
+  </data>
+  <data name="View_WelcomeForm_LoadAuthorityManager" xml:space="preserve">
+    <value>加载权限管理……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadAuthorityManagerError" xml:space="preserve">
+    <value>加载权限管理错误\r\n</value>
+  </data>
+  <data name="View_WelcomeForm_LoadPrims" xml:space="preserve">
+    <value>加载基元……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadPrimsFailed" xml:space="preserve">
+    <value>加载基元失败\n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadPrimsError" xml:space="preserve">
+    <value>加载基元错误\n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadPrimsConfigForm" xml:space="preserve">
+    <value>加载基元配置窗体……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadPrimsConfigFormError" xml:space="preserve">
+    <value>加载基元配置窗体错误\r\n</value>
+  </data>
+  <data name="View_WelcomeForm_LoadElementsManager" xml:space="preserve">
+    <value>加载元件管理……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadElementsManagerError" xml:space="preserve">
+    <value>加载元件管理错误\r\n</value>
+  </data>
+  <data name="View_WelcomeForm_LoadTasksManager" xml:space="preserve">
+    <value>加载任务管理……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadTasksManagerError" xml:space="preserve">
+    <value>加载任务管理错误\r\n</value>
+  </data>
+  <data name="View_WelcomeForm_LoadDataInfoManager" xml:space="preserve">
+    <value>加载数据信息管理……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadDataInfoManagerError" xml:space="preserve">
+    <value>加载数据信息管理错误\r\n</value>
+  </data>
+  <data name="View_WelcomeForm_LoadParamManager" xml:space="preserve">
+    <value>加载参数管理……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadParamManagerError" xml:space="preserve">
+    <value>加载参数管理错误\r\n</value>
+  </data>
+  <data name="View_WelcomeForm_LoadRecipeManager" xml:space="preserve">
+    <value>加载配方管理……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadRecipeManagerError" xml:space="preserve">
+    <value>加载配方管理失败\r\n</value>
+  </data>
+  <data name="View_WelcomeForm_LoadResultListManager" xml:space="preserve">
+    <value>加载结果列表管理……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadResultListManagerError" xml:space="preserve">
+    <value>加载结果列表管理失败\r\n</value>
+  </data>
+  <data name="View_WelcomeForm_LoadCalibrationTool" xml:space="preserve">
+    <value>加载校准工具……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadCalibrationToolError" xml:space="preserve">
+    <value>加载校准工具失败\r\n</value>
+  </data>
+  <data name="View_WelcomeForm_LoadOutput" xml:space="preserve">
+    <value>加载输出……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadOutputError" xml:space="preserve">
+    <value>加载输出失败\r\n</value>
+  </data>
+  <data name="View_DevMainForm_LoadHmiConfigsError" xml:space="preserve">
+    <value>设备主界面加载HMI配置错误!</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskInitializing" xml:space="preserve">
+    <value>系统任务初始化中……</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskInitializationFinished" xml:space="preserve">
+    <value>系统任务初始化完成！</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskInitializationFailed" xml:space="preserve">
+    <value>系统任务初始化失败！</value>
+  </data>
+  <data name="View_DevMainForm_SubTaskInitializing" xml:space="preserve">
+    <value>子任务初始化中……</value>
+  </data>
+  <data name="View_DevMainForm_SubTaskInitializationFinished" xml:space="preserve">
+    <value>子任务初始化完成！</value>
+  </data>
+  <data name="View_DevMainForm_SubTaskInitializationFailed" xml:space="preserve">
+    <value>子任务初始化失败！</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskInitializationSucceed" xml:space="preserve">
+    <value>子任务初始化成功！</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskStarted" xml:space="preserve">
+    <value>系统任务已启动！</value>
+  </data>
+  <data name="View_DevMainForm_SubTaskStopFailed" xml:space="preserve">
+    <value>子任务停止失败！</value>
+  </data>
+  <data name="View_DevMainForm_SubTaskStopSucceed" xml:space="preserve">
+    <value>子任务停止成功！</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskStopFailed" xml:space="preserve">
+    <value>系统任务停止失败！</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskStopSucceed" xml:space="preserve">
+    <value>系统任务停止成功！</value>
+  </data>
+  <data name="View_DevMainForm_SubTaskStartFailed" xml:space="preserve">
+    <value>子任务启动失败！</value>
+  </data>
+  <data name="View_DevMainForm_InputCorrectPassword" xml:space="preserve">
+    <value>请输入正确的密码。</value>
+  </data>
+  <data name="View_Program_SoftwareHasBeenStarted" xml:space="preserve">
+    <value>{0}软件已启动！</value>
+  </data>
+  <data name="View_MainForm_FormDesigner" xml:space="preserve">
+    <value>窗体设计器</value>
+  </data>
+</root>

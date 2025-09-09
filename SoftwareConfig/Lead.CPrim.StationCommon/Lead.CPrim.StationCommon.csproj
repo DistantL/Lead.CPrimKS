@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0E060597-6091-4BE8-AB02-CA99544F1863}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lead.CPrim.StationCommon</RootNamespace>
+    <AssemblyName>Lead.CPrim.StationCommon</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Lead.CPrim\InnerLibs\Config\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>..\..\Lead.CPrim\InnerLibs\Config\Lead.CPrim.StationCommon.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lead.CPrim.ProductInfoHelper">
+      <HintPath>..\..\Lead.CPrim\Lead.CPrim.ProductInfoHelper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Sys\MongoDB\MongoDB.Bson.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Sys\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Alert\AlertFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Alert\AlertFrm.Designer.cs">
+      <DependentUpon>AlertFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Alert\AlertFrmChartColumn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Alert\AlertFrmChartColumn.Designer.cs">
+      <DependentUpon>AlertFrmChartColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Alert\AlertFrmChartPie.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Alert\AlertFrmChartPie.Designer.cs">
+      <DependentUpon>AlertFrmChartPie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Alert\AlertHelper.cs" />
+    <Compile Include="Alert\AudioEarlyWarningFrmDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Alert\AudioEarlyWarningFrmDialog.Designer.cs">
+      <DependentUpon>AudioEarlyWarningFrmDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Alert\AudioAlertFrmDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Alert\AudioAlertFrmDialog.Designer.cs">
+      <DependentUpon>AudioAlertFrmDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataArea\GlobalVariableClassFrm.Designer.cs">
+      <DependentUpon>GlobalVariableClassFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Del\Del_ChangeEleItemType.cs" />
+    <Compile Include="Del\Del_ChangeStation.cs" />
+    <Compile Include="Del\Del_ChangeTab.cs" />
+    <Compile Include="Del\EventHandle.cs" />
+    <Compile Include="Del\Del_UpdateStation.cs" />
+    <Compile Include="Del\Del_UploadRecipes.cs" />
+    <Compile Include="DataArea\DataInfo.cs" />
+    <Compile Include="DataArea\MyPropList.cs" />
+    <Compile Include="Del\MyPropListChangedEventHandler.cs" />
+    <Compile Include="DataArea\OperationMode.cs" />
+    <Compile Include="DataArea\Property.cs" />
+    <Compile Include="DataArea\GlobalVariableClassFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataArea\GlobalVariableClass.cs" />
+    <Compile Include="MainOutput\NewDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainOutput\PrimOutputConfig.cs" />
+    <Compile Include="MainOutput\SingleDisplayConfig.cs" />
+    <Compile Include="MainOutput\SingleDisplayConfigUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainOutput\TabDisplayConfig.cs" />
+    <Compile Include="Recipe\CreatNewRecipe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recipe\CreatNewRecipe.Designer.cs">
+      <DependentUpon>CreatNewRecipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Recipe\RecipeElesConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recipe\RecipeElesConfigForm.Designer.cs">
+      <DependentUpon>RecipeElesConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Recipe\RecipePrimsConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recipe\RecipePrimsConfigForm.Designer.cs">
+      <DependentUpon>RecipePrimsConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Recipe\RecipesConfig.cs" />
+    <Compile Include="Recipe\SingleRecipeCfg.cs" />
+    <Compile Include="RtData\DataBarChart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RtData\DataBarChart.designer.cs">
+      <DependentUpon>DataBarChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RtData\DataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RtData\DataForm.designer.cs">
+      <DependentUpon>DataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RtData\DataLineChart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RtData\DataLineChart.designer.cs">
+      <DependentUpon>DataLineChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RtData\RtDataControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RtData\RtDataControl.Designer.cs">
+      <DependentUpon>RtDataControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RtVars\RtDataVar.cs" />
+    <Compile Include="RtVars\RtDataVars.cs" />
+    <Compile Include="RtVars\RtVarsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RtVars\RtVarsControl.Designer.cs">
+      <DependentUpon>RtVarsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RtVars\VarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RtVars\VarControl.Designer.cs">
+      <DependentUpon>VarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonUI\NewStation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommonUI\NewStation.Designer.cs">
+      <DependentUpon>NewStation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonUI\SingleStationConfigControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonUI\SingleStationConfigControl.Designer.cs">
+      <DependentUpon>SingleStationConfigControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonUI\StationsConfigControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonUI\StationsConfigControl.Designer.cs">
+      <DependentUpon>StationsConfigControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StationConfig.cs" />
+    <Compile Include="StationManager.cs" />
+    <Compile Include="Del\UiSelected.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Alert\AlertFrm.resx">
+      <DependentUpon>AlertFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Alert\AlertFrmChartColumn.resx">
+      <DependentUpon>AlertFrmChartColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Alert\AlertFrmChartPie.resx">
+      <DependentUpon>AlertFrmChartPie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Alert\AudioEarlyWarningFrmDialog.resx">
+      <DependentUpon>AudioEarlyWarningFrmDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Alert\AudioAlertFrmDialog.resx">
+      <DependentUpon>AudioAlertFrmDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataArea\GlobalVariableClassFrm.resx">
+      <DependentUpon>GlobalVariableClassFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainOutput\SingleDisplayConfigUi.resx">
+      <DependentUpon>SingleDisplayConfigUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recipe\RecipeElesConfigForm.resx">
+      <DependentUpon>RecipeElesConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recipe\RecipePrimsConfigForm.resx">
+      <DependentUpon>RecipePrimsConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RtData\DataBarChart.resx">
+      <DependentUpon>DataBarChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RtData\DataForm.resx">
+      <DependentUpon>DataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RtData\RtDataControl.resx">
+      <DependentUpon>RtDataControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RtVars\VarControl.resx">
+      <DependentUpon>VarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonUI\SingleStationConfigControl.resx">
+      <DependentUpon>SingleStationConfigControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonUI\StationsConfigControl.resx">
+      <DependentUpon>StationsConfigControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.Ele\Lead.CPrim.Interfaces.Ele.csproj">
+      <Project>{6b4508e2-de29-45c4-89bc-94da87feb277}</Project>
+      <Name>Lead.CPrim.Interfaces.Ele</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.Task\Lead.CPrim.Interfaces.Task.csproj">
+      <Project>{1906f049-9599-4abe-b152-1e27fb5a435d}</Project>
+      <Name>Lead.CPrim.Interfaces.Task</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces\Lead.CPrim.Interfaces.csproj">
+      <Project>{f83c7fbb-7e02-416e-afa4-a7c3e5d0d0e4}</Project>
+      <Name>Lead.CPrim.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Param\Lead.CPrim.CommonParam\Lead.CPrim.CommonParam.csproj">
+      <Project>{bbffcb6c-9e8e-44cd-b30a-2929016bc1e0}</Project>
+      <Name>Lead.CPrim.CommonParam</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Proxy\Lead.CPrim.Global\Lead.CPrim.Global.csproj">
+      <Project>{36f66f1c-499c-4b60-9012-9b843978dd21}</Project>
+      <Name>Lead.CPrim.Global</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\Lead.CPrim.ProxyTools\Lead.CPrim.ProxyTools.csproj">
+      <Project>{8399edff-87f1-40e7-a251-5a49cdaf6f10}</Project>
+      <Name>Lead.CPrim.ProxyTools</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Lead.CPrim.SoftwareConfig\Lead.CPrim.SoftwareConfig.csproj">
+      <Project>{f518d2f4-7b9d-4a13-9df0-41ec3960a4f3}</Project>
+      <Name>Lead.CPrim.SoftwareConfig</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\Lead.CPrim.StationCommon.DataArea.DataInfo.datasource" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

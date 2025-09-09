@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NLog.WindowsIdentity</name>
+    </assembly>
+    <members>
+        <member name="T:NLog.LayoutRenderers.WindowsIdentityLayoutRenderer">
+            <summary>
+            Thread Windows identity information (username).
+            </summary>
+        </member>
+        <member name="M:NLog.LayoutRenderers.WindowsIdentityLayoutRenderer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:NLog.LayoutRenderers.WindowsIdentityLayoutRenderer" /> class.
+            </summary>
+        </member>
+        <member name="P:NLog.LayoutRenderers.WindowsIdentityLayoutRenderer.Domain">
+            <summary>
+            Gets or sets a value indicating whether domain name should be included.
+            </summary>
+            <docgen category='Rendering Options' order='10' />
+        </member>
+        <member name="P:NLog.LayoutRenderers.WindowsIdentityLayoutRenderer.UserName">
+            <summary>
+            Gets or sets a value indicating whether username should be included.
+            </summary>
+            <docgen category='Rendering Options' order='10' />
+        </member>
+        <member name="M:NLog.LayoutRenderers.WindowsIdentityLayoutRenderer.Append(System.Text.StringBuilder,NLog.LogEventInfo)">
+            <summary>
+            Renders the current thread windows identity information and appends it to the specified <see cref="T:System.Text.StringBuilder" />.
+            </summary>
+            <param name="builder">The <see cref="T:System.Text.StringBuilder"/> to append the rendered data to.</param>
+            <param name="logEvent">Logging event.</param>
+        </member>
+    </members>
+</doc>

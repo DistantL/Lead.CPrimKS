@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PrimADLinkE_PrimADLinkE_CardTypeIncorrect" xml:space="preserve">
+    <value>Card is not PCIe-8334 or PCIe-8338!</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_InitializationFailed" xml:space="preserve">
+    <value>Initialization failed, please check if the driver is installed or MotionCreatorPro2 is enabled, error code: {0}</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_InitializePrimFirstly" xml:space="preserve">
+    <value>Please initialize the prim firstly.</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_StartFieldBusError" xml:space="preserve">
+    <value>Start Field BUS Field, Error Code is {0}</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_FailedCloseBusConnection" xml:space="preserve">
+    <value>Failed to close the bus connection, error code: {0} </value>
+  </data>
+  <data name="EleCartesian_EleCartesian_LimitMessage" xml:space="preserve">
+    <value>{0}'s {1} is in Limit: PEL-{2}, Mel-{3},SPEL-{4}, SMel-{5}, or has some alarm-{6} </value>
+  </data>
+  <data name="EleCartesian_EleCartesian_PosErrorHappened" xml:space="preserve">
+    <value> PosError happened.</value>
+  </data>
+  <data name="EleCartesian_EleCartesian_TimeOutHappened" xml:space="preserve">
+    <value> TimeOut happened.</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_ServoAxisError" xml:space="preserve">
+    <value>Servo axis {0} Error</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_SlavesNumberInconsistent" xml:space="preserve">
+    <value>The number of slaves setting - {0} is inconsistent with scanned - {1}. Do you want to continue?</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_AxesNumberInconsistent" xml:space="preserve">
+    <value>The number of axes setting - {0} is inconsistent with scanned - {1}. Do you want to continue?</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_StartFieldBusFieldError" xml:space="preserve">
+    <value>Start Field BUS Field, Error Code is {0}</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_ScanFieldBusError" xml:space="preserve">
+    <value>Scan Field BUS Field, Error Code is {0}</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_InitializationScanSucceeded" xml:space="preserve">
+    <value>Initialization scan succeeded: number of slaves: {0}, number of axes: {1}, please confirm whether it is consistent with the actual.</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_LoadConfigFileFailed" xml:space="preserve">
+    <value>Load Config File Failed, Error Code is : {0}</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_ParameterDownloadToFlashFailed" xml:space="preserve">
+    <value>Parameter download to flash failed, error code: {0}.</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_EnableAxisFirst" xml:space="preserve">
+    <value>Please enable the axis first.</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_JogOffsetMustBeNonNegative" xml:space="preserve">
+    <value>JOG_OFFSET must be non-negative.</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_DisableAxisFirst" xml:space="preserve">
+    <value>Please disable the axis first.</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_FormText" xml:space="preserve">
+    <value>AxisControl</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_JogParam" xml:space="preserve">
+    <value>Jog Param</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_DefaultParam" xml:space="preserve">
+    <value>Default Param</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_MotionStatus" xml:space="preserve">
+    <value>Motion Status</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_CommandPosition" xml:space="preserve">
+    <value>Command position :</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_FeedbackPosition" xml:space="preserve">
+    <value>Feedback position:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_TargetPosition" xml:space="preserve">
+    <value>Target position  :</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_ErrorPosition" xml:space="preserve">
+    <value>Error position:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_CommandVelocity" xml:space="preserve">
+    <value>Command velocity :</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_FeedbackVelocity" xml:space="preserve">
+    <value>Feedback velocity:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_SetPosition" xml:space="preserve">
+    <value>Set Position</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_MotionIOStatus" xml:space="preserve">
+    <value>Motion IO Status</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_HomeMove" xml:space="preserve">
+    <value>Home Move</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_Mode" xml:space="preserve">
+    <value>Mode:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_Direction" xml:space="preserve">
+    <value>Direction:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_StartHome" xml:space="preserve">
+    <value>Start Home</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_StopHome" xml:space="preserve">
+    <value>Stop Home</value>
+  </data>
+  <data name="PrimADLinkE_IOControl_FormText" xml:space="preserve">
+    <value>IOControl</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ADLinkEConfig" xml:space="preserve">
+    <value>ADLinkE Config</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ADLinkName" xml:space="preserve">
+    <value>ADLinkEName</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_CardID" xml:space="preserve">
+    <value>Card Id:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_EBusConfigPath" xml:space="preserve">
+    <value>EBus Config Path:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_IOInfoPath" xml:space="preserve">
+    <value>IO Infos Path:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Initialize" xml:space="preserve">
+    <value>Init</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Run" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Config" xml:space="preserve">
+    <value>Config</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_IO" xml:space="preserve">
+    <value>IO</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ContinueMove" xml:space="preserve">
+    <value>ContinueMove</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_CmpTrig" xml:space="preserve">
+    <value>CmpTrig</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Interrupt" xml:space="preserve">
+    <value>Interrupt</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Latch" xml:space="preserve">
+    <value>Latch</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_TrigDemo" xml:space="preserve">
+    <value>TrigDemo</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_FieldBusInfo" xml:space="preserve">
+    <value>Field BUS Info</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_FieldConnect" xml:space="preserve">
+    <value>Field Connect:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_InitialConnect" xml:space="preserve">
+    <value>Initial Connect</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_SlaveCount" xml:space="preserve">
+    <value>Slave Count:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_SlaveInfo" xml:space="preserve">
+    <value>Slave Info</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AxisCount" xml:space="preserve">
+    <value>Axis Count:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DIModuleCount" xml:space="preserve">
+    <value>DI Module Count:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DOModuleCount" xml:space="preserve">
+    <value>DO Module Count:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AIModuleCount" xml:space="preserve">
+    <value>AI Module Count:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AoModuleCount" xml:space="preserve">
+    <value>AO Module Count:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ConfigMode" xml:space="preserve">
+    <value>Config Mode</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ClearConfig" xml:space="preserve">
+    <value>Clear Config</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Axis" xml:space="preserve">
+    <value>Axis</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_SlaveNo" xml:space="preserve">
+    <value>Slave_No:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AxisID" xml:space="preserve">
+    <value>Axis_ID:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AxisType" xml:space="preserve">
+    <value>Axis_Type:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AxisControl" xml:space="preserve">
+    <value>Axis Control</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DiModule" xml:space="preserve">
+    <value>DiModule</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Count" xml:space="preserve">
+    <value>Count:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ID" xml:space="preserve">
+    <value>ID:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Type" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DIStatus" xml:space="preserve">
+    <value>DI Status</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DoModule" xml:space="preserve">
+    <value>DoModule</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DoControl" xml:space="preserve">
+    <value>DO Control</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AiModule" xml:space="preserve">
+    <value>AiModule</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AIStatus" xml:space="preserve">
+    <value>AI Status</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AoModule" xml:space="preserve">
+    <value>AoModule</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AOControl" xml:space="preserve">
+    <value>AO Control</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_IsolatedInputDI" xml:space="preserve">
+    <value>Isolated input DI(0-3 connects terminal block through 100pin line and 8-23 connects terminal block via 37pin line)</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_IsolatedOutputDO" xml:space="preserve">
+    <value>Isolated output DO(0-3 connects terminal block through 100pin line and 8-23 connects terminal block via 37pin line)</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_TwoAxisContinuousLinearMotion" xml:space="preserve">
+    <value>Two Axis Continuous Linear Motion(Point Table)：</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_LoadingCsvFormatFile" xml:space="preserve">
+    <value>Loading CSV format file</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_LoadingPoints" xml:space="preserve">
+    <value>Loading points(delay time over 50)</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_StartMotion" xml:space="preserve">
+    <value>Start motion</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_StopMotion" xml:space="preserve">
+    <value>Stop motion</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_MotionPointsCount" xml:space="preserve">
+    <value>Motion points count:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_BufFreeSpace" xml:space="preserve">
+    <value>BufFreeSpace:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_BufUsageSpace" xml:space="preserve">
+    <value>BufUsageSpace:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_RunningCnt" xml:space="preserve">
+    <value>RunningCnt:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_TrigChannelAndSource" xml:space="preserve">
+    <value>Trig Channel - Trig Source</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_ManualTrigger" xml:space="preserve">
+    <value>Manual trigger</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_SetTableTrigger" xml:space="preserve">
+    <value>Set table trigger</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_SettingLinearTrigger" xml:space="preserve">
+    <value>Setting linear trigger</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_InterruptCount0" xml:space="preserve">
+    <value>Interrupt count 0:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_InterruptCount1" xml:space="preserve">
+    <value>Interrupt count 1:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_InterruptCount2" xml:space="preserve">
+    <value>Interrupt count 2:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_InterruptCount3" xml:space="preserve">
+    <value>Interrupt count 3:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_InterruptCount4" xml:space="preserve">
+    <value>Interrupt count 4:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_InterruptCount5" xml:space="preserve">
+    <value>Interrupt count 5:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_SetDIInterrupt" xml:space="preserve">
+    <value>Set DI interrupt</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_CloseInterrupt" xml:space="preserve">
+    <value>Close Interrupt</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_OpenLatch" xml:space="preserve">
+    <value>Open latch</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_OpenInterrupt" xml:space="preserve">
+    <value>Open interrupt</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_GetLatchedData" xml:space="preserve">
+    <value>Get latched data</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_MotionAndTrigger" xml:space="preserve">
+    <value>Motion &amp; Trigger</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_RunningCount" xml:space="preserve">
+    <value>Running count</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_MotionStart" xml:space="preserve">
+    <value>Motion Start</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_StartPoint" xml:space="preserve">
+    <value>Start point</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_LinearTriggerTest" xml:space="preserve">
+    <value>Linear trigger test</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_OnlyToFirstParagraph" xml:space="preserve">
+    <value>Only to the first paragraph</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_RotateBackToZero" xml:space="preserve">
+    <value>Rotate back to zero</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_RescanBusSlaveDevice" xml:space="preserve">
+    <value>Are you sure you want to re-scan bus slave devices?</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Tip" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_StopPrimFirst" xml:space="preserve">
+    <value>Stop running the primitive first.</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ExitConfigurationMode" xml:space="preserve">
+    <value>Please exit configuration mode firstly.</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_SelectedFileNotExist" xml:space="preserve">
+    <value>The selection file does not exist.</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ClearAllBusConfiguration" xml:space="preserve">
+    <value>Are you sure to clear all bus configurations?</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_SelectXMLConfigurationFile" xml:space="preserve">
+    <value> does not exist, please select the XML configuration file.</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DiaglogFormatFile" xml:space="preserve">
+    <value>JSON File (*.json)|*.json|All Files (*.*)|*.*</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DialogTitle" xml:space="preserve">
+    <value>Select a JSON File</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ConfirmCurrentPrimNotRunning" xml:space="preserve">
+    <value>Please confirm that the current prim is not running.</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ReconfigureParameters" xml:space="preserve">
+    <value>Are you sure to reconfigure the parameters? This may cause the original configuration parameters to be cleared.</value>
+  </data>
+</root>

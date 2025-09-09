@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ThreadSafty_StreamlineControl
+{
+    public class FaiItem
+    {
+        /// <summary>
+        /// 类型
+        /// </summary>
+        public string DataType { get; set; }
+        /// <summary>
+        /// 下限
+        /// </summary>
+        public double FaiItemLimitLower { get; set; }
+        /// <summary>
+        /// 上限
+        /// </summary>
+        public double FaiItemLimitUpper { get; set; }
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public string FaiItemName { get; set; }
+        /// <summary>
+        /// 单位
+        /// </summary>
+        public string FaiItemUnit { get; set; }
+        /// <summary>
+        /// 值
+        /// </summary>
+        public double FaiItemValue { get; set; }
+    }
+}

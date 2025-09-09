@@ -1,0 +1,543 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="View_MainForm_AlarmForm" xml:space="preserve">
+    <value>AlarmForm</value>
+  </data>
+  <data name="View_MainForm_File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="View_MainForm_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="View_MainForm_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="View_MainForm_SaveAs" xml:space="preserve">
+    <value>SaveAs</value>
+  </data>
+  <data name="View_MainForm_Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="View_MainForm_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="View_MainForm_Project" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="View_MainForm_Station" xml:space="preserve">
+    <value>Station</value>
+  </data>
+  <data name="View_MainForm_Manager" xml:space="preserve">
+    <value>Manager</value>
+  </data>
+  <data name="View_MainForm_Config" xml:space="preserve">
+    <value>Config</value>
+  </data>
+  <data name="View_MainForm_Output" xml:space="preserve">
+    <value>OutPut</value>
+  </data>
+  <data name="View_MainForm_Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="View_MainForm_Hide" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="View_MainForm_Prim" xml:space="preserve">
+    <value>Prim</value>
+  </data>
+  <data name="View_MainForm_Element" xml:space="preserve">
+    <value>Element</value>
+  </data>
+  <data name="View_MainForm_Debug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="View_MainForm_Module" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="View_MainForm_Task" xml:space="preserve">
+    <value>Task</value>
+  </data>
+  <data name="View_MainForm_DataInfo" xml:space="preserve">
+    <value>DataInfo</value>
+  </data>
+  <data name="View_MainForm_DataParam" xml:space="preserve">
+    <value>DataParam</value>
+  </data>
+  <data name="View_MainForm_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="View_MainForm_Authorization" xml:space="preserve">
+    <value>Authorization</value>
+  </data>
+  <data name="View_MainForm_Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="View_MainForm_Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="View_MainForm_PassWordChange" xml:space="preserve">
+    <value>PassWordChange</value>
+  </data>
+  <data name="View_MainForm_Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="View_MainForm_About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="View_MainForm_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="View_MainForm_Chinese" xml:space="preserve">
+    <value>Chinese</value>
+  </data>
+  <data name="View_MainForm_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="View_MainForm_ConfirmPermission" xml:space="preserve">
+    <value>The current user does not have permission. Please confirm that the permission is in operation.</value>
+  </data>
+  <data name="View_MainForm_Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="View_MainForm_ExportProjectFailed" xml:space="preserve">
+    <value>Export Project Failed！</value>
+  </data>
+  <data name="View_MainForm_ProjectFile" xml:space="preserve">
+    <value>ProjectFile</value>
+  </data>
+  <data name="View_MainForm_SaveSuccessfully" xml:space="preserve">
+    <value>Successfully saved.</value>
+  </data>
+  <data name="View_MainForm_SystemInfo" xml:space="preserve">
+    <value>System Info</value>
+  </data>
+  <data name="View_MainForm_NotExistSysConfigFile" xml:space="preserve">
+    <value>SystemLoadSystemConfig Fail - No Systemconfig File Finded</value>
+  </data>
+  <data name="View_MainForm_XmlLoadFailed" xml:space="preserve">
+    <value>SystemLoadSystemConfig Fail - XML load Fail</value>
+  </data>
+  <data name="View_MainForm_LoadSystemConfig" xml:space="preserve">
+    <value> - Load SystemConfig</value>
+  </data>
+  <data name="View_MainForm_CreatePrim" xml:space="preserve">
+    <value> - Create Prim:</value>
+  </data>
+  <data name="View_MainForm_CannotBeLoaded" xml:space="preserve">
+    <value> couldn't be loaded!</value>
+  </data>
+  <data name="View_MainForm_LoadPrimTypeAttributesFail" xml:space="preserve">
+    <value>SystemLoadPrimTypeAttributes Fail！</value>
+  </data>
+  <data name="View_MainForm_LoadSystemConfigFail" xml:space="preserve">
+    <value>SystemLoadSystemConfig Fail！</value>
+  </data>
+  <data name="View_MainForm_LoadProjectConfigs" xml:space="preserve">
+    <value> - Load ProjectConfigs</value>
+  </data>
+  <data name="View_MainForm_LoadProjectConfigFial" xml:space="preserve">
+    <value>SystemLoadProjectConfig Fial！</value>
+  </data>
+  <data name="View_MainForm_NotFind" xml:space="preserve">
+    <value> not find！</value>
+  </data>
+  <data name="View_MainForm_SystemInitialize" xml:space="preserve">
+    <value>SystemInit</value>
+  </data>
+  <data name="View_MainForm_ClosingTip" xml:space="preserve">
+    <value>Are you sure to quit the current program?</value>
+  </data>
+  <data name="View_MainForm_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="View_MainForm_SubTaskStopFailed" xml:space="preserve">
+    <value>SubTask Stop failed!</value>
+  </data>
+  <data name="View_MainForm_SubTaskStopSucceed" xml:space="preserve">
+    <value>SubTasks Stop succeed!</value>
+  </data>
+  <data name="View_MainForm_SystemTaskStopFailed" xml:space="preserve">
+    <value>SysTask Stop failed!</value>
+  </data>
+  <data name="View_MainForm_SystemTaskStopSucceed" xml:space="preserve">
+    <value>SysTask Stop succeed!</value>
+  </data>
+  <data name="View_MainForm_NotNeedSwitchToChinese" xml:space="preserve">
+    <value>Current language is Chinese, you do not need to switch.</value>
+  </data>
+  <data name="View_MainForm_NotNeedSwitchToEnglish" xml:space="preserve">
+    <value>Current language is English, you do not need to switch.</value>
+  </data>
+  <data name="View_MainForm_CloseThenRestartSoftware" xml:space="preserve">
+    <value>Please close the software and then restart.</value>
+  </data>
+  <data name="View_Program_SoftwareHasBeenStarted" xml:space="preserve">
+    <value>{0} SoftWare has been started！</value>
+  </data>
+  <data name="View_WelcomeForm_NoSystemConfigFile" xml:space="preserve">
+    <value>SystemLoadSystemConfig Fail - No Systemconfig File Finded</value>
+  </data>
+  <data name="View_WelcomeForm_XmlLoadFail" xml:space="preserve">
+    <value>SystemLoadSystemConfig Fail - XML load Fail</value>
+  </data>
+  <data name="View_WelcomeForm_CannotBeLoaded" xml:space="preserve">
+    <value> couldn't be loaded!</value>
+  </data>
+  <data name="View_WelcomeForm_LoadPrimTypeAttributesFail" xml:space="preserve">
+    <value>SystemLoadPrimTypeAttributes Fail！</value>
+  </data>
+  <data name="View_WelcomeForm_LoadSystemConfigFail" xml:space="preserve">
+    <value>SystemLoadSystemConfig Fail！</value>
+  </data>
+  <data name="View_WelcomeForm_LoadProjectConfigFail" xml:space="preserve">
+    <value>SystemLoadProjectConfig Fial！</value>
+  </data>
+  <data name="View_WelcomeForm_NotFind" xml:space="preserve">
+    <value> not find！</value>
+  </data>
+  <data name="View_WelcomeForm_LoadAuthorityManager" xml:space="preserve">
+    <value>Load Authority Manager……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadAuthorityManagerError" xml:space="preserve">
+    <value>Ex:Load Authority Manager \n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadPrims" xml:space="preserve">
+    <value>Load Prims……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadPrimsFailed" xml:space="preserve">
+    <value>Fail:Load Prims \n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadPrimsError" xml:space="preserve">
+    <value>Ex:Load Prims  \n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadPrimsConfigForm" xml:space="preserve">
+    <value>Load Prims Config Form……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadPrimsConfigFormError" xml:space="preserve">
+    <value>Ex:Load Prims Config Form \n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadElementsManager" xml:space="preserve">
+    <value>Load Eles Manager……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadElementsManagerError" xml:space="preserve">
+    <value>Ex:Load Eles Manager \n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadTasksManager" xml:space="preserve">
+    <value>Load Tasks Manager……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadTasksManagerError" xml:space="preserve">
+    <value>Ex:Load Tasks Manager \n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadDataInfoManager" xml:space="preserve">
+    <value>Load Datainfo Manager……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadDataInfoManagerError" xml:space="preserve">
+    <value>Ex:Load Datainfo Manager \n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadParamManager" xml:space="preserve">
+    <value>Load Param Manager……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadParamManagerError" xml:space="preserve">
+    <value>Ex:Load Param Manager \n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadRecipeManager" xml:space="preserve">
+    <value>Load Recipe Manager……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadRecipeManagerError" xml:space="preserve">
+    <value>Ex:Load Recipe Manager \n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadResultListManager" xml:space="preserve">
+    <value>Load ResultList Manager……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadResultListManagerError" xml:space="preserve">
+    <value>Ex:Load ResultList Manager \n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadCalibrationTool" xml:space="preserve">
+    <value>Load Calib Tool……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadCalibrationToolError" xml:space="preserve">
+    <value>Ex:Load Calib Tool \n\r</value>
+  </data>
+  <data name="View_WelcomeForm_LoadOutput" xml:space="preserve">
+    <value>Load Output……</value>
+  </data>
+  <data name="View_WelcomeForm_LoadOutputError" xml:space="preserve">
+    <value>Ex:Load Output \n\r</value>
+  </data>
+  <data name="View_DevMainForm_Station" xml:space="preserve">
+    <value>Station</value>
+  </data>
+  <data name="View_DevMainForm_Result" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="View_DevMainForm_Alarm" xml:space="preserve">
+    <value>Alarm</value>
+  </data>
+  <data name="View_DevMainForm_Recipe" xml:space="preserve">
+    <value>Recipe</value>
+  </data>
+  <data name="View_DevMainForm_PrimOutput" xml:space="preserve">
+    <value>PrimOutput</value>
+  </data>
+  <data name="View_DevMainForm_Qualify" xml:space="preserve">
+    <value>Qualify</value>
+  </data>
+  <data name="View_DevMainForm_Reset" xml:space="preserve">
+    <value>    RESET</value>
+  </data>
+  <data name="View_DevMainForm_Start" xml:space="preserve">
+    <value>     START</value>
+  </data>
+  <data name="View_DevMainForm_Initialization" xml:space="preserve">
+    <value>     INIT</value>
+  </data>
+  <data name="View_DevMainForm_Stop" xml:space="preserve">
+    <value>     STOP</value>
+  </data>
+  <data name="View_DevMainForm_LeadCustomer" xml:space="preserve">
+    <value>Lead</value>
+  </data>
+  <data name="View_DevMainForm_LoadHmiConfigsError" xml:space="preserve">
+    <value>Err: DevMainFormLoadHmiConfigs!</value>
+  </data>
+  <data name="View_DevMainForm_ConfirmPermission" xml:space="preserve">
+    <value>The current user does not have permission. Please confirm that the permission is in operation.</value>
+  </data>
+  <data name="View_DevMainForm_Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="View_DevMainForm_DeleteSelectedTab" xml:space="preserve">
+    <value>Delete Selected Tab?</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskInitializing" xml:space="preserve">
+    <value>SysTask initing... </value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskInitializationFinished" xml:space="preserve">
+    <value>SysTask Init finished!</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskInitializationFailed" xml:space="preserve">
+    <value>SysTask Init failed!</value>
+  </data>
+  <data name="View_DevMainForm_SubTaskInitializing" xml:space="preserve">
+    <value>SubTask initing... </value>
+  </data>
+  <data name="View_DevMainForm_SubTaskInitializationFinished" xml:space="preserve">
+    <value>SubTask Init finished!</value>
+  </data>
+  <data name="View_DevMainForm_SubTaskInitializationFailed" xml:space="preserve">
+    <value>SubTask Init failed!</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskInitializationSucceed" xml:space="preserve">
+    <value>SubTask Init succeed!</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskStarted" xml:space="preserve">
+    <value>SysTask Started!</value>
+  </data>
+  <data name="View_DevMainForm_SubTaskStopFailed" xml:space="preserve">
+    <value>SubTask Stop failed!</value>
+  </data>
+  <data name="View_DevMainForm_SubTaskStopSucceed" xml:space="preserve">
+    <value>SubTasks Stop succeed!</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskStopFailed" xml:space="preserve">
+    <value>SysTask Stop failed!</value>
+  </data>
+  <data name="View_DevMainForm_SystemTaskStopSucceed" xml:space="preserve">
+    <value>SysTask Stop succeed!</value>
+  </data>
+  <data name="View_DevMainForm_SubTaskStartFailed" xml:space="preserve">
+    <value>SubTask Start failed!</value>
+  </data>
+  <data name="View_DevConfigForm_FormText" xml:space="preserve">
+    <value>DevConfigForm</value>
+  </data>
+  <data name="View_DevConfigForm_Output" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="View_DevConfigForm_Recipe" xml:space="preserve">
+    <value>Recipe</value>
+  </data>
+  <data name="View_DevConfigForm_Communication" xml:space="preserve">
+    <value>Comm</value>
+  </data>
+  <data name="View_DevConfigForm_Calibration" xml:space="preserve">
+    <value>Calib</value>
+  </data>
+  <data name="View_DevConfigForm_ResultList" xml:space="preserve">
+    <value>ResultList</value>
+  </data>
+  <data name="View_DevConfigForm_LMConfig" xml:space="preserve">
+    <value>LMConfig</value>
+  </data>
+  <data name="View_DevConfigForm_CommunicationConfig" xml:space="preserve">
+    <value>Communication Config</value>
+  </data>
+  <data name="View_DevConfigForm_StationName" xml:space="preserve">
+    <value>Station Name：</value>
+  </data>
+  <data name="View_DevConfigForm_SCType" xml:space="preserve">
+    <value>S\\C Type：</value>
+  </data>
+  <data name="View_DevConfigForm_CommunicationMode" xml:space="preserve">
+    <value>Comm Mode：</value>
+  </data>
+  <data name="View_DevConfigForm_HeartCycleTime" xml:space="preserve">
+    <value>Heart Cyc Time：</value>
+  </data>
+  <data name="View_DevConfigForm_TargetAddress" xml:space="preserve">
+    <value>Target Addr：</value>
+  </data>
+  <data name="View_DevConfigForm_TargetPort" xml:space="preserve">
+    <value>Target Port：</value>
+  </data>
+  <data name="View_DevConfigForm_HeartEnable" xml:space="preserve">
+    <value>HeartEnable</value>
+  </data>
+  <data name="View_DevConfigForm_Connect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="View_FrmTips_Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="View_FrmTips_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="View_FrmTips_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="View_PassWordForm_FormText" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="View_PassWordForm_Password" xml:space="preserve">
+    <value>    Password：</value>
+  </data>
+  <data name="View_PassWordForm_Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="View_PassWordForm_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="View_DevMainForm_InputCorrectPassword" xml:space="preserve">
+    <value>Please input correct password.</value>
+  </data>
+  <data name="View_MainForm_FormDesigner" xml:space="preserve">
+    <value>FormDesigner</value>
+  </data>
+</root>

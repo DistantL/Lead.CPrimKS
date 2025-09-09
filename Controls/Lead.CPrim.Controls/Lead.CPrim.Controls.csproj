@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4B0918F1-4BE0-40D2-B7D9-D07E27B7CA7F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lead.CPrim.Controls</RootNamespace>
+    <AssemblyName>Lead.CPrim.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Lead.CPrim\InnerLibs\Control\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lead.CPrim.ProductInfoHelper">
+      <HintPath>..\..\Lead.CPrim\Lead.CPrim.ProductInfoHelper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Sys\MongoDB\MongoDB.Bson.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ScriptLibrary">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Task\ScriptLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Alarm\AlarmHelper.cs" />
+    <Compile Include="Alarm\Dialog.cs" />
+    <Compile Include="Config\ConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Config\ConfigForm.designer.cs">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlsHelper.cs" />
+    <Compile Include="ControlsManager.cs" />
+    <Compile Include="Other\OpenFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other\OpenFile.Designer.cs">
+      <DependentUpon>OpenFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Other\ScanningSN_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other\ScanningSN_Form.Designer.cs">
+      <DependentUpon>ScanningSN_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Other\TipForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other\TipForm.Designer.cs">
+      <DependentUpon>TipForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Other\VersionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other\VersionForm.Designer.cs">
+      <DependentUpon>VersionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SensorFrm\SensorFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SensorFrm\SensorFrm.Designer.cs">
+      <DependentUpon>SensorFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SensorFrm\UCArrow_bottom.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SensorFrm\UCArrow_bottom.Designer.cs">
+      <DependentUpon>UCArrow_bottom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SensorFrm\UCArrow_right.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SensorFrm\UCArrow_right.Designer.cs">
+      <DependentUpon>UCArrow_right.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SensorFrm\UCArrow_up.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SensorFrm\UCArrow_up.Designer.cs">
+      <DependentUpon>UCArrow_up.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SensorFrm\UCSignalLamp1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SensorFrm\UCSignalLamp1.Designer.cs">
+      <DependentUpon>UCSignalLamp1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SensorFrm\UCSignalLamp2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SensorFrm\UCSignalLamp2.Designer.cs">
+      <DependentUpon>UCSignalLamp2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\CustomChartFrm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Test\CustomChartFrm.Designer.cs">
+      <DependentUpon>CustomChartFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\GDIFrm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Test\GDIFrm.Designer.cs">
+      <DependentUpon>GDIFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\Test.Designer.cs">
+      <DependentUpon>Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\UIInputDialogFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\UIInputDialogFrm.Designer.cs">
+      <DependentUpon>UIInputDialogFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vendor\AlertInfo\AlertInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vendor\AlertInfo\AlertInfo.Designer.cs">
+      <DependentUpon>AlertInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vendor\DisplayNGReason\ProductionNGReasonInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vendor\DisplayNGReason\ProductionNGReasonInfo.Designer.cs">
+      <DependentUpon>ProductionNGReasonInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vendor\LogsForm\LogTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vendor\LogsForm\LogTask.Designer.cs">
+      <DependentUpon>LogTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vendor\LogsForm\LogMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vendor\LogsForm\LogMain.Designer.cs">
+      <DependentUpon>LogMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vendor\LogsForm\LogAlarm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vendor\LogsForm\LogAlarm.Designer.cs">
+      <DependentUpon>LogAlarm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vendor\LogsQuery\LogsQuery.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vendor\LogsQuery\LogsQuery.Designer.cs">
+      <DependentUpon>LogsQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vendor\ProductInfoChart\ProductInfoChart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vendor\ProductInfoChart\ProductInfoChart.Designer.cs">
+      <DependentUpon>ProductInfoChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vendor\ProductQuery\ProductQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vendor\ProductQuery\ProductQuery.Designer.cs">
+      <DependentUpon>ProductQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\SettingFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\SettingFrm.designer.cs">
+      <DependentUpon>SettingFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Other\SoftWareInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other\SoftWareInfo.Designer.cs">
+      <DependentUpon>SoftWareInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vendor\Statistics\Statistics.cs" />
+    <Compile Include="Vendor\Statistics\UIStatistics.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vendor\Statistics\UIStatistics.Designer.cs">
+      <DependentUpon>UIStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vendor\Vendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vendor\Vendor.Designer.cs">
+      <DependentUpon>Vendor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vision\VisionFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vision\VisionFrm.Designer.cs">
+      <DependentUpon>VisionFrm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\ConfigForm.resx">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\OpenFile.resx">
+      <DependentUpon>OpenFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\ScanningSN_Form.resx">
+      <DependentUpon>ScanningSN_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\TipForm.resx">
+      <DependentUpon>TipForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\VersionForm.resx">
+      <DependentUpon>VersionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SensorFrm\SensorFrm.resx">
+      <DependentUpon>SensorFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\CustomChartFrm.resx">
+      <DependentUpon>CustomChartFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\GDIFrm.resx">
+      <DependentUpon>GDIFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\Test.resx">
+      <DependentUpon>Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\UIInputDialogFrm.resx">
+      <DependentUpon>UIInputDialogFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vendor\AlertInfo\AlertInfo.resx">
+      <DependentUpon>AlertInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vendor\DisplayNGReason\ProductionNGReasonInfo.resx">
+      <DependentUpon>ProductionNGReasonInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vendor\LogsForm\LogTask.resx">
+      <DependentUpon>LogTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vendor\LogsForm\LogMain.resx">
+      <DependentUpon>LogMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vendor\LogsForm\LogAlarm.resx">
+      <DependentUpon>LogAlarm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vendor\LogsQuery\LogsQuery.resx">
+      <DependentUpon>LogsQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vendor\ProductInfoChart\ProductInfoChart.resx">
+      <DependentUpon>ProductInfoChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vendor\ProductQuery\ProductQuery.resx">
+      <DependentUpon>ProductQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\SettingFrm.resx">
+      <DependentUpon>SettingFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\SoftWareInfo.resx">
+      <DependentUpon>SoftWareInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vendor\Statistics\UIStatistics.resx">
+      <DependentUpon>UIStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vendor\Vendor.resx">
+      <DependentUpon>Vendor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vision\VisionFrm.resx">
+      <DependentUpon>VisionFrm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.Display\Lead.CPrim.Interfaces.Display.csproj">
+      <Project>{bbf6e403-12aa-43b6-98d0-8e170b0bf042}</Project>
+      <Name>Lead.CPrim.Interfaces.Display</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.StateMachine\Lead.CPrim.Interfaces.StateMachine.csproj">
+      <Project>{C25D88DD-7FCC-432E-A8F3-DE209F733AB4}</Project>
+      <Name>Lead.CPrim.Interfaces.StateMachine</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.Task\Lead.CPrim.Interfaces.Task.csproj">
+      <Project>{1906F049-9599-4ABE-B152-1E27FB5A435D}</Project>
+      <Name>Lead.CPrim.Interfaces.Task</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces\Lead.CPrim.Interfaces.csproj">
+      <Project>{f83c7fbb-7e02-416e-afa4-a7c3e5d0d0e4}</Project>
+      <Name>Lead.CPrim.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Param\Lead.CPrim.CommonParam\Lead.CPrim.CommonParam.csproj">
+      <Project>{bbffcb6c-9e8e-44cd-b30a-2929016bc1e0}</Project>
+      <Name>Lead.CPrim.CommonParam</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Param\Lead.CPrim.DynamicParam\Lead.CPrim.DynamicParam.csproj">
+      <Project>{9b647775-1359-43d7-9b11-f78cee4e38c6}</Project>
+      <Name>Lead.CPrim.DynamicParam</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Proxy\Lead.CPrim.Global\Lead.CPrim.Global.csproj">
+      <Project>{36f66f1c-499c-4b60-9012-9b843978dd21}</Project>
+      <Name>Lead.CPrim.Global</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SoftwareConfig\Lead.CPrim.FaiHelper\Lead.CPrim.FaiHelper.csproj">
+      <Project>{fd302197-5298-4ec7-8df9-bad749447792}</Project>
+      <Name>Lead.CPrim.FaiHelper</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SoftwareConfig\Lead.CPrim.SoftwareConfig\Lead.CPrim.SoftwareConfig.csproj">
+      <Project>{F518D2F4-7B9D-4A13-9DF0-41EC3960A4F3}</Project>
+      <Name>Lead.CPrim.SoftwareConfig</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SoftwareConfig\Lead.CPrim.StationCommon\Lead.CPrim.StationCommon.csproj">
+      <Project>{0e060597-6091-4be8-ab02-ca99544f1863}</Project>
+      <Name>Lead.CPrim.StationCommon</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Task\Lead.CPrim.TaskHelper\Lead.CPrim.TaskHelper.csproj">
+      <Project>{386644a0-fa83-4a87-8ea5-de77a546ea2d}</Project>
+      <Name>Lead.CPrim.TaskHelper</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\Lead.CPrim.ProxyTools\Lead.CPrim.ProxyTools.csproj">
+      <Project>{8399edff-87f1-40e7-a251-5a49cdaf6f10}</Project>
+      <Name>Lead.CPrim.ProxyTools</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Lead.CPrim.CmpTrigHelper\Lead.CPrim.CmpTrigHelper.csproj">
+      <Project>{123BB7A8-36CE-40FE-A15D-5C8A0CDBEC2C}</Project>
+      <Name>Lead.CPrim.CmpTrigHelper</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\Administration.datasource" />
+    <None Include="Properties\DataSources\BindingTop10.datasource" />
+    <None Include="Properties\DataSources\BindLogsQuery.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\Maintenance.datasource" />
+    <None Include="Properties\DataSources\Maintenance1.datasource" />
+    <None Include="Properties\DataSources\UserAccessInfo.datasource" />
+    <None Include="Resources\LeadChinaLogo.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

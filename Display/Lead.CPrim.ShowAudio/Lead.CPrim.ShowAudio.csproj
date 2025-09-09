@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5FA86236-D392-4D57-9B11-C39F19F2F0F4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lead.CPrim.ShowAudio</RootNamespace>
+    <AssemblyName>Lead.CPrim.ShowAudio</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Lead.CPrim\InnerLibs\Display\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>..\..\Lead.CPrim\InnerLibs\Display\Lead.CPrim.ShowAudio.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lead.CPrim.ProductInfoHelper">
+      <HintPath>..\..\Lead.CPrim\Lead.CPrim.ProductInfoHelper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Lead.CPrim.TaskHelper">
+      <HintPath>..\..\Lead.CPrim\InnerLibs\Tasks\Lead.CPrim.TaskHelper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AudioConfig.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCreator.cs" />
+    <Compile Include="ShowAudio.cs" />
+    <Compile Include="Controls\ShowOutputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ShowOutputControl.Designer.cs">
+      <DependentUpon>ShowOutputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controls\ShowConfigControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ShowConfigControl.Designer.cs">
+      <DependentUpon>ShowConfigControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowTypeAttributes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\ShowConfigControl.resx">
+      <DependentUpon>ShowConfigControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ShowOutputControl.resx">
+      <DependentUpon>ShowOutputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Controls\Lead.CPrim.Controls\Lead.CPrim.Controls.csproj">
+      <Project>{4B0918F1-4BE0-40D2-B7D9-D07E27B7CA7F}</Project>
+      <Name>Lead.CPrim.Controls</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.Display\Lead.CPrim.Interfaces.Display.csproj">
+      <Project>{bbf6e403-12aa-43b6-98d0-8e170b0bf042}</Project>
+      <Name>Lead.CPrim.Interfaces.Display</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.StateMachine\Lead.CPrim.Interfaces.StateMachine.csproj">
+      <Project>{C25D88DD-7FCC-432E-A8F3-DE209F733AB4}</Project>
+      <Name>Lead.CPrim.Interfaces.StateMachine</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces\Lead.CPrim.Interfaces.csproj">
+      <Project>{f83c7fbb-7e02-416e-afa4-a7c3e5d0d0e4}</Project>
+      <Name>Lead.CPrim.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Proxy\Lead.CPrim.Global\Lead.CPrim.Global.csproj">
+      <Project>{36f66f1c-499c-4b60-9012-9b843978dd21}</Project>
+      <Name>Lead.CPrim.Global</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SoftwareConfig\Lead.CPrim.FaiHelper\Lead.CPrim.FaiHelper.csproj">
+      <Project>{fd302197-5298-4ec7-8df9-bad749447792}</Project>
+      <Name>Lead.CPrim.FaiHelper</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SoftwareConfig\Lead.CPrim.SoftwareConfig\Lead.CPrim.SoftwareConfig.csproj">
+      <Project>{F518D2F4-7B9D-4A13-9DF0-41EC3960A4F3}</Project>
+      <Name>Lead.CPrim.SoftwareConfig</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SoftwareConfig\Lead.CPrim.StationCommon\Lead.CPrim.StationCommon.csproj">
+      <Project>{0e060597-6091-4be8-ab02-ca99544f1863}</Project>
+      <Name>Lead.CPrim.StationCommon</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\Lead.CPrim.ProxyTools\Lead.CPrim.ProxyTools.csproj">
+      <Project>{8399edff-87f1-40e7-a251-5a49cdaf6f10}</Project>
+      <Name>Lead.CPrim.ProxyTools</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\Lead.CPrim.ShowCapacityOfProduction.Controls.FailBindDgv.datasource" />
+    <None Include="Resources\Default.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

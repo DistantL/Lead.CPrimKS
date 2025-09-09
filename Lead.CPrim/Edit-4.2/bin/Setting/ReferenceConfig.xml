@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferencesConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ImportAssemblyList>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Sys\CsvHelper.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>CsvHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Sys\Microsoft.CSharp.dll</NameOrPath>
+      <Version>4.0.0.0</Version>
+      <FullName>Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Sys\MongoDB\MongoDB.Bson.dll</NameOrPath>
+      <Version>2.11.1.0</Version>
+      <FullName>MongoDB.Bson, Version=2.11.1.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Sys\MongoDB\MongoDB.Driver.dll</NameOrPath>
+      <Version>2.11.1.0</Version>
+      <FullName>MongoDB.Driver, Version=2.11.1.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Sys\Newtonsoft.Json.dll</NameOrPath>
+      <Version>13.0.0.0</Version>
+      <FullName>Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Sys\WeifenLuo.WinFormsUI.Docking.dll</NameOrPath>
+      <Version>2.2.2864.18696</Version>
+      <FullName>WeifenLuo.WinFormsUI.Docking, Version=2.2.2864.18696, Culture=neutral, PublicKeyToken=d481317c817cec47</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\TestReal\CommonStruct.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>CommonStruct, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\Automation.dll</NameOrPath>
+      <Version>1.0.0.7</Version>
+      <FullName>Automation, Version=1.0.0.7, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\CommonStruct2D.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>CommonStruct2D, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\GlobalVariable.dll</NameOrPath>
+      <Version>0.0.0.0</Version>
+      <FullName>GlobalVariable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\GoldVisionForCPrim.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>GoldVisionForCPrim, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\halcondotnet.dll</NameOrPath>
+      <Version>18.11.3.0</Version>
+      <FullName>halcondotnet, Version=18.11.3.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\ICSharpCode.SharpZipLib.dll</NameOrPath>
+      <Version>1.2.0.246</Version>
+      <FullName>ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\ManualButton.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>ManualButton, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\ManualTestForm.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>ManualTestForm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\OxyPlot.dll</NameOrPath>
+      <Version>2.1.2.0</Version>
+      <FullName>OxyPlot, Version=2.1.2.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\OxyPlot.WindowsForms.dll</NameOrPath>
+      <Version>2.1.2.0</Version>
+      <FullName>OxyPlot.WindowsForms, Version=2.1.2.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\System.IO.Compression.dll</NameOrPath>
+      <Version>4.0.0.0</Version>
+      <FullName>System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\System.IO.Compression.FileSystem.dll</NameOrPath>
+      <Version>4.0.0.0</Version>
+      <FullName>System.IO.Compression.FileSystem, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\VisioPrim\Interop.BarTender.dll</NameOrPath>
+      <Version>11.1.8.1</Version>
+      <FullName>Interop.BarTender, Version=11.1.8.1, Culture=neutral, PublicKeyToken=109ff779a1b4cbc7</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Config\Lead.CPrim.FaiHelper.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.FaiHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Config\Lead.CPrim.SoftwareConfig.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.SoftwareConfig, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Config\Lead.CPrim.StationCommon.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.StationCommon, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Control\Lead.CPrim.CmpTrigHelper.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.CmpTrigHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Control\Lead.CPrim.Common.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Control\Lead.CPrim.Controls.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Controls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Display\Lead.CPrim.ShowPlcCurve.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.ShowPlcCurve, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.2DAgl.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.2DAgl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.3DAgl.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.3DAgl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.Communicate.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.Communicate, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.DB.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.DB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.Dev.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.Dev, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.Display.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.Display, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.Ele.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.Ele, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.IMotionCard.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.IMotionCard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.RemoteVars.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.RemoteVars, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.RemoteVars.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.RemoteVars, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.Robot.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.Robot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.StateMachine.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.StateMachine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.Task.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.Task, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Param\Lead.CPrim.CommonParam.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.CommonParam, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Param\Lead.CPrim.DynamicParam.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.DynamicParam, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Proxy\Lead.CPrim.Global.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Global, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Tasks\Lead.CPrim.DefaultTask.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.DefaultTask, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Tasks\Lead.CPrim.MachineHelper.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.MachineHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Tasks\Lead.CPrim.TaskHelper.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.TaskHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Tool\Lead.CPrim.ProxyTools.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.ProxyTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\InnerLibs\Tool\Lead.Tool.MongoDB.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.Tool.MongoDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\Lead.CPrim.ProductInfoHelper.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.ProductInfoHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ThreadSafty_StreamlineControl.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>ThreadSafty_StreamlineControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>PresentationCore</NameOrPath>
+      <Version>3.0.0.0</Version>
+      <FullName>PresentationCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</FullName>
+      <AssemblyType>Framework</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>System</NameOrPath>
+      <Version>4.0.0.0</Version>
+      <FullName>System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
+      <AssemblyType>Framework</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>System.Core</NameOrPath>
+      <Version>3.5.0.0</Version>
+      <FullName>System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
+      <AssemblyType>Framework</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>System.Data</NameOrPath>
+      <Version>4.0.0.0</Version>
+      <FullName>System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
+      <AssemblyType>Framework</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>System.Data.DataSetExtensions</NameOrPath>
+      <Version>4.0.0.0</Version>
+      <FullName>System.Data.DataSetExtensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
+      <AssemblyType>Framework</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>System.Drawing</NameOrPath>
+      <Version>4.0.0.0</Version>
+      <FullName>System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</FullName>
+      <AssemblyType>Framework</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>System.Windows.Forms</NameOrPath>
+      <Version>4.0.0.0</Version>
+      <FullName>System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
+      <AssemblyType>Framework</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>System.Xml</NameOrPath>
+      <Version>4.0.0.0</Version>
+      <FullName>System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
+      <AssemblyType>Framework</AssemblyType>
+    </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>System.Xml.Linq</NameOrPath>
+      <Version>4.0.0.0</Version>
+      <FullName>System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
+      <AssemblyType>Framework</AssemblyType>
+    </ImportAssembly>
+  </ImportAssemblyList>
+  <PartyAssemblyList>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\Lead.CPrim.CheckProductRepeat.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.CheckProductRepeat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.IMotionCard.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.IMotionCard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.RobotInovance.dll</Path>
+      <Version>1.0.0.1</Version>
+      <FullName>Lead.CPrim.Interfaces.RobotInovance, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\ManualTestForm.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>ManualTestForm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\ManualTestForm.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>ManualTestForm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\Automation.dll</Path>
+      <Version>1.0.0.7</Version>
+      <FullName>Automation, Version=1.0.0.7, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Sys\System.IO.Compression.FileSystem.dll</Path>
+      <Version>4.0.0.0</Version>
+      <FullName>System.IO.Compression.FileSystem, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\ICSharpCode.SharpZipLib.dll</Path>
+      <Version>1.2.0.246</Version>
+      <FullName>ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\System.IO.Compression.dll</Path>
+      <Version>4.0.0.0</Version>
+      <FullName>System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\System.IO.Compression.FileSystem.dll</Path>
+      <Version>4.0.0.0</Version>
+      <FullName>System.IO.Compression.FileSystem, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Common\Lead.CPrim.SoftwareConfig.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.SoftwareConfig, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Common\Lead.CPrim.SoftwareConfig.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.SoftwareConfig, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\Lead.CPrim.FaiHelper.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.FaiHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\Lead.CPrim.FaiHelper.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.FaiHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Sys\MongoDB\MongoDB.Bson.dll</Path>
+      <Version>2.11.1.0</Version>
+      <FullName>MongoDB.Bson, Version=2.11.1.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\Lead.CPrim.LogHelper.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.LogHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Sys\MongoDB\MongoDB.Bson.dll</Path>
+      <Version>2.11.1.0</Version>
+      <FullName>MongoDB.Bson, Version=2.11.1.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\ManualDoeForm.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>ManualDoeForm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.Robot.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.Robot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\..\..\3.3.22.0220\Lead.CPrim\InnerLibs\Interfaces\Lead.CPrim.Interfaces.Robot.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.Robot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.Robot.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.Robot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\ManualTestForm.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>ManualTestForm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\MessageboxDefine.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>MessageboxDefine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\SunnyUI.dll</Path>
+      <Version>3.1.3.0</Version>
+      <FullName>SunnyUI, Version=3.1.3.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\SunnyUI.Common.dll</Path>
+      <Version>3.1.2.0</Version>
+      <FullName>SunnyUI.Common, Version=3.1.2.0, Culture=neutral, PublicKeyToken=5a271fb7ba597231</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\Lead.CPrim.ProxyTools.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.ProxyTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.Display.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.Display, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\Lead.CPrim.ProxyTools.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.ProxyTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\BouncyCastle.Crypto.dll</Path>
+      <Version>1.8.9.0</Version>
+      <FullName>BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\Excel\EPPlus.dll</Path>
+      <Version>6.0.8.0</Version>
+      <FullName>EPPlus, Version=6.0.8.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Param\Lead.CPrim.CommonParam.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.CommonParam, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Param\Lead.CPrim.DynamicParam.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.DynamicParam, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Config\Lead.CPrim.FaiHelper.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.FaiHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Config\Lead.CPrim.SoftwareConfig.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.SoftwareConfig, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Config\Lead.CPrim.StationCommon.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.StationCommon, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Elements\Lead.CPrim.EleCommon.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.EleCommon, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\VisioPrims\Lead.CPrim.PrimCommon.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.PrimCommon, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Display\Lead.CPrim.ShowCommon.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.ShowCommon, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.StateMachine.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.StateMachine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.Task.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.Task, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\GlobalVariable.dll</Path>
+      <Version>0.0.0.0</Version>
+      <FullName>GlobalVariable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Sys\MongoDB\MongoDB.Driver.dll</Path>
+      <Version>2.11.1.0</Version>
+      <FullName>MongoDB.Driver, Version=2.11.1.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>D:\桌面\Cs02\3.3.23.0101\Lead.CPrim\InnerLibs\VisioPrims\Lead.CPrim.Common.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\VisioPrims\Lead.CPrim.Common.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Control\Lead.CPrim.CmpTrigHelper.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.CmpTrigHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\Lead.CPrim.ExendMyClass.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.ExendMyClass, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\Lead.CPrim.ProxyTools.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.ProxyTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ThreadSafty_StreamlineControl.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>ThreadSafty_StreamlineControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\Lead.Tool.MongoDB.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.Tool.MongoDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.3DAgl.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.3DAgl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Sys\Lead.Detect.INIHelper.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.Detect.INIHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Control\Lead.CPrim.Common.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Control\Lead.CPrim.Controls.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Controls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\VisioPrims\Lead.CPrim.Common.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Control\Lead.CPrim.Common.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\VisioPrim\Interop.BarTender.dll</Path>
+      <Version>11.1.8.1</Version>
+      <FullName>Interop.BarTender, Version=11.1.8.1, Culture=neutral, PublicKeyToken=109ff779a1b4cbc7</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ThreadSafty_StreamlineControl.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>ThreadSafty_StreamlineControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\ManualButton.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>ManualButton, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Proxy\Lead.CPrim.Global.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Global, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Interfaces\Lead.CPrim.Interfaces.3DAgl.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Interfaces.3DAgl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\Lead.Tool.MongoDB.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.Tool.MongoDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\OxyPlot.WindowsForms.dll</Path>
+      <Version>2.1.2.0</Version>
+      <FullName>OxyPlot.WindowsForms, Version=2.1.2.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\OxyPlot.dll</Path>
+      <Version>2.1.2.0</Version>
+      <FullName>OxyPlot, Version=2.1.2.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\OxyPlot.WindowsForms.dll</Path>
+      <Version>2.1.2.0</Version>
+      <FullName>OxyPlot.WindowsForms, Version=2.1.2.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\Lead.CPrim.ProxyTools.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.ProxyTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Tool\Lead.CPrim.ProxyTools.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.ProxyTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Display\Lead.CPrim.ShowPlcCurve.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.ShowPlcCurve, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Sys\Newtonsoft.Json.dll</Path>
+      <Version>13.0.0.0</Version>
+      <FullName>Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\InnerLibs\Control\Lead.CPrim.Alarm.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>Lead.CPrim.Alarm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+  </PartyAssemblyList>
+</ReferencesConfig>

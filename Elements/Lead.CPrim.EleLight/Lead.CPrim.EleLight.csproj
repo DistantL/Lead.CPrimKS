@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C26E9D1C-B416-42C3-A844-A46A01804599}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lead.CPrim.EleLight</RootNamespace>
+    <AssemblyName>Lead.CPrim.EleLight</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Lead.CPrim\InnerLibs\Elements\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>..\..\Lead.CPrim\InnerLibs\Elements\Lead.CPrim.EleLight.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EleCreator.cs" />
+    <Compile Include="EleLightConfig.cs" />
+    <Compile Include="EleLight.cs" />
+    <Compile Include="EleTypeAttributes.cs" />
+    <Compile Include="EleUIs\ConfigUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EleUIs\ConfigUI.Designer.cs">
+      <DependentUpon>ConfigUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EleUIs\DebugUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EleUIs\DebugUI.Designer.cs">
+      <DependentUpon>DebugUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EleUIs\ConfigUI.resx">
+      <DependentUpon>ConfigUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EleUIs\DebugUI.resx">
+      <DependentUpon>DebugUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="StringResources\EleLightResource.en-US.resx" />
+    <None Include="StringResources\EleLightResource.zh-CN.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\icn_气缸伸出.png" />
+    <None Include="Images\light.png" />
+    <Content Include="Images\传感器.png" />
+    <Content Include="Images\灯.png" />
+    <Content Include="Images\红绿灯.png" />
+    <None Include="Resources\Light.png" />
+    <None Include="Resources\传感器.png" />
+    <None Include="StringResources\RepeatedValueList.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.Ele\Lead.CPrim.Interfaces.Ele.csproj">
+      <Project>{6B4508E2-DE29-45C4-89BC-94DA87FEB277}</Project>
+      <Name>Lead.CPrim.Interfaces.Ele</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.IMotionCard\Lead.CPrim.Interfaces.IMotionCard.csproj">
+      <Project>{c14a95d9-5ad2-4b78-92bc-a687f623fda7}</Project>
+      <Name>Lead.CPrim.Interfaces.IMotionCard</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces\Lead.CPrim.Interfaces.csproj">
+      <Project>{f83c7fbb-7e02-416e-afa4-a7c3e5d0d0e4}</Project>
+      <Name>Lead.CPrim.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Proxy\Lead.CPrim.Global\Lead.CPrim.Global.csproj">
+      <Project>{36f66f1c-499c-4b60-9012-9b843978dd21}</Project>
+      <Name>Lead.CPrim.Global</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\Lead.CPrim.ProxyTools\Lead.CPrim.ProxyTools.csproj">
+      <Project>{8399edff-87f1-40e7-a251-5a49cdaf6f10}</Project>
+      <Name>Lead.CPrim.ProxyTools</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

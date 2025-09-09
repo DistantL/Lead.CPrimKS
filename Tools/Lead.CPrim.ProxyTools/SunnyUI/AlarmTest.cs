@@ -1,0 +1,67 @@
+﻿using Lead.CPrim.Global;
+using Lead.CPrim.ProxyTools.Authority;
+using Lead.CPrim.ProxyTools.Authority.Forms;
+using Lead.CPrim.ProxyTools.Common;
+using Lead.CPrim.ProxyTools.SunnyUI.Controls;
+using Lead.CPrim.ProxyTools.SunnyUI.Forms;
+using Sunny.UI.Win32;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Lead.CPrim.ProxyTools.SunnyUI
+{
+    public partial class AlarmTest : UIPage
+    {
+        public AlarmTest()
+        {
+            InitializeComponent();
+            //AlarmManager.Instance.SetEarlyWarning(false);
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            rtbxReq.Text = string.Empty;
+            rtbxRet.Text = string.Empty;
+            try
+            {
+                rtbxReq.Text = MesManager.AlarmCheckReq(tbxID.Text.Trim(), tbxSn.Text.Trim());
+                rtbxRet.Text = MesManager.AlarmCheckRet();
+                if (rtbxRet.Text.Contains("\"Result\":false") && !cbxEnable.Checked) 
+                {
+                    //AlarmManager.Instance.ShowEarlyWarning(rtbxRet.Text);
+                }
+            }
+            catch 
+            {
+            }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            tbxID.Text = string.Empty;
+            tbxSn.Text = string.Empty;
+        }
+
+        private void CbxEnable_Click(object sender, EventArgs e)
+        {
+            var form = new AudioPassWord2StepForm(Color.WhiteSmoke);
+            AuthorityManager.Instance.ShowLevelLoginUI = true;
+            DialogResult dialogResult = form.ShowDialog();
+            if (dialogResult != DialogResult.OK)
+            {
+                cbxEnable.Checked = !cbxEnable.Checked;
+            }
+            else 
+            {
+                //AlarmManager.Instance.SetEarlyWarning(cbxEnable.Checked);
+            }
+        }
+    }
+}

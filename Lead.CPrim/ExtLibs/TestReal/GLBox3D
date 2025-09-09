@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GLBox3DConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Chuang.Li">
+  <AxisColorX>Red</AxisColorX>
+  <AxisColorY>Green</AxisColorY>
+  <AxisColorZ>Blue</AxisColorZ>
+  <GridLineColorXY>Red</GridLineColorXY>
+  <GridLineColorXZ>Green</GridLineColorXZ>
+  <GridLineColorYZ>Blue</GridLineColorYZ>
+  <GridLineWidth>1</GridLineWidth>
+  <GridCellInterval>1</GridCellInterval>
+  <GridCellCount>500</GridCellCount>
+  <IsUseTexture>true</IsUseTexture>
+  <BackColor>White</BackColor>
+  <RampColor>Gray</RampColor>
+  <PathTexture>background.jpg</PathTexture>
+  <SmallWndBkColor>LightGray</SmallWndBkColor>
+  <EnableMouseEvents>false</EnableMouseEvents>
+</GLBox3DConfig>

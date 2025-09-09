@@ -1,0 +1,381 @@
+﻿/******************************************************************************
+ * CPrim
+ * CopyRight (C) 2020-2030.
+ * FileName: UIComboBox.cs
+ * Author: Victor
+ * Description: 组合框
+ * CreateTime: 2020-01-01
+ * Inherit：UIDropControl、UIPanel、UIUserControl
+ * 
+ * If you use this code, please keep this note.
+ * 如果您使用此代码，请保留此说明。
+ ******************************************************************************
+ * 版本迭代说明&修改记录
+ * 2020-01-01: V2.2.0 增加文件说明
+ * 2020-06-11: V2.2.5 增加DataSource，支持数据绑定
+ * 2021-05-06: V3.0.3 解决鼠标下拉选择，触发SelectedIndexChanged两次的问题
+ * 2021-06-03: V3.0.4 更新了数据绑定相关代码
+ * 2021-08-03: V3.0.5 Items.Clear后清除显示
+ * 2021-08-15: V3.0.6 重写了水印文字的画法，并增加水印文字颜色
+ * 2022-01-16: V3.1.0 增加了下拉框颜色设置
+ *
+ * <3.3.22.1010><Victor><20221010>
+ * 1、增加文件说明
+ * 2、命名空间变更为Lead.CPrim.ProxyTools.SunnyUI.Controls
+******************************************************************************/
+
+using Lead.CPrim.ProxyTools.SunnyUI.DropItem;
+using Lead.CPrim.ProxyTools.SunnyUI.Style;
+using Sunny.UI;
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Design;
+using System.Windows.Forms;
+
+namespace Lead.CPrim.ProxyTools.SunnyUI.Controls
+{
+    [DefaultProperty("Items")]
+    [DefaultEvent("SelectedIndexChanged")]
+    [ToolboxItem(true)]
+    [LookupBindingProperties("DataSource", "DisplayMember", "ValueMember", "SelectedValue")]
+    public sealed partial class UIComboBox : UIDropControl, IToolTip
+    {
+        #region event
+        public new event EventHandler TextChanged;
+        public event EventHandler SelectedIndexChanged;
+        public event EventHandler DataSourceChanged;
+        public event EventHandler DisplayMemberChanged;
+        public event EventHandler ValueMemberChanged;
+        public event EventHandler SelectedValueChanged;
+        #endregion
+
+
+
+        #region Field
+        private UIComboBoxItem dropForm = new UIComboBoxItem();
+        #endregion
+
+
+
+        #region Prop
+        [DefaultValue(false)]
+        public bool Sorted
+        {
+            get => ListBox.Sorted;
+            set => ListBox.Sorted = value;
+        }
+
+        private UIListBox ListBox
+        {
+            get => dropForm.ListBox;
+        }
+
+        [DefaultValue(25)]
+        [Description("列表项高度"), Category("SunnyUI")]
+        public int ItemHeight
+        {
+            get => ListBox.ItemHeight;
+            set => ListBox.ItemHeight = value;
+        }
+
+        [DefaultValue(8)]
+        [Description("列表下拉最大个数"), Category("SunnyUI")]
+        public int MaxDropDownItems { get; set; } = 8;
+
+        public object DataSource
+        {
+            get => ListBox.DataSource;
+            set => ListBox.DataSource = value;
+        }
+
+        [DefaultValue(150)]
+        [Description("下拉框宽度"), Category("SunnyUI")]
+        public int DropDownWidth { get; set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [Localizable(true)]
+        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        [MergableProperty(false)]
+        [Description("列表项"), Category("SunnyUI")]
+        public ListBox.ObjectCollection Items => ListBox.Items;
+
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Description("选中索引"), Category("SunnyUI")]
+        public int SelectedIndex
+        {
+            get => ListBox.SelectedIndex;
+            set => ListBox.SelectedIndex = value;
+        }
+
+        [Browsable(false), Bindable(true), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Description("选中项"), Category("SunnyUI")]
+        public object SelectedItem
+        {
+            get => ListBox.SelectedItem;
+            set => ListBox.SelectedItem = value;
+        }
+
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Description("选中文字"), Category("SunnyUI")]
+        public string SelectedText
+        {
+            get
+            {
+                if (DropDownStyle == UIDropDownStyle.DropDown)
+                {
+                    return edit.SelectedText;
+                }
+                else
+                {
+                    return Text;
+                }
+            }
+        }
+
+        [Description("获取或设置要为此列表框显示的属性。"), Category("SunnyUI")]
+        [DefaultValue("")]
+        [Editor("System.Windows.Forms.Design.DataMemberFieldEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        [TypeConverter("System.Windows.Forms.Design.DataMemberFieldConverter, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        public string DisplayMember
+        {
+            get => ListBox.DisplayMember;
+            set => ListBox.DisplayMember = value;
+        }
+
+        [Description("获取或设置指示显示值的方式的格式说明符字符。"), Category("SunnyUI")]
+        [DefaultValue("")]
+        [Editor("System.Windows.Forms.Design.FormatStringEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        [MergableProperty(false)]
+        public string FormatString
+        {
+            get => ListBox.FormatString;
+            set => ListBox.FormatString = value;
+        }
+
+        [Description("获取或设置指示显示值是否可以进行格式化操作。"), Category("SunnyUI")]
+        [DefaultValue(false)]
+        public bool FormattingEnabled
+        {
+            get => ListBox.FormattingEnabled;
+            set => ListBox.FormattingEnabled = value;
+        }
+
+        [Description("获取或设置要为此列表框实际值的属性。"), Category("SunnyUI")]
+        [DefaultValue("")]
+        [Editor("System.Windows.Forms.Design.DataMemberFieldEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        public string ValueMember
+        {
+            get => ListBox.ValueMember;
+            set => ListBox.ValueMember = value;
+        }
+
+        [DefaultValue(null), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Bindable(true) ]
+        public object SelectedValue
+        {
+            get => ListBox.SelectedValue;
+            set => ListBox.SelectedValue = value;
+        }
+
+        [DefaultValue(typeof(Color), "White")]
+        public Color ItemFillColor
+        {
+            get => ListBox.FillColor;
+            set => ListBox.FillColor = value;
+        }
+
+        [DefaultValue(typeof(Color), "48, 48, 48")]
+        public Color ItemForeColor
+        {
+            get => ListBox.ForeColor;
+            set => ListBox.ForeColor = value;
+        }
+
+        [DefaultValue(typeof(Color), "243, 249, 255")]
+        public Color ItemSelectForeColor
+        {
+            get => ListBox.ItemSelectForeColor;
+            set => ListBox.ItemSelectForeColor = value;
+        }
+
+        [DefaultValue(typeof(Color), "80, 160, 255")]
+        public Color ItemSelectBackColor
+        {
+            get => ListBox.ItemSelectBackColor;
+            set => ListBox.ItemSelectBackColor = value;
+        }
+
+        [DefaultValue(typeof(Color), "220, 236, 255")]
+        public Color ItemHoverColor
+        {
+            get => ListBox.HoverColor;
+            set => ListBox.HoverColor = value;
+        }
+        #endregion
+
+
+
+        //*****************************************************************************
+        #region Ctor
+        public UIComboBox()
+        {
+            InitializeComponent();
+            ListBox.SelectedIndexChanged += Box_SelectedIndexChanged;
+            ListBox.DataSourceChanged += Box_DataSourceChanged;
+            ListBox.DisplayMemberChanged += Box_DisplayMemberChanged;
+            ListBox.ValueMemberChanged += Box_ValueMemberChanged;
+            ListBox.SelectedValueChanged += ListBox_SelectedValueChanged;
+            ListBox.ItemsClear += ListBox_ItemsClear;
+            ListBox.ItemsRemove += ListBox_ItemsRemove;
+            edit.TextChanged += Edit_TextChanged;
+            DropDownWidth = 150;
+            fullControlSelect = true;
+        }
+        #endregion
+
+
+
+        //*****************************************************************************
+        #region Event_Subscribe
+        private void Box_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Text = ListBox.GetItemText(ListBox.SelectedItem);
+            SelectedIndexChanged?.Invoke(this, e);
+        }
+        private void Box_DataSourceChanged(object sender, EventArgs e)
+        {
+            DataSourceChanged?.Invoke(this, e);
+        }
+        private void Box_DisplayMemberChanged(object sender, EventArgs e)
+        {
+            DisplayMemberChanged?.Invoke(this, e);
+        }
+        private void Box_ValueMemberChanged(object sender, EventArgs e)
+        {
+            ValueMemberChanged?.Invoke(this, e);
+        }
+        private void ListBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            SelectedValueChanged?.Invoke(this, e);
+        }
+        private void ListBox_ItemsClear(object sender, EventArgs e)
+        {
+            Text = "";
+            edit.Text = "";
+        }
+        private void ListBox_ItemsRemove(object sender, EventArgs e)
+        {
+            if (ListBox.Count == 0)
+            {
+                Text = "";
+                edit.Text = "";
+            }
+        }
+        private void Edit_TextChanged(object sender, EventArgs e)
+        {
+            TextChanged?.Invoke(this, e);
+        }
+        #endregion
+
+
+
+        //*****************************************************************************
+        #region Method_Event
+        private void edit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ShowDropDown();
+            }
+        }
+        private void UIComboBox_FontChanged(object sender, EventArgs e)
+        {
+            if (ItemForm != null)
+            {
+                ListBox.Font = Font;
+            }
+        }
+        private void UIComboBox_ButtonClick(object sender, EventArgs e)
+        {
+            if (Items.Count > 0)
+                ItemForm.Show(this, new Size(DropDownWidth < Width ? Width : DropDownWidth, CalcItemFormHeight()));
+        }
+        private void UIComboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ShowDropDown();
+            }
+        }
+        #endregion
+
+
+
+        //*****************************************************************************
+        #region Method_Override
+        protected override void ItemForm_ValueChanged(object sender, object value)
+        {
+            //if (SelectedIndex != ListBox.SelectedIndex)
+            //{
+            //    SelectedIndex = ListBox.SelectedIndex;
+            //    //Box_SelectedIndexChanged(null, null);
+            //    Invalidate();
+            //}
+
+            Invalidate();
+        }
+        protected override void CreateInstance()
+        {
+            ItemForm = new UIDropDown(dropForm);
+        }
+        protected override int CalcItemFormHeight()
+        {
+            int interval = ItemForm.Height - ItemForm.ClientRectangle.Height;
+            return 4 + Math.Min(ListBox.Items.Count, MaxDropDownItems) * ItemHeight + interval;
+        }
+        public override void SetStyleColor(UIBaseStyle uiColor)
+        {
+            base.SetStyleColor(uiColor);
+            ListBox.SetStyleColor(uiColor.DropDownStyle);
+        }
+        public override void ResetText()
+        {
+            Clear();
+        }
+        #endregion
+
+
+
+        //*****************************************************************************
+        #region Method_ExternalUsing
+        public Control ExToolTipControl()
+        {
+            return edit;
+        }
+        public int FindString(string s)
+        {
+            return ListBox.FindString(s);
+        }
+        public int FindString(string s, int startIndex)
+        {
+            return ListBox.FindString(s, startIndex);
+        }
+        public int FindStringExact(string s)
+        {
+            return ListBox.FindStringExact(s);
+        }
+        public int FindStringExact(string s, int startIndex)
+        {
+            return ListBox.FindStringExact(s, startIndex);
+        }
+        public void ShowDropDown()
+        {
+            UIComboBox_ButtonClick(this, EventArgs.Empty);
+        }
+        public string GetItemText(object item)
+        {
+            return ListBox.GetItemText(item);
+        } 
+        #endregion
+    }
+}

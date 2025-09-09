@@ -1,0 +1,838 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ThreadSafty_StreamlineControl</name>
+    </assembly>
+    <members>
+        <member name="F:ThreadSafty_StreamlineControl.Form_HiveTest.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Form_HiveTest.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Form_HiveTest.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Program.Main">
+            <summary>应用程序的主入口点。</summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Traceability.GetSN_withUCSN(System.String,System.Int32)">
+            <summary>
+            通过ucSN 获取 SN
+            </summary>
+            <param name="ucSN"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Traceability.CheckSN_withSN(System.String,System.String,System.Int32)">
+            <summary>
+            验证sn是否可以过站
+            </summary>
+            <param name="sN"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Traceability.UpData(ThreadSafty_StreamlineControl.ProductionInfo,System.Collections.Generic.List{ThreadSafty_StreamlineControl.FaiItem},System.String,System.Boolean,System.Int32)">
+            <summary>
+            上传数据
+            </summary>
+            <param name="productionInfo"></param>
+            <param name="fais"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Traceability.GoPass(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Pass过站
+            </summary>
+            <param name="productionInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Traceability.GetRECQTY(System.String,System.Int32)">
+            <summary>
+            获取已过站次数
+            </summary>
+            <param name="sN"></param>
+            <returns></returns>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.uniqueID">
+            <summary>
+            请求唯⼀编号(制程_时间戳)
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.terminal_Name">
+            <summary>
+            工作站名称
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.machine_Name">
+            <summary>
+            制程站ID
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.machine_State">
+            <summary>
+            HIVE状态(1, 2, 3, 4, 5)
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.state_Change_Time">
+            <summary>
+            HIVE 状态改变时间
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.message">
+            <summary>
+            只有在HIVE的状态由Planned downtime或Downtime改变⾄Running时，才需要上传错误消息
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.detail">
+            <summary>
+            只有在HIVE的状态由Planned downtime或Downtime改变⾄Running时，才需要上传错误消息
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.code">
+            <summary>
+            只有在HIVE的状态由Planned downtime或Downtime改变⾄Running时，才需要上传错误代码
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.serverity">
+            <summary>
+            从“警告” /“错误” /“关键”中选择
+            只有在HIVE的状态由Planned downtime或Downtime改变⾄Running时才需要上传
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.occurrence_Time">
+            <summary>
+            机器宕机的开始时间
+            只有在HIVE的状态由Planned downtime或Downtime改变⾄Running时才需要上传
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.resolved_Time">
+            <summary>
+            机器宕机的结束时间
+            只有在HIVE的状态由Planned downtime或Downtime改变⾄Running时才需要上传
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.vendor">
+            <summary>
+            供应商英⽂名称 (全⼤写字⺟)
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.uid">
+            <summary>
+            仅在⼿动改变HIVE状态时赋值，⾃动切换状态禁⽌赋值
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.pdline_name">
+            <summary>
+            CM 线体编码(简码)
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MachineStateConfig.sW_Version">
+            <summary>
+            主软件版本
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.HttpClients.HttpPost(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            HttpPost访问
+            </summary>
+            <param name="JsonData"> 数据信息(Json格式)</param> 
+            <param name="url">访问接口</param> 
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.HttpClients.HttpPostMultipartData(System.String,System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            HIVE(httpPost)访问
+            </summary>
+            <param name="jsonData"> 数据信息(Json格式)</param>
+            <param name="url">访问接口</param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.HttpClients.HttpPostMultipartData(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            HIVE(httpPost)访问
+            </summary>
+            <param name="jsonData"> 数据信息(Json格式)</param>
+            <param name="url">访问接口</param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.HttpClients.getmemtype(System.String)">
+            <summary>
+            获取文件类型
+            </summary>
+            <param name="filename"></param>
+            <returns></returns>
+        </member>
+        <member name="F:ThreadSafty_StreamlineControl.Form_TraceabilityTest.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Form_TraceabilityTest.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Form_TraceabilityTest.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="E:ThreadSafty_StreamlineControl.Form_SingleAxisTest.StartTest">
+            <summary>
+            pos1,pos2,speed,time1,time2,testMaxCount
+            </summary>
+        </member>
+        <member name="F:ThreadSafty_StreamlineControl.Form_SingleAxisTest.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Form_SingleAxisTest.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Form_SingleAxisTest.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.StreamlineControl.CheckDifferentSNCompeleted(System.Int32,System.Int32)">
+            <summary>
+            验证count_DifferentSN个不同SN的料，完成count_NeedTest次测试
+            </summary>
+            <param name="count_DifferentSN">不同SN的料</param>
+            <param name="count_NeedTest">需要完成的次数</param>
+            <returns></returns>
+        </member>
+        <member name="F:ThreadSafty_StreamlineControl.StreamlineControl.dic_Apply">
+            <summary>
+            申请保持正转或保持停止
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.User_Login">
+            <summary>
+            接口 1:用户登录
+            </summary>
+            <returns>HWD:返回令牌</returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.GetSN_withUCSN(System.String,System.Int32)">
+            <summary>
+            接口1:依据载具码获得产品SN信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.CheckSN_withSN(System.String,System.String,System.Int32)">
+            <summary>
+            接口3: 依据SN检查路由，确认产品是否允许过站
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.UpData(ThreadSafty_StreamlineControl.ProductionInfo,System.Collections.Generic.List{ThreadSafty_StreamlineControl.FaiItem},System.String,System.Boolean,System.Int32)">
+            <summary>
+            接口4:依据SN,上传设备参数信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.UpBomData(System.String,System.String)">
+            <summary>
+            接口5:依据SN,上传设备BOM物料数据
+            </summary>
+            <param name="sn"></param>
+            <param name="raw_sn">子物料值</param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.GoPass(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            接口6:依据SN,提交过站数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.GoPassNg(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            接口6:依据SN,提交过站数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.GetInputData(System.String)">
+            <summary>
+            接口11:依据SN获得当前工站工装/设备参数信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.Check_section_soft_version">
+            <summary>
+            接口16:供应商版本上传接口
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.GetStationNameByStationCode">
+            <summary>
+            接口19:依据stationCode获取stationName信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.GetUserLevel_withBadgeID(System.String,System.Int32)">
+            <summary>
+            从MES获取权限级别
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.GetSnPartType_withSN(System.String,System.String@,System.Int32)">
+            <summary>
+            MES获取产品类型(通过MES获取产品类型，"E" 或 "M")
+            </summary>
+            <param name="sN"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.Input_Raw_return(System.String)">
+            <summary>
+            接口23:退还子物料接口
+            </summary>
+            <param name="sN"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.Clear_SN_tmp_data(System.String)">
+            <summary>
+            接口14: 提供给供应商清除临时数据的接口
+            </summary>
+            <param name="sN"></param>
+            <returns></returns>
+        </member>
+        <member name="F:ThreadSafty_StreamlineControl.PDCA.locker">
+            <summary>
+            阻塞锁，防止多线程冲突
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.PDCA._client_OnMsgReved(System.String,System.Object)">
+            <summary>
+            PDCA基元接收数据处理
+            </summary>
+            <param name="sender"></param>
+            <param name="msg"></param>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.PDCA.ConvertToPDCAdata(ThreadSafty_StreamlineControl.ProductionInfo,System.Collections.Generic.List{ThreadSafty_StreamlineControl.FaiItem},System.String)">
+            <summary>
+            PDCA数据处理
+            </summary>
+            <param name="PDCAdata">物料数据</param>
+            <param name="SN">物料SN</param>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.PDCA.UpData(ThreadSafty_StreamlineControl.ProductionInfo,System.Collections.Generic.List{ThreadSafty_StreamlineControl.FaiItem},System.String,System.Threading.CancellationToken)">
+            <summary>
+            数据上传
+            </summary>
+            <param name="UploadContent"></param>
+            <returns></returns>
+        </member>
+        <member name="F:ThreadSafty_StreamlineControl.Form_PdcaTest.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Form_PdcaTest.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Form_PdcaTest.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.ColumnsItem.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.ColumnsItem.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.ColumnsItem.Width">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.ColumnsItem.Visible">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.Display.DisplayNotices">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.Display.DisplayLabels">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.Display.DisplayTables">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.Display.CountDisplay">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.CountDisplay.SuccessCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.CountDisplay.FailCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayNoticesItem.Notice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayNoticesItem.Color">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayLabelsItem.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayLabelsItem.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayLabelsItem.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayLabelsItem.Visiable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayTablesItem.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayTablesItem.Title">
+            <summary>
+            工序Bom
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayTablesItem.Columns">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayTablesItem.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayTablesItem.TotalCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayTablesItem.PageCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayTablesItem.PageSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DisplayTablesItem.CurrentPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DataItem.WO_NO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DataItem.PN_CODE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DataItem.RAW_PN_CODE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DataItem.REAL_PN_CODE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DataItem.BATCH_NO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DataItem.QTY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DataItem.DATE_BEI">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DataItem.LINE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DataItem.SHELF">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DataItem.STATION_CODE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.DataItem.ORDERNO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MaterialInfos.total">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MaterialInfos.current_index">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MaterialInfos.page_size">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MaterialInfos.data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.Root.Cmd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.Root.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.OPRequestInfo.SOFT_VERSION">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.OPRequestInfo.VENDOR_CODE">
+            <summary>
+            供应商代码
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.OPResponseInfo.Result">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.VendorVersion.LineCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.VendorVersion.SectionCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.VendorVersion.StationCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.VendorVersion.OPCategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.VendorVersion.OPRequestInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.VendorVersion.OPResponseInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ThreadSafty_StreamlineControl.MesBase._objWrite">
+            <summary>
+            写入锁
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MesBase.empNo">
+            <summary>
+            作业员工号
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MesBase.terminalName">
+            <summary>
+            设备名称
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MesBase.MesIP">
+            <summary>
+            MesIP
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.MesBase.MesImageIP">
+            <summary>
+            Mes图片IP
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.MesBase.GetLotnoCount(System.String,System.String@)">
+            <summary>
+            获取辅料数量<br/>
+            True：辅料可以使用<br/>
+            False：辅料不可以使用<br/>
+            </summary>
+            <param name="sn"></param>
+            <param name="canUseQty"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ThreadSafty_StreamlineControl.MesReturnMsg">
+            <summary>
+            Mes返回解析类
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.MesKS.GetLotnoCount(System.String,System.String@)">
+            <summary>
+            查询辅料数量
+            </summary>
+            <param name="sn"></param>
+            <param name="canUseQty">可使用数量</param>
+            <returns></returns>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.FaiItem.DataType">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.FaiItem.FaiItemLimitLower">
+            <summary>
+            下限
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.FaiItem.FaiItemLimitUpper">
+            <summary>
+            上限
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.FaiItem.FaiItemName">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.FaiItem.FaiItemUnit">
+            <summary>
+            单位
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.FaiItem.FaiItemValue">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.ProductionInfo.Result">
+            <summary>
+            总结果,true,OK;false:NG;
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.ProductionInfo.FixtureID">
+            <summary>
+            载具SN
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.ProductionInfo.Sn">
+            <summary>
+            物料SN
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.ProductionInfo.GuidCode">
+            <summary>
+            唯一识别码
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.ProductionInfo.StreamLineIndex">
+            <summary>
+            流线编号,1;2;
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.ProductionInfo.SlotIndex">
+            <summary>
+            工位<br/>
+            供应商-抛料信息需要使用<br/>
+            </summary>
+        </member>
+        <member name="T:ThreadSafty_StreamlineControl.SlotInfo">
+            <summary>
+            工位信息
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.SlotInfo.AccessaryVisionImageFilenames">
+            <summary>
+            辅料SN<br/>
+            适用于主料SN未生成时，生成时间戳SN发送给视觉，最终将辅料图片移入主料文件夹
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.SlotInfo.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.SlotInfo.Fais">
+            <summary>
+            FAI项
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.SlotInfo.Head_Id">
+            <summary>
+            吸嘴编号<br/>
+            螺丝枪编号等等<br/>
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.SlotInfo.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.SlotInfo.SlotIndex">
+            <summary>
+            工位
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.SlotInfo.StartTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.SlotInfo.TossingAccessaryInfos">
+            <summary>
+            抛料信息
+            </summary>
+        </member>
+        <member name="T:ThreadSafty_StreamlineControl.TossingControl">
+            <summary>
+            抛料管理<br/>
+            配置文件路径D:\Config\IniConfig\TossingStaticitsInfo.ini<br/>
+            </summary>
+        </member>
+        <member name="E:ThreadSafty_StreamlineControl.TossingControl.Log">
+            <summary>
+            日志输出<br/>
+            LogLevel.Other：报警输出；其它是正常日志记录。<br/>
+            </summary>
+        </member>
+        <member name="F:ThreadSafty_StreamlineControl.TossingControl.tossingName">
+            <summary>
+            INI区域名称
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.TossingControl.InitCheckTossingRate(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            初始化参数
+            </summary>
+            <param name="ContinuousTossingThreshold"></param>
+            <param name="CheckAccessaryNum"></param>
+            <param name="CheckTossingThreshold"></param>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.TossingControl.CheckTossingRate(System.Int32,System.Int32)">
+            <summary>
+            抛料检查
+            </summary>
+            <param name="ngNum"></param>
+            <param name="okNum"></param>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.TossingControl.ClearEvent">
+            <summary>
+            清除Log所有事件注册<br/>
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.InteractiveScrewInfo.SN">
+            <summary>
+            产品SN
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.InteractiveScrewInfo.UCSN">
+            <summary>
+            载具SN
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.InteractiveScrewInfo.PosNo">
+            <summary>
+            锁螺丝位置
+            </summary>
+        </member>
+        <member name="P:ThreadSafty_StreamlineControl.InteractiveScrewInfo.ScrewNo">
+            <summary>
+            复锁次数
+            </summary>
+        </member>
+        <member name="F:ThreadSafty_StreamlineControl.PressCurve.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.PressCurve.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.PressCurve.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+    </members>
+</doc>

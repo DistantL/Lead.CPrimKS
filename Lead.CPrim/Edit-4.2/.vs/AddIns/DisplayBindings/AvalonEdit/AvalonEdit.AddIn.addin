@@ -1,0 +1,166 @@
+﻿<AddIn name        = "AvalonEdit.AddIn"
+       author      = "Daniel Grunwald"
+       description = "The main text editor for SharpDevelop"
+       addInManagerHidden="preinstalled">
+	
+	<Manifest>
+		<Identity name="LeadChina.AvalonEdit" />
+	</Manifest>
+	
+	<Runtime>
+		<Import assembly = ":LeadChina.AvalonEdit"/>
+		<Import assembly = "LeadChina.AvalonEdit.AddIn.dll">
+			<Doozer name="SyntaxMode" class="LeadChina.AvalonEdit.AddIn.SyntaxModeDoozer"/>
+		</Import>
+	</Runtime>
+	
+	<Path name = "/SharpDevelop/Workbench/DisplayBindings">
+		<DisplayBinding id = "Text"
+		                title = "${res:Gui.ProjectBrowser.OpenWith.Bindings.TextEditor}"
+		                class = "LeadChina.AvalonEdit.AddIn.AvalonEditDisplayBinding"/>
+		<DisplayBinding id = "TextWithEncoding"
+		                insertbefore = "ShellExecute"
+		                title = "${res:Gui.ProjectBrowser.OpenWith.Bindings.TextEditorWithEncoding}"
+		                class = "LeadChina.AvalonEdit.AddIn.ChooseEncodingDisplayBinding"/>
+	</Path>
+	
+	<Path name = "/SharpDevelop/ViewContent/AvalonEdit/ContextMenu">
+		<Include id="DefaultEditor" path="/SharpDevelop/ViewContent/TextEditor/ContextMenu"/>
+	</Path>
+	
+	<Path name = "/SharpDevelop/ViewContent/TextEditor/EditorControlService">
+		<Class id="CodeEditorView" class="LeadChina.AvalonEdit.AddIn.AvalonEditorControlService"/>
+	</Path>
+	
+	<!-- 
+	<Path name = "/SharpDevelop/ViewContent/TextEditor/ContextMenu">
+		<Condition name = "WindowActive" activewindow="LeadChina.AvalonEdit.AddIn.ICodeEditorProvider">
+			<MenuItem id = "SaveWithEncoding"
+			          label = "${res:XML.MainMenu.FileMenu.SaveWithEncoding}"
+			          insertafter="SaveAs"
+			          insertbefore="CloseFile"
+			          class = "LeadChina.AvalonEdit.AddIn.Commands.SaveFileWithEncoding"/>
+		</Condition>
+	</Path>
+	-->
+	
+	<Path name = "/SharpDevelop/Workbench/MainMenu/File">
+		<Condition name = "WindowActive" activewindow="LeadChina.AvalonEdit.AddIn.ICodeEditorProvider" action="Disable">
+			<MenuItem id = "SaveWithEncoding"
+			          label = "${res:XML.MainMenu.FileMenu.SaveWithEncoding}"
+			          insertafter="SaveAs"
+			          insertbefore="SaveAll"
+			          class = "LeadChina.AvalonEdit.AddIn.Commands.SaveFileWithEncoding"/>
+		</Condition>
+	</Path>
+	
+	<Path name = "/SharpDevelop/Workbench/MainMenu/Edit/Format">
+		<Condition name = "WindowActive" activewindow="LeadChina.LeadDevelop.Editor.ITextEditorProvider" action="Disable">
+			<MenuItem id = "RemoveLeadingWs"
+			          insertbefore = "Separator4"
+			          label = "${res:XML.MainMenu.EditMenu.FormatMenu.RlWs}"
+			          command = "LeadChina.AvalonEdit.AvalonEditCommands.RemoveLeadingWhitespace"/>
+			<MenuItem id = "RemoveTrailingWs"
+			          insertbefore = "Separator4"
+			          label = "${res:XML.MainMenu.EditMenu.FormatMenu.RtWs}"
+			          command = "LeadChina.AvalonEdit.AvalonEditCommands.RemoveTrailingWhitespace"/>
+			<MenuItem id = "Seperator1" type = "Separator" insertbefore = "Separator4" />
+			<MenuItem id = "UpperCase"
+			          insertbefore = "Separator4"
+			          label = "${res:XML.MainMenu.EditMenu.FormatMenu.UpperCase}"
+			          icon = "Icons.16x16.LowerToUpperCase"
+			          command = "LeadChina.AvalonEdit.AvalonEditCommands.ConvertToUppercase"/>
+			<MenuItem id = "LowerCase"
+			          insertbefore = "Separator4"
+			          label = "${res:XML.MainMenu.EditMenu.FormatMenu.LowerCase}"
+			          icon = "Icons.16x16.UpperToLowerCase"
+			          command = "LeadChina.AvalonEdit.AvalonEditCommands.ConvertToLowercase"/>
+			<MenuItem id = "Capitalize"
+			          insertbefore = "Separator4"
+			          label = "${res:XML.MainMenu.EditMenu.FormatMenu.Capitalize}"
+			          command = "LeadChina.AvalonEdit.AvalonEditCommands.ConvertToTitleCase"/>
+			<MenuItem id = "InvertCase"
+			          insertbefore = "Separator4"
+			          label = "${res:XML.MainMenu.EditMenu.FormatMenu.InvertCase}"
+			          command = "LeadChina.AvalonEdit.AvalonEditCommands.InvertCase"/>
+			<MenuItem id = "Separator2" type = "Separator" />
+			<MenuItem id = "SortSelection"
+			          insertbefore = "Separator4"
+			          label = "${res:XML.MainMenu.EditMenu.FormatMenu.SortLines}"
+			          class ="LeadChina.AvalonEdit.AddIn.Commands.SortSelectionCommand"/>
+			<MenuItem id = "Separator3" type = "Separator" insertbefore = "Separator4" />
+			<MenuItem id = "Tabs2Spaces"
+			          insertbefore = "Separator4"
+			          label = "${res:XML.MainMenu.EditMenu.FormatMenu.Tab2Space}"
+			          command = "LeadChina.AvalonEdit.AvalonEditCommands.ConvertTabsToSpaces"/>
+			<MenuItem id = "Spaces2Tabs"
+			          insertbefore = "Separator4"
+			          label = "${res:XML.MainMenu.EditMenu.FormatMenu.Space2Tab}"
+			          command = "LeadChina.AvalonEdit.AvalonEditCommands.ConvertSpacesToTabs"/>
+			<MenuItem id = "LeadingTabs2Spaces"
+			          insertbefore = "Separator4"
+			          label = "${res:XML.MainMenu.EditMenu.FormatMenu.LdTab2Space}"
+			          command = "LeadChina.AvalonEdit.AvalonEditCommands.ConvertLeadingTabsToSpaces"/>
+			<MenuItem id = "LeadingSpaces2Tabs"
+			          insertbefore = "Separator4"
+			          label = "${res:XML.MainMenu.EditMenu.FormatMenu.LdSpace2Tab}"
+			          command = "LeadChina.AvalonEdit.AvalonEditCommands.ConvertLeadingSpacesToTabs"/>
+			<MenuItem id = "Separator5" type = "Separator" insertbefore = "Separator4" />
+			<MenuItem id = "SurroundWithSnippet"
+			          insertbefore = "Separator4"
+			          shortcut="Ctrl|J"
+			          label = "Surround with"
+			          class = "LeadChina.AvalonEdit.AddIn.Commands.SurroundWithCommand"/>
+		</Condition>
+	</Path>
+	
+	<Path name = "/SharpDevelop/Workbench/MainMenu/Edit">
+		<MenuItem id = "Folding" label = "${res:XML.MainMenu.EditMenu.FoldingMenu}" type="Menu" insertafter="Format">
+			<Condition name = "WindowActive" activewindow="LeadChina.AvalonEdit.AddIn.ICodeEditorProvider" action="Disable">
+				<MenuItem id          = "ToggleFolding"
+				          label       = "${res:XML.MainMenu.EditMenu.FoldingMenu.ToggleFolding}"
+				          shortcut    = "Shift|Control|M"
+				          class       = "LeadChina.AvalonEdit.AddIn.Commands.ToggleFolding"/>
+				<MenuItem id          = "ToggleAllFoldings"
+				          label       = "${res:XML.MainMenu.EditMenu.FoldingMenu.ToggleAllFoldings}"
+				          shortcut    = "Shift|Control|L"
+				          class       = "LeadChina.AvalonEdit.AddIn.Commands.ToggleAllFoldings"/>
+				<MenuItem id          = "ShowDefinitionsOnly"
+				          label       = "${res:XML.MainMenu.EditMenu.FoldingMenu.ShowDefinitions}"
+				          shortcut    = "Shift|Control|P"
+				          class       = "LeadChina.AvalonEdit.AddIn.Commands.ShowDefinitionsOnly"/>
+			</Condition>
+		</MenuItem>
+	</Path>
+	
+	<Path name = "/SharpDevelop/Dialogs/OptionsDialog/CodingOptions">
+		<OptionPanel id = "CodeTemplates"
+		             label = "${res:Dialog.Options.CodeTemplatesText}"
+		             class = "LeadChina.AvalonEdit.AddIn.Snippets.SnippetOptionPanel"/>
+	</Path>
+	
+	<Path name = "/SharpDevelop/Dialogs/OptionsDialog">
+		<OptionPanel id    = "TextEditorOptions"
+		             insertafter = "CodingOptions"
+		             insertbefore = "ToolsOptions"
+		             label = "${res:Dialog.Options.IDEOptions.TextEditorOptionsText}">
+			<OptionPanel id = "General"
+			             label = "${res:Dialog.Options.IDEOptions.General}"
+			             class = "LeadChina.AvalonEdit.AddIn.Options.GeneralEditorOptions"/>
+			<OptionPanel id = "Markers"
+			             label = "${res:Dialog.Options.IDEOptions.TextEditor.Markers.PanelName}"
+			             class = "LeadChina.AvalonEdit.AddIn.Options.TextViewOptions"/>
+			<OptionPanel id = "Behavior"
+			             label = "${res:Dialog.Options.IDEOptions.TextEditor.Behaviour.PanelName}"
+			             class = "LeadChina.AvalonEdit.AddIn.Options.BehaviorOptions"/>
+			<OptionPanel id = "Highlighting"
+			             label = "${res:Dialog.Options.TextEditorOptions.EditHighlighting.Title}"
+			             class = "LeadChina.AvalonEdit.AddIn.Options.HighlightingOptions"/>
+		</OptionPanel>
+	</Path>
+	
+	<Path name = "/SharpDevelop/ViewContent/AvalonEdit/SnippetElementProviders">
+		<Class id="default" class="LeadChina.AvalonEdit.AddIn.Snippets.DefaultSnippetElementProvider" />
+		<Class id="anchor" class="LeadChina.AvalonEdit.AddIn.Snippets.AnchorSnippetElementProvider" />
+	</Path>
+</AddIn>

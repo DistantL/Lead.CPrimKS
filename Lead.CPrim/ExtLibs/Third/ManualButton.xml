@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ManualButton</name>
+    </assembly>
+    <members>
+        <member name="M:ManualButton.ManualButton.ClearControl">
+            <summary>
+            清除所有按钮
+            </summary>
+        </member>
+        <member name="M:ManualButton.ManualButton.Show(System.String)">
+            <summary>
+            输出消息
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:ManualButton.ManualButton.AddFromBtnName(System.String,System.String)">
+            <summary>
+            增加按钮
+            </summary>
+            <param name="groupName">分组</param>
+            <param name="buttonName">按钮名称</param>
+        </member>
+        <member name="M:ManualButton.ManualButton.OnButtonManualTestClearAll">
+            <summary>
+            清除所有事件
+            </summary>
+        </member>
+        <member name="M:ManualButton.ManualButton.SetSn1Description(System.String)">
+            <summary>
+            设置SN1描述
+            </summary>
+            <param name="sn"></param>
+        </member>
+        <member name="M:ManualButton.ManualButton.SetSn2Description(System.String)">
+            <summary>
+            设置SN2描述
+            </summary>
+            <param name="sn"></param>
+        </member>
+        <member name="F:ManualButton.ManualButton.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:ManualButton.ManualButton.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:ManualButton.ManualButton.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+    </members>
+</doc>

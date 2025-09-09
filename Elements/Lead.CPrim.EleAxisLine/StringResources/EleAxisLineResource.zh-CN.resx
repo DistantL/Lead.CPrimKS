@@ -1,0 +1,471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EleAxisLine_ConfigUI_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Type" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_State" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Enable" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Simulate" xml:space="preserve">
+    <value>仿真</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_DriveType" xml:space="preserve">
+    <value>驱动方式</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ControlType" xml:space="preserve">
+    <value>控制方式</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_FeedBackType" xml:space="preserve">
+    <value>反馈方式</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Controller" xml:space="preserve">
+    <value>控制器</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_DevName" xml:space="preserve">
+    <value>设备名称:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_CardIndex" xml:space="preserve">
+    <value>板卡号:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_AxisIndex" xml:space="preserve">
+    <value>轴号:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_AxisLead" xml:space="preserve">
+    <value>导程:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_AxisPlsPerRoll" xml:space="preserve">
+    <value>脉冲当量:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_HomeMode" xml:space="preserve">
+    <value>回安全位置方式:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_AccDecMode" xml:space="preserve">
+    <value>加减速方式:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_StopMode" xml:space="preserve">
+    <value>停止方式:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ErrChkRange" xml:space="preserve">
+    <value>误差检查范围:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_JogVelocity" xml:space="preserve">
+    <value>点动速度:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_JogDistance" xml:space="preserve">
+    <value>点动距离:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_HomeVelocity" xml:space="preserve">
+    <value>回安全位置速度:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Limit" xml:space="preserve">
+    <value>限定范围</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_HwLimitEnable" xml:space="preserve">
+    <value>启用硬极限</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_SwLimitEnable" xml:space="preserve">
+    <value>启用软极限</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_SPEL" xml:space="preserve">
+    <value>软正限位:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_LimVelMax" xml:space="preserve">
+    <value>最大速度:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_SMEL" xml:space="preserve">
+    <value>软负限位</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_LimVelMin" xml:space="preserve">
+    <value>最小速度:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_DefaultParams" xml:space="preserve">
+    <value>默认参数</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Velocity" xml:space="preserve">
+    <value>速度:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Acceleration" xml:space="preserve">
+    <value>加速:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Deceleration" xml:space="preserve">
+    <value>减速:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_MinVelocity" xml:space="preserve">
+    <value>最小速度:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_AccTime" xml:space="preserve">
+    <value>加速时间:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_DecTime" xml:space="preserve">
+    <value>减速时间:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_StopVel" xml:space="preserve">
+    <value>停止速度:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_StandByIndex" xml:space="preserve">
+    <value>等待位序号:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Test" xml:space="preserve">
+    <value>测试</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_CmmandPos" xml:space="preserve">
+    <value>指令位置:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_CmmandVel" xml:space="preserve">
+    <value>指令速度:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_CmdPulsePos" xml:space="preserve">
+    <value>指令脉冲位置:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ActualPulsePos" xml:space="preserve">
+    <value>实际脉冲位置:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_CmdPulseVel" xml:space="preserve">
+    <value>指令脉冲速度:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ActualPulseVel" xml:space="preserve">
+    <value>实际脉冲速度:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Position" xml:space="preserve">
+    <value>位置:</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_MoveTo" xml:space="preserve">
+    <value>移动至</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Set" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Status" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ActualPos" xml:space="preserve">
+    <value>实际位置</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ActualVel" xml:space="preserve">
+    <value>实际速度</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_StandBy" xml:space="preserve">
+    <value>回等待位</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Home" xml:space="preserve">
+    <value>回安全位</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Stop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Apply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Config" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Data" xml:space="preserve">
+    <value>数据</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_Load" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_SaveAs" xml:space="preserve">
+    <value>另存为</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_State" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Config" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Data" xml:space="preserve">
+    <value>数据</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Target" xml:space="preserve">
+    <value>目标</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_CommandPosition" xml:space="preserve">
+    <value>指令位置:</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_CommandVelocity" xml:space="preserve">
+    <value>指令速度:</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Actual" xml:space="preserve">
+    <value>实际</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_ActualPosition" xml:space="preserve">
+    <value>实际位置:</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_ActualVelocity" xml:space="preserve">
+    <value>实际速度:</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Move" xml:space="preserve">
+    <value>运动</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_RelativeDistance" xml:space="preserve">
+    <value>相对距离:</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Positiion" xml:space="preserve">
+    <value>位置:</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_GO" xml:space="preserve">
+    <value>移动至</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Control" xml:space="preserve">
+    <value>控制</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_ServoOn" xml:space="preserve">
+    <value>伺服开</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Home" xml:space="preserve">
+    <value>回安全位</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Reset" xml:space="preserve">
+    <value>复位</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Stop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Status" xml:space="preserve">
+    <value>状态</value>
+  </data>
+    <data name="EleAxisLine_InfoUI_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="EleAxisLine_InfoUI_ID" xml:space="preserve">
+    <value>识别码</value>
+  </data>
+  <data name="EleAxisLine_InfoUI_Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="EleAxisLine_InfoUI_State" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="EleAxisLine_InfoUI_Type" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="EleAxisLine_InfoUI_Enable" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="EleAxisLine_InfoUI_Simulate" xml:space="preserve">
+    <value>仿真</value>
+  </data>
+  <data name="EleAxisLine_EleAxisLine_AxisEanbleFailed" xml:space="preserve">
+    <value>轴启用失败。</value>
+  </data>
+  <data name="EleAxisLine_EleAxisLine_SpeedParameterLimit" xml:space="preserve">
+    <value>速度参数限制。</value>
+  </data>
+  <data name="EleAxisLine_EleAxisLine_Pause" xml:space="preserve">
+    <value>暂停</value>
+  </data>
+  <data name="EleAxisLine_EleAxisLine_HomeDone" xml:space="preserve">
+    <value>回零成功！</value>
+  </data>
+  <data name="EleAxisLine_EleAxisLine_HomeMotionError" xml:space="preserve">
+    <value>回零运动错误！</value>
+  </data>
+  <data name="EleAxisLine_EleAxisLine_DeviceWithName" xml:space="preserve">
+    <value>设备名称:</value>
+  </data>
+  <data name="EleAxisLine_EleAxisLine_NotFound" xml:space="preserve">
+    <value>未发现</value>
+  </data>
+  <data name="EleAxisLine_EleAxisLine_AxisInPositiveLimit" xml:space="preserve">
+    <value>轴在正极限。</value>
+  </data>
+  <data name="EleAxisLine_EleAxisLine_AxisInNegativeLimit" xml:space="preserve">
+    <value>轴在负极限</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_DeviceWithName" xml:space="preserve">
+    <value>设备名称：</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_NotFound" xml:space="preserve">
+    <value>未发现</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_SelectedFileNotExist" xml:space="preserve">
+    <value>所选文件不存在！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ConfirmPermission" xml:space="preserve">
+    <value>当前用户没有权限，请确认权限。</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ConfirmChangePointPosition" xml:space="preserve">
+    <value>您确定要更改点位置吗？</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfLimVelMaxIllegal" xml:space="preserve">
+    <value>LimVelMax的值非法！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfLimVelMinIllegal" xml:space="preserve">
+    <value>LimVelMin的值非法！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfJogVelocityIllegal" xml:space="preserve">
+    <value>JogVelocity的值是非法的！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfJogVelocityOverLimit" xml:space="preserve">
+    <value>JogVelocity的值超出了限定范围！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfHomeVelocityIllegal" xml:space="preserve">
+    <value>HomeVelocity的值是非法的！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfHomeVelocityOverLimit" xml:space="preserve">
+    <value>HomeVelocity的值超出了限定范围！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfDefaultParamsVelocityIllegal" xml:space="preserve">
+    <value>DefaultParams.Velocity的值非法！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfDefaultParamsVelocityOverLimit" xml:space="preserve">
+    <value>DefaultParams.Velocity的值超出限定范围！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfDefaultParamsMinVelocityIllegal" xml:space="preserve">
+    <value>DefaultParams.MinVelocity的值非法！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfDefaultParamsMinVelocityOverLimit" xml:space="preserve">
+    <value>DefaultParams.MinVelocity的值超出限定范围！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfDefaultParamsStopVelIllegal" xml:space="preserve">
+    <value>DefaultParams.StopVel的值非法！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfDefaultParamsStopVelOverLimit" xml:space="preserve">
+    <value>DefaultParams.StopVel的值超出限定范围！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfVelocityInTableIllegal" xml:space="preserve">
+    <value>处于行{0}, 列{1}的速度值非法！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfMinVelocityInTableIllegal" xml:space="preserve">
+    <value>处于行{0}, 列{1}的最小速度值非法！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfVelocityInTableOverLimit" xml:space="preserve">
+    <value>处于行{0}, 列{1}的速度值超出限定范围！</value>
+  </data>
+  <data name="EleAxisLine_ConfigUI_ValueOfMinVelocityInTableOverLimit" xml:space="preserve">
+    <value>处于行{0}, 列{1}的最小速度值超出限定范围！</value>
+  </data>
+  <data name="EleAxisLine_DebugUI_Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+</root>

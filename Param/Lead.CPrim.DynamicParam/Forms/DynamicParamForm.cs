@@ -1,0 +1,674 @@
+﻿using Lead.CPrim.BaseParam;
+using Lead.CPrim.Global;
+using Lead.CPrim.Interfaces;
+using Lead.CPrim.Interfaces.Ele;
+using Lead.CPrim.ProxyTools;
+using Lead.CPrim.ProxyTools.Authority;
+using Lead.CPrim.ProxyTools.SunnyUI.Forms;
+using Lead.CPrim.ProxyTools.SunnyUI.Style;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Linq;
+
+namespace Lead.CPrim.DynamicParam
+{
+    /// <summary>
+    /// 换型参数
+    /// </summary>
+    public partial class DynamicParamForm : UIPage
+    {
+        /// <summary>
+        /// 位置点对应的轴组 没有为null
+        /// </summary>
+        public Dictionary<string, string> DicCartesian = new Dictionary<string, string>();
+
+        public Dictionary<string, List<Pos>> DicPos = new Dictionary<string, List<Pos>>();
+
+        private bool _copyFlag;
+
+        /// <summary>
+        /// 已复制到的产品名
+        /// </summary>
+        private string _copyProduct;
+
+        /// <summary>当前产品参数文件名</summary>
+        private string _curParaPath;
+
+        /// <summary>System.Environment.CurrentDirectory;</summary>
+        private string _curSysDirPaht;
+
+        private XElement _node;
+
+        /// <summary>多产品参数文件存储目录路径</summary>
+        private string _productsCfgDir;
+
+        /// <summary>用户自定义类保存路径</summary>
+        private string _userDefineDir;
+
+        private List<Property> _xElementPropList = null;
+
+        /// <summary>属性表绑定对象</summary>
+        private PropertyManageCls Pmcls = new PropertyManageCls();
+        /// <summary>换型参数切换当前产品时发生</summary>
+        public event Action<string, List<string>> OnDynamicParamChangeCurrentProduct;
+
+        /// <summary>
+        /// 参数复制标志位
+        /// </summary>
+        private bool CopyFlag
+        {
+            get
+            {
+                return _copyFlag;
+            }
+            set
+            {
+                _copyFlag = value;
+                tsbtnCopy.Text = ((!value)
+                    ? NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_CopyParam", "复制参数")
+                    : NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_PasteParam", "粘贴参数"));
+                tsbtnCopy.BackColor = ((!value) ? Color.LawnGreen : Color.DarkSlateGray);
+            }
+        }
+        #region Ctor
+        public DynamicParamForm()
+        {
+            InitializeComponent();
+            cmbTreePos.Style = UIStyle.Gray;
+            cmbTreePos.TreeView.Style = UIStyle.Gray;
+            cmbTreePos.TreeView.RectColor = Color.Gray;
+
+            _curSysDirPaht = Application.StartupPath;
+            AuthorityManager.OnUpdateLevel += InstanceUpdateLevel;
+            pg.MouseWheel += PropertyGrid1_MouseWheel;
+
+            NLocalizer.LanguageChanged += OnLanguageChanged;
+
+            DynamicParam.OnUpdateProperty += InstanceUpdateProperty;
+        }
+        #endregion
+
+
+
+        #region Event_System
+        private void DynamicParamForm_Load(object sender, EventArgs e)
+        {
+            //BtnRefresh_Click(null, null);
+        }
+
+        private void PropertyGrid1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+        #endregion
+
+
+
+        #region Method_Instance
+        /// <summary>
+        /// 更新参数时发生
+        /// </summary>
+        /// <param name="property"></param>
+        void InstanceUpdateProperty(Property property)
+        {
+            if (pg.InvokeRequired)
+            {
+                BeginInvoke(new Action<Property>(InstanceUpdateProperty), property);
+            }
+            else
+            {
+                foreach (Property p in Pmcls)
+                {
+                    if (p.Name == property.Name)
+                    {
+                        p.Value = property.Value;
+                        break;
+                    }
+                }
+                pg.SelectedObject = Pmcls;
+            }
+        }
+
+        private void pnlMain_ControlRemoved(object sender, EventArgs e)
+        {
+            pnlMain.Controls.Clear();
+            pnlMain.Controls.Add(tlpMain);
+            pnlMain.ControlRemoved -= pnlMain_ControlRemoved;
+        }
+
+        /// <summary>响应权限等级改变</summary>
+        /// <param name="level">登录级别</param>
+        private void InstanceUpdateLevel(OpLevel level)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action<OpLevel>(InstanceUpdateLevel), level);
+            }
+            else if (AuthorityManager.Instance.VerifyLevel3Permission(false))
+            {
+                tsbtnEdit.Visible = true;
+                tsbtnNewUdt.Visible = true;
+                tsbtnEditUdt.Visible = true;
+            }
+            else if (AuthorityManager.Instance.VerifyLevel2Permission(false))
+            {
+                tsbtnEdit.Visible = false;
+                tsbtnNewUdt.Visible = false;
+                tsbtnEditUdt.Visible = false;
+            }
+            else
+            {
+                tsbtnEdit.Visible = false;
+                tsbtnNewUdt.Visible = false;
+                tsbtnEditUdt.Visible = false;
+            }
+        }
+        #endregion
+
+
+
+        #region Method_ExternalUsing
+        /// <summary>
+        /// 根据参数名称更新点位信息
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <param name="poss"></param>
+        internal void UpdatePos(string propertyName, List<Pos> poss)
+        {
+            if (propertyName.IsNullOrWhiteSpace())
+            {
+                DynamicParam.Instance.LogAdd(NLocalizer.GetString("ParameterNameIsNull", "参数名称为空"), LogLevel.Warn, 0, false);
+                return;
+            }
+
+            foreach (Property p in Pmcls)
+            {
+                if (p.Name == propertyName)
+                {
+                    p.Value = poss;
+                    break;
+                }
+            }
+        }
+        #endregion
+
+
+
+        #region Method_InternalUsing
+        /// <summary>
+        /// 换型参数初始化
+        /// </summary>
+        /// <param name="dynamicParamDir"></param>
+        /// <returns></returns>
+        public int Init(string dynamicParamDir)
+        {
+            tscboProducts.SelectedIndexChanged -= tscboProducts_SelectedIndexChanged;
+            if (string.IsNullOrEmpty(dynamicParamDir))
+            {
+                return -1;
+            }
+            _userDefineDir = dynamicParamDir + "\\UserDefineStruct";
+            _productsCfgDir = dynamicParamDir + "\\ProductCfg";
+            if (!Directory.Exists(dynamicParamDir))
+            {
+                Directory.CreateDirectory(dynamicParamDir);
+            }
+            if (!Directory.Exists(_userDefineDir))
+            {
+                Directory.CreateDirectory(_userDefineDir);
+            }
+            if (!Directory.Exists(_productsCfgDir))
+            {
+                Directory.CreateDirectory(_productsCfgDir);
+            }
+            if (SwManager.Instance.Products != null && SwManager.Instance.Products.Count > 0)
+            {
+                tscboProducts.Items.Clear();
+                foreach (string product in SwManager.Instance.Products)
+                {
+                    if (!File.Exists(_productsCfgDir + "\\" + product + ".para"))
+                    {
+                        if (File.Exists(Application.StartupPath + "\\Configs\\Template.para"))
+                        {
+                            File.Copy(Application.StartupPath + "\\Configs\\Template.para", _productsCfgDir + "\\" + product + ".para");
+                        }
+                        else
+                        {
+                            File.Create(_productsCfgDir + "\\" + product + ".para").Dispose();
+                        }
+                    }
+                    tscboProducts.Items.Add(product);
+                }
+                if (!string.IsNullOrEmpty(SwManager.Instance.CurrentProduct))
+                {
+                    _curParaPath = _productsCfgDir + "\\" + SwManager.Instance.CurrentProduct + ".para";
+                    tscboProducts.SelectedItem = SwManager.Instance.CurrentProduct;
+                }
+                if (File.Exists(_curParaPath))
+                {
+                    DynamicParam.Instance.Load(_curParaPath);
+                    UpdateUi();
+                }
+                tscboProducts.SelectedIndexChanged += tscboProducts_SelectedIndexChanged;
+                return 0;
+            }
+            return -10;
+        }
+
+        [Obsolete]
+        public new int Init()
+        {
+            if (!Directory.Exists(_productsCfgDir) || !Directory.Exists(_userDefineDir))
+            {
+                return -1;
+            }
+            if (SwManager.Instance != null && !string.IsNullOrEmpty(SwManager.Instance.CurrentProduct) && tscboProducts.Items.Contains(SwManager.Instance.CurrentProduct))
+            {
+                tscboProducts.SelectedIndexChanged -= tscboProducts_SelectedIndexChanged;
+                _curParaPath = _productsCfgDir + "\\" + SwManager.Instance.CurrentProduct + ".para";
+                tscboProducts.SelectedItem = SwManager.Instance.CurrentProduct;
+                if (File.Exists(_curParaPath))
+                {
+                    DynamicParam.Instance.Load(_curParaPath);
+                    UpdateUi();
+                }
+                tscboProducts.SelectedIndexChanged += tscboProducts_SelectedIndexChanged;
+                return 0;
+            }
+            return -10;
+        }
+
+        public void OnLanguageChanged()
+        {
+            tsLblProducts.Text = NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_ListProduction", "产品列表:");
+            tsbtnEdit.Text = NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_EditProductionParam", "编辑产品参数");
+            tsbtnCopy.Text = NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_CopyParam", "复制参数");
+            tsbtnNewUdt.Text = NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_CreateUserdefinedType", "新建自定义类型");
+            tsbtnEditUdt.Text = NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_EditUserdefinedType", "编辑自定义类型");
+            gbPos.Text = NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_gbPos", "轴组点位编辑");
+            lb_PosList.Text = NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_PosList", "点位列表:");
+            buttonRefresh.Text = NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_Refresh", "刷新");
+            buttonEditPositions.Text = NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_EditPos", "编辑");
+
+            foreach (Property p in Pmcls)
+            {
+                p.Category = NLocalizer.GetString(p.Category, p.Category);
+                p.DisplayName = NLocalizer.GetString(p.Name, p.DisplayName);
+            }
+            pg.SelectedObject = Pmcls;
+            Save(isManual: false);
+        }
+
+        /// <summary>保存</summary>
+        /// <param name="path"></param>
+        public int Save(string path = null, bool isManual = true)
+        {
+            if (!tsTitle.Enabled)
+            {
+                //	((UIPage)this).ShowWarningDialog("不允许进行参数保存", false);
+                return -1;
+            }
+
+            if (StringEx.IsNullOrEmpty(path))
+            {
+                path = _curParaPath;
+            }
+
+            string product = tscboProducts.SelectedItem.ToString();
+            UpdateParam(product);
+            if (product == SwManager.Instance.CurrentProduct)
+            {
+                DynamicParam.Instance.Save(path);
+            }
+            else
+            {
+                _node.Save(path);
+            }
+
+            BtnRefresh_Click(null, null);
+            if (isManual)
+            {
+                UIMessageTip.ShowOk(NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_DynamicParamSaveSuccess", "换型参数保存成功"));
+            }
+
+            return 0;
+        }
+
+        /// <summary>属性编辑_控制</summary>
+        /// <param name="enable"></param>
+        public void UIShow(bool enable)
+        {
+            if (((Control)this).InvokeRequired)
+            {
+                ((Control)this).BeginInvoke((Delegate)new Action<bool>(UIShow), new object[1] { enable });
+            }
+            else
+            {
+                pg.Enabled = enable;
+                tsTitle.Enabled = enable;
+                gbPos.Enabled = enable;
+            }
+        }
+
+        /// <summary>刷新</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnRefresh_Click(object sender, EventArgs e)
+        {
+            DicPos.Clear();
+            DicCartesian.Clear();
+            cmbTreePos.Nodes.Clear();
+            Dictionary<string, List<string>> dicGroups = new Dictionary<string, List<string>>();
+            foreach (object item2 in DynamicParam.Instance._xElementPropList)
+            {
+                Property item = (Property)item2;
+                if (item.Value is List<Pos> list)
+                {
+                    DicPos.Add(item.DisplayName, list);
+                    DicCartesian.Add(item.DisplayName, item.Cartesian);
+                    if (!dicGroups.ContainsKey(item.Cartesian))
+                    {
+                        dicGroups.Add(item.Cartesian, new List<string> { item.DisplayName });
+                    }
+                    else
+                    {
+                        dicGroups[item.Cartesian].Add(item.DisplayName);
+                    }
+                }
+            }
+
+            if (dicGroups.Count > 0)
+            {
+                foreach (var group in dicGroups)
+                {
+                    TreeNode tree = new TreeNode(group.Key);
+                    if (group.Value == null || group.Value.Count <= 0)
+                    {
+                        continue;
+                    }
+
+                    foreach (var item in group.Value)
+                    {
+                        tree.Nodes.Add(item);
+                    }
+
+                    cmbTreePos.Nodes.Add(tree);
+                }
+            }
+
+            cmbTreePos.TreeView.ExpandAll();
+            cmbTreePos.SelectedNode = null;
+        }
+
+        /// <summary>编辑</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonEditPositions_Click(object sender, EventArgs e)
+        {
+            TreeNode tree = cmbTreePos.SelectedNode;
+            if (tree == null || tree.Text.IsNullOrEmpty())
+            {
+                return;
+            }
+
+            PosEditorForm frm = new PosEditorForm
+            {
+                Pos = DicPos[tree.Text],
+                Pos_Cartesian = DicCartesian[tree.Text]
+            };
+            frm.ShowDialog();
+            if (!frm.IsSave)
+            {
+                return;
+            }
+
+            foreach (Property p in Pmcls)
+            {
+                if (p.DisplayName == tree.Text)
+                {
+                    p.Value = frm.Pos;
+                    break;
+                }
+            }
+        }
+
+        /// <summary>根据指定路径加载换型参数</summary>
+        /// <param name="path"></param>
+        private void FormLoad(string path)
+        {
+            try
+            {
+                _node = XElement.Load(path);
+                FormLoad(_node);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        /// <summary>根据指定XElement加载换型参数</summary>
+        /// <param name="CurNode"></param>
+        private void FormLoad(XElement CurNode)
+        {
+            try
+            {
+                _node = CurNode;
+                _xElementPropList = new List<Property>();
+                _node.Elements().ToList().Sort((x, y) =>
+                {
+                    string x_str = ((Property)x).Category + ((Property)x).DisplayName;
+                    string y_str = ((Property)y).Category + ((Property)y).DisplayName;
+                    return x_str.CompareTo(y_str);
+                });
+                List<XElement> xElementList = _node.Elements().ToList();
+                foreach (XElement element in xElementList)
+                {
+                    Property p = (Property)element;
+                    _xElementPropList.Add(p);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+        /// <summary>复制参数</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbtnCopy_Click(object sender, EventArgs e)
+        {
+            if (tscboProducts.SelectedItem == null)
+            {
+                return;
+            }
+            CopyFlag = !CopyFlag;
+            if (CopyFlag)
+            {
+                _copyProduct = tscboProducts.SelectedItem.ToString();
+                return;
+            }
+            string curProduct = tscboProducts.SelectedItem.ToString();
+            if (File.Exists(_productsCfgDir + "\\" + _copyProduct + ".para"))
+            {
+                if (File.Exists(_productsCfgDir + "\\" + curProduct + ".para"))
+                {
+                    File.Delete(_productsCfgDir + "\\" + curProduct + ".para");
+                }
+                File.Copy(_productsCfgDir + "\\" + _copyProduct + ".para", _productsCfgDir + "\\" + curProduct + ".para");
+            }
+            tscboProducts_SelectedIndexChanged(null, null);
+        }
+
+        /// <summary>编辑产品参数</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbtnEdit_Click(object sender, EventArgs e)
+        {
+            ParamCfg frm = new ParamCfg(_curParaPath)
+            {
+                CurSysDir = _curSysDirPaht
+            };
+            frm.ShowDialog();
+            if (tscboProducts.SelectedItem.ToString() == SwManager.Instance.CurrentProduct)
+            {
+                DynamicParam.Instance.Load(frm.CurParaPath);
+            }
+            else
+            {
+                FormLoad(frm.CurParaPath);
+            }
+            UpdateUi(tscboProducts.SelectedItem.ToString());
+        }
+
+        /// <summary>编辑自定义类型</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbtnEditUdt_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog
+            {
+                InitialDirectory = _userDefineDir,
+                Filter = "(Udt Param)|*.udt",
+                Multiselect = false
+            };
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                string udtParaPath = fd.FileName.Replace(Directory.GetCurrentDirectory(), ".");
+                UdtCfg frm = new UdtCfg(udtParaPath);
+                frm.ShowDialog();
+            }
+        }
+
+        /// <summary>新建自定义类型</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbtnNewUdt_Click(object sender, EventArgs e)
+        {
+            NewUdt f = new NewUdt();
+            f.ShowDialog();
+            if (f.DialogResult == DialogResult.OK)
+            {
+                string newName = f.TagString;
+                string newUdtPath = _userDefineDir + "\\" + newName + ".udt";
+                File.Create(newUdtPath).Dispose();
+                UdtCfg frmConfig = new UdtCfg(newUdtPath);
+                frmConfig.ShowDialog();
+            }
+        }
+
+        /// <summary>产品切换事件</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tscboProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tsbtnCopy.Enabled = false;
+            if (tscboProducts.SelectedItem != null)
+            {
+                _curParaPath = _productsCfgDir + $"\\{tscboProducts.SelectedItem}.para";
+                if (tscboProducts.SelectedItem.ToString() == SwManager.Instance.CurrentProduct)
+                {
+                    DynamicParam.Instance.Load(_curParaPath);
+                }
+                else
+                {
+                    FormLoad(_curParaPath);
+                }
+                UpdateUi(tscboProducts.SelectedItem.ToString());
+
+                OnDynamicParamChangeCurrentProduct?.Invoke(tscboProducts.SelectedItem.ToString(), null);
+            }
+            tsbtnCopy.Enabled = true;
+        }
+
+        /// <summary>产品列表双击</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsLblProducts_DoubleClick(object sender, EventArgs e)
+        {
+            if (SwManager.Instance.Products == null || SwManager.Instance.Products.Count <= 0)
+            {
+                return;
+            }
+            foreach (string product in SwManager.Instance.Products)
+            {
+                if (File.Exists(_productsCfgDir + "\\" + product + ".para") && !tscboProducts.Items.Contains(product))
+                {
+                    tscboProducts.Items.Add(product);
+                }
+            }
+        }
+        /// <summary>根据产品刷新Param数值</summary>
+        private void UpdateParam(string curProduct)
+        {
+            XElement xel = new XElement("Para", "");
+
+            List<Property> properties = new List<Property>();
+            foreach (Property p in Pmcls)
+            {
+                properties.Add(p);
+            }
+            properties.Sort(
+                (x, y) =>
+                {
+                    string x_str = x.Category + x.DisplayName;
+                    string y_str = y.Category + y.DisplayName;
+                    return x_str.CompareTo(y_str);
+                }
+                );
+            foreach (Property p in properties)
+            {
+                xel.Add(p.PropToXElment());
+            }
+
+            if (curProduct == SwManager.Instance.CurrentProduct)
+            {
+                DynamicParam.Instance.Load(xel);
+            }
+            else
+            {
+                FormLoad(xel);
+            }
+        }
+
+        /// <summary>默认根据产品刷新UI</summary>
+        private void UpdateUi()
+        {
+            XElement xel = DynamicParam.Instance.Node;
+            UpdateUi(xel);
+        }
+
+        /// <summary>根据指定产品刷新UI</summary>
+        private void UpdateUi(string product)
+        {
+            XElement xel = ((!(product == SwManager.Instance.CurrentProduct)) ? _node : ((XElement)DynamicParam.Instance.Node));
+            UpdateUi(xel);
+        }
+
+        /// <summary>根据指定XElement刷新UI</summary>
+        /// <param name="xel"></param>
+        private void UpdateUi(XElement xel)
+        {
+            if (xel == null)
+            {
+                return;
+            }
+            List<XElement> xmlist = xel.Elements().ToList();
+            Pmcls.Clear();
+            foreach (XElement a in xmlist)
+            {
+                Pmcls.Add((Property)a);
+            }
+            pg.SelectedObject = Pmcls;
+            OnLanguageChanged();
+        } 
+        #endregion
+    }
+}

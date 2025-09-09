@@ -1,0 +1,1238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8399EDFF-87F1-40E7-A251-5A49CDAF6F10}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lead.CPrim.ProxyTools</RootNamespace>
+    <AssemblyName>Lead.CPrim.ProxyTools</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Lead.CPrim\InnerLibs\Tool\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>..\..\Lead.CPrim\InnerLibs\Tool\Lead.CPrim.ProxyTools.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>8.0</LangVersion>
+    <DependsOnNETStandard>false</DependsOnNETStandard>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Sys\MongoDB\MongoDB.Bson.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Sys\MongoDB\MongoDB.Driver.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Sys\MongoDB\MongoDB.Driver.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Sys\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SoftLockDog">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\SoftDog\SoftLockDog.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Alarm\AlarmInfoEx.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Alarm\AlarmInfoEx.Designer.cs">
+      <DependentUpon>AlarmInfoEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Alarm\AlarmManager.cs" />
+    <Compile Include="Alarm\Core\AlarmInfo.cs" />
+    <Compile Include="Alarm\Core\ErrorLevel.cs" />
+    <Compile Include="Alarm\Core\ErrorType.cs" />
+    <Compile Include="Alarm\WarnInfoEx.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Alarm\WarnInfoEx.Designer.cs">
+      <DependentUpon>WarnInfoEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Algorithm\CommonStatisticalPatterns.cs" />
+    <Compile Include="Algorithm\ContinuousCumulativeStatisticsAlgorithm.cs" />
+    <Compile Include="Algorithm\StatisticsMode.cs" />
+    <Compile Include="Authority\AuthorityConfig.cs" />
+    <Compile Include="Authority\AuthorityManager.cs" />
+    <Compile Include="Authority\Controls\AuthorityLvlShowUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Authority\Controls\AuthorityLvlShowUI.Designer.cs">
+      <DependentUpon>AuthorityLvlShowUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Extend\FileInfoEx.cs" />
+    <Compile Include="Common\GlobalConsts.cs" />
+    <Compile Include="Common\GlobalVariables.cs" />
+    <Compile Include="Dialog\DialogForUIMessageFormOnlyOne.cs" />
+    <Compile Include="Event\EventManager.cs" />
+    <Compile Include="Authority\Forms\AudioPassWord2StepForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\AudioPassWord2StepForm.designer.cs">
+      <DependentUpon>AudioPassWord2StepForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Authority\Forms\FrmLogOutConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\FrmLogOutConfirm.Designer.cs">
+      <DependentUpon>FrmLogOutConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Authority\Forms\AuthorityManagerUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\AuthorityManagerUI.designer.cs">
+      <DependentUpon>AuthorityManagerUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Authority\Forms\AuthorityUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\AuthorityUpdate.designer.cs">
+      <DependentUpon>AuthorityUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Authority\Forms\Frm_CCD_Repeatability_Test_ModeSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\Frm_CCD_Repeatability_Test_ModeSelect.designer.cs">
+      <DependentUpon>Frm_CCD_Repeatability_Test_ModeSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Authority\Forms\Frm_LAD_ModeSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\Frm_LAD_ModeSelect.Designer.cs">
+      <DependentUpon>Frm_LAD_ModeSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Authority\Forms\HiveChangeStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\HiveChangeStatus.Designer.cs">
+      <DependentUpon>HiveChangeStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Authority\Forms\HivePlannedDowntime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\HivePlannedDowntime.Designer.cs">
+      <DependentUpon>HivePlannedDowntime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Authority\Forms\OperateLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\OperateLoginForm.Designer.cs">
+      <DependentUpon>OperateLoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Authority\Forms\AudioPassWordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\AudioPassWordForm.designer.cs">
+      <DependentUpon>AudioPassWordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Authority\Forms\PassWordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\PassWordForm.designer.cs">
+      <DependentUpon>PassWordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Authority\Forms\RegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\InputAccessarySN_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authority\Forms\InputAccessarySN_Form.designer.cs">
+      <DependentUpon>InputAccessarySN_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Event\SwitchStatus.cs" />
+    <Compile Include="HIVE\HiveManager.cs" />
+    <Compile Include="MES\MesManager.cs" />
+    <Compile Include="Common\AudioSwVersion.cs" />
+    <Compile Include="Common\Chart\ChartArgumentChartArea.cs" />
+    <Compile Include="Common\Chart\ChartArgumentChartAreaAxis.cs" />
+    <Compile Include="Common\Chart\ChartArgumentChartAreaAxisLableStyle.cs" />
+    <Compile Include="Common\Chart\ChartArgumentChartAreaAxisMajorGrid.cs" />
+    <Compile Include="Common\Chart\ChartArgumentChartAreaCursor.cs" />
+    <Compile Include="Common\Chart\ChartArgumentChartAreaScaleView.cs" />
+    <Compile Include="Common\Chart\ChartArgumentChartAreaScrollBar.cs" />
+    <Compile Include="Common\Chart\ChartArgumentSeries.cs" />
+    <Compile Include="Common\Chart\ChartData.cs" />
+    <Compile Include="Common\Chart\ChartDatas.cs" />
+    <Compile Include="Common\Chart\CustomChart.cs" />
+    <Compile Include="Common\Compile.cs" />
+    <Compile Include="Database\DeleteEnum.cs" />
+    <Compile Include="Database\IpClientDb.cs" />
+    <Compile Include="Common\Drawing.cs" />
+    <Compile Include="Common\Elements\Elements.cs" />
+    <Compile Include="Common\ExcelHelper.cs" />
+    <Compile Include="Common\Extend\MathEx.cs" />
+    <Compile Include="Common\ControlHelper.cs" />
+    <Compile Include="Common\DataHelper.cs" />
+    <Compile Include="Common\DESHelper.cs" />
+    <Compile Include="Common\FileHelper.cs" />
+    <Compile Include="Common\HashKeyInfos.cs" />
+    <Compile Include="Dialog\DialogForOperateLoginForm.cs" />
+    <Compile Include="Language\F.cs" />
+    <Compile Include="Language\E.cs" />
+    <Compile Include="Language\C.cs" />
+    <Compile Include="Language\L.cs" />
+    <Compile Include="Language\LanguageCfgUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Language\LanguageCfgUi.Designer.cs">
+      <DependentUpon>LanguageCfgUi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Language\LanguageManager.cs" />
+    <Compile Include="Language\M.cs" />
+    <Compile Include="Language\N.cs" />
+    <Compile Include="Language\P.cs" />
+    <Compile Include="Language\O.cs" />
+    <Compile Include="Language\S.cs" />
+    <Compile Include="Language\V.cs" />
+    <Compile Include="Language\W.cs" />
+    <Compile Include="Language\Y.cs" />
+    <Compile Include="Language\T.cs" />
+    <Compile Include="Language\R.cs" />
+    <Compile Include="Language\I.cs" />
+    <Compile Include="Language\A.cs" />
+    <Compile Include="ProducerConsumerModel\ProducerConsumerModelBase.cs" />
+    <Compile Include="ProducerConsumerModel\ModelFormat.cs" />
+    <Compile Include="ProducerConsumerModel\ModelMessage.cs" />
+    <Compile Include="ProducerConsumerModel\ProducerConsumerModel.cs" />
+    <Compile Include="Site\Sites.cs" />
+    <Compile Include="SunnyUI\Controls\Custom\CustomButtonCell.cs" />
+    <Compile Include="SunnyUI\Controls\UISelectText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UISelectText.Designer.cs">
+      <DependentUpon>UISelectText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\HashKeyInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\HashKeyInfo.Designer.cs">
+      <DependentUpon>HashKeyInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\AlarmTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\AlarmTest.Designer.cs">
+      <DependentUpon>AlarmTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\HashPathSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\HashPathSetting.Designer.cs">
+      <DependentUpon>HashPathSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\ProductInfos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\ProductInfos.Designer.cs">
+      <DependentUpon>ProductInfos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ProcessHelper.cs" />
+    <Compile Include="Common\FactoryCreator.cs" />
+    <Compile Include="Common\File\CsvHelper.cs" />
+    <Compile Include="Common\DoubleBufferedHelper.cs" />
+    <Compile Include="Common\JsonHelper.cs" />
+    <Compile Include="Common\Log\LogHelper.cs" />
+    <Compile Include="Database\MongodbHelper.cs" />
+    <Compile Include="SunnyUI\NewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\NewForm.Designer.cs">
+      <DependentUpon>NewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Language\NLocalizer.cs" />
+    <Compile Include="SunnyUI\ProductInfoStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\ProductInfoStatistics.Designer.cs">
+      <DependentUpon>ProductInfoStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ServiceHelper.cs" />
+    <Compile Include="Common\UIMessageBoxButtons.cs" />
+    <Compile Include="Common\UINotifierType.cs" />
+    <Compile Include="SunnyUI\TossingInfoStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\TossingInfoStatistics.Designer.cs">
+      <DependentUpon>TossingInfoStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\ProductInfoList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\ProductInfoList.Designer.cs">
+      <DependentUpon>ProductInfoList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\MsgForm\AnimationFlags.cs" />
+    <Compile Include="SunnyUI\MsgForm\DynamicUIShow.cs" />
+    <Compile Include="SunnyUI\MsgForm\FormShowAlignment.cs" />
+    <Compile Include="SunnyUI\MsgForm\MessageFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\MsgForm\MessageFrm.designer.cs">
+      <DependentUpon>MessageFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\MsgForm\Notification.cs" />
+    <Compile Include="SunnyUI\Style\Colors.cs" />
+    <Compile Include="SunnyUI\Style\ControlSetStyle.cs" />
+    <Compile Include="SunnyUI\Style\ControlStyle.cs" />
+    <Compile Include="SunnyUI\TypeEditor\UICornerRadiusSides.cs" />
+    <Compile Include="SunnyUI\TypeEditor\UICornerRadiusSidesHelper.cs" />
+    <Compile Include="SunnyUI\UIEditForm\Form\UIPointCompare.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\UIEditForm\Form\UIPointCompare.designer.cs">
+      <DependentUpon>UIPointCompare.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings1.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Register\FormRegister.Designer.cs">
+      <DependentUpon>FormRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Register\FormRegisteSpecial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Register\FormRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Register\FormRegisteSpecial.Designer.cs">
+      <DependentUpon>FormRegisteSpecial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Register\Register.cs" />
+    <Compile Include="Register\RegistrationCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Register\RegistrationCode.Designer.cs">
+      <DependentUpon>RegistrationCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Register\SuperPermissions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Register\SuperPermissions.Designer.cs">
+      <DependentUpon>SuperPermissions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\SunnyUI.Common\Microsoft\CodeAnalysis\EmbeddedAttribute.cs" />
+    <Compile Include="Common\SevenZip\Buffer\InBuffer.cs" />
+    <Compile Include="Common\SevenZip\Buffer\OutBuffer.cs" />
+    <Compile Include="Common\SevenZip\CoderPropID.cs" />
+    <Compile Include="Common\SevenZip\CommandLineParser\CommandForm.cs" />
+    <Compile Include="Common\SevenZip\CommandLineParser\CommandSubCharsSet.cs" />
+    <Compile Include="Common\SevenZip\CommandLineParser\Parser.cs" />
+    <Compile Include="Common\SevenZip\CommandLineParser\SwitchForm.cs" />
+    <Compile Include="Common\SevenZip\CommandLineParser\SwitchResult.cs" />
+    <Compile Include="Common\SevenZip\CommandLineParser\SwitchType.cs" />
+    <Compile Include="Common\SevenZip\Compression\LZMA\Base.cs" />
+    <Compile Include="Common\SevenZip\Compression\LZMA\Decoder.cs" />
+    <Compile Include="Common\SevenZip\Compression\LZMA\Encoder.cs" />
+    <Compile Include="Common\SevenZip\Compression\LZ\BinTree.cs" />
+    <Compile Include="Common\SevenZip\Compression\LZ\IInWindowStream.cs" />
+    <Compile Include="Common\SevenZip\Compression\LZ\IMatchFinder.cs" />
+    <Compile Include="Common\SevenZip\Compression\LZ\InWindow.cs" />
+    <Compile Include="Common\SevenZip\Compression\LZ\OutWindow.cs" />
+    <Compile Include="Common\SevenZip\Compression\RangeCoder\BitDecoder.cs" />
+    <Compile Include="Common\SevenZip\Compression\RangeCoder\BitEncoder.cs" />
+    <Compile Include="Common\SevenZip\Compression\RangeCoder\BitTreeDecoder.cs" />
+    <Compile Include="Common\SevenZip\Compression\RangeCoder\BitTreeEncoder.cs" />
+    <Compile Include="Common\SevenZip\Compression\RangeCoder\Decoder.cs" />
+    <Compile Include="Common\SevenZip\Compression\RangeCoder\Encoder.cs" />
+    <Compile Include="Common\SevenZip\CRC.cs" />
+    <Compile Include="Common\SevenZip\DataErrorException.cs" />
+    <Compile Include="Common\SevenZip\ICodeProgress.cs" />
+    <Compile Include="Common\SevenZip\ICoder.cs" />
+    <Compile Include="Common\SevenZip\InvalidParamException.cs" />
+    <Compile Include="Common\SevenZip\ISetCoderProperties.cs" />
+    <Compile Include="Common\SevenZip\ISetDecoderProperties.cs" />
+    <Compile Include="Common\SevenZip\IWriteCoderProperties.cs" />
+    <Compile Include="Common\Extend\ArrayEx.cs" />
+    <Compile Include="Common\Extend\AssemblyEx.cs" />
+    <Compile Include="Common\Extend\AttributeEx.cs" />
+    <Compile Include="Common\Extend\BackgroundWorkerEx.cs" />
+    <Compile Include="Common\SunnyUI.Common\BaseConfig.cs" />
+    <Compile Include="Common\SunnyUI.Common\CollectionsEx.cs" />
+    <Compile Include="Common\SunnyUI.Common\ConcurrentDoubleKeyDictionary.cs" />
+    <Compile Include="Common\SunnyUI.Common\ConcurrentGroupDictionary.cs" />
+    <Compile Include="Common\SunnyUI.Common\ConcurrentLimitedQueue.cs" />
+    <Compile Include="Common\SunnyUI.Common\ConfigFileAttribute.cs" />
+    <Compile Include="Common\SunnyUI.Common\ConfigHelper.cs" />
+    <Compile Include="Common\SunnyUI.Common\ConfigIgnoreAttribute.cs" />
+    <Compile Include="Common\SunnyUI.Common\ConfigIndexAttribute.cs" />
+    <Compile Include="Common\SunnyUI.Common\ConfigPropertyAttribute.cs" />
+    <Compile Include="Common\SunnyUI.Common\ConfigSectionAttribute.cs" />
+    <Compile Include="Common\SunnyUI.Common\ConvertEx.cs" />
+    <Compile Include="Common\SunnyUI.Common\Crc32.cs" />
+    <Compile Include="Common\SunnyUI.Common\DataReaderEx.cs" />
+    <Compile Include="Common\SunnyUI.Common\DateTimeEx.cs" />
+    <Compile Include="Common\SunnyUI.Common\DateTimeInt64.cs" />
+    <Compile Include="Common\SunnyUI.Common\DisplayTextAttribute.cs" />
+    <Compile Include="Common\SunnyUI.Common\EnumEx.cs" />
+    <Compile Include="Common\SunnyUI.Common\HotCache.cs" />
+    <Compile Include="Common\SunnyUI.Common\HotCacheItem.cs" />
+    <Compile Include="Common\SunnyUI.Common\Html.cs" />
+    <Compile Include="Common\SunnyUI.Common\Ident.cs" />
+    <Compile Include="Common\SunnyUI.Common\IdentityCard.cs" />
+    <Compile Include="Common\SunnyUI.Common\IgnoreAttribute.cs" />
+    <Compile Include="Common\SunnyUI.Common\IHotCacheItemCreator.cs" />
+    <Compile Include="Common\SunnyUI.Common\IncreaseData.cs" />
+    <Compile Include="Common\SunnyUI.Common\IniFileEx.cs" />
+    <Compile Include="Common\SunnyUI.Common\KeyScope.cs" />
+    <Compile Include="Common\SunnyUI.Common\KeyScopes.cs" />
+    <Compile Include="Common\SunnyUI.Common\LimitedQueue.cs" />
+    <Compile Include="Common\SunnyUI.Common\ListDictionary.cs" />
+    <Compile Include="Common\SunnyUI.Common\ListEx.cs" />
+    <Compile Include="Common\SunnyUI.Common\LogFile.cs" />
+    <Compile Include="Common\SunnyUI.Common\SunnyLogLevel.cs" />
+    <Compile Include="Common\SunnyUI.Common\MapperIgnoreAttribute.cs" />
+    <Compile Include="Common\SunnyUI.Common\NListEventArgs.cs" />
+    <Compile Include="Common\SunnyUI.Common\NullableDictionary.cs" />
+    <Compile Include="Common\SunnyUI.Common\RandomEx.cs" />
+    <Compile Include="Common\Extend\SevenZipEx.cs" />
+    <Compile Include="Common\SunnyUI.Common\SnowFlakeId.cs" />
+    <Compile Include="Common\Extend\StringEx.cs" />
+    <Compile Include="Common\SunnyUI.Common\StringList.cs" />
+    <Compile Include="Common\SunnyUI.Common\UConsole.cs" />
+    <Compile Include="Common\SunnyUI.Common\UdpReceiver.cs" />
+    <Compile Include="Common\SunnyUI.Common\UdpSender.cs" />
+    <Compile Include="Common\SunnyUI.Common\UIObjectCollection.cs" />
+    <Compile Include="Common\SunnyUI.Common\UIObjectEnumerator.cs" />
+    <Compile Include="Common\SunnyUI.Common\UIStringCollection.cs" />
+    <Compile Include="Common\SunnyUI.Common\UIStringEnumerator.cs" />
+    <Compile Include="Common\SunnyUI.Common\UITemplate.cs" />
+    <Compile Include="Common\SunnyUI.Common\ULicensing.cs" />
+    <Compile Include="Common\SunnyUI.Common\XmlConfig.cs" />
+    <Compile Include="Common\SunnyUI.Common\System\IO\BigEndianBinaryWriter.cs" />
+    <Compile Include="Common\SunnyUI.Common\System\Runtime\CompilerServices\IsReadOnlyAttribute.cs" />
+    <Compile Include="Common\SunnyUI.Common\System\SR.cs" />
+    <Compile Include="SunnyUI\Charts\UIBarChart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Charts\UIBarChartEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Charts\UIBarChartOption.cs" />
+    <Compile Include="SunnyUI\Charts\UIChart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Charts\UIChartStyle.cs" />
+    <Compile Include="SunnyUI\Charts\UIDoughnutChart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Charts\UILineChart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Charts\UILineChartOption.cs" />
+    <Compile Include="SunnyUI\Charts\UIOption.cs" />
+    <Compile Include="SunnyUI\Charts\UIPieChart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Charts\UIPieChartOption.cs" />
+    <Compile Include="SunnyUI\Charts\UIScale.cs" />
+    <Compile Include="Common\UAssemblyRef.cs" />
+    <Compile Include="Common\UAudio.cs" />
+    <Compile Include="Common\UBmp.cs" />
+    <Compile Include="Common\UControl.cs" />
+    <Compile Include="Common\UDefine.cs" />
+    <Compile Include="Common\UDir.cs" />
+    <Compile Include="Common\UEnvironment.cs" />
+    <Compile Include="Common\UFastBitmap.cs" />
+    <Compile Include="Common\UFastLZ.cs" />
+    <Compile Include="Common\UFile.cs" />
+    <Compile Include="Common\UFolderBrowserDialogEx.cs" />
+    <Compile Include="Common\GDI.cs" />
+    <Compile Include="Common\UGif.cs" />
+    <Compile Include="Common\Extend\GraphicsEx.cs" />
+    <Compile Include="Common\UHook.cs" />
+    <Compile Include="Common\UHotKey.cs" />
+    <Compile Include="Common\UIGlobal.cs" />
+    <Compile Include="Common\UImage.cs" />
+    <Compile Include="Common\IniConfig.cs" />
+    <Compile Include="Common\IniFile.cs" />
+    <Compile Include="Common\UJson.cs" />
+    <Compile Include="Common\UJsonConfig.cs" />
+    <Compile Include="Common\ULedChars.cs" />
+    <Compile Include="Common\ULocalize.cs" />
+    <Compile Include="Common\UMapper.cs" />
+    <Compile Include="Common\UIMessageTip.cs" />
+    <Compile Include="Common\UMMFile.cs" />
+    <Compile Include="Common\UOther.cs" />
+    <Compile Include="Common\UPrivilegeAPI.cs" />
+    <Compile Include="Common\UScrollBarInfo.cs" />
+    <Compile Include="Common\USevenZip.cs" />
+    <Compile Include="Common\USuspendCtrlAltDel.cs" />
+    <Compile Include="Common\USyncTime.cs" />
+    <Compile Include="Common\Extend\SystemEx.cs" />
+    <Compile Include="Common\UThunder.cs" />
+    <Compile Include="Common\UTranslate.cs" />
+    <Compile Include="SunnyUI\Controls\UISwitchStyle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\Color\UIColorBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\Color\UIColorTable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\Color\UIColorWheel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\Color\UIHSLColor.cs" />
+    <Compile Include="SunnyUI\Controls\Color\UILabelRotate.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIColorItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIComboBoxItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIComboBoxItem.Designer.cs">
+      <DependentUpon>UIComboBoxItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIComboDataGridViewItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIComboTreeViewItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIDateItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIDateTimeItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIDropControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIDropControl.Designer.cs">
+      <DependentUpon>UIDropControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIDropDownItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIDropDownItem.Designer.cs">
+      <DependentUpon>UIDropDownItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UITimeItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\DropItem\UIToolStripDropDown.cs" />
+    <Compile Include="SunnyUI\TypeEditor\UIDropEditor.cs" />
+    <Compile Include="SunnyUI\TypeEditor\UIRadiusSidesEditor.cs" />
+    <Compile Include="SunnyUI\Controls\UIAnalogMeter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIAnalogMeterRender.cs" />
+    <Compile Include="SunnyUI\Controls\UIAvatar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIBattery.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIBreadcrumb.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UICheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UICheckBoxGroup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIColorPicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIComboBox.Designer.cs">
+      <DependentUpon>UIComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIComboDataGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIComboTreeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIContextMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIDataGridViewFooter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIDatePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIDatePicker.Designer.cs">
+      <DependentUpon>UIDatePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIDateTimePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIDoubleUpDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIDoubleUpDown.designer.cs">
+      <DependentUpon>UIDoubleUpDown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIFlowLayoutPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIFlowLayoutPanel.Designer.cs">
+      <DependentUpon>UIFlowLayoutPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIGroupBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIGroupBox.Designer.cs">
+      <DependentUpon>UIGroupBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIHeaderButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIHorScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIHorScrollBarEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIImageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIImageListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIIntegerUpDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIIntegerUpDown.designer.cs">
+      <DependentUpon>UIIntegerUpDown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIIPTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UILabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UILedBulb.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UILedDisplay.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UILedLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UILedStopwatch.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UILight.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UILine.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UILogo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIMarkLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIMillisecondTimer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UINavBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UINavBar.Designer.cs">
+      <DependentUpon>UINavBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UINavMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UINavMenuHelper.cs" />
+    <Compile Include="SunnyUI\Controls\UIPagination.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIListBox.Designer.cs">
+      <DependentUpon>UIListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIPanel.Designer.cs">
+      <DependentUpon>UIPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIPipe.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIProcessBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIProgressIndicator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIRadioButtonGroup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIRichTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIRoundMeter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIRoundProcess.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIScrollingText.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UISignal.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UISmoothLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UISplitContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UISwitch.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UISymbolButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UISymbolLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITabControlMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITableLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITextBox.Designer.cs">
+      <DependentUpon>UITextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITextBoxPassWord.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITextBoxPassWord.Designer.cs">
+      <DependentUpon>UITextBoxPassWord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITimePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITitlePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITitlePanel.Designer.cs">
+      <DependentUpon>UITitlePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITransfer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITransfer.Designer.cs">
+      <DependentUpon>UITransfer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITransparentPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UITreeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIUserControl.Designer.cs">
+      <DependentUpon>UIUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIValve.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIVerScrollBarEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Controls\UIWaitingBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Fonts\UFontAwesomeV4.cs" />
+    <Compile Include="SunnyUI\Fonts\UFontAwesomeV5.cs" />
+    <Compile Include="SunnyUI\Fonts\UIFontImage.cs" />
+    <Compile Include="SunnyUI\Fonts\UIFontImageDefine.cs" />
+    <Compile Include="SunnyUI\Fonts\UIFontImages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Fonts\UIFontImages.designer.cs">
+      <DependentUpon>UIFontImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Forms\UIDataGridViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Forms\UIDataGridViewForm.Designer.cs">
+      <DependentUpon>UIDataGridViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\UIEditForm\ComboCheckedListBoxItem.cs" />
+    <Compile Include="SunnyUI\UIEditForm\EditInfo.cs" />
+    <Compile Include="SunnyUI\UIEditForm\EditType.cs" />
+    <Compile Include="SunnyUI\UIEditForm\Form\UIEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\UIEditForm\Form\UIEditForm.Designer.cs">
+      <DependentUpon>UIEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\UIEditForm\UIEditOption.cs" />
+    <Compile Include="SunnyUI\Forms\UIForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Forms\UIForm.designer.cs">
+      <DependentUpon>UIForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\UIFormHelper.cs" />
+    <Compile Include="SunnyUI\Forms\UIFormService.cs" />
+    <Compile Include="SunnyUI\UIEditForm\UIInputForm\UIInputDialog.cs" />
+    <Compile Include="SunnyUI\UIEditForm\UIInputForm\UIInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\UIEditForm\UIInputForm\UIInputForm.Designer.cs">
+      <DependentUpon>UIInputForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Forms\UILoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Forms\UILoginForm.Designer.cs">
+      <DependentUpon>UILoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\UIMessageForm\UIMessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\UIMessageForm\UIMessageForm.Designer.cs">
+      <DependentUpon>UIMessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Forms\UINotifier\UINotifier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Forms\UINotifier\UINotifier.designer.cs">
+      <DependentUpon>UINotifier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\UIEditForm\Form\UISelectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\UIEditForm\Form\UISelectForm.Designer.cs">
+      <DependentUpon>UISelectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Forms\UIStatusForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Forms\UIStatusForm.Designer.cs">
+      <DependentUpon>UIStatusForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\UIWaitForm\UIWaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\UIWaitForm\UIWaitForm.designer.cs">
+      <DependentUpon>UIWaitForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Frames\IFrame.cs" />
+    <Compile Include="SunnyUI\Frames\UIAsideHeaderMainFooterFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Frames\UIAsideHeaderMainFooterFrame.Designer.cs" />
+    <Compile Include="SunnyUI\Frames\UIAsideHeaderMainFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Frames\UIAsideHeaderMainFrame.Designer.cs" />
+    <Compile Include="SunnyUI\Frames\UIAsideMainFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Frames\UIAsideMainFrame.Designer.cs" />
+    <Compile Include="SunnyUI\Frames\UIHeaderAsideMainFooterFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Frames\UIHeaderAsideMainFooterFrame.Designer.cs" />
+    <Compile Include="SunnyUI\Frames\UIHeaderAsideMainFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Frames\UIHeaderAsideMainFrame.Designer.cs" />
+    <Compile Include="SunnyUI\Frames\UIHeaderMainFooterFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Frames\UIHeaderMainFooterFrame.Designer.cs" />
+    <Compile Include="SunnyUI\Frames\UIHeaderMainFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Frames\UIHeaderMainFrame.Designer.cs" />
+    <Compile Include="SunnyUI\Frames\UIMainFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Frames\UIMainFrame.Designer.cs" />
+    <Compile Include="SunnyUI\Forms\UIPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Forms\UIPage.Designer.cs">
+      <DependentUpon>UIPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SunnyUI\Style\UChineseColors.cs" />
+    <Compile Include="SunnyUI\Style\UIDPIScale.cs" />
+    <Compile Include="SunnyUI\Style\UIMenuStyle.cs" />
+    <Compile Include="SunnyUI\Style\UIRandomColor.cs" />
+    <Compile Include="SunnyUI\Style\UIStyle.cs" />
+    <Compile Include="SunnyUI\Style\UIStyleColor.cs" />
+    <Compile Include="SunnyUI\Style\UIStyleManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SunnyUI\Style\UIStyles.cs" />
+    <Compile Include="SunnyUI\Style\UITexture.cs" />
+    <Compile Include="SunnyUI\Style\UIZoomScale.cs" />
+    <Compile Include="Dialog\UIMessageForm\UIMessageDialog.cs" />
+    <Compile Include="SunnyUI\UIWaitForm\UIWaitFormService.cs" />
+    <Compile Include="Win32\Win32.Added.cs" />
+    <Compile Include="Win32\Win32.cs" />
+    <Compile Include="Win32\Win32.ErrorCodes.cs" />
+    <Compile Include="Win32\Win32.GDI.cs" />
+    <Compile Include="Win32\Win32.Kernel.cs" />
+    <Compile Include="Win32\Win32.Multimedia.cs" />
+    <Compile Include="Win32\Win32.NetApi.cs" />
+    <Compile Include="Win32\Win32.Shell.cs" />
+    <Compile Include="Win32\Win32.User.cs" />
+    <Compile Include="Common\XMLHelper.cs" />
+    <Compile Include="Common\XmlSerializerHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tools\Lead.CPrim.CommonTools\Lead.CPrim.CommonTools.csproj">
+      <Project>{21358d0c-c2f4-4714-b535-2a896e9ae9b9}</Project>
+      <Name>Lead.CPrim.CommonTools</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces\Lead.CPrim.Interfaces.csproj">
+      <Project>{f83c7fbb-7e02-416e-afa4-a7c3e5d0d0e4}</Project>
+      <Name>Lead.CPrim.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Lead.CPrim.Excel\Lead.CPrim.Excel.csproj">
+      <Project>{7efc7c73-a99e-4c1e-904d-756ca837db3f}</Project>
+      <Name>Lead.CPrim.Excel</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Lead.CPrim.LogHelper\Lead.CPrim.LogHelper.csproj">
+      <Project>{d6ceed96-2da1-4cfb-b469-8fda40122c5c}</Project>
+      <Name>Lead.CPrim.LogHelper</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Lead.CPrim.ProductInfoHelper\Lead.CPrim.ProductInfoHelper.csproj">
+      <Project>{13d7c67f-71e2-4d4d-a3ae-d6f051c18020}</Project>
+      <Name>Lead.CPrim.ProductInfoHelper</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Lead.CPrim.XmlHelper\Lead.CPrim.XmlHelper.csproj">
+      <Project>{8a6a1b0d-d7c0-416a-b486-efcb84928906}</Project>
+      <Name>Lead.CPrim.XmlHelper</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Alarm\AlarmInfoEx.resx">
+      <DependentUpon>AlarmInfoEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Alarm\WarnInfoEx.resx">
+      <DependentUpon>WarnInfoEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Controls\AuthorityLvlShowUI.resx">
+      <DependentUpon>AuthorityLvlShowUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Forms\AudioPassWord2StepForm.resx">
+      <DependentUpon>AudioPassWord2StepForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Forms\FrmLogOutConfirm.resx">
+      <DependentUpon>FrmLogOutConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Forms\AuthorityManagerUI.resx">
+      <DependentUpon>AuthorityManagerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Forms\AuthorityUpdate.resx">
+      <DependentUpon>AuthorityUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Forms\Frm_CCD_Repeatability_Test_ModeSelect.resx">
+      <DependentUpon>Frm_CCD_Repeatability_Test_ModeSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Forms\Frm_LAD_ModeSelect.resx">
+      <DependentUpon>Frm_LAD_ModeSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Forms\HiveChangeStatus.resx">
+      <DependentUpon>HiveChangeStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Forms\HivePlannedDowntime.resx">
+      <DependentUpon>HivePlannedDowntime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Forms\OperateLoginForm.resx">
+      <DependentUpon>OperateLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Forms\AudioPassWordForm.resx">
+      <DependentUpon>AudioPassWordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Forms\PassWordForm.resx">
+      <DependentUpon>PassWordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authority\Forms\InputAccessarySN_Form.resx">
+      <DependentUpon>InputAccessarySN_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Language\LanguageCfgUi.resx">
+      <DependentUpon>LanguageCfgUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register\SuperPermissions.resx">
+      <DependentUpon>SuperPermissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\Controls\UISelectText.resx">
+      <DependentUpon>UISelectText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\HashKeyInfo.resx">
+      <DependentUpon>HashKeyInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\AlarmTest.resx">
+      <DependentUpon>AlarmTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\HashPathSetting.resx">
+      <DependentUpon>HashPathSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\ProductInfos.resx">
+      <DependentUpon>ProductInfos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\ProductInfoStatistics.resx">
+      <DependentUpon>ProductInfoStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\TossingInfoStatistics.resx">
+      <DependentUpon>TossingInfoStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\Fonts\UIFontImages.resx">
+      <DependentUpon>UIFontImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\MsgForm\MessageFrm.resx">
+      <DependentUpon>MessageFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\UIEditForm\Form\UIPointCompare.resx">
+      <DependentUpon>UIPointCompare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register\FormRegister.resx">
+      <DependentUpon>FormRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register\FormRegisteSpecial.resx">
+      <DependentUpon>FormRegisteSpecial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register\RegistrationCode.resx">
+      <DependentUpon>RegistrationCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\Controls\DropItem\UIDropControl.resx">
+      <DependentUpon>UIDropControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\Controls\UIListBox.resx">
+      <DependentUpon>UIListBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\Forms\UIForm.resx">
+      <DependentUpon>UIForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\Forms\UILoginForm.resx">
+      <DependentUpon>UILoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\UIEditForm\UIInputForm\UIInputForm.resx">
+      <DependentUpon>UIInputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\UIMessageForm\UIMessageForm.resx">
+      <DependentUpon>UIMessageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SunnyUI\UIWaitForm\UIWaitForm.resx">
+      <DependentUpon>UIWaitForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\DataSources\Lead.CPrim.ProxyTools.Authority.AuthorityDb.datasource" />
+    <None Include="Properties\Settings1.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\user.png" />
+    <EmbeddedResource Include="SunnyUI\Fonts\ElegantIcons.ttf" />
+    <EmbeddedResource Include="SunnyUI\Fonts\fa-brands-400.ttf" />
+    <EmbeddedResource Include="SunnyUI\Fonts\fa-regular-400.ttf" />
+    <EmbeddedResource Include="SunnyUI\Fonts\fa-solid-900.ttf" />
+    <EmbeddedResource Include="SunnyUI\Fonts\FontAwesome.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PictureBox2.BackgroundImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Btn_Home.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\colorbarIndicators.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gps_postion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gps1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_notifier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Login1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Login2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Login3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Login4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Login5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Login6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\notifier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wind_postion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\SunnyUI.Common\System\Numerics\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\No_login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Level1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Level2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Level3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HIVE_Disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HIVE_DT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HIVE_Engineering.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HIVE_Idle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HIVE_Plan_DT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HIVE_Running.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Audio_Logo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

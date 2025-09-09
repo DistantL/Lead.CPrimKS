@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6DAD129D-E60B-449E-808A-CCC2C2202AE2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lead.CPrim.FormMain</RootNamespace>
+    <AssemblyName>Lead.CPrim.FormMain</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <DependsOnNETStandard>false</DependsOnNETStandard>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Lead.CPrim\InnerLibs\Main\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>..\..\Lead.CPrim\InnerLibs\Main\Lead.CPrim.FormMain.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommunicationBase">
+      <HintPath>..\..\Lead.CPrim\InnerLibs\Tool\CommunicationBase.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Lead.CPrim.Global">
+      <HintPath>..\..\Lead.CPrim\InnerLibs\Proxy\Lead.CPrim.Global.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Lead.CPrim.MachineHelper">
+      <HintPath>..\..\Lead.CPrim\InnerLibs\Tasks\Lead.CPrim.MachineHelper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Lead.CPrim.TaskHelper">
+      <HintPath>..\..\Lead.CPrim\InnerLibs\Tasks\Lead.CPrim.TaskHelper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="LogicControl">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\TestReal\LogicControl.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Sys\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UserControls">
+      <HintPath>..\..\Lead.CPrim\ExtLibs\TestReal\UserControls.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DevMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DevMainForm.Designer.cs">
+      <DependentUpon>DevMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings1.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Controls\Lead.CPrim.Controls\Lead.CPrim.Controls.csproj">
+      <Project>{4b0918f1-4be0-40d2-b7d9-d07e27b7ca7f}</Project>
+      <Name>Lead.CPrim.Controls</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.3DAgl\Lead.CPrim.Interfaces.3DAgl.csproj">
+      <Project>{57c2e174-1fc4-4b8d-99cc-c94e6cdec48c}</Project>
+      <Name>Lead.CPrim.Interfaces.3DAgl</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.StateMachine\Lead.CPrim.Interfaces.StateMachine.csproj">
+      <Project>{c25d88dd-7fcc-432e-a8f3-de209f733ab4}</Project>
+      <Name>Lead.CPrim.Interfaces.StateMachine</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.Task\Lead.CPrim.Interfaces.Task.csproj">
+      <Project>{1906f049-9599-4abe-b152-1e27fb5a435d}</Project>
+      <Name>Lead.CPrim.Interfaces.Task</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces\Lead.CPrim.Interfaces.csproj">
+      <Project>{f83c7fbb-7e02-416e-afa4-a7c3e5d0d0e4}</Project>
+      <Name>Lead.CPrim.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Param\Lead.CPrim.CommonParam\Lead.CPrim.CommonParam.csproj">
+      <Project>{bbffcb6c-9e8e-44cd-b30a-2929016bc1e0}</Project>
+      <Name>Lead.CPrim.CommonParam</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SoftwareConfig\Lead.CPrim.SoftwareConfig\Lead.CPrim.SoftwareConfig.csproj">
+      <Project>{f518d2f4-7b9d-4a13-9df0-41ec3960a4f3}</Project>
+      <Name>Lead.CPrim.SoftwareConfig</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SoftwareConfig\Lead.CPrim.StationCommon\Lead.CPrim.StationCommon.csproj">
+      <Project>{0e060597-6091-4be8-ab02-ca99544f1863}</Project>
+      <Name>Lead.CPrim.StationCommon</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\Lead.CPrim.ProxyTools\Lead.CPrim.ProxyTools.csproj">
+      <Project>{8399edff-87f1-40e7-a251-5a49cdaf6f10}</Project>
+      <Name>Lead.CPrim.ProxyTools</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DevMainForm.resx">
+      <DependentUpon>DevMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings1.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\btnClrErr.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnDispose.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnInit.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnPause.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnReset.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnStart.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnStop.Image.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

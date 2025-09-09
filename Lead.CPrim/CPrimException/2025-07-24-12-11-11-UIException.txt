@@ -1,0 +1,9 @@
+已进行模式显示的窗体不能显示为模式对话框。请在调用 showDialog 之前关闭该窗体。
+   在 System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   在 Lead.CPrim.ProxyTools.Authority.AuthorityManager.ShowLoginUI(String title) 位置 D:\TEST\4.4.25.0721-04\Tools\Lead.CPrim.ProxyTools\Authority\AuthorityManager.cs:行号 461
+   在 Lead.CPrim.ProxyTools.Authority.Forms.HiveChangeStatus.Audio_BtnRun_Click(Object sender, EventArgs e) 位置 D:\TEST\4.4.25.0721-04\Tools\Lead.CPrim.ProxyTools\Authority\Forms\HiveChangeStatus.cs:行号 67
+   在 System.Windows.Forms.Control.OnClick(EventArgs e)
+   在 Lead.CPrim.ProxyTools.SunnyUI.Controls.UIButton.OnClick(EventArgs e) 位置 D:\TEST\4.4.25.0721-04\Tools\Lead.CPrim.ProxyTools\SunnyUI\Controls\UIButton.cs:行号 400
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)

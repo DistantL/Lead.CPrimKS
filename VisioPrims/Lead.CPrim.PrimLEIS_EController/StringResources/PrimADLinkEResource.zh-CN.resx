@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PrimADLinkE_AxisControl_FormText" xml:space="preserve">
+    <value>运动控制</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_JogParam" xml:space="preserve">
+    <value>点动参数</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_DefaultParam" xml:space="preserve">
+    <value>默认参数</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_MotionStatus" xml:space="preserve">
+    <value>运动状态</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_CommandPosition" xml:space="preserve">
+    <value>指令位置:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_FeedbackPosition" xml:space="preserve">
+    <value>反馈位置:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_TargetPosition" xml:space="preserve">
+    <value>目标位置:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_ErrorPosition" xml:space="preserve">
+    <value>错误位置:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_CommandVelocity" xml:space="preserve">
+    <value>指令速度:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_FeedbackVelocity" xml:space="preserve">
+    <value>反馈速度:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_SetPosition" xml:space="preserve">
+    <value>设置位置</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_MotionIOStatus" xml:space="preserve">
+    <value>运动IO状态</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_Apply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_HomeMove" xml:space="preserve">
+    <value>回零</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_Mode" xml:space="preserve">
+    <value>模式:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_Direction" xml:space="preserve">
+    <value>方向:</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_StartHome" xml:space="preserve">
+    <value>开始回零</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_StopHome" xml:space="preserve">
+    <value>停止回零</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_JogOffsetMustBeNonNegative" xml:space="preserve">
+    <value>JOG_OFFSET必须为非负值。</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_EnableAxisFirst" xml:space="preserve">
+    <value>请先将该轴使能。</value>
+  </data>
+  <data name="PrimADLinkE_AxisControl_DisableAxisFirst" xml:space="preserve">
+    <value>请先断开该轴使能。</value>
+  </data>
+  <data name="PrimADLinkE_IOControl_FormText" xml:space="preserve">
+    <value>IO控制</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ADLinkEConfig" xml:space="preserve">
+    <value>ADLinkE配置</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ADLinkName" xml:space="preserve">
+    <value>ADLinkE名称</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_CardID" xml:space="preserve">
+    <value>卡号:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_EBusConfigPath" xml:space="preserve">
+    <value>EBus配置路径:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_IOInfoPath" xml:space="preserve">
+    <value>IO信息路径:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Load" xml:space="preserve">
+    <value>加载</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Initialize" xml:space="preserve">
+    <value>初始化</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Run" xml:space="preserve">
+    <value>运行</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Stop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Apply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Config" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_IO" xml:space="preserve">
+    <value>IO</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ContinueMove" xml:space="preserve">
+    <value>连续运动</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_CmpTrig" xml:space="preserve">
+    <value>触发</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Interrupt" xml:space="preserve">
+    <value>中断</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Latch" xml:space="preserve">
+    <value>锁存</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_TrigDemo" xml:space="preserve">
+    <value>触发示例</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_FieldBusInfo" xml:space="preserve">
+    <value>现场总线信息</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_FieldConnect" xml:space="preserve">
+    <value>现场连接：</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_InitialConnect" xml:space="preserve">
+    <value>初始化连接:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_SlaveCount" xml:space="preserve">
+    <value>从站数量:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_SlaveInfo" xml:space="preserve">
+    <value>从站信息</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AxisCount" xml:space="preserve">
+    <value>轴数:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DIModuleCount" xml:space="preserve">
+    <value>DI模块数量:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DOModuleCount" xml:space="preserve">
+    <value>DO模块数量:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AIModuleCount" xml:space="preserve">
+    <value>AI模块数量:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AoModuleCount" xml:space="preserve">
+    <value>AO模块数量:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ConfigMode" xml:space="preserve">
+    <value>配置模式</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ClearConfig" xml:space="preserve">
+    <value>清除配置</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Axis" xml:space="preserve">
+    <value>轴</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_SlaveNo" xml:space="preserve">
+    <value>从站号:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AxisID" xml:space="preserve">
+    <value>轴号:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AxisType" xml:space="preserve">
+    <value>轴类型:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AxisControl" xml:space="preserve">
+    <value>运动控制</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DiModule" xml:space="preserve">
+    <value>DI模块</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Count" xml:space="preserve">
+    <value>数量:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ID" xml:space="preserve">
+    <value>号:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Type" xml:space="preserve">
+    <value>类型:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DIStatus" xml:space="preserve">
+    <value>DI状态</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DoModule" xml:space="preserve">
+    <value>DO模块</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DoControl" xml:space="preserve">
+    <value>DO控制</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AiModule" xml:space="preserve">
+    <value>AI模块</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AIStatus" xml:space="preserve">
+    <value>AI状态</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AoModule" xml:space="preserve">
+    <value>AO模块</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_AOControl" xml:space="preserve">
+    <value>AO控制</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_IsolatedInputDI" xml:space="preserve">
+    <value>隔离输入DI(0-3通过100pin线连接端子台，8-23通过37pin线连接端子台）</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_IsolatedOutputDO" xml:space="preserve">
+    <value>隔离输出DO(0-3通过100pin线连接端子台，8-23通过37pin线连接端子台)</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_TwoAxisContinuousLinearMotion" xml:space="preserve">
+    <value>2轴连续直线运动(点位表)：</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_LoadingCsvFormatFile" xml:space="preserve">
+    <value>加载CSV格式文件</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_LoadingPoints" xml:space="preserve">
+    <value>加载点位(超过50延时等待)</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_StartMotion" xml:space="preserve">
+    <value>开始运动</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_StopMotion" xml:space="preserve">
+    <value>停止运动</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_MotionPointsCount" xml:space="preserve">
+    <value>运动点数量:</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_BufFreeSpace" xml:space="preserve">
+    <value>缓冲区可用空间：</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_BufUsageSpace" xml:space="preserve">
+    <value>缓冲区使用空间：</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_RunningCnt" xml:space="preserve">
+    <value>运行数量:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_TrigChannelAndSource" xml:space="preserve">
+    <value>触发通道-触发源</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_ManualTrigger" xml:space="preserve">
+    <value>手动触发</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_SetTableTrigger" xml:space="preserve">
+    <value>设置表格触发</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_SettingLinearTrigger" xml:space="preserve">
+    <value>设置线性触发</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_InterruptCount0" xml:space="preserve">
+    <value>中断计数0:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_InterruptCount1" xml:space="preserve">
+    <value>中断计数1:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_InterruptCount2" xml:space="preserve">
+    <value>中断计数2:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_InterruptCount3" xml:space="preserve">
+    <value>中断计数3:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_InterruptCount4" xml:space="preserve">
+    <value>中断计数4:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_InterruptCount5" xml:space="preserve">
+    <value>中断计数5:</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_SetDIInterrupt" xml:space="preserve">
+    <value>设置DI中断</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_CloseInterrupt" xml:space="preserve">
+    <value>关闭中断</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_OpenLatch" xml:space="preserve">
+    <value>开启锁存</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_OpenInterrupt" xml:space="preserve">
+    <value>开启中断</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_GetLatchedData" xml:space="preserve">
+    <value>获取锁存数据</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_MotionAndTrigger" xml:space="preserve">
+    <value>运动&amp;触发</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_RunningCount" xml:space="preserve">
+    <value>运行数量</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_MotionStart" xml:space="preserve">
+    <value>运动开始</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_StartPoint" xml:space="preserve">
+    <value>起始点</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_LinearTriggerTest" xml:space="preserve">
+    <value>线性触发测试</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_OnlyToFirstParagraph" xml:space="preserve">
+    <value>只到第一段</value>
+  </data>
+  <data name="PrimADLinkP_PrimConfigControl_RotateBackToZero" xml:space="preserve">
+    <value>旋转回零</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_RescanBusSlaveDevice" xml:space="preserve">
+    <value>确定要重新扫描总线从站设备吗？</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Tip" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_StopPrimFirst" xml:space="preserve">
+    <value>请首先将该基元停止运行。</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ExitConfigurationMode" xml:space="preserve">
+    <value>请先退出配置模式。</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_SelectedFileNotExist" xml:space="preserve">
+    <value>选择的文件不存在。</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_SelectXMLConfigurationFile" xml:space="preserve">
+    <value>不存在，请选择XML配置文件。</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DiaglogFormatFile" xml:space="preserve">
+    <value>JSON文件 (*.json)|*.json|所有文件 (*.*)|*.*</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_DialogTitle" xml:space="preserve">
+    <value>选择一个JSON文件</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ClearAllBusConfiguration" xml:space="preserve">
+    <value>确定要清除所有总线配置吗？</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ConfirmCurrentPrimNotRunning" xml:space="preserve">
+    <value>请确认当前基元是未运行状态。</value>
+  </data>
+  <data name="PrimADLinkE_PrimConfigControl_ReconfigureParameters" xml:space="preserve">
+    <value>确认要重新配置各项参数吗？这可能会导致原有配置参数被清除。</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_CardTypeIncorrect" xml:space="preserve">
+    <value>卡片不是 PCIe-8334 或者 PCIe-8338 !</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_InitializationFailed" xml:space="preserve">
+    <value>初始化失败，检查驱动是否已安装好或者MotionCreatorPro2已经开启，错误码: {0}。</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_InitializePrimFirstly" xml:space="preserve">
+    <value>请先初始化该基元。</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_StartFieldBusError" xml:space="preserve">
+    <value>关闭总线连接失败，报错代码：{0} 。</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_FailedCloseBusConnection" xml:space="preserve">
+    <value>无法关闭总线连接，错误代码：{0}</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_ServoAxisError" xml:space="preserve">
+    <value>伺服轴{0}错误。</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_SlavesNumberInconsistent" xml:space="preserve">
+    <value>设定从站数目-{0}与扫描到的从站数目-{1}不一致，是否继续？</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_AxesNumberInconsistent" xml:space="preserve">
+    <value>设定轴数目-{0}与扫描到的轴数目-{1}不一致，是否继续？</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_StartFieldBusFieldError" xml:space="preserve">
+    <value>启动现场总线，错误代码为{0}。</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_ScanFieldBusError" xml:space="preserve">
+    <value>扫描现场总线，错误代码为{0}。</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_InitializationScanSucceeded" xml:space="preserve">
+    <value>初始化扫描成功：从站数目：{0},轴数：{1}，请确认是否与实际一致。</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_LoadConfigFileFailed" xml:space="preserve">
+    <value>加载配置文件失败，错误代码为：{0}。</value>
+  </data>
+  <data name="PrimADLinkE_PrimADLinkE_ParameterDownloadToFlashFailed" xml:space="preserve">
+    <value>参数下载到闪存失败，错误代码：{0}。</value>
+  </data>
+</root>

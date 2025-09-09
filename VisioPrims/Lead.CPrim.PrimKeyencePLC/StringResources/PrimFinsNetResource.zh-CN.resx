@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PrimFinsNet_PrimConfigControl_IncorrectIpAddress" xml:space="preserve">
+    <value>: IP地址输入错误。</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_IncorrectPortNumber" xml:space="preserve">
+    <value>: 端口号输入错误。</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_IncorrectLocalNetworkNumber" xml:space="preserve">
+    <value>: 本地网络号输入错误！</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_IncorrectPlcUnitNumber" xml:space="preserve">
+    <value>: PLC单元号输入错误！</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_IncorrectPlcNodeNumber" xml:space="preserve">
+    <value>: PLC节点号输入错误！</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_Connected" xml:space="preserve">
+    <value>已连接</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_ConnectSuccess" xml:space="preserve">
+    <value>连接成功</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_ConnectFail" xml:space="preserve">
+    <value>连接失败</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_FailedConnectTo" xml:space="preserve">
+    <value>连接至{0}失败。</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_FinsNetConfig" xml:space="preserve">
+    <value>FinsNet配置</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_FinsNetName" xml:space="preserve">
+    <value>FinsNet名称</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_Config" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_Data" xml:space="preserve">
+    <value>数据</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_IPAddress" xml:space="preserve">
+    <value>IP地址:</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_PLCUnitNumber" xml:space="preserve">
+    <value>PLC单元号:</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_PortNumber" xml:space="preserve">
+    <value>端口号:</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_PLCNetNumber" xml:space="preserve">
+    <value>PLC网络号：</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_PCNetNumber" xml:space="preserve">
+    <value>PC网络号：</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_ConfirmPermission" xml:space="preserve">
+    <value>当前用户没有权限，请确认权限。</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_SelectedFileNotExist" xml:space="preserve">
+    <value>选择的文件不存在。</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_SystemHint" xml:space="preserve">
+    <value>系统提示</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_ErrorHappened" xml:space="preserve">
+    <value>发生错误。</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_CommitError" xml:space="preserve">
+    <value>提交错误</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_CellChange" xml:space="preserve">
+    <value>单元更改</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_ParsingError" xml:space="preserve">
+    <value>分析错误</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_LeaveControlError" xml:space="preserve">
+    <value>离开控制错误</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_MonitorNotChecked" xml:space="preserve">
+    <value>未检查监视器。</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_CurrentVariableAddressInvalid" xml:space="preserve">
+    <value>当前变量地址无效！</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_CurrentVariableHasNoWritePermission" xml:space="preserve">
+    <value>当前变量没有写入权限！</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_ValueIsIllegal" xml:space="preserve">
+    <value>值非法！</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_WrittenSuccessfully" xml:space="preserve">
+    <value>[{0}] 已成功写入</value>
+  </data>
+  <data name="PrimFinsNet_PrimConfigControl_WrittenFailure" xml:space="preserve">
+    <value>[{0}] 写入失败</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_FinsNetDebug" xml:space="preserve">
+    <value>FinsNet调试</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_FinsNetName" xml:space="preserve">
+    <value>FinsNet名称</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_ReadDataDebug" xml:space="preserve">
+    <value>调试1</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_ReadPacketDebug" xml:space="preserve">
+    <value>调试2</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_SingleDataReadTest" xml:space="preserve">
+    <value>单个数据读取测试</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_Address" xml:space="preserve">
+    <value>地址：</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_Length" xml:space="preserve">
+    <value>长度：</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_Result" xml:space="preserve">
+    <value>结果：</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_BatchReadTest" xml:space="preserve">
+    <value>批量读取测试：</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_BatchRead" xml:space="preserve">
+    <value>批量读取：</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_SingleDataWriteTest" xml:space="preserve">
+    <value>单个数据写测试</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_Value" xml:space="preserve">
+    <value>值:</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_NeedConvertDataType" xml:space="preserve">
+    <value>注意：需要将值字符串转换为相应的数据类型。</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_StressTestThreeThousandTimes" xml:space="preserve">
+    <value>压力测试，快速读写3000次。</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_Execute" xml:space="preserve">
+    <value>执行</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_Initialize" xml:space="preserve">
+    <value>初始化</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_Run" xml:space="preserve">
+    <value>运行</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_Stop" xml:space="preserve">
+    <value>结束</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_ReadFailedAndReason" xml:space="preserve">
+    <value>[{0}] 读取失败{1}原因:{2}</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_WirttenSuccessfully" xml:space="preserve">
+    <value>[{0}] 写入失败</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_WriteFailureAndReason" xml:space="preserve">
+    <value>[{0}] 写入失败{1}原因:{2}</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_ConfirmPermission" xml:space="preserve">
+    <value>当前用户没有权限，请确认权限。</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_ReadFailed" xml:space="preserve">
+    <value>读取失败：</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_TimeConsuming" xml:space="preserve">
+    <value>耗时:</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_FailureTimes" xml:space="preserve">
+    <value>失败次数:</value>
+  </data>
+  <data name="PrimFinsNet_PrimDebugControl_IntervalFormatInputError" xml:space="preserve">
+    <value>间隔格式输入错误！</value>
+  </data>
+  <data name="PrimFinsNet_PrimOutputControl_OutputUI" xml:space="preserve">
+    <value>输出界面</value>
+  </data>
+</root>

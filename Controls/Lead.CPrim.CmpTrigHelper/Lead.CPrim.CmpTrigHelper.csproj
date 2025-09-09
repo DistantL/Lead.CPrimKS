@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{123BB7A8-36CE-40FE-A15D-5C8A0CDBEC2C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lead.CPrim.CmpTrigHelper</RootNamespace>
+    <AssemblyName>Lead.CPrim.CmpTrigHelper</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Lead.CPrim\InnerLibs\Control\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\Lead.CPrim\InnerLibs\Control\Lead.CPrim.CmpTrigHelper.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lead.CPrim\ExtLibs\Sys\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\AglSelForm.Designer.cs">
+      <DependentUpon>AglSelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Config\ActionConfig.cs" />
+    <Compile Include="Config\ActionType.cs" />
+    <Compile Include="Config\CartesianEx.cs" />
+    <Compile Include="Config\01 TriggerManager.cs" />
+    <Compile Include="Controls\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AglSelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\01 TriggerMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\InterpolationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LinearTrigConfigControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ManualDebug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ManualDebug.Designer.cs">
+      <DependentUpon>ManualDebug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PlatformDebug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\02 TriggerTable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\02 TriggerTrack.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\02 TriggerPort.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\02 TriggerPort.Designer.cs">
+      <DependentUpon>02 TriggerPort.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TrigTabMangerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComplexInterpolation\ComplexInterPolationCfg.cs" />
+    <Compile Include="ComplexInterpolation\ComplexInterPolationCfgUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComplexInterpolation\AxisTeach.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComplexInterpolation\ICmpCtrl.cs" />
+    <Compile Include="ComplexInterpolation\MoveConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComplexInterpolation\MoveIcon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComplexInterpolation\UdtArray.cs" />
+    <Compile Include="Config\CmpPos.cs" />
+    <Compile Include="Config\ConfigType.cs" />
+    <Compile Include="Config\CPrimTrigInfo.cs" />
+    <Compile Include="Config\InterPolationCfg.cs" />
+    <Compile Include="Config\InterPolationPos.cs" />
+    <Compile Include="Config\LinearTrigData.cs" />
+    <Compile Include="Config\03 ProductTrigInfo.cs" />
+    <Compile Include="Config\02 StationTrigInfo.cs" />
+    <Compile Include="Config\04 TriggerTableData.cs" />
+    <Compile Include="Config\04 TriggerTrackData.cs" />
+    <Compile Include="Config\04 TriggerPortData.cs" />
+    <Compile Include="Config\TrigTabCfg.cs" />
+    <Compile Include="Config\TrigTabMangerData.cs" />
+    <Compile Include="ComplexInterpolation\DelayCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComplexInterpolation\DoAdvance.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmAxisDebugUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComplexInterpolation\IOControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\01 TriggerMain.Designer.cs">
+      <DependentUpon>01 TriggerMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\02 TriggerTable.Designer.cs">
+      <DependentUpon>02 TriggerTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComplexInterpolation\WaitDICtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\02 TriggerTrack.Designer.cs">
+      <DependentUpon>02 TriggerTrack.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.3DAgl\Lead.CPrim.Interfaces.3DAgl.csproj">
+      <Project>{57c2e174-1fc4-4b8d-99cc-c94e6cdec48c}</Project>
+      <Name>Lead.CPrim.Interfaces.3DAgl</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.Ele\Lead.CPrim.Interfaces.Ele.csproj">
+      <Project>{6b4508e2-de29-45c4-89bc-94da87feb277}</Project>
+      <Name>Lead.CPrim.Interfaces.Ele</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.IMotionCard\Lead.CPrim.Interfaces.IMotionCard.csproj">
+      <Project>{c14a95d9-5ad2-4b78-92bc-a687f623fda7}</Project>
+      <Name>Lead.CPrim.Interfaces.IMotionCard</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.StateMachine\Lead.CPrim.Interfaces.StateMachine.csproj">
+      <Project>{c25d88dd-7fcc-432e-a8f3-de209f733ab4}</Project>
+      <Name>Lead.CPrim.Interfaces.StateMachine</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.Task\Lead.CPrim.Interfaces.Task.csproj">
+      <Project>{1906f049-9599-4abe-b152-1e27fb5a435d}</Project>
+      <Name>Lead.CPrim.Interfaces.Task</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces\Lead.CPrim.Interfaces.csproj">
+      <Project>{f83c7fbb-7e02-416e-afa4-a7c3e5d0d0e4}</Project>
+      <Name>Lead.CPrim.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Proxy\Lead.CPrim.Global\Lead.CPrim.Global.csproj">
+      <Project>{36f66f1c-499c-4b60-9012-9b843978dd21}</Project>
+      <Name>Lead.CPrim.Global</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Task\Lead.CPrim.MachineHelper\Lead.CPrim.MachineHelper.csproj">
+      <Project>{1618815e-9bd9-44f2-9a87-6a3f9095d890}</Project>
+      <Name>Lead.CPrim.MachineHelper</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\Lead.CPrim.ProxyTools\Lead.CPrim.ProxyTools.csproj">
+      <Project>{8399edff-87f1-40e7-a251-5a49cdaf6f10}</Project>
+      <Name>Lead.CPrim.ProxyTools</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\01 TriggerMain.resx">
+      <DependentUpon>01 TriggerMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\02 TriggerTrack.resx">
+      <DependentUpon>02 TriggerTrack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\InterpolationControl.resx">
+      <DependentUpon>InterpolationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\02 TriggerTable.resx">
+      <DependentUpon>02 TriggerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\02 TriggerPort.resx">
+      <DependentUpon>02 TriggerPort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComplexInterpolation\DoAdvance.resx">
+      <DependentUpon>DoAdvance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComplexInterpolation\IOControl.resx">
+      <DependentUpon>IOControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ManualDebug.resx">
+      <DependentUpon>ManualDebug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComplexInterpolation\WaitDICtrl.resx">
+      <DependentUpon>WaitDICtrl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

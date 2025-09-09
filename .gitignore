@@ -11,7 +11,6 @@
 [Dd]ebug/
 [Rr]elease/
 x64/
-[Bb]in/
 [Oo]bj/
 
 # MSTest test Results
@@ -43,6 +42,27 @@ x64/
 *.log
 *.svclog
 *.scc
+Lead.CPrim/InnerLibs/Config/
+Lead.CPrim/InnerLibs/Control/
+Lead.CPrim/InnerLibs/Display/
+Lead.CPrim/InnerLibs/Elements/
+Lead.CPrim/InnerLibs/Interfaces/
+Lead.CPrim/InnerLibs/Main/
+Lead.CPrim/InnerLibs/Param/
+Lead.CPrim/InnerLibs/Proxy/
+Lead.CPrim/InnerLibs/VisioPrims/
+Lead.CPrim/InnerLibs/Tasks/Lead.CPrim.TaskHelper.dll
+Lead.CPrim/InnerLibs/Tasks/Lead.CPrim.MachineHelper.dll
+Lead.CPrim/InnerLibs/Tool/Lead.CPrim.ProxyTools.dll
+Lead.CPrim/InnerLibs/Tool/Lead.CPrim.ProxyTools.xml
+Lead.CPrim/InnerLibs/Tool/Lead.CPrim.CommonTools.dll
+Lead.CPrim/InnerLibs/Tool/Lead.CPrim.CommonTools.xml
+Lead.CPrim/InnerLibs/Tool/Lead.CPrim.LogHelper.dll
+Lead.CPrim/InnerLibs/Tool/Lead.CPrim.XmlHelper.dll
+Lead.CPrim/InnerLibs/Tool/Lead.CPrim.Excel.dll
+Lead.CPrim/InnerLibs/Tool/Lead.CPrim.Excel.xml
+Lead.CPrim/Lead.CPrim.View.exe
+Lead.CPrim/Lead.CPrim.ProductInfoHelper.dll
 
 # Visual C++ cache files
 ipch/
