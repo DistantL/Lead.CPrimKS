@@ -183,6 +183,7 @@
       <DependentUpon>InputAccessarySN_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Event\SwitchStatus.cs" />
+    <Compile Include="FileName.cs" />
     <Compile Include="HIVE\HiveManager.cs" />
     <Compile Include="MES\MesManager.cs" />
     <Compile Include="Common\AudioSwVersion.cs" />
