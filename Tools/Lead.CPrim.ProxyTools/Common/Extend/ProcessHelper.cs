@@ -18,14 +18,31 @@ using Lead.CPrim.Interfaces;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 
 namespace Lead.CPrim.ProxyTools
 {
     /// <summary>
     /// 进程帮助类
     /// </summary>
-    public class ProcessHelper
+    public static class ProcessHelper
     {
+        /// <summary>
+        /// 根据名称结束进程
+        /// </summary>
+        /// <param name="strProcName"></param>
+        public static void KillProc(string strProcName)
+        {
+            Process[] processesByName = Process.GetProcessesByName(strProcName);
+            foreach (Process process in processesByName)
+            {
+                if (!process.CloseMainWindow())
+                {
+                    process.Kill();
+                }
+            }
+        }
+
         /// <summary>进程按名称启动</summary>
 		/// <param name="strProcName">名称</param>
 		public static bool ProcessStart(string strProcName)
@@ -50,17 +67,50 @@ namespace Lead.CPrim.ProxyTools
         }
 
         /// <summary>
-        /// 根据名称结束进程
+        /// 运行批处理字符串
         /// </summary>
-        /// <param name="strProcName"></param>
-        public static void KillProc(string strProcName)
+        /// <param name="batchString"></param>
+        /// <param name="hour"></param>
+        public static void RunBatchProcessing(this string batchString, double hour = 0.5)
         {
-            Process[] processesByName = Process.GetProcessesByName(strProcName);
-            foreach (Process process in processesByName)
+            if (string.IsNullOrWhiteSpace(batchString))
             {
-                if (!process.CloseMainWindow())
+                return;
+            }
+
+            string tempBatchPath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.bat");
+            try
+            {
+                File.WriteAllText(tempBatchPath, batchString, Encoding.GetEncoding(936));
+
+                var info = new ProcessStartInfo
                 {
-                    process.Kill();
+                    FileName = tempBatchPath,
+                    Verb = "runas",
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    UseShellExecute = true,
+                    CreateNoWindow = true
+                };
+
+                using (var process = Process.Start(info))
+                {
+                    // 默认30min
+                    if (!process.WaitForExit((int)(hour * 60 * 1000)))
+                    {
+                        process.Kill();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Warn($"{nameof(ProcessHelper)}.{nameof(RunBatchProcessing)}", ex);
+            }
+            finally
+            {
+                var file = tempBatchPath.GetFileInfo();
+                if (file != null)
+                {
+                    file.Delete();
                 }
             }
         }

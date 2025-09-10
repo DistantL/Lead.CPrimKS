@@ -270,7 +270,7 @@
     <Compile Include="SunnyUI\ProductInfos.Designer.cs">
       <DependentUpon>ProductInfos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Common\ProcessHelper.cs" />
+    <Compile Include="Common\Extend\ProcessHelper.cs" />
     <Compile Include="Common\FactoryCreator.cs" />
     <Compile Include="Common\File\CsvHelper.cs" />
     <Compile Include="Common\DoubleBufferedHelper.cs" />
