@@ -102,6 +102,7 @@
     <Compile Include="Authority\Controls\AuthorityLvlShowUI.Designer.cs">
       <DependentUpon>AuthorityLvlShowUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\BatchHelper.cs" />
     <Compile Include="Common\Extend\FileInfoEx.cs" />
     <Compile Include="Common\GlobalConsts.cs" />
     <Compile Include="Common\GlobalVariables.cs" />
