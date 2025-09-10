@@ -42,6 +42,7 @@ x64/
 *.log
 *.svclog
 *.scc
+.vs/
 Lead.CPrim/InnerLibs/Config/
 Lead.CPrim/InnerLibs/Control/
 Lead.CPrim/InnerLibs/Display/
