@@ -1,23 +1,39 @@
-﻿using Lead.CPrim.Interfaces;
+﻿/******************************************************************************
+ * CPrim
+ * CopyRight (C) 2020-2030.
+ * FileName: CsvHelper.cs
+ * Author: Victor
+ * Description: CSV帮助类
+ * 
+ * If you use this code, please keep this note.
+ * 如果您使用此代码，请保留此说明。
+ ******************************************************************************
+ * 版本迭代说明&修改记录
+ * <Victor><20230911>
+ * 1、引入第三方库CsvHelper，需配合Microsoft.Bcl.AsyncInterfaces一起使用
+******************************************************************************/
+
+using CsvHelper;
+using CsvHelper.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Lead.CPrim.ProxyTools
 {
     /// <summary>
     /// CSV帮助类<br/>
-    /// 20250909
     /// </summary>
     public class CsvHelper
     {
         /// <summary>
-        /// 字符串写入到Csv
+        /// 写入到Csv
         /// </summary>
         /// <param name="fileName">文件名称</param>
         /// <param name="data">待写入字符串</param>
@@ -28,28 +44,12 @@ namespace Lead.CPrim.ProxyTools
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(fileName))
-                {
-                    throw new ArgumentNullException(nameof(fileName), "CSV写入路径为空");
-                }
-                if (string.IsNullOrWhiteSpace(data))
-                {
-                    throw new ArgumentNullException(nameof(data), "CSV写入内容为空");
-                }
+                ValidationFileName(fileName);
+                ValidationData(data);
 
-                string dir = fileName?.Substring(0, fileName.LastIndexOf("\\"));
-                if (!Directory.Exists(dir))
-                {
-                    Directory.CreateDirectory(dir);
-                }
+                FileNameProcessing(fileName);
 
-                if (!File.Exists(fileName))
-                {
-                    File.Create(fileName).Close();
-                    Thread.Sleep(1);
-                }
-
-                FileInfo info = new FileInfo(fileName);
+                FileInfo info = fileName.GetFileInfo();
                 info.Attributes = FileAttributes.Normal;
 
                 using (StreamWriter sw = new StreamWriter(fileName, !IsCreated, Encoding.Default))
@@ -72,7 +72,7 @@ namespace Lead.CPrim.ProxyTools
         }
 
         /// <summary>
-        /// 字符串写入到Csv
+        /// 写入到Csv
         /// </summary>
         /// <param name="fileName">文件名称</param>
         /// <param name="data">待写入字符串</param>
@@ -83,28 +83,12 @@ namespace Lead.CPrim.ProxyTools
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(fileName))
-                {
-                    throw new ArgumentNullException(nameof(fileName), "CSV写入路径为空");
-                }
-                if (string.IsNullOrWhiteSpace(data))
-                {
-                    throw new ArgumentNullException(nameof(data), "CSV写入内容为空");
-                }
+                ValidationFileName(fileName);
+                ValidationData(data);
 
-                string dir = fileName?.Substring(0, fileName.LastIndexOf("\\"));
-                if (!Directory.Exists(dir))
-                {
-                    Directory.CreateDirectory(dir);
-                }
+                await FileNameProcessingAsync(fileName);
 
-                if (!File.Exists(fileName))
-                {
-                    File.Create(fileName).Close();
-                    await Task.Delay(1);
-                }
-
-                FileInfo info = new FileInfo(fileName);
+                FileInfo info = fileName.GetFileInfo();
                 info.Attributes = FileAttributes.Normal;
 
                 using (StreamWriter sw = new StreamWriter(fileName, !IsCreated, Encoding.Default))
@@ -127,7 +111,7 @@ namespace Lead.CPrim.ProxyTools
         }
 
         /// <summary>
-        /// 集合ListString写入到Csv
+        /// 写入到Csv
         /// </summary>
         /// <param name="fileName">文件名称</param>
         /// <param name="datas">待写入集合ListString</param>
@@ -140,7 +124,7 @@ namespace Lead.CPrim.ProxyTools
         }
 
         /// <summary>
-        /// 集合ListString写入到Csv
+        /// 写入到Csv
         /// </summary>
         /// <param name="fileName">文件名称</param>
         /// <param name="datas">待写入集合ListString</param>
@@ -153,17 +137,108 @@ namespace Lead.CPrim.ProxyTools
         }
 
         /// <summary>
-        /// Csv文件读出到集合ListString
+        /// 写入到Csv
         /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="fileName">文件名称</param>
-        /// <param name="encoding">编码方式</param>
-        /// <param name="isIgnoreTitle">true：忽略标题；false：不忽略标题；</param>
-        /// <param name="datas">集合ListString</param>
-        /// <returns>bool</returns>
-        public static bool ReadCsvToListString(string fileName, Encoding encoding, bool isIgnoreTitle, out List<string> datas)
+        /// <param name="datas">待写入集合</param>
+        /// <param name="isHasHeader">True：有标题；False：无标题；</param>
+        /// <param name="isReadOnly">True：只读；False：读写；</param>
+        /// <param name="IsCreated">True：新建；False：追加；（默认False）</param>
+        /// <returns></returns>
+        public static bool WriteToCsv<T>(string fileName, IEnumerable<T> datas, bool isHasHeader, bool isReadOnly = true, bool IsCreated = false)
         {
             try
             {
+                ValidationFileName(fileName);
+                ValidationDatas(datas);
+
+                FileNameProcessing(fileName);
+
+                FileInfo info = fileName.GetFileInfo();
+                info.Attributes = FileAttributes.Normal;
+
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    HasHeaderRecord = isHasHeader,
+                };
+                using (StreamWriter sw = new StreamWriter(fileName, !IsCreated, Encoding.Default))
+                using (var csv = new CsvWriter(sw, config))
+                {
+                    csv.WriteRecords(datas);
+                }
+
+                if (isReadOnly)
+                {
+                    info.Attributes = FileAttributes.ReadOnly;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Warn($"{nameof(CsvHelper)}.{nameof(WriteToCsv)}", ex);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 写入到Csv
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="fileName">文件名称</param>
+        /// <param name="datas">待写入集合</param>
+        /// <param name="isHasHeader">True：有标题；False：无标题；</param>
+        /// <param name="isReadOnly">True：只读；False：读写；</param>
+        /// <param name="IsCreated">True：新建；False：追加；（默认False）</param>
+        /// <returns></returns>
+        public async static Task<bool> WriteToCsvAsync<T>(string fileName, IEnumerable<T> datas, bool isHasHeader, bool isReadOnly = true, bool IsCreated = false)
+        {
+            try
+            {
+                ValidationFileName(fileName);
+                ValidationDatas(datas);
+
+                await FileNameProcessingAsync(fileName);
+
+                FileInfo info = fileName.GetFileInfo();
+                info.Attributes = FileAttributes.Normal;
+
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    HasHeaderRecord = isHasHeader,
+                };
+                using (StreamWriter sw = new StreamWriter(fileName, !IsCreated, Encoding.Default))
+                using (var csv = new CsvWriter(sw, config))
+                {
+                    await csv.WriteRecordsAsync(datas);
+                }
+
+                if (isReadOnly)
+                {
+                    info.Attributes = FileAttributes.ReadOnly;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Warn($"{nameof(CsvHelper)}.{nameof(WriteToCsvAsync)}", ex);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Csv读取到集合ListString
+        /// </summary>
+        /// <param name="fileName">文件名称</param>
+        /// <param name="encoding">编码方式</param>
+        /// <param name="isIgnoreFirstLine">true：忽略第一行；false：不忽略第一行；</param>
+        /// <param name="datas">集合ListString</param>
+        /// <returns></returns>
+        public static bool ReadCsvToListString(string fileName, Encoding encoding, bool isIgnoreFirstLine, out List<string> datas)
+        {
+            try
+            {
+                ValidationFileName(fileName);
                 if (!File.Exists(fileName))
                 {
                     datas = null;
@@ -176,11 +251,10 @@ namespace Lead.CPrim.ProxyTools
                 }
 
                 datas = new List<string>();
-                FileInfo info = new FileInfo(fileName);
                 using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 using (StreamReader sw = new StreamReader(fs, encoding))
                 {
-                    if (isIgnoreTitle)
+                    if (isIgnoreFirstLine)
                     {
                         sw.ReadLine();
                     }
@@ -205,16 +279,17 @@ namespace Lead.CPrim.ProxyTools
         }
 
         /// <summary>
-        /// Csv文件读出到集合ListString
+        /// Csv读取到集合ListString
         /// </summary>
         /// <param name="fileName">文件名称</param>
         /// <param name="encoding">编码方式</param>
-        /// <param name="isIgnoreTitle">true：忽略标题；false：不忽略标题；</param>
-        /// <returns>bool</returns>
-        public static async Task<List<string>> ReadCsvToListStringAsync(string fileName, Encoding encoding, bool isIgnoreTitle)
+        /// <param name="isIgnoreFirstLine">true：忽略第一行；false：不忽略第一行；</param>
+        /// <returns></returns>
+        public static async Task<List<string>> ReadCsvToListStringAsync(string fileName, Encoding encoding, bool isIgnoreFirstLine)
         {
             try
             {
+                ValidationFileName(fileName);
                 if (!File.Exists(fileName))
                 {
                     return null;
@@ -226,11 +301,10 @@ namespace Lead.CPrim.ProxyTools
                 }
 
                 List<string> datas = new List<string>();
-                FileInfo info = new FileInfo(fileName);
                 using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 using (StreamReader sw = new StreamReader(fs, encoding))
                 {
-                    if (isIgnoreTitle)
+                    if (isIgnoreFirstLine)
                     {
                         await sw.ReadLineAsync();
                     }
@@ -250,6 +324,56 @@ namespace Lead.CPrim.ProxyTools
             {
                 LogHelper.Warn($"{nameof(CsvHelper)}.{nameof(ReadCsvToListStringAsync)}", ex);
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Csv读取
+        /// </summary>
+        /// <param name="fileName">文件名称</param>
+        /// <param name="encoding">编码方式</param>
+        /// <param name="isHasHeader">True：有标题；False：无标题；</param>
+        /// <param name="datas">泛型集合</param>
+        /// <returns></returns>
+        public static bool ReadCsv<T>(string fileName, Encoding encoding, bool isHasHeader, out List<T> datas)
+        {
+            try
+            {
+                ValidationFileName(fileName);
+                if (!File.Exists(fileName))
+                {
+                    datas = null;
+                    return false;
+                }
+
+                if (encoding == null)
+                {
+                    encoding = Encoding.Default;
+                }
+
+                datas = new List<T>();
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    HasHeaderRecord = isHasHeader,
+                };
+                using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (StreamReader sw = new StreamReader(fs, encoding))
+                using (var csv = new CsvReader(sw, config))
+                {
+                    var records = csv.GetRecords<T>();
+                    if (records != null)
+                    {
+                        datas = records.ToList();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Warn($"{nameof(CsvHelper)}.{nameof(ReadCsv)}", ex);
+                datas = null;
+                return false;
             }
         }
 
@@ -328,12 +452,12 @@ namespace Lead.CPrim.ProxyTools
         /// <returns></returns>
         static string GetString(List<string> datas)
         {
-            if (datas == null || datas.Count <= 0)
+            if (datas == null || datas.Count() <= 0)
             {
                 return null;
             }
 
-            if (datas.Count == 1)
+            if (datas.Count() == 1)
             {
                 return datas[0];
             }
@@ -344,6 +468,80 @@ namespace Lead.CPrim.ProxyTools
                 text.AppendLine(data);
             }
             return text.ToString();
+        }
+
+        /// <summary>
+        /// 验证参数fileName
+        /// </summary>
+        /// <param name="fileName"></param>
+        static void ValidationFileName(string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                throw new ArgumentNullException(nameof(fileName), "CSV写入路径为空");
+            }
+        }
+
+        /// <summary>
+        /// 验证参数data
+        /// </summary>
+        /// <param name="data"></param>
+        static void ValidationData(string data)
+        {
+            if (string.IsNullOrWhiteSpace(data))
+            {
+                throw new ArgumentNullException(nameof(data), "CSV写入数据为空");
+            }
+        }
+
+        /// <summary>
+        /// 验证参数data
+        /// </summary>
+        /// <param name="datas"></param>
+        static void ValidationDatas<T>(IEnumerable<T> datas)
+        {
+            if (datas == null || datas.Count() <= 0)
+            {
+                throw new ArgumentNullException(nameof(datas), "CSV写入数据为空");
+            }
+        }
+
+        /// <summary>
+        /// 参数fileName处理
+        /// </summary>
+        /// <param name="fileName"></param>
+        static void FileNameProcessing(string fileName)
+        {
+            string dir = fileName?.Substring(0, fileName.LastIndexOf("\\"));
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
+            if (!File.Exists(fileName))
+            {
+                File.Create(fileName).Close();
+                Thread.Sleep(1);
+            }
+        }
+
+        /// <summary>
+        /// 参数fileName处理
+        /// </summary>
+        /// <param name="fileName"></param>
+        static async Task FileNameProcessingAsync(string fileName)
+        {
+            string dir = fileName?.Substring(0, fileName.LastIndexOf("\\"));
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
+            if (!File.Exists(fileName))
+            {
+                File.Create(fileName).Close();
+                await Task.Delay(1);
+            }
         }
         #endregion
     }
