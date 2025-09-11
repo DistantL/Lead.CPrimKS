@@ -18,30 +18,36 @@ namespace Lead.CPrim.ProxyTools.Authority
 {
     public partial class AlarmInfoEx : UserControl
     {
+        #region Field
         /// <summary>
-        /// setting界面中显示报警的列表
+        /// 报警列表
         /// </summary>
-        private BindingList<AlarmInfo> _list = new BindingList<AlarmInfo>();
+        private BindingList<AlarmInfo> _alarmsBinding = new BindingList<AlarmInfo>();
+
+        /// <summary>
+        /// 报警列表锁
+        /// </summary>
+        static readonly object _lockAlarm = new object();
+        #endregion
 
 
 
+        #region Ctor
         public AlarmInfoEx(ref BindingList<AlarmInfo> list)
         {
-            _list = list;
             InitializeComponent();
             OnLanguageChanged();
             NLocalizer.LanguageChanged += OnLanguageChanged;
 
-            ErrorLevel.DataSource = new List<string> { "一级报警", "二级报警", "三级报警" };
-
-            PromptMethod.DataSource = new List<string> { "不停机界面提示", "停机黄灯", "DT红灯" };
-            ErrorLevel.DataSource = new ErrorLevel[] { ProxyTools.ErrorLevel.一级报警, ProxyTools.ErrorLevel.二级报警, ProxyTools.ErrorLevel.三级报警 };
-            ErrorLevel.ValueType = typeof(ErrorLevel);
+            _alarmsBinding = list;
+            colPromptMethod.DataSource = new List<string> { "不停机界面提示", "停机黄灯", "DT红灯" };
+            colErrorLevel.DataSource = new ErrorLevel[] { ProxyTools.ErrorLevel.一级报警, ProxyTools.ErrorLevel.二级报警, ProxyTools.ErrorLevel.三级报警 };
+            colErrorLevel.ValueType = typeof(ErrorLevel);
 
             try
             {
                 dgv_AlertInfo.AutoGenerateColumns = false;
-                dgv_AlertInfo.DataSource = _list;
+                dgv_AlertInfo.DataSource = _alarmsBinding;
             }
             catch (Exception ex)
             {
@@ -50,15 +56,37 @@ namespace Lead.CPrim.ProxyTools.Authority
 
             dgv_AlertInfo.DoubleBuffered(true);
         }
+        #endregion
 
-        private void OnLanguageChanged()
+
+
+        #region EventButton
+
+        private void tsmiAdd_Click(object sender, EventArgs e)
         {
-            dgv_AlertInfo.Columns["ErrorCode"].HeaderText = NLocalizer.GetString("Lead_CPrim_Controls_UIAlarmInfo_ErrorCode", "报警代码");
-            dgv_AlertInfo.Columns["ErrorMessage"].HeaderText = NLocalizer.GetString("Lead_CPrim_Controls_UIAlarmInfo_ErrorMessage", "报警类型");
-            dgv_AlertInfo.Columns["ErrorDetail"].HeaderText = NLocalizer.GetString("Lead_CPrim_Controls_UIAlarmInfo_ErrorDetail", "报警信息");
+            lock (_lockAlarm)
+            {
+                _alarmsBinding.Add(new AlarmInfo());
+            }
         }
 
-        public int Save()
+        private void tsmiDelete_Click(object sender, EventArgs e)
+        {
+            lock (_lockAlarm)
+            {
+                
+            };
+        }
+        #endregion
+
+
+
+        #region MethodExternalUsing
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <returns></returns>
+        internal int Save()
         {
             FileInfo fileInfo = new FileInfo(AlarmManager.Instance.ConfigFilePath);
             if (!fileInfo.Directory.Exists)
@@ -73,9 +101,9 @@ namespace Lead.CPrim.ProxyTools.Authority
 
                 foreach (DataGridViewRow row in dgv_AlertInfo.Rows)
                 {
-                    sw.Write(row.Cells["ErrorCode"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colErrorCode"].Value); sw.Write(',');
 
-                    switch (row.Cells["ErrorLevel"].Value.ToString())
+                    switch (row.Cells["colErrorLevel"].Value.ToString())
                     {
                         case "一级报警":
                             sw.Write("critical"); sw.Write(',');
@@ -90,19 +118,19 @@ namespace Lead.CPrim.ProxyTools.Authority
                             sw.Write(""); sw.Write(',');
                             break;
                     }
-                    sw.Write(row.Cells["ErrorMessage"].Value); sw.Write(',');
-                    sw.Write(row.Cells["ErrorDetail"].Value); sw.Write(',');
-                    sw.Write(row.Cells["ErrorDetailInEN"].Value); sw.Write(',');
-                    sw.Write(row.Cells["ErrorDetailInVN"].Value); sw.Write(',');
-                    sw.Write(row.Cells["AlarmCount"].Value); sw.Write(',');
-                    sw.Write(row.Cells["dgvCumulativeThreshold"].Value); sw.Write(',');
-                    sw.Write(row.Cells["ErrorLevel"].Value); sw.Write(',');
-                    sw.Write(row.Cells["PromptMethod"].Value); sw.Write(',');
-                    sw.Write(row.Cells["dgvSolution"].Value); sw.Write(',');
-                    sw.Write(row.Cells["dgvSolutionInEN"].Value); sw.Write(',');
-                    sw.Write(row.Cells["dgvSolutionInVN"].Value); sw.Write(',');
-                    sw.Write(row.Cells["HasParams"].Value); sw.Write(',');
-                    sw.Write(row.Cells["Sequence"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colErrorMessage"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colErrorDetail"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colErrorDetailInEN"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colErrorDetailInVN"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colAlarmCount"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colCumulativeThreshold"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colErrorLevel"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colPromptMethod"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colSolution"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colSolutionInEN"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colSolutionInVN"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colHasParams"].Value); sw.Write(',');
+                    sw.Write(row.Cells["colSequence"].Value); sw.Write(',');
                     sw.WriteLine();
                 }
             }
@@ -113,5 +141,20 @@ namespace Lead.CPrim.ProxyTools.Authority
 
             return 0;
         }
+        #endregion
+
+
+
+        #region MethodInternalUsing
+        void OnLanguageChanged()
+        {
+            colErrorCode.HeaderText = NLocalizer.GetString("Lead_CPrim_Controls_UIAlarmInfo_ErrorCode", "报警代码");
+            colErrorMessage.HeaderText = NLocalizer.GetString("Lead_CPrim_Controls_UIAlarmInfo_ErrorMessage", "报警类型");
+            colErrorDetail.HeaderText = NLocalizer.GetString("Lead_CPrim_Controls_UIAlarmInfo_ErrorDetail", "报警信息");
+
+            tsmiAdd.Text = NLocalizer.Add;
+            tsmiDelete.Text = NLocalizer.Delete;
+        }
+        #endregion
     }
 }

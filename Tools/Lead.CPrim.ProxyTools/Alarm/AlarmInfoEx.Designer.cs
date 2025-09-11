@@ -28,31 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv_AlertInfo = new System.Windows.Forms.DataGridView();
-            this.dgvVendorAlarmCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ErrorDetail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ErrorDetailInEN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ErrorDetailInVN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ErrorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ErrorMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ErrorLevel = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.HasParams = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.PromptMethod = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.AlarmCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvContinuousThreshold = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvCumulativeThreshold = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSolution = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSolutionInEN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSolutionInVN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ErrorLevelInEN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sequence = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.colVendorAlarmCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colErrorDetail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colErrorDetailInEN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colErrorDetailInVN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colErrorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colErrorMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colErrorLevel = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colHasParams = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colPromptMethod = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colAlarmCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colContinuousThreshold = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCumulativeThreshold = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSolution = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSolutionInEN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSolutionInVN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colErrorLevelInEN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSequence = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_AlertInfo)).BeginInit();
+            this.cms.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv_AlertInfo
@@ -76,24 +82,25 @@
             this.dgv_AlertInfo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_AlertInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_AlertInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvVendorAlarmCode,
-            this.ErrorDetail,
-            this.ErrorDetailInEN,
-            this.ErrorDetailInVN,
-            this.ErrorCode,
-            this.ErrorMessage,
-            this.ErrorLevel,
-            this.HasParams,
-            this.PromptMethod,
-            this.AlarmCount,
-            this.dgvContinuousThreshold,
-            this.dgvCumulativeThreshold,
-            this.dgvSolution,
-            this.dgvSolutionInEN,
-            this.dgvSolutionInVN,
-            this.ErrorLevelInEN,
-            this.LastTime,
-            this.Sequence});
+            this.colVendorAlarmCode,
+            this.colErrorDetail,
+            this.colErrorDetailInEN,
+            this.colErrorDetailInVN,
+            this.colErrorCode,
+            this.colErrorMessage,
+            this.colErrorLevel,
+            this.colHasParams,
+            this.colPromptMethod,
+            this.colAlarmCount,
+            this.colContinuousThreshold,
+            this.colCumulativeThreshold,
+            this.colSolution,
+            this.colSolutionInEN,
+            this.colSolutionInVN,
+            this.colErrorLevelInEN,
+            this.colLastTime,
+            this.colSequence});
+            this.dgv_AlertInfo.ContextMenuStrip = this.cms;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(232)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -127,155 +134,182 @@
             this.dgv_AlertInfo.Size = new System.Drawing.Size(1142, 537);
             this.dgv_AlertInfo.TabIndex = 1;
             // 
-            // dgvVendorAlarmCode
+            // cms
             // 
-            this.dgvVendorAlarmCode.HeaderText = "供应商报警编号";
-            this.dgvVendorAlarmCode.Name = "dgvVendorAlarmCode";
-            this.dgvVendorAlarmCode.Width = 146;
+            this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiAdd,
+            this.tsmiDelete});
+            this.cms.Name = "cms";
+            this.cms.Size = new System.Drawing.Size(101, 48);
             // 
-            // ErrorDetail
+            // tsmiAdd
             // 
-            this.ErrorDetail.DataPropertyName = "ErrorDetail";
-            this.ErrorDetail.HeaderText = "报警详细信息";
-            this.ErrorDetail.MinimumWidth = 6;
-            this.ErrorDetail.Name = "ErrorDetail";
-            this.ErrorDetail.Width = 130;
+            this.tsmiAdd.Name = "tsmiAdd";
+            this.tsmiAdd.Size = new System.Drawing.Size(100, 22);
+            this.tsmiAdd.Text = "新增";
+            this.tsmiAdd.Click += new System.EventHandler(this.tsmiAdd_Click);
             // 
-            // ErrorDetailInEN
+            // tsmiDelete
             // 
-            this.ErrorDetailInEN.DataPropertyName = "ErrorDetailInEN";
-            this.ErrorDetailInEN.HeaderText = "Error Detail";
-            this.ErrorDetailInEN.MinimumWidth = 6;
-            this.ErrorDetailInEN.Name = "ErrorDetailInEN";
-            this.ErrorDetailInEN.Width = 120;
+            this.tsmiDelete.Name = "tsmiDelete";
+            this.tsmiDelete.Size = new System.Drawing.Size(100, 22);
+            this.tsmiDelete.Text = "删除";
+            this.tsmiDelete.Click += new System.EventHandler(this.tsmiDelete_Click);
             // 
-            // ErrorDetailInVN
+            // contextMenuStrip1
             // 
-            this.ErrorDetailInVN.DataPropertyName = "ErrorDetailInVN";
-            this.ErrorDetailInVN.HeaderText = "Chi tiết lỗi";
-            this.ErrorDetailInVN.MinimumWidth = 6;
-            this.ErrorDetailInVN.Name = "ErrorDetailInVN";
-            this.ErrorDetailInVN.Width = 111;
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // ErrorCode
+            // colVendorAlarmCode
             // 
-            this.ErrorCode.DataPropertyName = "ErrorCode";
-            this.ErrorCode.HeaderText = "报警代码";
-            this.ErrorCode.MinimumWidth = 6;
-            this.ErrorCode.Name = "ErrorCode";
-            this.ErrorCode.Width = 98;
+            this.colVendorAlarmCode.HeaderText = "供应商报警编号";
+            this.colVendorAlarmCode.Name = "colVendorAlarmCode";
+            this.colVendorAlarmCode.Width = 146;
             // 
-            // ErrorMessage
+            // colErrorDetail
             // 
-            this.ErrorMessage.DataPropertyName = "ErrorMessage";
-            this.ErrorMessage.HeaderText = "报警类型";
-            this.ErrorMessage.MinimumWidth = 6;
-            this.ErrorMessage.Name = "ErrorMessage";
-            this.ErrorMessage.Width = 98;
+            this.colErrorDetail.DataPropertyName = "ErrorDetail";
+            this.colErrorDetail.HeaderText = "报警详细信息";
+            this.colErrorDetail.MinimumWidth = 6;
+            this.colErrorDetail.Name = "colErrorDetail";
+            this.colErrorDetail.Width = 130;
             // 
-            // ErrorLevel
+            // colErrorDetailInEN
             // 
-            this.ErrorLevel.DataPropertyName = "ErrorLevel";
-            this.ErrorLevel.HeaderText = "报警级别";
-            this.ErrorLevel.MinimumWidth = 6;
-            this.ErrorLevel.Name = "ErrorLevel";
-            this.ErrorLevel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ErrorLevel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ErrorLevel.Width = 98;
+            this.colErrorDetailInEN.DataPropertyName = "ErrorDetailInEN";
+            this.colErrorDetailInEN.HeaderText = "Error Detail";
+            this.colErrorDetailInEN.MinimumWidth = 6;
+            this.colErrorDetailInEN.Name = "colErrorDetailInEN";
+            this.colErrorDetailInEN.Width = 120;
             // 
-            // HasParams
+            // colErrorDetailInVN
             // 
-            this.HasParams.DataPropertyName = "HasParams";
-            this.HasParams.HeaderText = "包含参数";
-            this.HasParams.MinimumWidth = 6;
-            this.HasParams.Name = "HasParams";
-            this.HasParams.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.HasParams.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.HasParams.Width = 98;
+            this.colErrorDetailInVN.DataPropertyName = "ErrorDetailInVN";
+            this.colErrorDetailInVN.HeaderText = "Chi tiết lỗi";
+            this.colErrorDetailInVN.MinimumWidth = 6;
+            this.colErrorDetailInVN.Name = "colErrorDetailInVN";
+            this.colErrorDetailInVN.Width = 111;
             // 
-            // PromptMethod
+            // colErrorCode
             // 
-            this.PromptMethod.DataPropertyName = "PromptMethod";
-            this.PromptMethod.HeaderText = "提示方式";
-            this.PromptMethod.MinimumWidth = 6;
-            this.PromptMethod.Name = "PromptMethod";
-            this.PromptMethod.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.PromptMethod.Width = 79;
+            this.colErrorCode.DataPropertyName = "ErrorCode";
+            this.colErrorCode.HeaderText = "报警代码";
+            this.colErrorCode.MinimumWidth = 6;
+            this.colErrorCode.Name = "colErrorCode";
+            this.colErrorCode.Width = 98;
             // 
-            // AlarmCount
+            // colErrorMessage
             // 
-            this.AlarmCount.DataPropertyName = "AlarmCount";
-            this.AlarmCount.HeaderText = "当前次数";
-            this.AlarmCount.MinimumWidth = 6;
-            this.AlarmCount.Name = "AlarmCount";
-            this.AlarmCount.Width = 98;
+            this.colErrorMessage.DataPropertyName = "ErrorMessage";
+            this.colErrorMessage.HeaderText = "报警类型";
+            this.colErrorMessage.MinimumWidth = 6;
+            this.colErrorMessage.Name = "colErrorMessage";
+            this.colErrorMessage.Width = 98;
             // 
-            // dgvContinuousThreshold
+            // colErrorLevel
             // 
-            this.dgvContinuousThreshold.DataPropertyName = "ContinuousThreshold";
-            this.dgvContinuousThreshold.HeaderText = "连续阈值";
-            this.dgvContinuousThreshold.Name = "dgvContinuousThreshold";
-            this.dgvContinuousThreshold.Width = 98;
+            this.colErrorLevel.DataPropertyName = "ErrorLevel";
+            this.colErrorLevel.HeaderText = "报警级别";
+            this.colErrorLevel.MinimumWidth = 6;
+            this.colErrorLevel.Name = "colErrorLevel";
+            this.colErrorLevel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colErrorLevel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colErrorLevel.Width = 98;
             // 
-            // dgvCumulativeThreshold
+            // colHasParams
             // 
-            this.dgvCumulativeThreshold.DataPropertyName = "CumulativeThreshold";
-            this.dgvCumulativeThreshold.HeaderText = "累计阈值";
-            this.dgvCumulativeThreshold.MinimumWidth = 6;
-            this.dgvCumulativeThreshold.Name = "dgvCumulativeThreshold";
-            this.dgvCumulativeThreshold.Width = 98;
+            this.colHasParams.DataPropertyName = "HasParams";
+            this.colHasParams.HeaderText = "包含参数";
+            this.colHasParams.MinimumWidth = 6;
+            this.colHasParams.Name = "colHasParams";
+            this.colHasParams.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colHasParams.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colHasParams.Width = 98;
             // 
-            // dgvSolution
+            // colPromptMethod
             // 
-            this.dgvSolution.DataPropertyName = "Solution";
-            this.dgvSolution.HeaderText = "解决方案";
-            this.dgvSolution.MinimumWidth = 6;
-            this.dgvSolution.Name = "dgvSolution";
-            this.dgvSolution.Width = 98;
+            this.colPromptMethod.DataPropertyName = "PromptMethod";
+            this.colPromptMethod.HeaderText = "提示方式";
+            this.colPromptMethod.MinimumWidth = 6;
+            this.colPromptMethod.Name = "colPromptMethod";
+            this.colPromptMethod.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colPromptMethod.Width = 79;
             // 
-            // dgvSolutionInEN
+            // colAlarmCount
             // 
-            this.dgvSolutionInEN.DataPropertyName = "SolutionInEN";
-            this.dgvSolutionInEN.HeaderText = "Solution";
-            this.dgvSolutionInEN.MinimumWidth = 6;
-            this.dgvSolutionInEN.Name = "dgvSolutionInEN";
-            this.dgvSolutionInEN.Width = 97;
+            this.colAlarmCount.DataPropertyName = "AlarmCount";
+            this.colAlarmCount.HeaderText = "当前次数";
+            this.colAlarmCount.MinimumWidth = 6;
+            this.colAlarmCount.Name = "colAlarmCount";
+            this.colAlarmCount.Width = 98;
             // 
-            // dgvSolutionInVN
+            // colContinuousThreshold
             // 
-            this.dgvSolutionInVN.DataPropertyName = "SolutionInVN";
-            this.dgvSolutionInVN.HeaderText = "Giải pháp";
-            this.dgvSolutionInVN.MinimumWidth = 6;
-            this.dgvSolutionInVN.Name = "dgvSolutionInVN";
-            this.dgvSolutionInVN.Width = 107;
+            this.colContinuousThreshold.DataPropertyName = "ContinuousThreshold";
+            this.colContinuousThreshold.HeaderText = "连续阈值";
+            this.colContinuousThreshold.Name = "colContinuousThreshold";
+            this.colContinuousThreshold.Width = 98;
             // 
-            // ErrorLevelInEN
+            // colCumulativeThreshold
             // 
-            this.ErrorLevelInEN.DataPropertyName = "ErrorLevelInEN";
-            this.ErrorLevelInEN.HeaderText = "ErrorLevelInEN";
-            this.ErrorLevelInEN.MinimumWidth = 6;
-            this.ErrorLevelInEN.Name = "ErrorLevelInEN";
-            this.ErrorLevelInEN.Visible = false;
-            this.ErrorLevelInEN.Width = 146;
+            this.colCumulativeThreshold.DataPropertyName = "CumulativeThreshold";
+            this.colCumulativeThreshold.HeaderText = "累计阈值";
+            this.colCumulativeThreshold.MinimumWidth = 6;
+            this.colCumulativeThreshold.Name = "colCumulativeThreshold";
+            this.colCumulativeThreshold.Width = 98;
             // 
-            // LastTime
+            // colSolution
             // 
-            this.LastTime.DataPropertyName = "LastTime";
-            this.LastTime.HeaderText = "LastTime";
-            this.LastTime.MinimumWidth = 6;
-            this.LastTime.Name = "LastTime";
-            this.LastTime.Visible = false;
-            this.LastTime.Width = 101;
+            this.colSolution.DataPropertyName = "Solution";
+            this.colSolution.HeaderText = "解决方案";
+            this.colSolution.MinimumWidth = 6;
+            this.colSolution.Name = "colSolution";
+            this.colSolution.Width = 98;
             // 
-            // Sequence
+            // colSolutionInEN
             // 
-            this.Sequence.DataPropertyName = "Sequence";
-            this.Sequence.HeaderText = "Sequence";
-            this.Sequence.MinimumWidth = 6;
-            this.Sequence.Name = "Sequence";
-            this.Sequence.ReadOnly = true;
-            this.Sequence.Visible = false;
-            this.Sequence.Width = 108;
+            this.colSolutionInEN.DataPropertyName = "SolutionInEN";
+            this.colSolutionInEN.HeaderText = "Solution";
+            this.colSolutionInEN.MinimumWidth = 6;
+            this.colSolutionInEN.Name = "colSolutionInEN";
+            this.colSolutionInEN.Width = 97;
+            // 
+            // colSolutionInVN
+            // 
+            this.colSolutionInVN.DataPropertyName = "SolutionInVN";
+            this.colSolutionInVN.HeaderText = "Giải pháp";
+            this.colSolutionInVN.MinimumWidth = 6;
+            this.colSolutionInVN.Name = "colSolutionInVN";
+            this.colSolutionInVN.Width = 107;
+            // 
+            // colErrorLevelInEN
+            // 
+            this.colErrorLevelInEN.DataPropertyName = "ErrorLevelInEN";
+            this.colErrorLevelInEN.HeaderText = "ErrorLevelInEN";
+            this.colErrorLevelInEN.MinimumWidth = 6;
+            this.colErrorLevelInEN.Name = "colErrorLevelInEN";
+            this.colErrorLevelInEN.Visible = false;
+            this.colErrorLevelInEN.Width = 146;
+            // 
+            // colLastTime
+            // 
+            this.colLastTime.DataPropertyName = "LastTime";
+            this.colLastTime.HeaderText = "LastTime";
+            this.colLastTime.MinimumWidth = 6;
+            this.colLastTime.Name = "colLastTime";
+            this.colLastTime.Visible = false;
+            this.colLastTime.Width = 101;
+            // 
+            // colSequence
+            // 
+            this.colSequence.DataPropertyName = "Sequence";
+            this.colSequence.HeaderText = "Sequence";
+            this.colSequence.MinimumWidth = 6;
+            this.colSequence.Name = "colSequence";
+            this.colSequence.ReadOnly = true;
+            this.colSequence.Visible = false;
+            this.colSequence.Width = 108;
             // 
             // AlarmInfoEx
             // 
@@ -284,6 +318,7 @@
             this.Name = "AlarmInfoEx";
             this.Size = new System.Drawing.Size(1142, 537);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_AlertInfo)).EndInit();
+            this.cms.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -292,23 +327,27 @@
 
         //private ProxyTools.SunnyUI.Controls.UIDataGridView dgv_AlertInfo;
         private System.Windows.Forms.DataGridView dgv_AlertInfo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvVendorAlarmCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ErrorDetail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ErrorDetailInEN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ErrorDetailInVN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ErrorCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ErrorMessage;
-        private System.Windows.Forms.DataGridViewComboBoxColumn ErrorLevel;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn HasParams;
-        private System.Windows.Forms.DataGridViewComboBoxColumn PromptMethod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AlarmCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvContinuousThreshold;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCumulativeThreshold;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvSolution;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvSolutionInEN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvSolutionInVN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ErrorLevelInEN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LastTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sequence;
+        private System.Windows.Forms.ContextMenuStrip cms;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAdd;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDelete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colVendorAlarmCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colErrorDetail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colErrorDetailInEN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colErrorDetailInVN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colErrorCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colErrorMessage;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colErrorLevel;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colHasParams;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colPromptMethod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAlarmCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContinuousThreshold;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCumulativeThreshold;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSolution;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSolutionInEN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSolutionInVN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colErrorLevelInEN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLastTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSequence;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

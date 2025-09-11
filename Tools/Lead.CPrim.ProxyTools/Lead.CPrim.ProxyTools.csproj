@@ -185,6 +185,7 @@
     </Compile>
     <Compile Include="Event\SwitchStatus.cs" />
     <Compile Include="HIVE\HiveManager.cs" />
+    <Compile Include="Language\D.cs" />
     <Compile Include="MES\MesManager.cs" />
     <Compile Include="Common\AudioSwVersion.cs" />
     <Compile Include="Common\Chart\ChartArgumentChartArea.cs" />

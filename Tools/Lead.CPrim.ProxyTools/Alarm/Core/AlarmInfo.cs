@@ -53,7 +53,7 @@ namespace Lead.CPrim.ProxyTools
         /// <summary>
         /// 报警等级-中文
         /// </summary>
-        public ErrorLevel ErrorLevel { get; set; }
+        public ErrorLevel ErrorLevel { get; set; } = ErrorLevel.三级报警;
 
         /// <summary>
         /// 报警等级-英文<br/>
@@ -77,7 +77,7 @@ namespace Lead.CPrim.ProxyTools
         /// 暂不使用
         /// </summary>
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-        public DateTime LastTime { get; set; }
+        public DateTime LastTime { get; set; } = DateTime.Now;
 
         /// <summary>
         /// 提示方式

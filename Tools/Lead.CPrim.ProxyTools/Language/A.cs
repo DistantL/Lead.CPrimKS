@@ -8,6 +8,7 @@ namespace Lead.CPrim.ProxyTools
 {
     public partial class NLocalizer
     {
+        public static string Add { get; set; }
         public static string Apply { get; set; }
         public static string ApplyError { get; set; }
         public static string ApplySuccess { get; set; }
@@ -18,6 +19,7 @@ namespace Lead.CPrim.ProxyTools
 
         public static void InitA()
         {
+            Add = GetString("Add", "增加");
             Apply = GetString("Apply", "应用");
             ApplyError = GetString("ApplyError", "应用错误");
             ApplySuccess = GetString("ApplySuccess", "应用成功");

@@ -81,19 +81,20 @@ namespace Lead.CPrim.ProxyTools.Authority
             {
                 switch (NLocalizer.Language)
                 {
-
                     case "en-US":
                         rtb_WarnInfo.AppendText($"{item.LastTime.ToString("yyyy-MM-dd HH:mm:ss.ff")} {item.ErrorCode.PadLeft(8)} {item.ErrorDetailInEN}" + Environment.NewLine);
                         break;
+
                     case "vi-VN":
                         rtb_WarnInfo.AppendText($"{item.LastTime.ToString("yyyy-MM-dd HH:mm:ss.ff")} {item.ErrorCode.PadLeft(8)} {item.ErrorDetailInVN}" + Environment.NewLine);
                         break;
+
                     case "zh-CN":
                         rtb_WarnInfo.AppendText($"{item.LastTime.ToString("yyyy-MM-dd HH:mm:ss.ff")} {item.ErrorCode.PadLeft(8)} {item.ErrorDetail}" + Environment.NewLine);
                         break;
+
                     default:
                         break;
-
                 }
             }
         }

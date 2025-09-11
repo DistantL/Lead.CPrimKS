@@ -325,6 +325,7 @@ namespace Lead.CPrim.ProxyTools
         {
             InitA();
             InitC();
+            InitD();
             InitE();
             InitF();
             InitI();
