@@ -31,6 +31,7 @@ using Lead.CPrim.Interfaces.Display;
 using Lead.CPrim.Interfaces.StateMachine;
 using Lead.CPrim.ProxyTools;
 using Lead.CPrim.ProxyTools.Authority;
+using Lead.CPrim.ProxyTools.Common;
 using Lead.CPrim.ProxyTools.Register;
 using Lead.CPrim.ProxyTools.SunnyUI.Controls;
 using Lead.CPrim.ProxyTools.SunnyUI.Forms;

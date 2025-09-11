@@ -29,19 +29,17 @@ namespace Lead.CPrim.ProxyTools.Common
                 @echo off
                 setlocal enabledelayedexpansion
 
-                set ""target_path={dir}""  
+                set ""target_path={dir}""
                 set days_old={day}                       
 
-                if not exist ""%target_path%"" 
-                (
+                if not exist ""%target_path%"" (
                     echo [ERROR] Path not found: %target_path%
                     exit /b 1
                 )
 
                 forfiles /p ""%target_path%"" /s /m * /d -%days_old% /c ""cmd /c del @path /q /f 2>nul""
 
-                for /f ""delims="" %%d in ('dir ""%target_path%"" /ad /b /s ^| sort /r 2^>nul') do 
-                (
+                for /f ""delims="" %%d in ('dir ""%target_path%"" /ad /b /s ^| sort /r 2^>nul') do (
                     rd ""%%d"" 2>nul
                 )
 
