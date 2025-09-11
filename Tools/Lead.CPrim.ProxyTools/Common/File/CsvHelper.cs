@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Lead.CPrim.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Lead.CPrim.ProxyTools
 {
@@ -24,41 +26,15 @@ namespace Lead.CPrim.ProxyTools
         /// <returns>bool</returns>
         public static bool WriteStringToCsv(string fileName, string data, bool isReadOnly, bool IsCreated = false)
         {
-            List<string> list = new List<string>();
-            list.Add(data);
-            return WriteListStringToCsv(fileName, list, isReadOnly, IsCreated);
-        }
-
-        /// <summary>
-        /// 字符串写入到Csv
-        /// </summary>
-        /// <param name="fileName">文件名称</param>
-        /// <param name="data">待写入字符串</param>
-        /// <param name="isReadOnly">True：只读；False：读写；</param>
-        /// <param name="IsCreated">True：新建；False：追加；（默认False）</param>
-        /// <returns>bool</returns>
-        public static async Task<bool> WriteStringToCsvAsync(string fileName, string data, bool isReadOnly, bool IsCreated = false)
-        {
-            List<string> list = new List<string>();
-            list.Add(data);
-            return await WriteListStringToCsvAsync(fileName, list, isReadOnly, IsCreated);
-        }
-
-        /// <summary>
-        /// 集合ListString写入到Csv
-        /// </summary>
-        /// <param name="fileName">文件名称</param>
-        /// <param name="datas">待写入集合ListString</param>
-        /// <param name="isReadOnly">True：只读；False：读写；</param>
-        /// <param name="IsCreated">True：新建；False：追加；（默认False）</param>
-        /// <returns>bool</returns>
-        public static bool WriteListStringToCsv(string fileName, List<string> datas, bool isReadOnly, bool IsCreated = false)
-        {
             try
             {
-                if (datas == null || datas.Count == 0)
+                if (string.IsNullOrWhiteSpace(fileName))
                 {
-                    return false;
+                    throw new ArgumentNullException(nameof(fileName), "CSV写入路径为空");
+                }
+                if (string.IsNullOrWhiteSpace(data))
+                {
+                    throw new ArgumentNullException(nameof(data), "CSV写入内容为空");
                 }
 
                 string dir = fileName?.Substring(0, fileName.LastIndexOf("\\"));
@@ -78,10 +54,7 @@ namespace Lead.CPrim.ProxyTools
 
                 using (StreamWriter sw = new StreamWriter(fileName, !IsCreated, Encoding.Default))
                 {
-                    foreach (var data in datas)
-                    {
-                        sw.WriteLine(data);
-                    }
+                    sw.WriteLine(data);
                     sw.AutoFlush = true;
                 }
 
@@ -93,26 +66,30 @@ namespace Lead.CPrim.ProxyTools
             }
             catch (Exception ex)
             {
-                LogHelper.Warn($"{nameof(CsvHelper)}.{nameof(WriteListStringToCsv)}", ex);
+                LogHelper.Warn($"{nameof(CsvHelper)}.{nameof(WriteStringToCsv)}", ex);
                 return false;
             }
         }
 
         /// <summary>
-        /// 集合ListString写入到Csv
+        /// 字符串写入到Csv
         /// </summary>
         /// <param name="fileName">文件名称</param>
-        /// <param name="datas">待写入集合ListString</param>
+        /// <param name="data">待写入字符串</param>
         /// <param name="isReadOnly">True：只读；False：读写；</param>
         /// <param name="IsCreated">True：新建；False：追加；（默认False）</param>
         /// <returns>bool</returns>
-        public static async Task<bool> WriteListStringToCsvAsync(string fileName, List<string> datas, bool isReadOnly, bool IsCreated = false)
+        public static async Task<bool> WriteStringToCsvAsync(string fileName, string data, bool isReadOnly, bool IsCreated = false)
         {
             try
             {
-                if (datas == null || datas.Count == 0)
+                if (string.IsNullOrWhiteSpace(fileName))
                 {
-                    return false;
+                    throw new ArgumentNullException(nameof(fileName), "CSV写入路径为空");
+                }
+                if (string.IsNullOrWhiteSpace(data))
+                {
+                    throw new ArgumentNullException(nameof(data), "CSV写入内容为空");
                 }
 
                 string dir = fileName?.Substring(0, fileName.LastIndexOf("\\"));
@@ -132,10 +109,7 @@ namespace Lead.CPrim.ProxyTools
 
                 using (StreamWriter sw = new StreamWriter(fileName, !IsCreated, Encoding.Default))
                 {
-                    foreach (var data in datas)
-                    {
-                        await sw.WriteLineAsync(data);
-                    }
+                    await sw.WriteLineAsync(data);
                     sw.AutoFlush = true;
                 }
 
@@ -147,9 +121,35 @@ namespace Lead.CPrim.ProxyTools
             }
             catch (Exception ex)
             {
-                LogHelper.Warn($"{nameof(CsvHelper)}.{nameof(WriteListStringToCsvAsync)}", ex);
+                LogHelper.Warn($"{nameof(CsvHelper)}.{nameof(WriteStringToCsvAsync)}", ex);
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 集合ListString写入到Csv
+        /// </summary>
+        /// <param name="fileName">文件名称</param>
+        /// <param name="datas">待写入集合ListString</param>
+        /// <param name="isReadOnly">True：只读；False：读写；</param>
+        /// <param name="IsCreated">True：新建；False：追加；（默认False）</param>
+        /// <returns>bool</returns>
+        public static bool WriteListStringToCsv(string fileName, List<string> datas, bool isReadOnly, bool IsCreated = false)
+        {
+            return WriteStringToCsv(fileName, GetString(datas), isReadOnly, IsCreated);
+        }
+
+        /// <summary>
+        /// 集合ListString写入到Csv
+        /// </summary>
+        /// <param name="fileName">文件名称</param>
+        /// <param name="datas">待写入集合ListString</param>
+        /// <param name="isReadOnly">True：只读；False：读写；</param>
+        /// <param name="IsCreated">True：新建；False：追加；（默认False）</param>
+        /// <returns>bool</returns>
+        public static async Task<bool> WriteListStringToCsvAsync(string fileName, List<string> datas, bool isReadOnly, bool IsCreated = false)
+        {
+            return await WriteStringToCsvAsync(fileName, GetString(datas), isReadOnly, IsCreated);
         }
 
         /// <summary>
@@ -317,5 +317,34 @@ namespace Lead.CPrim.ProxyTools
                 return false;
             }
         }
+
+
+
+        #region MethodInternalUsing
+        /// <summary>
+        /// 待写入CSV集合转化为字符串
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <returns></returns>
+        static string GetString(List<string> datas)
+        {
+            if (datas == null || datas.Count <= 0)
+            {
+                return null;
+            }
+
+            if (datas.Count == 1)
+            {
+                return datas[0];
+            }
+
+            StringBuilder text = new StringBuilder();
+            foreach (var data in datas)
+            {
+                text.AppendLine(data);
+            }
+            return text.ToString();
+        }
+        #endregion
     }
 }
