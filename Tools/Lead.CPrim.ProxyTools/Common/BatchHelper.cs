@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Lead.CPrim.ProxyTools.Common
+namespace Lead.CPrim.ProxyTools
 {
     /// <summary>
     /// 批处理
@@ -18,11 +18,11 @@ namespace Lead.CPrim.ProxyTools.Common
         /// </summary>
         /// <param name="dir"></param>
         /// <param name="day"></param>
-        public static string GetBatchStringForDeleteFiles(this string dir, int day)
+        public static string GetBatchStringForDeleteFiles(this string dir, double day)
         {
             if (string.IsNullOrWhiteSpace(dir) || !Directory.Exists(dir) || day < 1)
             {
-                return dir;
+                return null;
             }
 
             return $@"

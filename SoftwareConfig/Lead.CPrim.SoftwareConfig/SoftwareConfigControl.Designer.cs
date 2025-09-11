@@ -101,6 +101,8 @@ namespace Lead.CPrim.SoftwareConfig
             this.tbPressPrimName = new System.Windows.Forms.TextBox();
             this.lb_Tip_RestartSoftware = new System.Windows.Forms.Label();
             this.tpPath = new System.Windows.Forms.TabPage();
+            this.dudDirectory2 = new Sunny.UI.UIDoubleUpDown();
+            this.dudDirectory1 = new Sunny.UI.UIDoubleUpDown();
             this.lb_Prims = new System.Windows.Forms.Label();
             this.chkDisConfigEnable = new System.Windows.Forms.CheckBox();
             this.btnBrowsePDCAPath = new System.Windows.Forms.Button();
@@ -111,6 +113,8 @@ namespace Lead.CPrim.SoftwareConfig
             this.chkDynamicParamEnable = new System.Windows.Forms.CheckBox();
             this.btnBrowseMachinePath = new System.Windows.Forms.Button();
             this.chkCmpTrigConfigEnable = new System.Windows.Forms.CheckBox();
+            this.txtDirectory2 = new System.Windows.Forms.TextBox();
+            this.txtDirectory1 = new System.Windows.Forms.TextBox();
             this.tbMachineData = new System.Windows.Forms.TextBox();
             this.chkTasksConfigEnable = new System.Windows.Forms.CheckBox();
             this.tbSFLPath = new System.Windows.Forms.TextBox();
@@ -121,6 +125,8 @@ namespace Lead.CPrim.SoftwareConfig
             this.chkPrimsConfigEnable = new System.Windows.Forms.CheckBox();
             this.lb_Log_PDCA = new System.Windows.Forms.Label();
             this.btnBrowseDisConfigPath = new System.Windows.Forms.Button();
+            this.lblDirectory2 = new System.Windows.Forms.Label();
+            this.lblDirectory1 = new System.Windows.Forms.Label();
             this.lb_ProductionData = new System.Windows.Forms.Label();
             this.btnBrowseComplexQueryTaskFilePath = new System.Windows.Forms.Button();
             this.lb_Log_Machine = new System.Windows.Forms.Label();
@@ -149,12 +155,6 @@ namespace Lead.CPrim.SoftwareConfig
             this.lb_ParameterFilePath = new System.Windows.Forms.Label();
             this.lb_ComplexFai = new System.Windows.Forms.Label();
             this.lb_Fai = new System.Windows.Forms.Label();
-            this.lblDirectory1 = new System.Windows.Forms.Label();
-            this.txtDirectory1 = new System.Windows.Forms.TextBox();
-            this.dudDirectory1 = new Sunny.UI.UIDoubleUpDown();
-            this.lblDirectory2 = new System.Windows.Forms.Label();
-            this.txtDirectory2 = new System.Windows.Forms.TextBox();
-            this.dudDirectory2 = new Sunny.UI.UIDoubleUpDown();
             this.tmrOneHour = new System.Windows.Forms.Timer(this.components);
             this.tlpMain.SuspendLayout();
             this.tsStationsConfig.SuspendLayout();
@@ -214,7 +214,6 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             // tsTbSWConfigFilePath
             // 
-            this.tsTbSWConfigFilePath.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.tsTbSWConfigFilePath.Name = "tsTbSWConfigFilePath";
             this.tsTbSWConfigFilePath.Size = new System.Drawing.Size(600, 26);
             // 
@@ -912,6 +911,42 @@ namespace Lead.CPrim.SoftwareConfig
             this.tpPath.TabIndex = 1;
             this.tpPath.Text = "功能路径";
             // 
+            // dudDirectory2
+            // 
+            this.dudDirectory2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.dudDirectory2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.dudDirectory2.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.dudDirectory2.Location = new System.Drawing.Point(495, 521);
+            this.dudDirectory2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dudDirectory2.MinimumSize = new System.Drawing.Size(100, 0);
+            this.dudDirectory2.Name = "dudDirectory2";
+            this.dudDirectory2.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
+            this.dudDirectory2.ShowText = false;
+            this.dudDirectory2.Size = new System.Drawing.Size(100, 26);
+            this.dudDirectory2.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Gray;
+            this.dudDirectory2.TabIndex = 401;
+            this.dudDirectory2.Text = "uiDoubleUpDown1";
+            this.dudDirectory2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dudDirectory2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // dudDirectory1
+            // 
+            this.dudDirectory1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.dudDirectory1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.dudDirectory1.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.dudDirectory1.Location = new System.Drawing.Point(495, 466);
+            this.dudDirectory1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dudDirectory1.MinimumSize = new System.Drawing.Size(100, 0);
+            this.dudDirectory1.Name = "dudDirectory1";
+            this.dudDirectory1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
+            this.dudDirectory1.ShowText = false;
+            this.dudDirectory1.Size = new System.Drawing.Size(100, 26);
+            this.dudDirectory1.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Gray;
+            this.dudDirectory1.TabIndex = 401;
+            this.dudDirectory1.Text = "uiDoubleUpDown1";
+            this.dudDirectory1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dudDirectory1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // lb_Prims
             // 
             this.lb_Prims.AutoSize = true;
@@ -1003,6 +1038,24 @@ namespace Lead.CPrim.SoftwareConfig
             this.chkCmpTrigConfigEnable.TabIndex = 384;
             this.chkCmpTrigConfigEnable.Text = "启用";
             // 
+            // txtDirectory2
+            // 
+            this.txtDirectory2.Location = new System.Drawing.Point(141, 509);
+            this.txtDirectory2.Margin = new System.Windows.Forms.Padding(1);
+            this.txtDirectory2.Multiline = true;
+            this.txtDirectory2.Name = "txtDirectory2";
+            this.txtDirectory2.Size = new System.Drawing.Size(349, 50);
+            this.txtDirectory2.TabIndex = 396;
+            // 
+            // txtDirectory1
+            // 
+            this.txtDirectory1.Location = new System.Drawing.Point(141, 454);
+            this.txtDirectory1.Margin = new System.Windows.Forms.Padding(1);
+            this.txtDirectory1.Multiline = true;
+            this.txtDirectory1.Name = "txtDirectory1";
+            this.txtDirectory1.Size = new System.Drawing.Size(349, 50);
+            this.txtDirectory1.TabIndex = 396;
+            // 
             // tbMachineData
             // 
             this.tbMachineData.Location = new System.Drawing.Point(141, 417);
@@ -1090,6 +1143,28 @@ namespace Lead.CPrim.SoftwareConfig
             this.btnBrowseDisConfigPath.TabIndex = 379;
             this.btnBrowseDisConfigPath.Text = "...";
             this.btnBrowseDisConfigPath.Click += new System.EventHandler(this.btnBrowseDisConfigPath_Click);
+            // 
+            // lblDirectory2
+            // 
+            this.lblDirectory2.AutoSize = true;
+            this.lblDirectory2.Location = new System.Drawing.Point(20, 526);
+            this.lblDirectory2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblDirectory2.Name = "lblDirectory2";
+            this.lblDirectory2.Size = new System.Drawing.Size(99, 17);
+            this.lblDirectory2.TabIndex = 391;
+            this.lblDirectory2.Text = "自动删除文件夹2";
+            this.lblDirectory2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblDirectory1
+            // 
+            this.lblDirectory1.AutoSize = true;
+            this.lblDirectory1.Location = new System.Drawing.Point(20, 471);
+            this.lblDirectory1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblDirectory1.Name = "lblDirectory1";
+            this.lblDirectory1.Size = new System.Drawing.Size(99, 17);
+            this.lblDirectory1.TabIndex = 391;
+            this.lblDirectory1.Text = "自动删除文件夹1";
+            this.lblDirectory1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lb_ProductionData
             // 
@@ -1340,82 +1415,6 @@ namespace Lead.CPrim.SoftwareConfig
             this.lb_Fai.TabIndex = 359;
             this.lb_Fai.Text = "FAI参数：";
             this.lb_Fai.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblDirectory1
-            // 
-            this.lblDirectory1.AutoSize = true;
-            this.lblDirectory1.Location = new System.Drawing.Point(20, 471);
-            this.lblDirectory1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.lblDirectory1.Name = "lblDirectory1";
-            this.lblDirectory1.Size = new System.Drawing.Size(99, 17);
-            this.lblDirectory1.TabIndex = 391;
-            this.lblDirectory1.Text = "自动删除文件夹1";
-            this.lblDirectory1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // txtDirectory1
-            // 
-            this.txtDirectory1.Location = new System.Drawing.Point(141, 454);
-            this.txtDirectory1.Margin = new System.Windows.Forms.Padding(1);
-            this.txtDirectory1.Multiline = true;
-            this.txtDirectory1.Name = "txtDirectory1";
-            this.txtDirectory1.Size = new System.Drawing.Size(349, 50);
-            this.txtDirectory1.TabIndex = 396;
-            // 
-            // dudDirectory1
-            // 
-            this.dudDirectory1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.dudDirectory1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.dudDirectory1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.dudDirectory1.Location = new System.Drawing.Point(495, 466);
-            this.dudDirectory1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dudDirectory1.MinimumSize = new System.Drawing.Size(100, 0);
-            this.dudDirectory1.Name = "dudDirectory1";
-            this.dudDirectory1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
-            this.dudDirectory1.ShowText = false;
-            this.dudDirectory1.Size = new System.Drawing.Size(100, 26);
-            this.dudDirectory1.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Gray;
-            this.dudDirectory1.TabIndex = 401;
-            this.dudDirectory1.Text = "uiDoubleUpDown1";
-            this.dudDirectory1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.dudDirectory1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // lblDirectory2
-            // 
-            this.lblDirectory2.AutoSize = true;
-            this.lblDirectory2.Location = new System.Drawing.Point(20, 526);
-            this.lblDirectory2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.lblDirectory2.Name = "lblDirectory2";
-            this.lblDirectory2.Size = new System.Drawing.Size(99, 17);
-            this.lblDirectory2.TabIndex = 391;
-            this.lblDirectory2.Text = "自动删除文件夹2";
-            this.lblDirectory2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // txtDirectory2
-            // 
-            this.txtDirectory2.Location = new System.Drawing.Point(141, 509);
-            this.txtDirectory2.Margin = new System.Windows.Forms.Padding(1);
-            this.txtDirectory2.Multiline = true;
-            this.txtDirectory2.Name = "txtDirectory2";
-            this.txtDirectory2.Size = new System.Drawing.Size(349, 50);
-            this.txtDirectory2.TabIndex = 396;
-            // 
-            // dudDirectory2
-            // 
-            this.dudDirectory2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.dudDirectory2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.dudDirectory2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.dudDirectory2.Location = new System.Drawing.Point(495, 521);
-            this.dudDirectory2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dudDirectory2.MinimumSize = new System.Drawing.Size(100, 0);
-            this.dudDirectory2.Name = "dudDirectory2";
-            this.dudDirectory2.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
-            this.dudDirectory2.ShowText = false;
-            this.dudDirectory2.Size = new System.Drawing.Size(100, 26);
-            this.dudDirectory2.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Gray;
-            this.dudDirectory2.TabIndex = 401;
-            this.dudDirectory2.Text = "uiDoubleUpDown1";
-            this.dudDirectory2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.dudDirectory2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // tmrOneHour
             // 

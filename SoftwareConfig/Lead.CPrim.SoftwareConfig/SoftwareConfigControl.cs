@@ -2,6 +2,7 @@
 using Lead.CPrim.Interfaces;
 using Lead.CPrim.ProxyTools;
 using Lead.CPrim.ProxyTools.Authority;
+using Lead.CPrim.ProxyTools.Common;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -656,6 +657,7 @@ namespace Lead.CPrim.SoftwareConfig
                         {
                             foreach (var dirTop in dirTops)
                             {
+                                /*
                                 string[] dirs = Directory.GetDirectories(dirTop, "*", SearchOption.AllDirectories);
                                 if (dirs != null && dirs.Length > 0)
                                 {
@@ -665,6 +667,10 @@ namespace Lead.CPrim.SoftwareConfig
                                         Thread.Sleep(1);
                                     }
                                 }
+                                */
+
+                                // IO操作会占用大量CPU线程，此处变更为批处理删除
+                                dirTop.GetBatchStringForDeleteFiles(_manager.Directory1SaveDays).RunBatchProcessing();
                             }
                         }
                     }
@@ -687,6 +693,7 @@ namespace Lead.CPrim.SoftwareConfig
                         {
                             foreach (var dirTop in dirTops)
                             {
+                                /*
                                 string[] dirs = Directory.GetDirectories(dirTop, "*", SearchOption.AllDirectories);
                                 if (dirs != null && dirs.Length > 0)
                                 {
@@ -696,6 +703,10 @@ namespace Lead.CPrim.SoftwareConfig
                                         Thread.Sleep(1);
                                     }
                                 }
+                                */
+
+                                // IO操作会占用大量CPU线程，此处变更为批处理删除
+                                dirTop.GetBatchStringForDeleteFiles(_manager.Directory2SaveDays).RunBatchProcessing();
                             }
                         }
                     }
