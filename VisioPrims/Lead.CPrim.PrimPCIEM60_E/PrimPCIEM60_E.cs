@@ -1,22 +1,24 @@
-﻿using System;
+﻿using Lead.CPrim.Interfaces;
+using Lead.CPrim.Interfaces.Ele;
+using Lead.CPrim.Interfaces.IMotionCard;
+using Lead.CPrim.ProxyTools;
+using Lead.CPrim.ProxyTools.Authority;
+using Lead.CPrim.ProxyTools.SunnyUI.Style;
+using Newtonsoft.Json.Linq;
+using Sunny.UI.Win32;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
-using System.Collections.Concurrent;
-using Lead.CPrim.Interfaces;
-using Lead.CPrim.Interfaces.IMotionCard;
 using System.Windows.Forms;
-using System.IO;
-using System.Diagnostics;
-using Lead.CPrim.ProxyTools;
-using Newtonsoft.Json.Linq;
-using Lead.CPrim.Interfaces.Ele;
-using Sunny.UI.Win32;
-using Lead.CPrim.ProxyTools.SunnyUI.Style;
-using Lead.CPrim.ProxyTools.Authority;
+using System.Xml;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Lead.CPrim.PrimPCIEM60_E
 {
@@ -362,7 +364,7 @@ namespace Lead.CPrim.PrimPCIEM60_E
         public int IPrimStop()
         {
             bool state = false;
-            
+
             try
             {
                 _cycleCycleReadIOFlag = false;
@@ -1032,9 +1034,6 @@ namespace Lead.CPrim.PrimPCIEM60_E
             lock (_lockAxisesMove)
             {
                 Thread.Sleep(1);
-                ecat_motion.CmdPrm prm = new ecat_motion.CmdPrm();
-                ecat_motion.M_GetMove(Axises[axisId].Id, out prm, (short)DevIndex);
-                ecat_motion.M_SetMove(Axises[axisId].Id, ref prm, (short)DevIndex);
                 return ecat_motion.M_AbsMove(Axises[axisId].Id, Convert.ToInt32(pos), maxVel, (short)DevIndex);
             }
         }
@@ -1070,61 +1069,78 @@ namespace Lead.CPrim.PrimPCIEM60_E
             {
                 vel = Int32.MinValue;
             }
-            //ecat_motion.CmdPrm prm = new ecat_motion.CmdPrm();
-            //ecat_motion.M_GetMove(Axises[axisId].Id, out prm, (short)DevIndex);
-            //ecat_motion.M_SetMove(Axises[axisId].Id, ref prm, (short)DevIndex);
+
             return ecat_motion.M_RelMove(Axises[axisId].Id, Convert.ToInt32(distance), vel, (short)DevIndex);
         }
 
         public int AxisSetAcc(int axisId, double acc)
         {
-            if (PrimRunStat == PrimRunState.Stop || PrimRunStat == PrimRunState.Other)
-            {
-                return -1;
-            }
-            ecat_motion.CmdPrm prm = new ecat_motion.CmdPrm();
-            ecat_motion.M_GetMove(Axises[axisId].Id, out prm, (short)DevIndex);
-            prm.acc = acc;
-            return ecat_motion.M_SetMove(Axises[axisId].Id, ref prm, (short)DevIndex);
+            return SetAccDec((ushort)axisId, acc, -1, -1);
         }
 
         public int AxisSetAccDec(int axisId, double minVel, double maxVel, double tAcc, double tDec, double stopVel)
         {
-            if (PrimRunStat == PrimRunState.Stop || PrimRunStat == PrimRunState.Other)
-            {
-                return -1;
-            }
-            ecat_motion.CmdPrm prm = new ecat_motion.CmdPrm();
-            ecat_motion.M_GetMove(Axises[axisId].Id, out prm, (short)DevIndex);
-            prm.acc = tAcc;
-            prm.dec = tDec;
-            return ecat_motion.M_SetMove(Axises[axisId].Id, ref prm, (short)DevIndex);
+            return SetAccDec((ushort)axisId, tAcc, tDec, -1);
         }
 
         public int AxisSetAccDec(int axisId, double minVel, double maxVel, double tAcc, double tDec, double stopVel, double stTime)
         {
-            if (PrimRunStat == PrimRunState.Stop || PrimRunStat == PrimRunState.Other)
-            {
-                return -1;
-            }
-            ecat_motion.CmdPrm prm = new ecat_motion.CmdPrm();
-            ecat_motion.M_GetMove(Axises[axisId].Id, out prm, (short)DevIndex);
-            prm.acc = tAcc;
-            prm.dec = tDec;
-            prm.sTime = (short)stTime;
-            return ecat_motion.M_SetMove(Axises[axisId].Id, ref prm, (short)DevIndex);
+            return SetAccDec((ushort)axisId, tAcc, tDec, (short)stTime);
         }
 
         public int AxisSetDec(int axisId, double dec)
+        {
+            return SetAccDec((ushort)axisId, -1, dec, -1);
+        }
+
+        /// <summary>
+        /// 加减速设置<br/>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="acc">加速度（默认值-1，代表不进行加速度设置）</param>
+        /// <param name="dec">减速度（默认值-1，代表不进行减速度设置）</param>
+        /// <param name="st">S段（默认值-1，代表不进行S段设置）</param>
+        /// <returns></returns>
+        int SetAccDec(ushort id, double acc = -1, double dec = -1, short st = -1)
         {
             if (PrimRunStat == PrimRunState.Stop || PrimRunStat == PrimRunState.Other)
             {
                 return -1;
             }
+
+            // 此处增加如果值一致，不再进行设置
+            bool flagAcc = false;
+            bool flagDec = false;
+            bool flagSt = false;
             ecat_motion.CmdPrm prm = new ecat_motion.CmdPrm();
-            ecat_motion.M_GetMove(Axises[axisId].Id, out prm, (short)DevIndex);
-            prm.dec = dec;
-            return ecat_motion.M_SetMove(Axises[axisId].Id, ref prm, (short)DevIndex);
+            var ret = ecat_motion.M_GetMove(Axises[id].Id, out prm, (short)DevIndex);
+            if (ret == 0)
+            {
+                if (acc != -1 && Math.Abs(prm.acc - acc) > 5)
+                {
+                    LogAdd($"加速度设置：板卡={prm.acc}，目标值={acc}", LogLevel.Debug);
+                    prm.acc = acc;
+                    flagAcc = true;
+                }
+                if (dec != -1 && Math.Abs(prm.dec - dec) > 5)
+                {
+                    LogAdd($"减速度设置：板卡={prm.dec}，目标值={dec}", LogLevel.Debug);
+                    prm.dec = dec;
+                    flagDec = true;
+                }
+                if (st != -1 && Math.Abs(prm.sTime - st) > 5)
+                {
+                    LogAdd($"S段设置：板卡={prm.sTime}，目标值={st}", LogLevel.Debug);
+                    prm.sTime = st;
+                    flagSt = true;
+                }
+
+                if (flagAcc || flagDec || flagSt)
+                {
+                    return ecat_motion.M_SetMove(Axises[id].Id, ref prm, (short)DevIndex);
+                }
+            }
+            return ret;
         }
 
         public int AxisSetElMode(int axisId, bool pelEnable, bool melEnable, StopMode pelStopMode, StopMode melStopMode)
@@ -1204,9 +1220,7 @@ namespace Lead.CPrim.PrimPCIEM60_E
             {
                 return -1;
             }
-            //ecat_motion.CmdPrm prm = new ecat_motion.CmdPrm();
-            //ecat_motion.M_GetMove(Axises[axisId].Id, out prm, (short)DevIndex);
-            //ecat_motion.M_SetMove(Axises[axisId].Id, ref prm, (short)DevIndex);
+
             return ecat_motion.M_Jog(Axises[axisId].Id, maxVel, (short)DevIndex);
         }
 

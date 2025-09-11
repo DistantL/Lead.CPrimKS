@@ -1,6 +1,0 @@
-“Lead.CPrim.Global.SwManager”的类型初始值设定项引发异常。
-   在 Lead.CPrim.Global.SwManager.get_Instance()
-   在 Lead.CPrim.View.MainForm.tmrAuthority_Tick(Object sender, EventArgs e) 位置 C:\temp\4.4.25.0727\Main\Lead.CPrim.View\MainForm.cs:行号 1317
-   在 System.Windows.Forms.Timer.OnTick(EventArgs e)
-   在 System.Windows.Forms.Timer.TimerNativeWindow.WndProc(Message& m)
-   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)

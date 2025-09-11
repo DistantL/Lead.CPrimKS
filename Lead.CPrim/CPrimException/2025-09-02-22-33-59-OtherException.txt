@@ -1,9 +1,0 @@
-已取消该操作。
-   在 System.Collections.Concurrent.BlockingCollection`1.TryTakeWithNoTimeValidation(T& item, Int32 millisecondsTimeout, CancellationToken cancellationToken, CancellationTokenSource combinedTokenSource)
-   在 System.Collections.Concurrent.BlockingCollection`1.TryTake(T& item, Int32 millisecondsTimeout, CancellationToken cancellationToken)
-   在 Lead.CPrim.ProxyTools.WriteService.Working(CancellationToken token) 位置 D:\001CPrim\003昆山版本\4.4.25.0901\Tools\Lead.CPrim.ProxyTools\Service\WriteService.cs:行号 175
-   在 Lead.CPrim.ProxyTools.WriteService.<Start>b__10_0() 位置 D:\001CPrim\003昆山版本\4.4.25.0901\Tools\Lead.CPrim.ProxyTools\Service\WriteService.cs:行号 149
-   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
-   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
-   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
-   在 System.Threading.ThreadHelper.ThreadStart()
