@@ -127,7 +127,7 @@ namespace Lead.CPrim.ProxyTools
                 str_errCode = errorMessage.Substring(startIndex + 1, endIndex - startIndex - 1);
             }
 
-            AlarmInfo alarmInfo = _list.FirstOrDefault(x => x.ErrorCode == str_errCode || x.ErrorDetail.Contains(errorMessage) || errorMessage.Contains(x.ErrorDetail));
+            AlarmInfo alarmInfo = _list?.FirstOrDefault(x => x.ErrorCode == str_errCode || x.ErrorDetail.Contains(errorMessage) || errorMessage.Contains(x.ErrorDetail));
             if (alarmInfo == null)
             {
                 return null;
@@ -370,7 +370,7 @@ namespace Lead.CPrim.ProxyTools
                 str_errCode = errorMessage.Substring(startIndex + 1, endIndex - startIndex - 1);
             }
 
-            return _list.FirstOrDefault(x => x.ErrorCode == str_errCode || x.ErrorDetail.Contains(errorMessage) || errorMessage.Contains(x.ErrorDetail));
+            return _list?.FirstOrDefault(x => x.ErrorCode == str_errCode || x.ErrorDetail.Contains(errorMessage) || errorMessage.Contains(x.ErrorDetail));
         }
 
         private bool GetAlertConfigData(string path, out string msg)
@@ -457,7 +457,7 @@ namespace Lead.CPrim.ProxyTools
                         errorCode = errorMessage.Substring(startIndex + 1, endIndex - startIndex - 1);
                     }
 
-                    AlarmInfo alarmInfo = _list.FirstOrDefault(x =>
+                    AlarmInfo alarmInfo = _list?.FirstOrDefault(x =>
                     x.VendorAlarmCode == vendorAlarmCode ||
                     x.ErrorCode == errorCode ||
                     x.ErrorDetail.Contains(errorMessage) ||

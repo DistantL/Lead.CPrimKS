@@ -10,7 +10,8 @@
  ******************************************************************************
  * 版本迭代说明&修改记录
  * <Victor><20230911>
- * 1、引入第三方库CsvHelper，需配合Microsoft.Bcl.AsyncInterfaces一起使用
+ * 1、引入第三方库CsvHelper，需配合Microsoft.Bcl.AsyncInterfaces、Microsoft.Bcl.HashCode、System.Threading.Tasks.Extensions一起使用
+ * 2、ReadCsv泛型方法需要配置属性HeaderValidated、MissingFieldFound一起使用，否则当增加属性时会造成数据无法读取
 ******************************************************************************/
 
 using CsvHelper;
@@ -355,6 +356,8 @@ namespace Lead.CPrim.ProxyTools
                 var config = new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
                     HasHeaderRecord = isHasHeader,
+                    HeaderValidated = null,
+                    MissingFieldFound = null,
                 };
                 using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 using (StreamReader sw = new StreamReader(fs, encoding))
