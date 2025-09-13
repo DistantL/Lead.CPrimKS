@@ -41,6 +41,7 @@ using Lead.CPrim.StationCommon.Alert;
 using Lead.CPrim.StationControl;
 using Lead.CPrim.TaskHelper;
 using Lead.CPrim.View.Properties;
+using Sunny.UI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -58,19 +59,16 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Lead.CPrim.View
 {
-    public partial class MainForm : Form
+    public partial class MainForm : UIForm
     {
         #region Field
         //地址
         /// <summary>应用程序起始地址</summary>
         private static readonly string _curDominStartPath = Application.StartupPath;
-        /// <summary>软件Logo地址</summary>
-        private readonly string _mainLogoPath = Environment.CurrentDirectory + "\\Configs\\ProjectConfigs\\MainLogo.png";
         /// <summary>基元地址</summary>
         private readonly string _primsAssemblyPath = _curDominStartPath + "\\InnerLibs\\VisioPrims";
         /// <summary>显示地址</summary>
         private readonly string _showAssemblyPath = _curDominStartPath + "\\InnerLibs\\Display";
-
 
         //表单
         /// <summary>主界面</summary>
@@ -212,10 +210,17 @@ namespace Lead.CPrim.View
         public MainForm()
         {
             InitializeComponent();
-            this.KeyPreview = true;
+            // KeyPreview注册快捷键方式缺点，仅当主窗体是活动窗口时有效，不能跨窗口或后台响应。
+            // 变更为RegisterHotKey方式
+            //this.KeyPreview = true;
             tlpMain.SetDoubleBuffered();
             tlpState.SetDoubleBuffered();
             tlpButton.SetDoubleBuffered();
+            Style = UIStyle.Custom;
+            TitleForeColor = Colors.PrimaryForeColorDark;
+            TitleColor = Colors.PrimaryBackColor236;
+            RegisterHotKey(Sunny.UI.ModifierKeys.Control, Keys.F11);
+            HotKeyEventHandler += MainForm_HotKeyEventHandler;
         }
         #endregion
 
@@ -553,44 +558,6 @@ namespace Lead.CPrim.View
             OnLanguageChanged();
             NLocalizer.LanguageChanged += OnLanguageChanged;
         }
-
-        /// <summary>
-        /// 组合快捷键<br/>
-        /// 需配合this.KeyPreview = true;否则不生效<br/>
-        /// </summary>
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control & e.KeyCode == Keys.F12)
-            {
-                bool verify = AuthorityManager.Instance.VerifyLevel3Permission(false);
-                if (verify)
-                {
-                    _showBtn = !_showBtn;
-                    tsmiTest.Visible = _showBtn;
-                    tsmiAuthority.Visible = _showBtn;
-                    tsmiTesuFuc.Visible = _showBtn;
-                }
-                else
-                {
-                    _showBtn = false;
-                    tsmiTest.Visible = false;
-                    tsmiAuthority.Visible = false;
-                    tsmiTesuFuc.Visible = false;
-                }
-            }
-            else if (e.Control & e.KeyCode == Keys.F11)
-            {
-                AuthorityManager.Instance.LvlShowUI.EnableLogin = !AuthorityManager.Instance.LvlShowUI.EnableLogin;
-                if (AuthorityManager.Instance.LvlShowUI.EnableLogin)
-                {
-                    Notification.ShowInfo(NLocalizer.Enable);
-                }
-                else
-                {
-                    Notification.ShowError(NLocalizer.Forbid);
-                }
-            }
-        }
         #endregion
 
 
@@ -902,6 +869,45 @@ namespace Lead.CPrim.View
         {
             ProcessHelper.ViewPicture(Path.Combine(Application.StartupPath, @"Images\Main\VersionExplanation.png"));
         }
+
+        private void tslbl_Light_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var eles = ElesManagerTransfer.GetAllIEle();
+                foreach (var _elet in eles)
+                {
+                    if (_elet.Enable && _elet.Name.Contains("照明灯") && _elet.EleTypeName == "DO")
+                    {
+                        _elet.IEleInit();
+                        IEleDO _do_1 = (IEleDO)_elet;
+                        _do_1.Write(flag_Light);
+                    }
+                }
+                flag_Light = !flag_Light;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void tssl_Warning_Click(object sender, EventArgs e)
+        {
+            BtnBar_Click(BtnHome, null);
+            mainForm.ChangeToVendorPage("警告信息");
+        }
+
+        private void tssl_DisplayNGInfo_Click(object sender, EventArgs e)
+        {
+            BtnBar_Click(BtnHome, null);
+            mainForm.ChangeToVendorPage("抛料信息");
+        }
+
+        private void tssl_LogTask_Click(object sender, EventArgs e)
+        {
+            BtnBar_Click(BtnHome, null);
+            mainForm.ChangeToVendorPage("任务日志");
+        }
         #endregion
 
 
@@ -964,12 +970,14 @@ namespace Lead.CPrim.View
             //    _dynamicParamForm.Init(SwManager.Instance.DynamicParamDirPath);
             //}
         }
+
         /// <summary>删除工站事件响应</summary>
         /// <param name="name"></param>
         private void InstanceOnOnRemoveStation(string name)
         {
             TaskSmManger.Instance.Remove(name);
         }
+
         /// <summary>改变配方事件响应</summary>
         /// <param name="stationName"></param>
         /// <param name="recipeName"></param>
@@ -979,6 +987,7 @@ namespace Lead.CPrim.View
             {
             }
         }
+
         /// <summary>新建配方事件响应</summary>
         /// <param name="stationName"></param>
         /// <param name="newRecipeName"></param>
@@ -988,12 +997,14 @@ namespace Lead.CPrim.View
             {
             }
         }
+
         /// <summary>删除配方事件响应</summary>
         /// <param name="stationName"></param>
         /// <param name="removedRecipeName"></param>
         private void Instance_OnDeleteRecipe(string stationName, string removedRecipeName)
         {
         }
+
         /// <summary>响应更新软件名称事件</summary>
         /// <param name="name">名称</param>
         public void InstanceOnUpdateSwName(string name)
@@ -1001,6 +1012,7 @@ namespace Lead.CPrim.View
             string tempName = string.IsNullOrEmpty(name) ? "CPrim." : name;
             this.SetText(tempName);
         }
+
         /// <summary>响应更新工站事件</summary>
         private void InstanceOnOnUpdateStation()
         {
@@ -1037,6 +1049,7 @@ namespace Lead.CPrim.View
                 LogTask.Instance.UpdateLog(tab, log, level);
             }
         }
+
         /// <summary>自定义任务日志显示</summary>
         /// <param name="tab"></param>
         /// <param name="log"></param>
@@ -1053,10 +1066,12 @@ namespace Lead.CPrim.View
                 LogTask.Instance.UpdateLogType(tab, log, type, level);
             }
         }
+
         void InstanceShowAlarmEvent(string msg, LogLevel level)
         {
             DialogForUIMessageFormOnlyOne.Instance.EnqueueDialog(msg);
         }
+
         //ProxyTools_日志帮助类事件订阅响应
         /// <summary>获取日志时发生</summary>
         /// <param name="msg"></param>
@@ -1144,6 +1159,7 @@ namespace Lead.CPrim.View
 
             BtnAlert.ImageSelected = state == SmStates.WaitClrErr ? Resources.Alarm_Alerted : Resources.Alarm_Energized;
         }
+
         /// <summary>响应手自动状态机状态切换时发生事件</summary>
         /// <param name="state"></param>
         /// <param name="sender"></param>
@@ -1304,6 +1320,46 @@ namespace Lead.CPrim.View
             if (mode.Contains("PD-13"))
             {
                 CurrentWorkMode = 运行模式.CCD动静态模式;
+            }
+        }
+
+        // 快捷键
+        /// <summary>
+        /// 全局快捷键响应
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_HotKeyEventHandler(object sender, HotKeyEventArgs e)
+        {
+            if (e.hotKey.ModifierKey == Sunny.UI.ModifierKeys.Control && e.hotKey.Key == Keys.F11)
+            {
+                AuthorityManager.Instance.LvlShowUI.EnableLogin = !AuthorityManager.Instance.LvlShowUI.EnableLogin;
+                if (AuthorityManager.Instance.LvlShowUI.EnableLogin)
+                {
+                    Notification.ShowInfo(NLocalizer.Enable);
+                }
+                else
+                {
+                    Notification.ShowError(NLocalizer.Forbid);
+                }
+            }
+            else if (e.hotKey.ModifierKey == Sunny.UI.ModifierKeys.Control && e.hotKey.Key == Keys.F12)
+            {
+                bool verify = AuthorityManager.Instance.VerifyLevel3Permission(false);
+                if (verify)
+                {
+                    _showBtn = !_showBtn;
+                    tsmiTest.Visible = _showBtn;
+                    tsmiAuthority.Visible = _showBtn;
+                    tsmiTesuFuc.Visible = _showBtn;
+                }
+                else
+                {
+                    _showBtn = false;
+                    tsmiTest.Visible = false;
+                    tsmiAuthority.Visible = false;
+                    tsmiTesuFuc.Visible = false;
+                }
             }
         }
         #endregion
@@ -1728,28 +1784,6 @@ namespace Lead.CPrim.View
                 ProcessHelper.KillProc(processName);
             }
         }
-        #endregion
-
-        private void tslbl_Light_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var eles = ElesManagerTransfer.GetAllIEle();
-                foreach (var _elet in eles)
-                {
-                    if (_elet.Enable && _elet.Name.Contains("照明灯") && _elet.EleTypeName == "DO")
-                    {
-                        _elet.IEleInit();
-                        IEleDO _do_1 = (IEleDO)_elet;
-                        _do_1.Write(flag_Light);
-                    }
-                }
-                flag_Light = !flag_Light;
-            }
-            catch (Exception)
-            {
-            }
-        }
 
         public void OnLanguageChanged()
         {
@@ -1775,27 +1809,57 @@ namespace Lead.CPrim.View
                 tmrUIRefresh_Tick(null, null);
             }
         }
+        #endregion
 
-        private void tssl_Warning_Click(object sender, EventArgs e)
-        {
-            BtnBar_Click(BtnHome, null);
-            mainForm.ChangeToVendorPage("警告信息");
-        }
 
-        private void tssl_DisplayNGInfo_Click(object sender, EventArgs e)
-        {
-            BtnBar_Click(BtnHome, null);
-            mainForm.ChangeToVendorPage("抛料信息");
-        }
 
-        private void tssl_LogTask_Click(object sender, EventArgs e)
+        #region MethodObsolete
+        /// <summary>
+        /// 组合快捷键<br/>
+        /// 需配合this.KeyPreview = true;否则不生效<br/>
+        /// </summary>
+        [Obsolete("变更为RegisterHotKey方式")]
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            BtnBar_Click(BtnHome, null);
-            mainForm.ChangeToVendorPage("任务日志");
+            if (e.Control & e.KeyCode == Keys.F12)
+            {
+                bool verify = AuthorityManager.Instance.VerifyLevel3Permission(false);
+                if (verify)
+                {
+                    _showBtn = !_showBtn;
+                    tsmiTest.Visible = _showBtn;
+                    tsmiAuthority.Visible = _showBtn;
+                    tsmiTesuFuc.Visible = _showBtn;
+                }
+                else
+                {
+                    _showBtn = false;
+                    tsmiTest.Visible = false;
+                    tsmiAuthority.Visible = false;
+                    tsmiTesuFuc.Visible = false;
+                }
+            }
+            else if (e.Control & e.KeyCode == Keys.F11)
+            {
+                AuthorityManager.Instance.LvlShowUI.EnableLogin = !AuthorityManager.Instance.LvlShowUI.EnableLogin;
+                if (AuthorityManager.Instance.LvlShowUI.EnableLogin)
+                {
+                    Notification.ShowInfo(NLocalizer.Enable);
+                }
+                else
+                {
+                    Notification.ShowError(NLocalizer.Forbid);
+                }
+            }
         }
+        #endregion
     }
 
-    /// <summary>按钮枚举</summary>
+
+
+    /// <summary>
+    /// 按钮枚举
+    /// </summary>
     public enum BtnEnum
     {
         BtnHome,

@@ -34,12 +34,32 @@ namespace Lead.CPrim.View
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tlpButton = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlTitle = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIPanel();
             this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiViewVersionExplanation = new System.Windows.Forms.ToolStripMenuItem();
+            this.uiLine3 = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
             this.panelAuthority = new System.Windows.Forms.Panel();
+            this.BtnHome = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
+            this.BtnAlert = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
+            this.BtnConfig = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
+            this.BtnData = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
+            this.BtnVision = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
+            this.BtnSetting = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
+            this.btnRun = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
+            this.btnPaused = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
+            this.btnStop = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
+            this.uiLine1 = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
+            this.uiLine2 = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
             this.ttConfig = new System.Windows.Forms.ToolTip(this.components);
             this.tmrAuthority = new System.Windows.Forms.Timer(this.components);
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpState = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UITableLayoutPanel();
+            this.lblAlarmTag = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
+            this.btnClear = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
+            this.lblLogTag = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
+            this.lblAlarm = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
+            this.lblLog = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
+            this.pnlMain = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIPanel();
             this.stuStatus = new System.Windows.Forms.StatusStrip();
             this.tssl_LogTask = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssl_DisplayNGInfo = new System.Windows.Forms.ToolStripStatusLabel();
@@ -59,30 +79,8 @@ namespace Lead.CPrim.View
             this.tmrAlarm = new System.Windows.Forms.Timer(this.components);
             this.tmrSoftWare = new System.Windows.Forms.Timer(this.components);
             this.tmrUIRefresh = new System.Windows.Forms.Timer(this.components);
-            this.pnlTitle = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIPanel();
-            this.uiLine3 = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
-            this.BtnHome = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
-            this.BtnAlert = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
-            this.BtnConfig = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
-            this.BtnData = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
-            this.BtnVision = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
-            this.BtnSetting = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
-            this.btnRun = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
-            this.btnPaused = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
-            this.btnStop = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
-            this.uiLine1 = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
-            this.uiLine2 = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
-            this.tlpState = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UITableLayoutPanel();
-            this.lblAlarmTag = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
-            this.btnClear = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
-            this.lblLogTag = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
-            this.lblAlarm = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
-            this.lblLog = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
-            this.pnlMain = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIPanel();
             this.tlpButton.SuspendLayout();
             this.cms.SuspendLayout();
-            this.tlpMain.SuspendLayout();
-            this.stuStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnHome)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnAlert)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnConfig)).BeginInit();
@@ -92,7 +90,9 @@ namespace Lead.CPrim.View
             ((System.ComponentModel.ISupportInitialize)(this.btnRun)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPaused)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnStop)).BeginInit();
+            this.tlpMain.SuspendLayout();
             this.tlpState.SuspendLayout();
+            this.stuStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpButton
@@ -146,214 +146,6 @@ namespace Lead.CPrim.View
             this.tlpButton.Size = new System.Drawing.Size(1184, 76);
             this.tlpButton.TabIndex = 5;
             // 
-            // cms
-            // 
-            this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiViewVersionExplanation});
-            this.cms.Name = "cms";
-            this.cms.Size = new System.Drawing.Size(221, 26);
-            // 
-            // tsmiViewVersionExplanation
-            // 
-            this.tsmiViewVersionExplanation.Name = "tsmiViewVersionExplanation";
-            this.tsmiViewVersionExplanation.Size = new System.Drawing.Size(220, 22);
-            this.tsmiViewVersionExplanation.Text = "View version explanation";
-            this.tsmiViewVersionExplanation.Click += new System.EventHandler(this.tsmlViewVersionExplanation_Click);
-            // 
-            // panelAuthority
-            // 
-            this.panelAuthority.BackColor = System.Drawing.Color.Transparent;
-            this.panelAuthority.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAuthority.Location = new System.Drawing.Point(974, 0);
-            this.panelAuthority.Margin = new System.Windows.Forms.Padding(0);
-            this.panelAuthority.Name = "panelAuthority";
-            this.panelAuthority.Size = new System.Drawing.Size(210, 76);
-            this.panelAuthority.TabIndex = 21;
-            // 
-            // tmrAuthority
-            // 
-            this.tmrAuthority.Enabled = true;
-            this.tmrAuthority.Interval = 1000;
-            this.tmrAuthority.Tick += new System.EventHandler(this.tmrAuthority_Tick);
-            // 
-            // tlpMain
-            // 
-            this.tlpMain.ColumnCount = 1;
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMain.Controls.Add(this.tlpButton, 0, 0);
-            this.tlpMain.Controls.Add(this.tlpState, 0, 2);
-            this.tlpMain.Controls.Add(this.pnlMain, 0, 1);
-            this.tlpMain.Controls.Add(this.stuStatus, 0, 3);
-            this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpMain.Location = new System.Drawing.Point(0, 0);
-            this.tlpMain.Margin = new System.Windows.Forms.Padding(0);
-            this.tlpMain.Name = "tlpMain";
-            this.tlpMain.RowCount = 4;
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpMain.Size = new System.Drawing.Size(1184, 561);
-            this.tlpMain.TabIndex = 23;
-            // 
-            // stuStatus
-            // 
-            this.stuStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.stuStatus.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.stuStatus.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.stuStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tssl_LogTask,
-            this.tssl_DisplayNGInfo,
-            this.tssl_Warning,
-            this.tsbtn,
-            this.tslblMode,
-            this.tslblMemory,
-            this.tslblCpuRate,
-            this.tslblTimer,
-            this.tslbl_Light,
-            this.tslblAutoManual});
-            this.stuStatus.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.stuStatus.Location = new System.Drawing.Point(0, 535);
-            this.stuStatus.Name = "stuStatus";
-            this.stuStatus.Size = new System.Drawing.Size(1184, 26);
-            this.stuStatus.TabIndex = 23;
-            this.stuStatus.Text = "statusStrip1";
-            // 
-            // tssl_LogTask
-            // 
-            this.tssl_LogTask.Margin = new System.Windows.Forms.Padding(10, 4, 0, 2);
-            this.tssl_LogTask.Name = "tssl_LogTask";
-            this.tssl_LogTask.Size = new System.Drawing.Size(56, 20);
-            this.tssl_LogTask.Text = "任务日志";
-            this.tssl_LogTask.Click += new System.EventHandler(this.tssl_LogTask_Click);
-            // 
-            // tssl_DisplayNGInfo
-            // 
-            this.tssl_DisplayNGInfo.Margin = new System.Windows.Forms.Padding(10, 4, 0, 2);
-            this.tssl_DisplayNGInfo.Name = "tssl_DisplayNGInfo";
-            this.tssl_DisplayNGInfo.Size = new System.Drawing.Size(56, 20);
-            this.tssl_DisplayNGInfo.Text = "抛料信息";
-            this.tssl_DisplayNGInfo.Click += new System.EventHandler(this.tssl_DisplayNGInfo_Click);
-            // 
-            // tssl_Warning
-            // 
-            this.tssl_Warning.Margin = new System.Windows.Forms.Padding(10, 4, 0, 2);
-            this.tssl_Warning.Name = "tssl_Warning";
-            this.tssl_Warning.Size = new System.Drawing.Size(32, 20);
-            this.tssl_Warning.Text = "警告";
-            this.tssl_Warning.Click += new System.EventHandler(this.tssl_Warning_Click);
-            // 
-            // tsbtn
-            // 
-            this.tsbtn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiTest,
-            this.tsmiAuthority,
-            this.tsmiTesuFuc,
-            this.tsmiLesson,
-            this.tsmiAbout});
-            this.tsbtn.Image = global::Lead.CPrim.View.Properties.Resources.up;
-            this.tsbtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbtn.Name = "tsbtn";
-            this.tsbtn.Size = new System.Drawing.Size(36, 24);
-            this.tsbtn.Text = "toolStripSplitButton1";
-            // 
-            // tsmiTest
-            // 
-            this.tsmiTest.Name = "tsmiTest";
-            this.tsmiTest.Size = new System.Drawing.Size(180, 22);
-            this.tsmiTest.Text = "软件测试";
-            this.tsmiTest.Click += new System.EventHandler(this.tsmiTest_Click);
-            // 
-            // tsmiAuthority
-            // 
-            this.tsmiAuthority.Name = "tsmiAuthority";
-            this.tsmiAuthority.Size = new System.Drawing.Size(180, 22);
-            this.tsmiAuthority.Text = "超级权限";
-            this.tsmiAuthority.Click += new System.EventHandler(this.tsmiAuthority_Click);
-            // 
-            // tsmiTesuFuc
-            // 
-            this.tsmiTesuFuc.Name = "tsmiTesuFuc";
-            this.tsmiTesuFuc.Size = new System.Drawing.Size(180, 22);
-            this.tsmiTesuFuc.Text = "单一功能测试";
-            this.tsmiTesuFuc.Click += new System.EventHandler(this.tsmiTesuFuc_Click);
-            // 
-            // tsmiLesson
-            // 
-            this.tsmiLesson.Name = "tsmiLesson";
-            this.tsmiLesson.Size = new System.Drawing.Size(180, 22);
-            this.tsmiLesson.Text = "教程";
-            this.tsmiLesson.Click += new System.EventHandler(this.tsmiLesson_Click);
-            // 
-            // tsmiAbout
-            // 
-            this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(180, 22);
-            this.tsmiAbout.Text = "关于";
-            this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
-            // 
-            // tslblMode
-            // 
-            this.tslblMode.AutoSize = false;
-            this.tslblMode.Image = global::Lead.CPrim.View.Properties.Resources.mode;
-            this.tslblMode.Name = "tslblMode";
-            this.tslblMode.Size = new System.Drawing.Size(130, 20);
-            this.tslblMode.Click += new System.EventHandler(this.tslblMode_Click);
-            // 
-            // tslblMemory
-            // 
-            this.tslblMemory.AutoSize = false;
-            this.tslblMemory.Image = global::Lead.CPrim.View.Properties.Resources.memory;
-            this.tslblMemory.Name = "tslblMemory";
-            this.tslblMemory.Size = new System.Drawing.Size(100, 20);
-            // 
-            // tslblCpuRate
-            // 
-            this.tslblCpuRate.AutoSize = false;
-            this.tslblCpuRate.Image = global::Lead.CPrim.View.Properties.Resources.cpu;
-            this.tslblCpuRate.Name = "tslblCpuRate";
-            this.tslblCpuRate.Size = new System.Drawing.Size(100, 20);
-            // 
-            // tslblTimer
-            // 
-            this.tslblTimer.AutoSize = false;
-            this.tslblTimer.Image = global::Lead.CPrim.View.Properties.Resources.timer;
-            this.tslblTimer.Name = "tslblTimer";
-            this.tslblTimer.Size = new System.Drawing.Size(130, 20);
-            // 
-            // tslbl_Light
-            // 
-            this.tslbl_Light.AutoSize = false;
-            this.tslbl_Light.Name = "tslbl_Light";
-            this.tslbl_Light.Size = new System.Drawing.Size(100, 21);
-            this.tslbl_Light.Text = "照明";
-            this.tslbl_Light.Click += new System.EventHandler(this.tslbl_Light_Click);
-            // 
-            // tslblAutoManual
-            // 
-            this.tslblAutoManual.AutoSize = false;
-            this.tslblAutoManual.Name = "tslblAutoManual";
-            this.tslblAutoManual.Size = new System.Drawing.Size(100, 21);
-            this.tslblAutoManual.Text = "自动";
-            this.tslblAutoManual.Click += new System.EventHandler(this.tslblAutoManual_Click);
-            // 
-            // tmrAlarm
-            // 
-            this.tmrAlarm.Interval = 300;
-            this.tmrAlarm.Tick += new System.EventHandler(this.tmrAlarm_Tick);
-            // 
-            // tmrSoftWare
-            // 
-            this.tmrSoftWare.Interval = 1000;
-            this.tmrSoftWare.Tick += new System.EventHandler(this.tmrSoftWare_Tick);
-            // 
-            // tmrUIRefresh
-            // 
-            this.tmrUIRefresh.Tick += new System.EventHandler(this.tmrUIRefresh_Tick);
-            // 
             // pnlTitle
             // 
             this.pnlTitle.ContextMenuStrip = this.cms;
@@ -376,6 +168,20 @@ namespace Lead.CPrim.View
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // cms
+            // 
+            this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiViewVersionExplanation});
+            this.cms.Name = "cms";
+            this.cms.Size = new System.Drawing.Size(221, 26);
+            // 
+            // tsmiViewVersionExplanation
+            // 
+            this.tsmiViewVersionExplanation.Name = "tsmiViewVersionExplanation";
+            this.tsmiViewVersionExplanation.Size = new System.Drawing.Size(220, 22);
+            this.tsmiViewVersionExplanation.Text = "View version explanation";
+            this.tsmiViewVersionExplanation.Click += new System.EventHandler(this.tsmlViewVersionExplanation_Click);
+            // 
             // uiLine3
             // 
             this.uiLine3.Direction = Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine.LineDirection.Vertical;
@@ -391,6 +197,16 @@ namespace Lead.CPrim.View
             this.uiLine3.TabIndex = 26;
             this.uiLine3.Text = "uiLine3";
             this.uiLine3.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // panelAuthority
+            // 
+            this.panelAuthority.BackColor = System.Drawing.Color.Transparent;
+            this.panelAuthority.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAuthority.Location = new System.Drawing.Point(974, 0);
+            this.panelAuthority.Margin = new System.Windows.Forms.Padding(0);
+            this.panelAuthority.Name = "panelAuthority";
+            this.panelAuthority.Size = new System.Drawing.Size(210, 76);
+            this.panelAuthority.TabIndex = 21;
             // 
             // BtnHome
             // 
@@ -604,8 +420,37 @@ namespace Lead.CPrim.View
             this.uiLine2.Text = "uiLine2";
             this.uiLine2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // tmrAuthority
+            // 
+            this.tmrAuthority.Enabled = true;
+            this.tmrAuthority.Interval = 1000;
+            this.tmrAuthority.Tick += new System.EventHandler(this.tmrAuthority_Tick);
+            // 
+            // tlpMain
+            // 
+            this.tlpMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(236)))), ((int)(((byte)(236)))));
+            this.tlpMain.ColumnCount = 1;
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMain.Controls.Add(this.tlpButton, 0, 0);
+            this.tlpMain.Controls.Add(this.tlpState, 0, 2);
+            this.tlpMain.Controls.Add(this.pnlMain, 0, 1);
+            this.tlpMain.Controls.Add(this.stuStatus, 0, 3);
+            this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpMain.Location = new System.Drawing.Point(0, 35);
+            this.tlpMain.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpMain.Name = "tlpMain";
+            this.tlpMain.RowCount = 4;
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpMain.Size = new System.Drawing.Size(1184, 526);
+            this.tlpMain.TabIndex = 23;
+            // 
             // tlpState
             // 
+            this.tlpState.BackColor = System.Drawing.Color.Transparent;
             this.tlpState.ColumnCount = 6;
             this.tlpState.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tlpState.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -619,7 +464,7 @@ namespace Lead.CPrim.View
             this.tlpState.Controls.Add(this.lblAlarm, 1, 0);
             this.tlpState.Controls.Add(this.lblLog, 5, 0);
             this.tlpState.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpState.Location = new System.Drawing.Point(0, 509);
+            this.tlpState.Location = new System.Drawing.Point(0, 474);
             this.tlpState.Margin = new System.Windows.Forms.Padding(0);
             this.tlpState.Name = "tlpState";
             this.tlpState.RowCount = 1;
@@ -630,6 +475,7 @@ namespace Lead.CPrim.View
             // 
             // lblAlarmTag
             // 
+            this.lblAlarmTag.BackColor = System.Drawing.Color.Transparent;
             this.lblAlarmTag.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAlarmTag.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblAlarmTag.Image = global::Lead.CPrim.View.Properties.Resources.alarm;
@@ -643,6 +489,7 @@ namespace Lead.CPrim.View
             // 
             // btnClear
             // 
+            this.btnClear.BackColor = System.Drawing.Color.Transparent;
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClear.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnClear.Image = global::Lead.CPrim.View.Properties.Resources.clearAlarm;
@@ -657,6 +504,7 @@ namespace Lead.CPrim.View
             // 
             // lblLogTag
             // 
+            this.lblLogTag.BackColor = System.Drawing.Color.Transparent;
             this.lblLogTag.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLogTag.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblLogTag.Image = global::Lead.CPrim.View.Properties.Resources.info;
@@ -670,6 +518,7 @@ namespace Lead.CPrim.View
             // 
             // lblAlarm
             // 
+            this.lblAlarm.BackColor = System.Drawing.Color.Transparent;
             this.lblAlarm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAlarm.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblAlarm.Location = new System.Drawing.Point(29, 1);
@@ -682,6 +531,7 @@ namespace Lead.CPrim.View
             // 
             // lblLog
             // 
+            this.lblLog.BackColor = System.Drawing.Color.Transparent;
             this.lblLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLog.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblLog.Location = new System.Drawing.Point(637, 1);
@@ -702,7 +552,7 @@ namespace Lead.CPrim.View
             this.pnlMain.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.RectColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlMain.Size = new System.Drawing.Size(1176, 423);
+            this.pnlMain.Size = new System.Drawing.Size(1176, 388);
             this.pnlMain.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
             this.pnlMain.StyleCustomMode = true;
             this.pnlMain.TabIndex = 22;
@@ -710,29 +560,190 @@ namespace Lead.CPrim.View
             this.pnlMain.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlMain.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // stuStatus
+            // 
+            this.stuStatus.BackColor = System.Drawing.Color.Transparent;
+            this.stuStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.stuStatus.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.stuStatus.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.stuStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tssl_LogTask,
+            this.tssl_DisplayNGInfo,
+            this.tssl_Warning,
+            this.tsbtn,
+            this.tslblMode,
+            this.tslblMemory,
+            this.tslblCpuRate,
+            this.tslblTimer,
+            this.tslbl_Light,
+            this.tslblAutoManual});
+            this.stuStatus.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.stuStatus.Location = new System.Drawing.Point(0, 500);
+            this.stuStatus.Name = "stuStatus";
+            this.stuStatus.Size = new System.Drawing.Size(1184, 26);
+            this.stuStatus.TabIndex = 23;
+            this.stuStatus.Text = "statusStrip1";
+            // 
+            // tssl_LogTask
+            // 
+            this.tssl_LogTask.BackColor = System.Drawing.Color.Transparent;
+            this.tssl_LogTask.Margin = new System.Windows.Forms.Padding(10, 4, 0, 2);
+            this.tssl_LogTask.Name = "tssl_LogTask";
+            this.tssl_LogTask.Size = new System.Drawing.Size(56, 20);
+            this.tssl_LogTask.Text = "任务日志";
+            this.tssl_LogTask.Click += new System.EventHandler(this.tssl_LogTask_Click);
+            // 
+            // tssl_DisplayNGInfo
+            // 
+            this.tssl_DisplayNGInfo.BackColor = System.Drawing.Color.Transparent;
+            this.tssl_DisplayNGInfo.Margin = new System.Windows.Forms.Padding(10, 4, 0, 2);
+            this.tssl_DisplayNGInfo.Name = "tssl_DisplayNGInfo";
+            this.tssl_DisplayNGInfo.Size = new System.Drawing.Size(56, 20);
+            this.tssl_DisplayNGInfo.Text = "抛料信息";
+            this.tssl_DisplayNGInfo.Click += new System.EventHandler(this.tssl_DisplayNGInfo_Click);
+            // 
+            // tssl_Warning
+            // 
+            this.tssl_Warning.BackColor = System.Drawing.Color.Transparent;
+            this.tssl_Warning.Margin = new System.Windows.Forms.Padding(10, 4, 0, 2);
+            this.tssl_Warning.Name = "tssl_Warning";
+            this.tssl_Warning.Size = new System.Drawing.Size(32, 20);
+            this.tssl_Warning.Text = "警告";
+            this.tssl_Warning.Click += new System.EventHandler(this.tssl_Warning_Click);
+            // 
+            // tsbtn
+            // 
+            this.tsbtn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsbtn.BackColor = System.Drawing.Color.Transparent;
+            this.tsbtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiTest,
+            this.tsmiAuthority,
+            this.tsmiTesuFuc,
+            this.tsmiLesson,
+            this.tsmiAbout});
+            this.tsbtn.Image = global::Lead.CPrim.View.Properties.Resources.up;
+            this.tsbtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtn.Name = "tsbtn";
+            this.tsbtn.Size = new System.Drawing.Size(36, 24);
+            this.tsbtn.Text = "toolStripSplitButton1";
+            // 
+            // tsmiTest
+            // 
+            this.tsmiTest.Name = "tsmiTest";
+            this.tsmiTest.Size = new System.Drawing.Size(148, 22);
+            this.tsmiTest.Text = "软件测试";
+            this.tsmiTest.Click += new System.EventHandler(this.tsmiTest_Click);
+            // 
+            // tsmiAuthority
+            // 
+            this.tsmiAuthority.Name = "tsmiAuthority";
+            this.tsmiAuthority.Size = new System.Drawing.Size(148, 22);
+            this.tsmiAuthority.Text = "超级权限";
+            this.tsmiAuthority.Click += new System.EventHandler(this.tsmiAuthority_Click);
+            // 
+            // tsmiTesuFuc
+            // 
+            this.tsmiTesuFuc.Name = "tsmiTesuFuc";
+            this.tsmiTesuFuc.Size = new System.Drawing.Size(148, 22);
+            this.tsmiTesuFuc.Text = "单一功能测试";
+            this.tsmiTesuFuc.Click += new System.EventHandler(this.tsmiTesuFuc_Click);
+            // 
+            // tsmiLesson
+            // 
+            this.tsmiLesson.Name = "tsmiLesson";
+            this.tsmiLesson.Size = new System.Drawing.Size(148, 22);
+            this.tsmiLesson.Text = "教程";
+            this.tsmiLesson.Click += new System.EventHandler(this.tsmiLesson_Click);
+            // 
+            // tsmiAbout
+            // 
+            this.tsmiAbout.Name = "tsmiAbout";
+            this.tsmiAbout.Size = new System.Drawing.Size(148, 22);
+            this.tsmiAbout.Text = "关于";
+            this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
+            // 
+            // tslblMode
+            // 
+            this.tslblMode.AutoSize = false;
+            this.tslblMode.BackColor = System.Drawing.Color.Transparent;
+            this.tslblMode.Image = global::Lead.CPrim.View.Properties.Resources.mode;
+            this.tslblMode.Name = "tslblMode";
+            this.tslblMode.Size = new System.Drawing.Size(130, 20);
+            this.tslblMode.Click += new System.EventHandler(this.tslblMode_Click);
+            // 
+            // tslblMemory
+            // 
+            this.tslblMemory.AutoSize = false;
+            this.tslblMemory.BackColor = System.Drawing.Color.Transparent;
+            this.tslblMemory.Image = global::Lead.CPrim.View.Properties.Resources.memory;
+            this.tslblMemory.Name = "tslblMemory";
+            this.tslblMemory.Size = new System.Drawing.Size(100, 20);
+            // 
+            // tslblCpuRate
+            // 
+            this.tslblCpuRate.AutoSize = false;
+            this.tslblCpuRate.BackColor = System.Drawing.Color.Transparent;
+            this.tslblCpuRate.Image = global::Lead.CPrim.View.Properties.Resources.cpu;
+            this.tslblCpuRate.Name = "tslblCpuRate";
+            this.tslblCpuRate.Size = new System.Drawing.Size(100, 20);
+            // 
+            // tslblTimer
+            // 
+            this.tslblTimer.AutoSize = false;
+            this.tslblTimer.BackColor = System.Drawing.Color.Transparent;
+            this.tslblTimer.Image = global::Lead.CPrim.View.Properties.Resources.timer;
+            this.tslblTimer.Name = "tslblTimer";
+            this.tslblTimer.Size = new System.Drawing.Size(130, 20);
+            // 
+            // tslbl_Light
+            // 
+            this.tslbl_Light.AutoSize = false;
+            this.tslbl_Light.BackColor = System.Drawing.Color.Transparent;
+            this.tslbl_Light.Name = "tslbl_Light";
+            this.tslbl_Light.Size = new System.Drawing.Size(100, 21);
+            this.tslbl_Light.Text = "照明";
+            this.tslbl_Light.Click += new System.EventHandler(this.tslbl_Light_Click);
+            // 
+            // tslblAutoManual
+            // 
+            this.tslblAutoManual.AutoSize = false;
+            this.tslblAutoManual.Name = "tslblAutoManual";
+            this.tslblAutoManual.Size = new System.Drawing.Size(100, 21);
+            this.tslblAutoManual.Text = "自动";
+            this.tslblAutoManual.Click += new System.EventHandler(this.tslblAutoManual_Click);
+            // 
+            // tmrAlarm
+            // 
+            this.tmrAlarm.Interval = 300;
+            this.tmrAlarm.Tick += new System.EventHandler(this.tmrAlarm_Tick);
+            // 
+            // tmrSoftWare
+            // 
+            this.tmrSoftWare.Interval = 1000;
+            this.tmrSoftWare.Tick += new System.EventHandler(this.tmrSoftWare_Tick);
+            // 
+            // tmrUIRefresh
+            // 
+            this.tmrUIRefresh.Tick += new System.EventHandler(this.tmrUIRefresh_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1184, 561);
             this.Controls.Add(this.tlpMain);
-            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "C Prim";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 1184, 561);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.tlpButton.ResumeLayout(false);
             this.cms.ResumeLayout(false);
-            this.tlpMain.ResumeLayout(false);
-            this.tlpMain.PerformLayout();
-            this.stuStatus.ResumeLayout(false);
-            this.stuStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnHome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnAlert)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnConfig)).EndInit();
@@ -742,7 +753,11 @@ namespace Lead.CPrim.View
             ((System.ComponentModel.ISupportInitialize)(this.btnRun)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPaused)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnStop)).EndInit();
+            this.tlpMain.ResumeLayout(false);
+            this.tlpMain.PerformLayout();
             this.tlpState.ResumeLayout(false);
+            this.stuStatus.ResumeLayout(false);
+            this.stuStatus.PerformLayout();
             this.ResumeLayout(false);
 
         }

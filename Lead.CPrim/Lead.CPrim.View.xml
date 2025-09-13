@@ -33,9 +33,6 @@
         <member name="F:Lead.CPrim.View.MainForm._curDominStartPath">
             <summary>应用程序起始地址</summary>
         </member>
-        <member name="F:Lead.CPrim.View.MainForm._mainLogoPath">
-            <summary>软件Logo地址</summary>
-        </member>
         <member name="F:Lead.CPrim.View.MainForm._primsAssemblyPath">
             <summary>基元地址</summary>
         </member>
@@ -122,12 +119,6 @@
         <member name="P:Lead.CPrim.View.MainForm.CurrentWorkMode">
             <summary>
             当前工作模式
-            </summary>
-        </member>
-        <member name="M:Lead.CPrim.View.MainForm.MainForm_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
-            <summary>
-            组合快捷键<br/>
-            需配合this.KeyPreview = true;否则不生效<br/>
             </summary>
         </member>
         <member name="M:Lead.CPrim.View.MainForm.registerToolStripMenuItem_Click(System.Object,System.EventArgs)">
@@ -311,6 +302,13 @@
             
             </summary>
         </member>
+        <member name="M:Lead.CPrim.View.MainForm.MainForm_HotKeyEventHandler(System.Object,Sunny.UI.HotKeyEventArgs)">
+            <summary>
+            全局快捷键响应
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
         <member name="M:Lead.CPrim.View.MainForm.LogAdd(System.String,Lead.CPrim.Interfaces.LogLevel,System.Int32,System.Boolean)">
             <summary>日志增加</summary>
             <param name="msg">消息</param>
@@ -365,6 +363,12 @@
             关闭脚本编译器
             </summary>
         </member>
+        <member name="M:Lead.CPrim.View.MainForm.MainForm_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            组合快捷键<br/>
+            需配合this.KeyPreview = true;否则不生效<br/>
+            </summary>
+        </member>
         <member name="F:Lead.CPrim.View.MainForm.components">
             <summary>
             Required designer variable.
@@ -383,7 +387,9 @@
             </summary>
         </member>
         <member name="T:Lead.CPrim.View.BtnEnum">
-            <summary>按钮枚举</summary>
+            <summary>
+            按钮枚举
+            </summary>
         </member>
         <member name="E:Lead.CPrim.View.ModeSelection.OnWorkModeClick">
             <summary>
