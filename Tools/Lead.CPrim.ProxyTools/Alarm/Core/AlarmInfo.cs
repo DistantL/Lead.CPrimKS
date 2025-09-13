@@ -11,11 +11,6 @@ namespace Lead.CPrim.ProxyTools
     public class AlarmInfo
     {
         /// <summary>
-        /// 当前计数
-        /// </summary>
-        public int AlarmCount => Algorithm.CumulativeCounting;
-
-        /// <summary>
         /// 连续累计算法
         /// </summary>
         public ContinuousCumulativeStatisticsAlgorithm Algorithm { get; set; }
@@ -23,12 +18,12 @@ namespace Lead.CPrim.ProxyTools
         /// <summary>
         /// 连续阈值
         /// </summary>
-        public int ContinuousThreshold { get; set; }
+        public int ContinuousThreshold { get; set; } = 1;
 
         /// <summary>
         /// 累计阈值
         /// </summary>
-        public int CumulativeThreshold { get; set; }
+        public int CumulativeThreshold { get; set; } = 1;
 
         /// <summary>
         /// 报警代码
@@ -80,11 +75,6 @@ namespace Lead.CPrim.ProxyTools
         public DateTime LastTime { get; set; } = DateTime.Now;
 
         /// <summary>
-        /// 提示方式
-        /// </summary>
-        public string PromptMethod { get; set; }
-
-        /// <summary>
         /// 序列<br/>
         /// 暂不使用
         /// </summary>
@@ -119,7 +109,7 @@ namespace Lead.CPrim.ProxyTools
 
         public AlarmInfo()
         {
-            Algorithm = new ContinuousCumulativeStatisticsAlgorithm(VendorAlarmCode, StatisticsMode.StatisticsByTime);
+            Algorithm = new ContinuousCumulativeStatisticsAlgorithm(VendorAlarmCode);
             Algorithm.Init(ContinuousThreshold, CumulativeThreshold, 60);
         }
     }

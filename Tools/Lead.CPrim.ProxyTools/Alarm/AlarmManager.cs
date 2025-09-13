@@ -270,44 +270,26 @@ namespace Lead.CPrim.ProxyTools
                     //步骤3：判定报警级别：1级直接DT；2级当[当前报警次数]大于等于[报警阈值次数]，DT、否则只记录；3级提示报警
                     switch (alarmInfo.ErrorLevel)
                     {
+                        case ErrorLevel.一级报警:
+                        default:
+                            return;
+
                         case ErrorLevel.二级报警:
-                            if (alarmInfo.AlarmCount < alarmInfo.CumulativeThreshold)
-                            {
-                                //alarmInfo.AlarmCount++;
-                                return;
-                            }
-                            else
-                            {
-                                //alarmInfo.AlarmCount = 0;
-                            }
                             break;
+
                         case ErrorLevel.三级报警:
-                            if (alarmInfo.AlarmCount < alarmInfo.CumulativeThreshold)
-                            {
-                                //alarmInfo.AlarmCount++;
-                                return;
-                            }
-                            else
-                            {
-                                //alarmInfo.AlarmCount = 0;
-                            }
 
                             if (_alarmDict.ContainsKey(alarmInfo.ErrorCode))
                             {
                                 _alarmDict.Remove(alarmInfo.ErrorCode);
                                 _warnInfoUI.RemoveInfo(alarmInfo);
                             }
-
-                            return;
-
-                        case ErrorLevel.一级报警:
-                        default:
                             return;
                     }
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.LogAdd(LogLevel.Warn, $"AlarmManager.RemoveWarnInfoInUI：{ex.Message}：{ex.StackTrace}", LogClassification.Tools.ToString());
+                    LogHelper.Warn($"AlarmManager.RemoveWarnInfoInUI", ex);
                 }
             }
         }
@@ -378,50 +360,60 @@ namespace Lead.CPrim.ProxyTools
             msg = string.Empty;
             try
             {
-                CsvHelper.ReadCsvToListString(path, GlobalVariables.EncodingChinese, false, out List<string> data);
-                if (data.IsNullOrEmpty())
+                //CsvHelper.ReadCsvToListString(path, GlobalVariables.EncodingChinese, false, out List<string> data);
+                //if (data.IsNullOrEmpty())
+                //{
+                //    msg = "Read csv File is null";
+                //    return false;
+                //}
+                //data.RemoveAt(0);
+                //Dictionary<string, AlarmInfo> AlertConfigDatas = new Dictionary<string, AlarmInfo>();
+
+                //AlertConfigDatas.Clear();
+                //foreach (string info in data)
+                //{
+                //    string[] tmp = info.Trim().Split(',');
+                //    if (tmp == null || tmp.Count() < 15 || string.IsNullOrWhiteSpace(tmp[0]))
+                //    {
+                //        continue;
+                //    }
+
+                //    AlarmInfo alertConfigData = new AlarmInfo
+                //    {
+                //        ErrorCode = tmp[0].Trim(),
+                //        ErrorLevelInEN = tmp[1].Trim(),
+                //        ErrorMessage = tmp[2].Trim(),
+                //        ErrorDetail = tmp[3].Trim(),
+                //        ErrorDetailInEN = tmp[4].Trim(),
+                //        ErrorDetailInVN = tmp[5].Trim(),
+                //        //AlarmCount = tmp[6].ToInt(),
+                //        CumulativeThreshold = tmp[7].ToInt(),
+                //        ErrorLevel = Enum.TryParse(tmp[8].Trim(), out ErrorLevel level) ? level : ErrorLevel.三级报警,
+                //        PromptMethod = tmp[9].Trim(),
+                //        Solution = tmp[10].Trim(),
+                //        SolutionInEN = tmp[11].Trim(),
+                //        SolutionInVN = tmp[12].Trim(),
+                //        HasParams = tmp[13].ToBoolean(),
+                //        Sequence = tmp[14].ToUShort(),
+                //    };
+
+                //    if (!AlertConfigDatas.ContainsKey(tmp[0]))
+                //    {
+                //        AlertConfigDatas.Add(tmp[0], alertConfigData);
+                //    }
+                //}
+
+                //_list = new BindingList<AlarmInfo>(AlertConfigDatas.Values.ToList());
+
+                if (CsvHelper.ReadCsv(path, GlobalVariables.EncodingChinese, true, out List<AlarmInfo> datas) && datas.IsValid())
+                {
+                    _list = new BindingList<AlarmInfo>(datas);
+                }
+                else
                 {
                     msg = "Read csv File is null";
                     return false;
                 }
-                data.RemoveAt(0);
-                Dictionary<string, AlarmInfo> AlertConfigDatas = new Dictionary<string, AlarmInfo>();
-
-                AlertConfigDatas.Clear();
-                foreach (string info in data)
-                {
-                    string[] tmp = info.Trim().Split(',');
-                    if (tmp == null || tmp.Count() < 15 || string.IsNullOrWhiteSpace(tmp[0]))
-                    {
-                        continue;
-                    }
-
-                    AlarmInfo alertConfigData = new AlarmInfo
-                    {
-                        ErrorCode = tmp[0].Trim(),
-                        ErrorLevelInEN = tmp[1].Trim(),
-                        ErrorMessage = tmp[2].Trim(),
-                        ErrorDetail = tmp[3].Trim(),
-                        ErrorDetailInEN = tmp[4].Trim(),
-                        ErrorDetailInVN = tmp[5].Trim(),
-                        //AlarmCount = tmp[6].ToInt(),
-                        CumulativeThreshold = tmp[7].ToInt(),
-                        ErrorLevel = Enum.TryParse(tmp[8].Trim(), out ErrorLevel level) ? level : ErrorLevel.三级报警,
-                        PromptMethod = tmp[9].Trim(),
-                        Solution = tmp[10].Trim(),
-                        SolutionInEN = tmp[11].Trim(),
-                        SolutionInVN = tmp[12].Trim(),
-                        HasParams = tmp[13].ToBoolean(),
-                        Sequence = tmp[14].ToUShort(),
-                    };
-
-                    if (!AlertConfigDatas.ContainsKey(tmp[0]))
-                    {
-                        AlertConfigDatas.Add(tmp[0], alertConfigData);
-                    }
-                }
-
-                _list = new BindingList<AlarmInfo>(AlertConfigDatas.Values.ToList());
             }
             catch (Exception ex)
             {

@@ -20,14 +20,14 @@ namespace Lead.CPrim.ProxyTools.Authority
     {
         #region Field
         /// <summary>
-        /// 报警列表
-        /// </summary>
-        private BindingList<AlarmInfo> _alarmsBinding = new BindingList<AlarmInfo>();
-
-        /// <summary>
         /// 报警列表锁
         /// </summary>
         static readonly object _lockAlarm = new object();
+
+        /// <summary>
+        /// 报警列表
+        /// </summary>
+        private BindingList<AlarmInfo> _alarmsBinding = new BindingList<AlarmInfo>();
         #endregion
 
 
@@ -40,22 +40,27 @@ namespace Lead.CPrim.ProxyTools.Authority
             NLocalizer.LanguageChanged += OnLanguageChanged;
 
             _alarmsBinding = list;
-            colPromptMethod.DataSource = new List<string> { "不停机界面提示", "停机黄灯", "DT红灯" };
-            colErrorLevel.DataSource = new ErrorLevel[] { ProxyTools.ErrorLevel.一级报警, ProxyTools.ErrorLevel.二级报警, ProxyTools.ErrorLevel.三级报警 };
+            colErrorLevel.DataSource = new ErrorLevel[] { ErrorLevel.一级报警, ErrorLevel.二级报警, ErrorLevel.三级报警 };
             colErrorLevel.ValueType = typeof(ErrorLevel);
 
             try
             {
+                dgv_AlertInfo.RowHeadersVisible = true;
+                dgv_AlertInfo.RowHeadersWidth = 60;
+                dgv_AlertInfo.RowHeadersDefaultCellStyle = new DataGridViewCellStyle
+                {
+                    Font = new Font("微软雅黑", 9.0f, FontStyle.Italic),
+                };
                 dgv_AlertInfo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgv_AlertInfo.AutoGenerateColumns = false;
+                dgv_AlertInfo.SetDoubleBuffered();
+                RefreshDatas();
                 dgv_AlertInfo.DataSource = _alarmsBinding;
             }
             catch (Exception ex)
             {
                 LogHelper.Warn(nameof(AlarmInfoEx), ex);
             }
-
-            dgv_AlertInfo.DoubleBuffered(true);
         }
         #endregion
 
@@ -63,7 +68,8 @@ namespace Lead.CPrim.ProxyTools.Authority
 
         #region EventSystem
         /// <summary>
-        /// 当单元格收到输入焦点，从而成为 DataGridView 中的当前单元格时发生
+        /// 当单元格收到输入焦点，从而成为 DataGridView 中的当前单元格时发生<br/>
+        /// 解决DataGridViewComboBoxColumn首次必须点击2次才可弹出<br/>
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -81,7 +87,8 @@ namespace Lead.CPrim.ProxyTools.Authority
             }
         }
         /// <summary>
-        /// 单元格状态因其内容更改而更改时发生
+        /// 单元格状态因其内容更改而更改时发生<br/>
+        /// 解决DataGridViewCheckBoxColumn必须按Enter键才生效<br/>
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -99,13 +106,23 @@ namespace Lead.CPrim.ProxyTools.Authority
             }
         }
         /// <summary>
-        /// 外部数据分析或验证操作引发异常时，或将数据提交到数据源的尝试失败时发生。
+        /// 外部数据分析或验证操作引发异常时，或将数据提交到数据源的尝试失败时发生。<br/>
+        /// 解决报错时一直抛异常，目前是忽略异常<br/>
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void dgv_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
+        }
+        /// <summary>
+        /// 行首计数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgv_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            e.Row.HeaderCell.Value = $"{e.Row.Index + 1}";
         }
         #endregion
 
@@ -148,6 +165,28 @@ namespace Lead.CPrim.ProxyTools.Authority
         /// </summary>
         /// <returns></returns>
         internal int Save()
+        {
+            try
+            {
+                if (_alarmsBinding.IsNullOrEmpty())
+                {
+                    return 0;
+                }
+
+                RefreshDatas();
+                return CsvHelper.WriteToCsv(AlarmManager.Instance.ConfigFilePath, _alarmsBinding, true, true, true) ? 0 : -1;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Warn($"{nameof(AlarmInfoEx)}.{nameof(Save)}", ex);
+                return -1;
+            }
+        }
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <returns></returns>
+        internal int SaveBackup()
         {
             FileInfo fileInfo = new FileInfo(AlarmManager.Instance.ConfigFilePath);
             if (!fileInfo.Directory.Exists)
@@ -215,6 +254,28 @@ namespace Lead.CPrim.ProxyTools.Authority
 
             tsmiAdd.Text = NLocalizer.Add;
             tsmiDelete.Text = NLocalizer.Delete;
+        }
+
+        /// <summary>
+        /// 数据防呆
+        /// </summary>
+        void RefreshDatas()
+        {
+            if (_alarmsBinding.IsNullOrEmpty())
+            {
+                return;
+            }
+
+            foreach (var data in _alarmsBinding)
+            {
+                if (data.ErrorLevel == ErrorLevel.一级报警 || data.ErrorLevel == ErrorLevel.二级报警)
+                {
+                    data.ContinuousThreshold = 1;
+                    data.CumulativeThreshold = 1;
+                    data.Algorithm = new ContinuousCumulativeStatisticsAlgorithm(data.VendorAlarmCode);
+                    data.Algorithm.Init(data.ContinuousThreshold, data.CumulativeThreshold, 60);
+                }
+            }
         }
         #endregion
     }
