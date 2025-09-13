@@ -46,6 +46,7 @@ namespace Lead.CPrim.ProxyTools.Authority
 
             try
             {
+                dgv_AlertInfo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgv_AlertInfo.AutoGenerateColumns = false;
                 dgv_AlertInfo.DataSource = _alarmsBinding;
             }
@@ -55,6 +56,56 @@ namespace Lead.CPrim.ProxyTools.Authority
             }
 
             dgv_AlertInfo.DoubleBuffered(true);
+        }
+        #endregion
+
+
+
+        #region EventSystem
+        /// <summary>
+        /// 当单元格收到输入焦点，从而成为 DataGridView 中的当前单元格时发生
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgv_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            if (dgv == null)
+            {
+                return;
+            }
+
+            if (e.RowIndex != -1 && dgv.Columns[e.ColumnIndex] is DataGridViewComboBoxColumn)
+            {
+                SendKeys.Send("{F4}");
+            }
+        }
+        /// <summary>
+        /// 单元格状态因其内容更改而更改时发生
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgv_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            if (dgv == null)
+            {
+                return;
+            }
+
+            if (dgv.IsCurrentCellDirty)
+            {
+                dgv.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }
+        /// <summary>
+        /// 外部数据分析或验证操作引发异常时，或将数据提交到数据源的尝试失败时发生。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgv_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
         }
         #endregion
 
@@ -74,8 +125,18 @@ namespace Lead.CPrim.ProxyTools.Authority
         {
             lock (_lockAlarm)
             {
-                
-            };
+                var selectRows = dgv_AlertInfo.SelectedRows;
+                if (selectRows.Count <= 0)
+                {
+                    return;
+                }
+
+                for (int i = selectRows.Count - 1; i >= 0; i--)
+                {
+                    var row = selectRows[i];
+                    _alarmsBinding.RemoveAt(row.Index);
+                }
+            }
         }
         #endregion
 
