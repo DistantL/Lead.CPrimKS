@@ -33,6 +33,11 @@ namespace Lead.CPrim.StationCommon.Alert
         private bool _isMuted = false;
 
         private List<AlertInfo> _listAlertInfos = new List<AlertInfo>();
+
+        /// <summary>
+        /// 当前报警
+        /// </summary>
+        AlarmInfo _currentAlarmInfo = null;
         #endregion
 
 
@@ -78,26 +83,34 @@ namespace Lead.CPrim.StationCommon.Alert
                 return;
             }
 
-            DialogForOperateLoginForm.Instance.EnqueueDialog("请刷卡", ok =>
+            if (_currentAlarmInfo != null &&
+                (_currentAlarmInfo.ErrorLevel == ErrorLevel.一级报警 || _currentAlarmInfo.ErrorLevel == ErrorLevel.二级报警))
             {
-                if (ok && !string.IsNullOrWhiteSpace(AuthorityManager.Instance.CurrentOperatorID))
+                DialogForOperateLoginForm.Instance.EnqueueDialog("请刷卡", ok =>
                 {
-                    string errCode = cboErrCodeValue.SelectedItem?.ToString().Trim();
-                    OnClrAudioErr?.Invoke(true, errCode);
-
-                    cboErrCodeValue.Items.Remove(errCode);
-                    _listAlertInfos.RemoveAll(p => p.ErrorCode == errCode);
-
-                    if (cboErrCodeValue.Items.Count <= 0)
+                    if (ok && !string.IsNullOrWhiteSpace(AuthorityManager.Instance.CurrentOperatorID))
                     {
-                        Close();
+                        string errCode = cboErrCodeValue.SelectedItem?.ToString().Trim();
+                        OnClrAudioErr?.Invoke(true, errCode);
+
+                        cboErrCodeValue.Items.Remove(errCode);
+                        _listAlertInfos.RemoveAll(p => p.ErrorCode == errCode);
+
+                        if (cboErrCodeValue.Items.Count <= 0)
+                        {
+                            Close();
+                        }
+                        else
+                        {
+                            DisplayUI();
+                        }
                     }
-                    else
-                    {
-                        DisplayUI();
-                    }
-                }
-            });
+                });
+            }
+            else
+            {
+                Close();
+            }
         }
 
         /// <summary>静音</summary>
@@ -154,26 +167,26 @@ namespace Lead.CPrim.StationCommon.Alert
             AlertInfo info = _listAlertInfos.Find(p => p.ErrorCode == cboErrCodeValue.SelectedItem?.ToString().Trim());
             lblStartTimeValue.Text = info.CreateTime.ToString("yyyy/MM/dd HH:mm:ss");
             lblErrMsgValue.Text = info.ErrorMessage;
-            AlarmInfo alarmInfo = AlarmManager.Instance.GetAlarmInfoByErrorMessage("(" + info.ErrorCode + ")" + info.ErrorDetail);
-            if (alarmInfo != null)
+            _currentAlarmInfo = AlarmManager.Instance.GetAlarmInfoByErrorMessage("(" + info.ErrorCode + ")" + info.ErrorDetail);
+            if (_currentAlarmInfo != null)
             {
                 switch (NLocalizer.Language)
                 {
                     case "en-US":
-                        rtbErrDetailValue.Text = alarmInfo.ErrorDetailInEN;
-                        rtb_ErrMessage.Text = alarmInfo.ErrorDetailInEN;
+                        rtbErrDetailValue.Text = _currentAlarmInfo.ErrorDetailInEN;
+                        rtb_ErrMessage.Text = _currentAlarmInfo.ErrorDetailInEN;
                         break;
                     case "vi-VN":
-                        rtbErrDetailValue.Text = alarmInfo.ErrorDetailInVN;
-                        rtb_ErrMessage.Text = alarmInfo.ErrorDetailInVN;
+                        rtbErrDetailValue.Text = _currentAlarmInfo.ErrorDetailInVN;
+                        rtb_ErrMessage.Text = _currentAlarmInfo.ErrorDetailInVN;
                         break;
                     default:
-                        rtbErrDetailValue.Text = alarmInfo.ErrorDetail;
-                        rtb_ErrMessage.Text = alarmInfo.ErrorDetail;
+                        rtbErrDetailValue.Text = _currentAlarmInfo.ErrorDetail;
+                        rtb_ErrMessage.Text = _currentAlarmInfo.ErrorDetail;
                         break;
                 }
 
-                if (alarmInfo.ErrorLevel == ErrorLevel.三级报警)
+                if (_currentAlarmInfo.ErrorLevel == ErrorLevel.三级报警)
                 {
                     EventManager.SwitchStatus(SwitchStatus.RunningWithNotice);
                 }
