@@ -811,6 +811,14 @@ namespace Lead.CPrim.MachineHelper
         {
             PostEvent(UserEventType.Abnormal, systemSM);
         }
+
+        /// <summary>
+        /// 急停
+        /// </summary>
+        public void ESTOP()
+        {
+            PostEvent(UserEventType.ESTOP, systemSM);
+        }
         #endregion
 
 

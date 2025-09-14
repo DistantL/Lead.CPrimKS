@@ -14,5 +14,6 @@ namespace Lead.CPrim.ProxyTools
         ClrErr,
         Abnormal,
         RunningWithNotice,
+        ESTOP,
     }
 }

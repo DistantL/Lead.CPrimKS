@@ -209,32 +209,21 @@ namespace Lead.CPrim.ProxyTools
                     }
 
                     //步骤4：判定报警级别：1级直接DT；2级当[当前报警次数]大于等于[报警阈值次数]，DT、否则只记录；3级提示报警
-                    switch (alarmInfo.ErrorLevel)
+                    if (alarmInfo.ErrorLevel == ErrorLevel.三级报警)
                     {
-                        case ErrorLevel.一级报警:
-                            {
-                                EventManager.SwitchStatus(SwitchStatus.Abnormal);
-                            }
-                            break;
+                        if (alarmInfo.Algorithm.Check(false) == 0)
+                        {
+                            return;
+                        }
+                    }
 
-                        case ErrorLevel.二级报警:
-                            {
-                                if (alarmInfo.Algorithm.Check(false) == 0)
-                                {
-                                    return;
-                                }
-                                EventManager.SwitchStatus(SwitchStatus.Abnormal);
-                            }
-                            break;
-                        case ErrorLevel.三级报警:
-                        default:
-                            {
-                                if (alarmInfo.Algorithm.Check(false) == 0)
-                                {
-                                    return;
-                                }
-                            }
-                            break;
+                    if (alarmInfo.ErrorLevel == ErrorLevel.一级报警)
+                    {
+                        EventManager.SwitchStatus(SwitchStatus.ESTOP);
+                    }
+                    else
+                    {
+                        EventManager.SwitchStatus(SwitchStatus.Abnormal);
                     }
 
                     //步骤5：弹窗
@@ -245,7 +234,7 @@ namespace Lead.CPrim.ProxyTools
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.LogAdd(LogLevel.Warn, $"AlarmManager.InsertAlarm：{ex.Message}：{ex.StackTrace}", LogClassification.Tools.ToString());
+                    LogHelper.Warn($"AlarmManager.InsertAlarm", ex);
                 }
             }
         }
@@ -352,7 +341,10 @@ namespace Lead.CPrim.ProxyTools
                 str_errCode = errorMessage.Substring(startIndex + 1, endIndex - startIndex - 1);
             }
 
-            return _list?.FirstOrDefault(x => x.ErrorCode == str_errCode || x.ErrorDetail.Contains(errorMessage) || errorMessage.Contains(x.ErrorDetail));
+            return _list?.FirstOrDefault(x =>
+            (!string.IsNullOrWhiteSpace(str_errCode) && x.ErrorCode == str_errCode) ||
+            x.ErrorDetail.Contains(errorMessage) ||
+            errorMessage.Contains(x.ErrorDetail));
         }
 
         private bool GetAlertConfigData(string path, out string msg)
@@ -450,8 +442,8 @@ namespace Lead.CPrim.ProxyTools
                     }
 
                     AlarmInfo alarmInfo = _list?.FirstOrDefault(x =>
-                    x.VendorAlarmCode == vendorAlarmCode ||
-                    x.ErrorCode == errorCode ||
+                    (!string.IsNullOrWhiteSpace(vendorAlarmCode) && x.VendorAlarmCode == vendorAlarmCode) ||
+                    (!string.IsNullOrWhiteSpace(errorCode) && x.ErrorCode == errorCode) ||
                     x.ErrorDetail.Contains(errorMessage) ||
                     errorMessage.Contains(x.ErrorDetail));
                     if (alarmInfo == null)
@@ -477,25 +469,21 @@ namespace Lead.CPrim.ProxyTools
                     }
 
                     //步骤4：判定报警级别
-                    switch (alarmInfo.ErrorLevel)
+                    if (alarmInfo.ErrorLevel == ErrorLevel.三级报警)
                     {
-                        case ErrorLevel.二级报警:
-                            if (alarmInfo.Algorithm.Check(result) == 0)
-                            {
-                                return true;
-                            }
-                            break;
+                        if (alarmInfo.Algorithm.Check(false) == 0)
+                        {
+                            return true;
+                        }
+                    }
 
-                        case ErrorLevel.三级报警:
-                            if (alarmInfo.Algorithm.Check(result) == 0)
-                            {
-                                return true;
-                            }
-                            break;
-
-                        case ErrorLevel.一级报警:
-                        default:
-                            break;
+                    if (alarmInfo.ErrorLevel == ErrorLevel.一级报警)
+                    {
+                        EventManager.SwitchStatus(SwitchStatus.ESTOP);
+                    }
+                    else
+                    {
+                        EventManager.SwitchStatus(SwitchStatus.Abnormal);
                     }
 
                     //步骤5：弹窗
@@ -503,10 +491,11 @@ namespace Lead.CPrim.ProxyTools
                     {
                         _alarmInfoInDialog = alarmInfoForDisply;
                     }
+                    ret = true;
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.LogAdd(LogLevel.Warn, $"AlarmManager.InsertAlarm：{ex.Message}：{ex.StackTrace}", LogClassification.Tools.ToString());
+                    LogHelper.Warn($"AlarmManager.InsertAlarm", ex);
                 }
 
                 return ret;

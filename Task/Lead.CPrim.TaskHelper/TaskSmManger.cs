@@ -53,6 +53,12 @@ namespace Lead.CPrim.TaskHelper
                         ((TaskStateMachine)TaskSMs[stationName]).RunningWithNotice();
                     }
                     break;
+                case SwitchStatus.ESTOP:
+                    if (TaskSMs.ContainsKey(stationName))
+                    {
+                        ((TaskStateMachine)TaskSMs[stationName]).ESTOP();
+                    }
+                    break;
                 default:
                     break;
             }
