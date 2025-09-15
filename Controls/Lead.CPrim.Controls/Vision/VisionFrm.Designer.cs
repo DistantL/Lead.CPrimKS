@@ -54,6 +54,7 @@ namespace Lead.CPrim.Controls
             this.tlpMain.Controls.Add(this.pnl6, 2, 1);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
+            this.tlpMain.Margin = new System.Windows.Forms.Padding(0);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 2;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -66,15 +67,12 @@ namespace Lead.CPrim.Controls
             // 
             this.pnl1.BackColor = System.Drawing.Color.LightGray;
             this.pnl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl1.FillColor = System.Drawing.Color.LightGray;
             this.pnl1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pnl1.Location = new System.Drawing.Point(10, 10);
-            this.pnl1.Margin = new System.Windows.Forms.Padding(10, 10, 5, 5);
+            this.pnl1.Location = new System.Drawing.Point(10, 5);
+            this.pnl1.Margin = new System.Windows.Forms.Padding(10, 5, 5, 5);
             this.pnl1.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnl1.Name = "pnl1";
-            this.pnl1.RectColor = System.Drawing.Color.Transparent;
-            this.pnl1.Size = new System.Drawing.Size(251, 210);
-            this.pnl1.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
+            this.pnl1.Size = new System.Drawing.Size(251, 215);
             this.pnl1.TabIndex = 0;
             this.pnl1.Text = "CCD1";
             this.pnl1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -84,15 +82,12 @@ namespace Lead.CPrim.Controls
             // 
             this.pnl2.BackColor = System.Drawing.Color.LightGray;
             this.pnl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl2.FillColor = System.Drawing.Color.LightGray;
             this.pnl2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pnl2.Location = new System.Drawing.Point(271, 10);
-            this.pnl2.Margin = new System.Windows.Forms.Padding(5, 10, 5, 5);
+            this.pnl2.Location = new System.Drawing.Point(271, 5);
+            this.pnl2.Margin = new System.Windows.Forms.Padding(5);
             this.pnl2.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnl2.Name = "pnl2";
-            this.pnl2.RectColor = System.Drawing.Color.Transparent;
-            this.pnl2.Size = new System.Drawing.Size(256, 210);
-            this.pnl2.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
+            this.pnl2.Size = new System.Drawing.Size(256, 215);
             this.pnl2.TabIndex = 0;
             this.pnl2.Text = "CCD2";
             this.pnl2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -102,15 +97,12 @@ namespace Lead.CPrim.Controls
             // 
             this.pnl3.BackColor = System.Drawing.Color.LightGray;
             this.pnl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl3.FillColor = System.Drawing.Color.LightGray;
             this.pnl3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pnl3.Location = new System.Drawing.Point(537, 10);
-            this.pnl3.Margin = new System.Windows.Forms.Padding(5, 10, 10, 5);
+            this.pnl3.Location = new System.Drawing.Point(537, 5);
+            this.pnl3.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.pnl3.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnl3.Name = "pnl3";
-            this.pnl3.RectColor = System.Drawing.Color.Transparent;
-            this.pnl3.Size = new System.Drawing.Size(253, 210);
-            this.pnl3.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
+            this.pnl3.Size = new System.Drawing.Size(253, 215);
             this.pnl3.TabIndex = 0;
             this.pnl3.Text = "CCD3";
             this.pnl3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -120,15 +112,12 @@ namespace Lead.CPrim.Controls
             // 
             this.pnl4.BackColor = System.Drawing.Color.LightGray;
             this.pnl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl4.FillColor = System.Drawing.Color.LightGray;
             this.pnl4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pnl4.Location = new System.Drawing.Point(10, 230);
-            this.pnl4.Margin = new System.Windows.Forms.Padding(10, 5, 5, 10);
+            this.pnl4.Margin = new System.Windows.Forms.Padding(10, 5, 5, 5);
             this.pnl4.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnl4.Name = "pnl4";
-            this.pnl4.RectColor = System.Drawing.Color.Transparent;
-            this.pnl4.Size = new System.Drawing.Size(251, 210);
-            this.pnl4.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
+            this.pnl4.Size = new System.Drawing.Size(251, 215);
             this.pnl4.TabIndex = 0;
             this.pnl4.Text = "CCD4";
             this.pnl4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -138,15 +127,12 @@ namespace Lead.CPrim.Controls
             // 
             this.pnl5.BackColor = System.Drawing.Color.LightGray;
             this.pnl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl5.FillColor = System.Drawing.Color.LightGray;
             this.pnl5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pnl5.Location = new System.Drawing.Point(271, 230);
-            this.pnl5.Margin = new System.Windows.Forms.Padding(5, 5, 5, 10);
+            this.pnl5.Margin = new System.Windows.Forms.Padding(5);
             this.pnl5.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnl5.Name = "pnl5";
-            this.pnl5.RectColor = System.Drawing.Color.Transparent;
-            this.pnl5.Size = new System.Drawing.Size(256, 210);
-            this.pnl5.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
+            this.pnl5.Size = new System.Drawing.Size(256, 215);
             this.pnl5.TabIndex = 0;
             this.pnl5.TagString = "";
             this.pnl5.Text = "CCD5";
@@ -157,15 +143,12 @@ namespace Lead.CPrim.Controls
             // 
             this.pnl6.BackColor = System.Drawing.Color.LightGray;
             this.pnl6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl6.FillColor = System.Drawing.Color.LightGray;
             this.pnl6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pnl6.Location = new System.Drawing.Point(537, 230);
-            this.pnl6.Margin = new System.Windows.Forms.Padding(5, 5, 10, 10);
+            this.pnl6.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.pnl6.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnl6.Name = "pnl6";
-            this.pnl6.RectColor = System.Drawing.Color.Transparent;
-            this.pnl6.Size = new System.Drawing.Size(253, 210);
-            this.pnl6.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
+            this.pnl6.Size = new System.Drawing.Size(253, 215);
             this.pnl6.TabIndex = 0;
             this.pnl6.Text = "CCD6";
             this.pnl6.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;

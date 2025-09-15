@@ -34,19 +34,18 @@ namespace Lead.CPrim.StationCommon.Alert
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tlpAlert = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UITableLayoutPanel();
-            this.pnlTitle = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIPanel();
-            this.lTitle = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
+            this.pnlTitle = new System.Windows.Forms.Panel();
             this.btnSave = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIButton();
             this.btnQuery = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIButton();
             this.lblEndTime = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
@@ -97,7 +96,6 @@ namespace Lead.CPrim.StationCommon.Alert
             // pnlTitle
             // 
             this.tlpAlert.SetColumnSpan(this.pnlTitle, 2);
-            this.pnlTitle.Controls.Add(this.lTitle);
             this.pnlTitle.Controls.Add(this.btnSave);
             this.pnlTitle.Controls.Add(this.btnQuery);
             this.pnlTitle.Controls.Add(this.lblEndTime);
@@ -106,29 +104,12 @@ namespace Lead.CPrim.StationCommon.Alert
             this.pnlTitle.Controls.Add(this.dtpEndTime);
             this.pnlTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTitle.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pnlTitle.Location = new System.Drawing.Point(0, 3);
-            this.pnlTitle.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.pnlTitle.Location = new System.Drawing.Point(0, 0);
+            this.pnlTitle.Margin = new System.Windows.Forms.Padding(0);
             this.pnlTitle.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlTitle.Name = "pnlTitle";
-            this.pnlTitle.Size = new System.Drawing.Size(1285, 42);
-            this.pnlTitle.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
-            this.pnlTitle.TabIndex = 10;
-            this.pnlTitle.Text = null;
-            this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.pnlTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // lTitle
-            // 
-            this.lTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lTitle.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lTitle.LineSize = 2;
-            this.lTitle.Location = new System.Drawing.Point(0, 0);
-            this.lTitle.MinimumSize = new System.Drawing.Size(1, 1);
-            this.lTitle.Name = "lTitle";
-            this.lTitle.Size = new System.Drawing.Size(1285, 5);
-            this.lTitle.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
-            this.lTitle.TabIndex = 14;
-            this.lTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.pnlTitle.Size = new System.Drawing.Size(1285, 45);
+            this.pnlTitle.TabIndex = 12;
             // 
             // btnSave
             // 
@@ -145,7 +126,6 @@ namespace Lead.CPrim.StationCommon.Alert
             this.btnSave.Text = "Save";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnQuery
             // 
@@ -162,10 +142,10 @@ namespace Lead.CPrim.StationCommon.Alert
             this.btnQuery.Text = "Query";
             this.btnQuery.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnQuery.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnQuery.Click += new System.EventHandler(this.btnQuery_Click);
             // 
             // lblEndTime
             // 
+            this.lblEndTime.BackColor = System.Drawing.Color.Transparent;
             this.lblEndTime.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
             this.lblEndTime.Location = new System.Drawing.Point(330, 11);
             this.lblEndTime.Name = "lblEndTime";
@@ -178,6 +158,7 @@ namespace Lead.CPrim.StationCommon.Alert
             // 
             // lblStartTime
             // 
+            this.lblStartTime.BackColor = System.Drawing.Color.Transparent;
             this.lblStartTime.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
             this.lblStartTime.Location = new System.Drawing.Point(3, 11);
             this.lblStartTime.Name = "lblStartTime";
@@ -288,20 +269,20 @@ namespace Lead.CPrim.StationCommon.Alert
             // 
             // dgvAlertData
             // 
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgvAlertData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgvAlertData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
             this.dgvAlertData.AutoGenerateColumns = false;
             this.dgvAlertData.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvAlertData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAlertData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAlertData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dgvAlertData.ColumnHeadersHeight = 45;
             this.dgvAlertData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvAlertData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -313,14 +294,14 @@ namespace Lead.CPrim.StationCommon.Alert
             this.errorMessage,
             this.errorDetail});
             this.dgvAlertData.DataSource = this.alertInfoBindingSource;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAlertData.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAlertData.DefaultCellStyle = dataGridViewCellStyle28;
             this.dgvAlertData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAlertData.EnableHeadersVisualStyles = false;
             this.dgvAlertData.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -328,21 +309,21 @@ namespace Lead.CPrim.StationCommon.Alert
             this.dgvAlertData.Location = new System.Drawing.Point(10, 10);
             this.dgvAlertData.Name = "dgvAlertData";
             this.dgvAlertData.ReadOnly = true;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAlertData.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAlertData.RowHeadersDefaultCellStyle = dataGridViewCellStyle29;
             this.dgvAlertData.RowHeadersWidth = 51;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgvAlertData.RowsDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgvAlertData.RowsDefaultCellStyle = dataGridViewCellStyle30;
             this.dgvAlertData.RowTemplate.Height = 27;
             this.dgvAlertData.ScrollBarRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.dgvAlertData.SelectedIndex = -1;
@@ -356,9 +337,9 @@ namespace Lead.CPrim.StationCommon.Alert
             // date
             // 
             this.date.DataPropertyName = "Date";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.Format = "yyyy-MM-dd";
-            this.date.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.Format = "yyyy-MM-dd";
+            this.date.DefaultCellStyle = dataGridViewCellStyle23;
             this.date.HeaderText = "Date";
             this.date.MinimumWidth = 8;
             this.date.Name = "date";
@@ -368,9 +349,9 @@ namespace Lead.CPrim.StationCommon.Alert
             // startTime
             // 
             this.startTime.DataPropertyName = "CreateTime";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.Format = "yyyy-MM-dd HH:mm:ss.fff";
-            this.startTime.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle24.Format = "yyyy-MM-dd HH:mm:ss.fff";
+            this.startTime.DefaultCellStyle = dataGridViewCellStyle24;
             this.startTime.HeaderText = "Start Time";
             this.startTime.MinimumWidth = 6;
             this.startTime.Name = "startTime";
@@ -380,8 +361,8 @@ namespace Lead.CPrim.StationCommon.Alert
             // endTime
             // 
             this.endTime.DataPropertyName = "EndTime";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.endTime.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.endTime.DefaultCellStyle = dataGridViewCellStyle25;
             this.endTime.HeaderText = "End Time";
             this.endTime.MinimumWidth = 8;
             this.endTime.Name = "endTime";
@@ -391,8 +372,8 @@ namespace Lead.CPrim.StationCommon.Alert
             // timeInState
             // 
             this.timeInState.DataPropertyName = "TimeInState";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.timeInState.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.timeInState.DefaultCellStyle = dataGridViewCellStyle26;
             this.timeInState.HeaderText = "Time In State（Min）";
             this.timeInState.MinimumWidth = 8;
             this.timeInState.Name = "timeInState";
@@ -402,8 +383,8 @@ namespace Lead.CPrim.StationCommon.Alert
             // errorCode
             // 
             this.errorCode.DataPropertyName = "ErrorCode";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.errorCode.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.errorCode.DefaultCellStyle = dataGridViewCellStyle27;
             this.errorCode.HeaderText = "Error Code";
             this.errorCode.MinimumWidth = 8;
             this.errorCode.Name = "errorCode";
@@ -436,7 +417,7 @@ namespace Lead.CPrim.StationCommon.Alert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(1285, 830);
             this.Controls.Add(this.tlpAlert);
             this.Font = new System.Drawing.Font("微软雅黑", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -457,19 +438,11 @@ namespace Lead.CPrim.StationCommon.Alert
 
         #endregion
         private UITableLayoutPanel tlpAlert;
-        private UIPanel pnlTitle;
-        private UIDatetimePicker dtpEndTime;
-        private UIButton btnSave;
-        private UIButton btnQuery;
-        private UILabel lblEndTime;
-        private UILabel lblStartTime;
         private UIPanel pnlAlertTop10;
         private UIPanel pnlAlertTimeStatic;
         private UIPanel pnlAlertData;
         private UIDataGridView dgvAlertData;
         private BindingSource alertInfoBindingSource;
-        private UILine lTitle;
-        private UIDatetimePicker dtpStartTime;
         private DataGridViewTextBoxColumn date;
         private DataGridViewTextBoxColumn startTime;
         private DataGridViewTextBoxColumn endTime;
@@ -477,5 +450,12 @@ namespace Lead.CPrim.StationCommon.Alert
         private DataGridViewTextBoxColumn errorCode;
         private DataGridViewTextBoxColumn errorMessage;
         private DataGridViewTextBoxColumn errorDetail;
+        private Panel pnlTitle;
+        private UIButton btnSave;
+        private UIButton btnQuery;
+        private UILabel lblEndTime;
+        private UILabel lblStartTime;
+        private UIDatetimePicker dtpStartTime;
+        private UIDatetimePicker dtpEndTime;
     }
 }

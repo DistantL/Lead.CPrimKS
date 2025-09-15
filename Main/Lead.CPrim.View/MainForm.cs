@@ -216,9 +216,22 @@ namespace Lead.CPrim.View
             tlpMain.SetDoubleBuffered();
             tlpState.SetDoubleBuffered();
             tlpButton.SetDoubleBuffered();
+
+            lineTop.FillColor = Color.Transparent;
+            lineTop.BackColor = Color.Transparent;
+            lineTop.LineColor = Colors.PrimaryBackColor211;
+            lineBottom.FillColor = Color.Transparent;
+            lineBottom.BackColor = Color.Transparent;
+            lineBottom.LineColor = Colors.PrimaryBackColor211;
+
             Style = UIStyle.Custom;
-            TitleForeColor = Colors.PrimaryForeColorDark;
+            TitleForeColor = Colors.PrimaryBackColor128;
             TitleColor = Colors.PrimaryBackColor236;
+
+            pnlMain.RectColor = Color.Transparent;
+            pnlMain.FillColor = Color.Transparent;
+            pnlMain.BackColor = Color.Transparent;
+
             RegisterHotKey(Sunny.UI.ModifierKeys.Control, Keys.F11);
             HotKeyEventHandler += MainForm_HotKeyEventHandler;
         }

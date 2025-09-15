@@ -93,6 +93,7 @@ namespace Lead.CPrim.StationCommon.Alert
         {
             InitializeComponent();
 
+            RectColor = Color.Transparent;
             frmPieChart = new AlertFrmChartPie();
             frmPieChart.Dock = DockStyle.Fill;
             pnlAlertTop10.Controls.Add(frmPieChart);
@@ -108,11 +109,10 @@ namespace Lead.CPrim.StationCommon.Alert
             btnSave.SetStyle(ControlStyle.Light);
             //btnQuery.SetStyle(Color.WhiteSmoke, Color.FromArgb(64, 64, 64));
             //btnSave.SetStyle(Color.WhiteSmoke, Color.FromArgb(64, 64, 64));
-            pnlTitle.SetStyle();
+            pnlTitle.BackColor = Color.Transparent;
             pnlAlertTop10.SetStyle(Color.FromArgb(211, 211, 211), default(Color));
             pnlAlertTimeStatic.SetStyle(Color.FromArgb(211, 211, 211), default(Color));
             pnlAlertData.SetStyle(Color.FromArgb(211, 211, 211), default(Color));
-            lTitle.LineColor = Color.FromArgb(191, 191, 191);
 
             dgvAlertData.SetStyle(false, false, false, DataGridViewAutoSizeColumnsMode.None, DataGridViewContentAlignment.MiddleLeft, 9.0f, FontStyle.Regular, Color.FromArgb(211, 211, 211));
 
@@ -188,7 +188,7 @@ namespace Lead.CPrim.StationCommon.Alert
         /// <param name="e"></param>
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            UpdateChart(dtpStartTime.Value, dtpEndTime.Value, true);
+
         }
 
         /// <summary>保存</summary>
@@ -196,42 +196,7 @@ namespace Lead.CPrim.StationCommon.Alert
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (_listAlertInfos.Count <= 0)
-            {
-                return;
-            }
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "*.csv|*.CSV";
-            DialogResult result = saveFileDialog.ShowDialog();
-            if(result == DialogResult.OK)
-            {
-                using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName,false))
-                {
-                    sw.WriteLine("序号,日期,开始时间,结束时间,持续时间,错误代码,错误信息,错误细节");
-                    int i = 0;
-                    foreach (var item in _listAlertInfos)
-                    {
-                        i++;
-                        sw.Write(i.ToString());
-                        sw.Write(',');
-                        sw.Write(item.CreateTime.ToString("yyyy-MM-dd"));
-                        sw.Write(',');
-                        sw.Write(item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-                        sw.Write(',');
-                        sw.Write(item.EndTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-                        sw.Write(',');
-                        sw.Write(item.TimeInState);
-                        sw.Write(',');
-                        sw.Write(item.ErrorCode);
-                        sw.Write(',');
-                        sw.Write(item.ErrorMessage);
-                        sw.Write(',');
-                        sw.Write(item.ErrorDetail);
-                        sw.WriteLine();
-                    }
-                }
-            }
         }
         #endregion
 

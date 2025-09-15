@@ -37,7 +37,7 @@ namespace Lead.CPrim.View
             this.pnlTitle = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIPanel();
             this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiViewVersionExplanation = new System.Windows.Forms.ToolStripMenuItem();
-            this.uiLine3 = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
+            this.lineLeft = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
             this.panelAuthority = new System.Windows.Forms.Panel();
             this.BtnHome = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
             this.BtnAlert = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
@@ -48,8 +48,8 @@ namespace Lead.CPrim.View
             this.btnRun = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
             this.btnPaused = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
             this.btnStop = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIImageButton();
-            this.uiLine1 = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
-            this.uiLine2 = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
+            this.lineRight = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
+            this.lineMiddle = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
             this.ttConfig = new System.Windows.Forms.ToolTip(this.components);
             this.tmrAuthority = new System.Windows.Forms.Timer(this.components);
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
@@ -76,9 +76,11 @@ namespace Lead.CPrim.View
             this.tslblTimer = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslbl_Light = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslblAutoManual = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lineTop = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
             this.tmrAlarm = new System.Windows.Forms.Timer(this.components);
             this.tmrSoftWare = new System.Windows.Forms.Timer(this.components);
             this.tmrUIRefresh = new System.Windows.Forms.Timer(this.components);
+            this.lineBottom = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine();
             this.tlpButton.SuspendLayout();
             this.cms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnHome)).BeginInit();
@@ -124,7 +126,7 @@ namespace Lead.CPrim.View
             this.tlpButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210F));
             this.tlpButton.Controls.Add(this.pnlTitle, 14, 0);
-            this.tlpButton.Controls.Add(this.uiLine3, 13, 0);
+            this.tlpButton.Controls.Add(this.lineLeft, 13, 0);
             this.tlpButton.Controls.Add(this.panelAuthority, 23, 0);
             this.tlpButton.Controls.Add(this.BtnHome, 1, 0);
             this.tlpButton.Controls.Add(this.BtnAlert, 3, 0);
@@ -135,10 +137,10 @@ namespace Lead.CPrim.View
             this.tlpButton.Controls.Add(this.btnRun, 16, 0);
             this.tlpButton.Controls.Add(this.btnPaused, 18, 0);
             this.tlpButton.Controls.Add(this.btnStop, 20, 0);
-            this.tlpButton.Controls.Add(this.uiLine1, 21, 0);
-            this.tlpButton.Controls.Add(this.uiLine2, 15, 0);
+            this.tlpButton.Controls.Add(this.lineRight, 21, 0);
+            this.tlpButton.Controls.Add(this.lineMiddle, 15, 0);
             this.tlpButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpButton.Location = new System.Drawing.Point(0, 0);
+            this.tlpButton.Location = new System.Drawing.Point(0, 6);
             this.tlpButton.Margin = new System.Windows.Forms.Padding(0);
             this.tlpButton.Name = "tlpButton";
             this.tlpButton.RowCount = 1;
@@ -182,21 +184,21 @@ namespace Lead.CPrim.View
             this.tsmiViewVersionExplanation.Text = "View version explanation";
             this.tsmiViewVersionExplanation.Click += new System.EventHandler(this.tsmlViewVersionExplanation_Click);
             // 
-            // uiLine3
+            // lineLeft
             // 
-            this.uiLine3.Direction = Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine.LineDirection.Vertical;
-            this.uiLine3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiLine3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.uiLine3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLine3.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.uiLine3.Location = new System.Drawing.Point(493, 3);
-            this.uiLine3.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiLine3.Name = "uiLine3";
-            this.uiLine3.Size = new System.Drawing.Size(4, 70);
-            this.uiLine3.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
-            this.uiLine3.TabIndex = 26;
-            this.uiLine3.Text = "uiLine3";
-            this.uiLine3.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.lineLeft.Direction = Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine.LineDirection.Vertical;
+            this.lineLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lineLeft.FillColor = System.Drawing.Color.Transparent;
+            this.lineLeft.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lineLeft.LineColor = System.Drawing.Color.LightGray;
+            this.lineLeft.Location = new System.Drawing.Point(490, 0);
+            this.lineLeft.Margin = new System.Windows.Forms.Padding(0);
+            this.lineLeft.MinimumSize = new System.Drawing.Size(1, 1);
+            this.lineLeft.Name = "lineLeft";
+            this.lineLeft.Size = new System.Drawing.Size(10, 76);
+            this.lineLeft.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
+            this.lineLeft.TabIndex = 26;
+            this.lineLeft.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // panelAuthority
             // 
@@ -389,36 +391,37 @@ namespace Lead.CPrim.View
             this.btnStop.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // uiLine1
+            // lineRight
             // 
-            this.uiLine1.Direction = Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine.LineDirection.Vertical;
-            this.uiLine1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiLine1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.uiLine1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLine1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.uiLine1.Location = new System.Drawing.Point(937, 3);
-            this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiLine1.Name = "uiLine1";
-            this.uiLine1.Size = new System.Drawing.Size(4, 70);
-            this.uiLine1.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
-            this.uiLine1.TabIndex = 24;
-            this.uiLine1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.lineRight.Direction = Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine.LineDirection.Vertical;
+            this.lineRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lineRight.FillColor = System.Drawing.Color.Transparent;
+            this.lineRight.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lineRight.LineColor = System.Drawing.Color.LightGray;
+            this.lineRight.Location = new System.Drawing.Point(934, 0);
+            this.lineRight.Margin = new System.Windows.Forms.Padding(0);
+            this.lineRight.MinimumSize = new System.Drawing.Size(1, 1);
+            this.lineRight.Name = "lineRight";
+            this.lineRight.Size = new System.Drawing.Size(10, 76);
+            this.lineRight.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
+            this.lineRight.TabIndex = 24;
+            this.lineRight.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // uiLine2
+            // lineMiddle
             // 
-            this.uiLine2.Direction = Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine.LineDirection.Vertical;
-            this.uiLine2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiLine2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.uiLine2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLine2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.uiLine2.Location = new System.Drawing.Point(707, 3);
-            this.uiLine2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiLine2.Name = "uiLine2";
-            this.uiLine2.Size = new System.Drawing.Size(4, 70);
-            this.uiLine2.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
-            this.uiLine2.TabIndex = 25;
-            this.uiLine2.Text = "uiLine2";
-            this.uiLine2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.lineMiddle.Direction = Lead.CPrim.ProxyTools.SunnyUI.Controls.UILine.LineDirection.Vertical;
+            this.lineMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lineMiddle.FillColor = System.Drawing.Color.Transparent;
+            this.lineMiddle.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lineMiddle.LineColor = System.Drawing.Color.LightGray;
+            this.lineMiddle.Location = new System.Drawing.Point(704, 0);
+            this.lineMiddle.Margin = new System.Windows.Forms.Padding(0);
+            this.lineMiddle.MinimumSize = new System.Drawing.Size(1, 1);
+            this.lineMiddle.Name = "lineMiddle";
+            this.lineMiddle.Size = new System.Drawing.Size(10, 76);
+            this.lineMiddle.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
+            this.lineMiddle.TabIndex = 25;
+            this.lineMiddle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // tmrAuthority
             // 
@@ -431,20 +434,23 @@ namespace Lead.CPrim.View
             this.tlpMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(236)))), ((int)(((byte)(236)))));
             this.tlpMain.ColumnCount = 1;
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMain.Controls.Add(this.tlpButton, 0, 0);
-            this.tlpMain.Controls.Add(this.tlpState, 0, 2);
-            this.tlpMain.Controls.Add(this.pnlMain, 0, 1);
-            this.tlpMain.Controls.Add(this.stuStatus, 0, 3);
+            this.tlpMain.Controls.Add(this.lineBottom, 0, 2);
+            this.tlpMain.Controls.Add(this.tlpButton, 0, 1);
+            this.tlpMain.Controls.Add(this.tlpState, 0, 4);
+            this.tlpMain.Controls.Add(this.pnlMain, 0, 3);
+            this.tlpMain.Controls.Add(this.stuStatus, 0, 5);
+            this.tlpMain.Controls.Add(this.lineTop, 0, 0);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMain.Location = new System.Drawing.Point(0, 35);
             this.tlpMain.Margin = new System.Windows.Forms.Padding(0);
             this.tlpMain.Name = "tlpMain";
-            this.tlpMain.RowCount = 4;
+            this.tlpMain.RowCount = 6;
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMain.Size = new System.Drawing.Size(1184, 526);
             this.tlpMain.TabIndex = 23;
             // 
@@ -544,15 +550,17 @@ namespace Lead.CPrim.View
             // 
             // pnlMain
             // 
+            this.pnlMain.BackColor = System.Drawing.Color.Transparent;
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.FillColor = System.Drawing.SystemColors.ControlLight;
+            this.pnlMain.FillColor = System.Drawing.Color.Transparent;
+            this.pnlMain.FillColor2 = System.Drawing.Color.Transparent;
             this.pnlMain.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pnlMain.Location = new System.Drawing.Point(4, 81);
-            this.pnlMain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pnlMain.Location = new System.Drawing.Point(0, 88);
+            this.pnlMain.Margin = new System.Windows.Forms.Padding(0);
             this.pnlMain.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.RectColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlMain.Size = new System.Drawing.Size(1176, 388);
+            this.pnlMain.RectColor = System.Drawing.Color.Transparent;
+            this.pnlMain.Size = new System.Drawing.Size(1184, 386);
             this.pnlMain.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;
             this.pnlMain.StyleCustomMode = true;
             this.pnlMain.TabIndex = 22;
@@ -713,6 +721,19 @@ namespace Lead.CPrim.View
             this.tslblAutoManual.Text = "自动";
             this.tslblAutoManual.Click += new System.EventHandler(this.tslblAutoManual_Click);
             // 
+            // lineTop
+            // 
+            this.lineTop.BackColor = System.Drawing.Color.Transparent;
+            this.lineTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lineTop.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lineTop.Location = new System.Drawing.Point(0, 0);
+            this.lineTop.Margin = new System.Windows.Forms.Padding(0);
+            this.lineTop.MinimumSize = new System.Drawing.Size(1, 1);
+            this.lineTop.Name = "lineTop";
+            this.lineTop.Size = new System.Drawing.Size(1184, 6);
+            this.lineTop.TabIndex = 24;
+            this.lineTop.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // tmrAlarm
             // 
             this.tmrAlarm.Interval = 300;
@@ -726,6 +747,19 @@ namespace Lead.CPrim.View
             // tmrUIRefresh
             // 
             this.tmrUIRefresh.Tick += new System.EventHandler(this.tmrUIRefresh_Tick);
+            // 
+            // lineBottom
+            // 
+            this.lineBottom.BackColor = System.Drawing.Color.Transparent;
+            this.lineBottom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lineBottom.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lineBottom.Location = new System.Drawing.Point(0, 82);
+            this.lineBottom.Margin = new System.Windows.Forms.Padding(0);
+            this.lineBottom.MinimumSize = new System.Drawing.Size(1, 1);
+            this.lineBottom.Name = "lineBottom";
+            this.lineBottom.Size = new System.Drawing.Size(1184, 6);
+            this.lineBottom.TabIndex = 25;
+            this.lineBottom.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // MainForm
             // 
@@ -785,8 +819,8 @@ namespace Lead.CPrim.View
         private UIImageButton btnRun;
         private UIImageButton btnPaused;
         private UIImageButton btnStop;
-        private UILine uiLine1;
-        private UILine uiLine2;
+        private UILine lineRight;
+        private UILine lineMiddle;
         private UIPanel pnlMain;
         private System.Windows.Forms.Timer tmrUIRefresh;
         private System.Windows.Forms.StatusStrip stuStatus;
@@ -801,7 +835,7 @@ namespace Lead.CPrim.View
         private System.Windows.Forms.ToolStripMenuItem tsmiAuthority;
         private System.Windows.Forms.ToolStripMenuItem tsmiTesuFuc;
         private System.Windows.Forms.ToolStripStatusLabel tslbl_Light;
-        private UILine uiLine3;
+        private UILine lineLeft;
         private UIPanel pnlTitle;
         private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
         private System.Windows.Forms.ToolStripStatusLabel tssl_Warning;
@@ -809,5 +843,7 @@ namespace Lead.CPrim.View
         private System.Windows.Forms.ToolStripStatusLabel tssl_DisplayNGInfo;
         private System.Windows.Forms.ContextMenuStrip cms;
         private System.Windows.Forms.ToolStripMenuItem tsmiViewVersionExplanation;
+        private UILine lineTop;
+        private UILine lineBottom;
     }
 }
