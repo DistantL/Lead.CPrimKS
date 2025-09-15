@@ -9,83 +9,103 @@ namespace Lead.CPrim.MachineHelper
 {
     public abstract class SystemStateMachine : StateMachineBase
     {
+        #region Prop
+        /// <summary>
+        /// 手自动状态机
+        /// </summary>
         public IStateMachine AutoSm { get; protected set; }
 
+        /// <summary>
+        /// 系统状态机
+        /// </summary>
         public Dictionary<string, IStateMachine> taskSms { get; protected set; }
+        #endregion
 
+
+
+        #region MethodOverride
+        /// <summary>
+        /// 发送命令（3）<br/>
+        /// </summary>
+        /// <param name="e"></param>
         public override void HandleEvent(UserEvent e)
         {
             base.HandleEvent(e);
-            UserEventType eventType = e.EventType;
-            UserEventType val = eventType;
-            switch ((int)val)
+            switch (e.EventType)
             {
-                case 0:
+                case UserEventType.ESTOP:
                     SendToAllSMs(e);
                     break;
-                case 1:
+                case UserEventType.ESTOPOFF:
                     SendToAllSMs(e);
                     break;
-                case 2:
-                    if ((int)AutoSm.State == 8)
+                case UserEventType.START:
+                    if (AutoSm.State == SmStates.Auto)
                     {
                         SendToSm(e);
                     }
                     break;
-                case 3:
+                case UserEventType.STOP:
                     SendToSm(e);
                     break;
-                case 4:
-                    if ((int)AutoSm.State == 8)
+                case UserEventType.RESET:
+                    if (AutoSm.State == SmStates.Auto)
                     {
                         SendToSm(e);
                     }
                     break;
-                case 5:
+                case UserEventType.ClrErr:
                     SendToSm(e);
                     break;
-                case 6:
+                case UserEventType.Abnormal:
                     SendToSm(e);
                     break;
-                case 7:
+                case UserEventType.NoErr:
                     SendToSm(e);
                     break;
-                case 8:
+                case UserEventType.PAUSE:
                     SendToSm(e);
                     break;
-                case 9:
-                    if ((int)AutoSm.State == 8)
+                case UserEventType.CONTINUE:
+                    if (AutoSm.State == SmStates.Auto)
                     {
                         SendToSm(e);
                     }
                     break;
-                case 10:
+                case UserEventType.PrimErr:
                     SendToSm(e);
                     break;
-                case 11:
+                case UserEventType.Auto:
                     SendToSm(e);
                     break;
-                case 12:
+                case UserEventType.Manual:
                     SendToSm(e);
                     SendToAllSMs(new UserEvent
                     {
                         EventSender = e.EventSender,
-                        EventType = (UserEventType)8
+                        EventType = UserEventType.PAUSE
                     });
                     break;
-                case 13:
+                case UserEventType.Local:
                     SendToSm(e);
                     break;
-                case 14:
+                case UserEventType.Remote:
                     SendToSm(e);
                     break;
-                // 新增20250907
-                case 16:
+                case UserEventType.RunningWithNotice:
+                    SendToSm(e);
+                    break;
+                case UserEventType.Idle:
                     SendToSm(e);
                     break;
             }
         }
 
+        /// <summary>
+        /// 系统状态机初始化[2]<br/>
+        /// 系统状态机以及手自动状态机<br/>
+        /// </summary>
+        /// <param name="obj"></param>
         public override void Initialize(object obj)
         {
             base.Name = "SystemSM";
@@ -98,6 +118,11 @@ namespace Lead.CPrim.MachineHelper
             base.IsRunning = true;
             base.Initialize(obj);
         }
+        #endregion
+
+
+
+        #region MethodInternalUsing
 
         private void SendToAllSMs(UserEvent e)
         {
@@ -118,6 +143,10 @@ namespace Lead.CPrim.MachineHelper
             });
         }
 
+        /// <summary>
+        /// 发送命令（4）<br/>
+        /// </summary>
+        /// <param name="e"></param>
         private void SendToSm(UserEvent e)
         {
             if (e.EventSender == this)
@@ -128,5 +157,6 @@ namespace Lead.CPrim.MachineHelper
             e.EventTarget = (IEventHandler)(object)e.EventSender;
             e.EventSender.PostEvent(e);
         }
+        #endregion
     }
 }

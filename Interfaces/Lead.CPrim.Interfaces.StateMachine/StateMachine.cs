@@ -27,7 +27,8 @@ namespace Lead.CPrim.Interfaces.StateMachine
 		Remote,
 		RecipeApply,
 		RunningWithNotice = 13,
-	}
+        RunningToIdle,
+    }
 
 
 	/// <summary>用户事件类型</summary>
@@ -50,6 +51,7 @@ namespace Lead.CPrim.Interfaces.StateMachine
 		Remote,
 		RecipeApply, 
 		RunningWithNotice = 16,
+		Idle,
 	}
 
 

@@ -215,6 +215,10 @@ namespace Lead.CPrim.MachineHelper
                         {
                             LightChange(SmStates.RunningWithNotice);
                         }
+                        else if (e.EventType == UserEventType.Idle)
+                        {
+                            LightChange(SmStates.RunningToIdle);
+                        }
                         else if (e.EventType == UserEventType.ClrErr)
                         {
                             LightChange(SmStates.Running);
@@ -730,6 +734,7 @@ namespace Lead.CPrim.MachineHelper
         #endregion
 
 
+
         //*****************************************************************************
         #region 状态机
         /// <summary>
@@ -820,6 +825,7 @@ namespace Lead.CPrim.MachineHelper
             PostEvent(UserEventType.ESTOP, systemSM);
         }
         #endregion
+
 
 
         //*****************************************************************************
@@ -987,6 +993,7 @@ namespace Lead.CPrim.MachineHelper
                             BeeTim = 0;
                         }
                         break;
+                    case SmStates.RunningToIdle:
                     case SmStates.Pause:
                         {
                             RedLightState = 0;
