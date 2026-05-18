@@ -1,0 +1,5 @@
+未将对象引用设置到对象的实例。
+   在 Lead.CPrim.Controls.SettingFrm..ctor() 位置 E:\project\昆山\0518程序\4.4.26.0518\Controls\Lead.CPrim.Controls\Setting\SettingFrm.cs:行号 321
+   在 Lead.CPrim.View.MainForm.<MainForm_Load>d__32.MoveNext() 位置 E:\project\昆山\0518程序\4.4.26.0518\Main\Lead.CPrim.View\MainForm.cs:行号 510
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
