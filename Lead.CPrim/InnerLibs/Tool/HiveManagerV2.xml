@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HiveManagerV2</name>
+    </assembly>
+    <members>
+        <member name="T:Lead.Cprim.HiveManagerV2.HiveManagerV2">
+            <summary>
+            Hive 管理状态机 V2
+            作用：统一管理设备/系统的工作状态流转（Idle、Running、Engineering、Plan_DT、DT）
+            设计：单例模式 + Stateless 状态机，线程安全
+            </summary>
+        </member>
+        <member name="P:Lead.Cprim.HiveManagerV2.HiveManagerV2.Instance">
+            <summary>
+            公开单例入口，外部唯一获取实例方式
+            </summary>
+        </member>
+        <member name="E:Lead.Cprim.HiveManagerV2.HiveManagerV2.CanHiveChange">
+            <summary>
+            状态切换前的校验事件
+            返回 true：允许切换；返回 false：拒绝切换
+            </summary>
+        </member>
+        <member name="E:Lead.Cprim.HiveManagerV2.HiveManagerV2.HiveStateChanged">
+            <summary>
+            状态已切换完成的通知事件
+            </summary>
+        </member>
+        <member name="P:Lead.Cprim.HiveManagerV2.HiveManagerV2.CurrentState">
+            <summary>
+            当前状态机状态
+            </summary>
+        </member>
+        <member name="P:Lead.Cprim.HiveManagerV2.HiveManagerV2.IsMasterControlByPc">
+            <summary>
+            是否由 PC 主控（决定状态机行为）
+            </summary>
+        </member>
+        <member name="P:Lead.Cprim.HiveManagerV2.HiveManagerV2.StateMachineDb">
+            <summary>
+            状态机数据存储库名（根据主控方切换：PC / PLC）
+            </summary>
+        </member>
+        <member name="M:Lead.Cprim.HiveManagerV2.HiveManagerV2.#ctor">
+            <summary>
+            私有构造函数（单例），初始化状态机
+            </summary>
+        </member>
+        <member name="M:Lead.Cprim.HiveManagerV2.HiveManagerV2.ClearEventCanHiveChange">
+            <summary>
+            移除所有状态切换校验事件
+            </summary>
+        </member>
+        <member name="M:Lead.Cprim.HiveManagerV2.HiveManagerV2.ClearEventHiveStateChanged">
+            <summary>
+            移除所有状态切换完成事件
+            </summary>
+        </member>
+        <member name="M:Lead.Cprim.HiveManagerV2.HiveManagerV2.ConfigureStateMachine">
+            <summary>
+            配置所有状态、触发条件、流转规则、进入/离开动作
+            </summary>
+        </member>
+        <member name="M:Lead.Cprim.HiveManagerV2.HiveManagerV2.Fire(Lead.CPrim.Interfaces.HiveTrigger,System.String)">
+            <summary>
+            触发状态转换（线程安全）
+            </summary>
+            <param name="trigger">触发类型</param>
+            <param name="info">附带信息（如停机代码）</param>
+            <returns>是否成功切换</returns>
+        </member>
+        <member name="M:Lead.Cprim.HiveManagerV2.HiveManagerV2.GetNextState(Lead.CPrim.Interfaces.HiveTrigger)">
+            <summary>
+            根据【当前状态 + 触发器】获取 固定路由的下一状态
+            </summary>
+            <param name="trigger">要查询的触发器</param>
+            <returns>下一状态，无匹配返回 default</returns>
+        </member>
+        <member name="M:Lead.Cprim.HiveManagerV2.HiveManagerV2.GetLastHiveStatusInfo">
+            <summary>
+            获取上一次状态机记录
+            </summary>
+        </member>
+        <member name="M:Lead.Cprim.HiveManagerV2.HiveManagerV2.InsertHiveStateInfo(Lead.CPrim.Interfaces.StateInfo)">
+            <summary>
+            插入一条状态记录到数据库
+            </summary>
+        </member>
+    </members>
+</doc>
