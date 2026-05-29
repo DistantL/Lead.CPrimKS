@@ -283,6 +283,23 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.UploadInspectResult_Postman(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32)">
+            <summary>
+            接口20：上传设备点检结果 2026-5-15新增
+            </summary>
+            <param name="empNo">作业员卡号（如"TEST"）</param>
+            <param name="terminalName">终端/工站名称（如"PGI_GB_Out01"）</param>
+            <param name="serialNumber">设备/项目编号（如"H90"）</param>
+            <param name="inspectResults">点检项目与结果字典（key:点检项名称, value:结果值）</param>
+            <returns>上传是否成功</returns>
+        </member>
+        <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.GetInspectCommand_New(System.String)">
+            <summary>
+            接口21：获取设备点检指令 2026-5-15新增
+            </summary>
+            <param name="serialNumber">设备/项目编号 (格式: 工作站+专案)</param>
+            <returns>点检内容字符串</returns>
+        </member>
         <member name="M:ThreadSafty_StreamlineControl.Mes_GTK.GetUserLevel_withBadgeID(System.String,System.Int32)">
             <summary>
             从MES获取权限级别
