@@ -730,6 +730,11 @@
             供应商-抛料信息需要使用<br/>
             </summary>
         </member>
+        <member name="P:ThreadSafty_StreamlineControl.ProductionInfo.FoFNGMsgs">
+            <summary>
+            fofNg信息
+            </summary>
+        </member>
         <member name="T:ThreadSafty_StreamlineControl.SlotInfo">
             <summary>
             工位信息
