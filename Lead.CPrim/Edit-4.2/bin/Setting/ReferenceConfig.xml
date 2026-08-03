@@ -361,6 +361,12 @@
       <FullName>System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</FullName>
       <AssemblyType>Framework</AssemblyType>
     </ImportAssembly>
+    <ImportAssembly>
+      <NameOrPath>..\..\ExtLibs\Third\DinoVedioRecord.dll</NameOrPath>
+      <Version>1.0.0.0</Version>
+      <FullName>DinoVedioRecord, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+      <AssemblyType>ThirdParty</AssemblyType>
+    </ImportAssembly>
   </ImportAssemblyList>
   <PartyAssemblyList>
     <ChosenThirdPartyAssemblies>
@@ -712,6 +718,11 @@
       <Path>..\..\InnerLibs\Control\Lead.CPrim.Alarm.dll</Path>
       <Version>1.0.0.0</Version>
       <FullName>Lead.CPrim.Alarm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
+    </ChosenThirdPartyAssemblies>
+    <ChosenThirdPartyAssemblies>
+      <Path>..\..\ExtLibs\Third\DinoVedioRecord.dll</Path>
+      <Version>1.0.0.0</Version>
+      <FullName>DinoVedioRecord, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</FullName>
     </ChosenThirdPartyAssemblies>
   </PartyAssemblyList>
 </ReferencesConfig>
