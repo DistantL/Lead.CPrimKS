@@ -14,6 +14,7 @@ namespace ThreadSafty_StreamlineControl
         工位3,
         工位4,
         缓存位,
-        S1熟料
+        S1熟料,
+        生料
     }
 }
