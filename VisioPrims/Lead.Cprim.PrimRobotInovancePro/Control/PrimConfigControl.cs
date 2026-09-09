@@ -3,6 +3,7 @@ using Lead.CPrim.ProxyTools;
 using Lead.CPrim.ProxyTools.SunnyUI.Controls;
 using System;
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMC100APIDLL;
@@ -10,6 +11,9 @@ using System.ComponentModel;
 using System.Linq;
 using Lead.CPrim.Interfaces.Robot;
 using Lead.CPrim.Controls;
+using Lead.CPrim.Interfaces.StateMachine;
+using Lead.CPrim.StationCommon;
+using Lead.CPrim.TaskHelper;
 using static System.Windows.Forms.AxHost;
 
 namespace Lead.CPrim.PrimRobotInovancePro
@@ -18,6 +22,8 @@ namespace Lead.CPrim.PrimRobotInovancePro
     {
         #region Field
         private Prim _prim;
+        private Color _enableStatusRectColor;
+        private int _isMotorEnableStatusReading;
         #endregion
 
 
@@ -41,6 +47,11 @@ namespace Lead.CPrim.PrimRobotInovancePro
             txtResult.SetStyle();
             btnRead.SetStyle();
             btnWrite.SetStyle();
+            btnEnable.SetStyle();
+            btnEnableSta.SetStyle();
+            _enableStatusRectColor = btnEnableSta.RectColor;
+            btnEnable.Enabled = false;
+            SetMotorEnableStatus(MotorEnableStatus.Unknown);
 
             lineConfig.BackColor = Color.Transparent;
             lineConfig.FillColor = Color.Transparent;
@@ -75,6 +86,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             SetPrimConnState(_prim.PrimConnStat);
             SetPrimRunState(_prim.PrimRunStat);
             SetSpeed(_prim.Vel);
+            UpdateMotorEnableMonitoring();
         }
 
         /// <summary>
@@ -266,6 +278,21 @@ namespace Lead.CPrim.PrimRobotInovancePro
                     break;
             }
         }
+
+        /// <summary>
+        /// 使能操作入口。
+        /// 当前仅保留安全占位，不会向机器人下发任何命令。
+        /// </summary>
+        private void btnEnable_Click(object sender, EventArgs e)
+        {
+            if (!CanUseMotorEnableOperation())
+            {
+                UpdateMotorEnableOperationEnable();
+                return;
+            }
+
+            UIMessageTip.ShowWarning("机器人使能切换命令待厂家确认，当前未执行任何操作。");
+        }
         #endregion
 
 
@@ -329,6 +356,8 @@ namespace Lead.CPrim.PrimRobotInovancePro
                 lblPosition.Text = "";
                 lblState.Text = "";
             }
+
+            UpdateMotorEnableOperationEnable();
         }
 
         private void tmr_Tick(object sender, EventArgs e)
@@ -346,6 +375,165 @@ namespace Lead.CPrim.PrimRobotInovancePro
 
             lblPosition.Text = $"X：{pos.X:F3}；Y：{pos.Y:F3}；Z：{pos.Z:F3}；A：{pos.A:F3}；B：{pos.B:F3}；C：{pos.C:F3}；";
             lblState.Text = _prim.GetPrgState().ToString();
+        }
+
+        /// <summary>
+        /// 真实电机使能状态定时读取。
+        /// </summary>
+        private void tmrEnableSta_Tick(object sender, EventArgs e)
+        {
+            UpdateMotorEnableOperationEnable();
+            if (!CanReadMotorEnableStatus())
+            {
+                SetMotorEnableStatus(MotorEnableStatus.Unknown);
+                return;
+            }
+
+            StartMotorEnableStatusRead();
+        }
+
+        /// <summary>
+        /// 更新电机使能状态读取的启停状态。
+        /// </summary>
+        private void UpdateMotorEnableMonitoring()
+        {
+            bool canRead = CanReadMotorEnableStatus();
+            tmrEnableSta.Enabled = canRead;
+            if (canRead)
+            {
+                StartMotorEnableStatusRead();
+            }
+            else
+            {
+                SetMotorEnableStatus(MotorEnableStatus.Unknown);
+            }
+
+            UpdateMotorEnableOperationEnable();
+        }
+
+        /// <summary>
+        /// 启动一次后台状态读取；上一轮未结束时不重复读取。
+        /// </summary>
+        private void StartMotorEnableStatusRead()
+        {
+            if (!CanReadMotorEnableStatus() ||
+                Interlocked.CompareExchange(ref _isMotorEnableStatusReading, 1, 0) != 0)
+            {
+                return;
+            }
+
+            Prim prim = _prim;
+            Task.Run(() =>
+            {
+                MotorEnableStatus status = prim.GetActualMotorEnableStatus();
+                Action updateAction = () =>
+                {
+                    try
+                    {
+                        if (CanReadMotorEnableStatus())
+                        {
+                            SetMotorEnableStatus(status);
+                        }
+                        else
+                        {
+                            SetMotorEnableStatus(MotorEnableStatus.Unknown);
+                        }
+
+                        UpdateMotorEnableOperationEnable();
+                    }
+                    finally
+                    {
+                        Interlocked.Exchange(ref _isMotorEnableStatusReading, 0);
+                    }
+                };
+
+                if (IsDisposed || !IsHandleCreated)
+                {
+                    Interlocked.Exchange(ref _isMotorEnableStatusReading, 0);
+                    return;
+                }
+
+                try
+                {
+                    BeginInvoke(updateAction);
+                }
+                catch (InvalidOperationException)
+                {
+                    Interlocked.Exchange(ref _isMotorEnableStatusReading, 0);
+                }
+            });
+        }
+
+        /// <summary>
+        /// 是否可读取真实电机使能状态。
+        /// </summary>
+        private bool CanReadMotorEnableStatus()
+        {
+            return _prim != null &&
+                   _prim.PrimRunStat == PrimRunState.Running &&
+                   _prim.PrimConnStat == PrimConnState.Connected &&
+                   !_prim.IsConnecting;
+        }
+
+        /// <summary>
+        /// 是否允许进入使能操作占位入口。
+        /// </summary>
+        private bool CanUseMotorEnableOperation()
+        {
+            if (!CanReadMotorEnableStatus() || !chkMonitor.Checked)
+            {
+                return false;
+            }
+
+            try
+            {
+                string stationName = StationManager.Instance.CurrentStationName;
+                if (string.IsNullOrWhiteSpace(stationName) ||
+                    TaskSmManger.Instance.TaskSMs == null ||
+                    !TaskSmManger.Instance.TaskSMs.ContainsKey(stationName))
+                {
+                    return false;
+                }
+
+                return TaskSmManger.Instance.TaskSMs[stationName].State != SmStates.Running;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 更新使能操作入口可用状态。
+        /// </summary>
+        private void UpdateMotorEnableOperationEnable()
+        {
+            btnEnable.Enabled = CanUseMotorEnableOperation();
+        }
+
+        /// <summary>
+        /// 将真实电机使能状态显示到只读按钮。
+        /// </summary>
+        private void SetMotorEnableStatus(MotorEnableStatus status)
+        {
+            btnEnableSta.SetStyle();
+            btnEnableSta.RectColor = _enableStatusRectColor;
+            switch (status)
+            {
+                case MotorEnableStatus.Enabled:
+                    btnEnableSta.Text = "Enabled";
+                    btnEnableSta.FillColor = btnApply.BackColor;
+                    break;
+
+                case MotorEnableStatus.Disabled:
+                    btnEnableSta.Text = "Disabled";
+                    break;
+
+                default:
+                    btnEnableSta.Text = "Unknown";
+                    btnEnableSta.FillColor = Color.Orange;
+                    break;
+            }
         }
         #endregion
 
@@ -469,6 +657,8 @@ namespace Lead.CPrim.PrimRobotInovancePro
                         btnInit.Enabled = false;
                         break;
                 }
+
+                UpdateMotorEnableMonitoring();
             }
         }
 
@@ -544,8 +734,15 @@ namespace Lead.CPrim.PrimRobotInovancePro
                         //btnStop.BackColor = Color.Gray;
                         break;
                 }
+
+                UpdateMotorEnableMonitoring();
             }
         }
         #endregion
+
+        private void btnEnableSta_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -70,6 +70,9 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.lblState = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
             this.cmbVer = new System.Windows.Forms.ComboBox();
             this.lblVer = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UILabel();
+            this.btnEnable = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIButton();
+            this.btnEnableSta = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UIButton();
+            this.tmrEnableSta = new System.Windows.Forms.Timer(this.components);
             this.tlpTitle.SuspendLayout();
             this.gbExe.SuspendLayout();
             this.SuspendLayout();
@@ -87,7 +90,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             "4"});
             this.cmbRobotId.Location = new System.Drawing.Point(320, 118);
             this.cmbRobotId.Name = "cmbRobotId";
-            this.cmbRobotId.Size = new System.Drawing.Size(150, 27);
+            this.cmbRobotId.Size = new System.Drawing.Size(150, 35);
             this.cmbRobotId.TabIndex = 135;
             // 
             // txtPassward
@@ -96,7 +99,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.txtPassward.Location = new System.Drawing.Point(475, 119);
             this.txtPassward.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPassward.Name = "txtPassward";
-            this.txtPassward.Size = new System.Drawing.Size(150, 25);
+            this.txtPassward.Size = new System.Drawing.Size(150, 34);
             this.txtPassward.TabIndex = 120;
             // 
             // txtIp
@@ -105,7 +108,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.txtIp.Location = new System.Drawing.Point(10, 119);
             this.txtIp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtIp.Name = "txtIp";
-            this.txtIp.Size = new System.Drawing.Size(150, 25);
+            this.txtIp.Size = new System.Drawing.Size(150, 34);
             this.txtIp.TabIndex = 123;
             // 
             // txtPort
@@ -114,7 +117,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.txtPort.Location = new System.Drawing.Point(165, 119);
             this.txtPort.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(150, 25);
+            this.txtPort.Size = new System.Drawing.Size(150, 34);
             this.txtPort.TabIndex = 120;
             // 
             // itemRowCopy
@@ -291,7 +294,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.lblIp.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblIp.Location = new System.Drawing.Point(10, 90);
             this.lblIp.Name = "lblIp";
-            this.lblIp.Size = new System.Drawing.Size(22, 20);
+            this.lblIp.Size = new System.Drawing.Size(30, 27);
             this.lblIp.TabIndex = 148;
             this.lblIp.Text = "IP";
             this.lblIp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -304,7 +307,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.lblPort.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblPort.Location = new System.Drawing.Point(165, 90);
             this.lblPort.Name = "lblPort";
-            this.lblPort.Size = new System.Drawing.Size(37, 20);
+            this.lblPort.Size = new System.Drawing.Size(52, 27);
             this.lblPort.TabIndex = 148;
             this.lblPort.Text = "Port";
             this.lblPort.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -317,7 +320,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.lblRobotId.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblRobotId.Location = new System.Drawing.Point(320, 90);
             this.lblRobotId.Name = "lblRobotId";
-            this.lblRobotId.Size = new System.Drawing.Size(24, 20);
+            this.lblRobotId.Size = new System.Drawing.Size(33, 27);
             this.lblRobotId.TabIndex = 148;
             this.lblRobotId.Text = "ID";
             this.lblRobotId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -330,7 +333,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.lblPassWord.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblPassWord.Location = new System.Drawing.Point(475, 90);
             this.lblPassWord.Name = "lblPassWord";
-            this.lblPassWord.Size = new System.Drawing.Size(75, 20);
+            this.lblPassWord.Size = new System.Drawing.Size(107, 27);
             this.lblPassWord.TabIndex = 148;
             this.lblPassWord.Text = "PassWord";
             this.lblPassWord.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -379,7 +382,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.lblVelocity.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblVelocity.Location = new System.Drawing.Point(10, 210);
             this.lblVelocity.Name = "lblVelocity";
-            this.lblVelocity.Size = new System.Drawing.Size(62, 20);
+            this.lblVelocity.Size = new System.Drawing.Size(88, 27);
             this.lblVelocity.TabIndex = 148;
             this.lblVelocity.Text = "Velocity";
             this.lblVelocity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -392,7 +395,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.lblVersion.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblVersion.Location = new System.Drawing.Point(670, 472);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(31, 20);
+            this.lblVersion.Size = new System.Drawing.Size(45, 27);
             this.lblVersion.TabIndex = 154;
             this.lblVersion.Text = "Ver";
             this.lblVersion.Click += new System.EventHandler(this.lblVersion_DoubleClick);
@@ -487,7 +490,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.lblType.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblType.Location = new System.Drawing.Point(10, 290);
             this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(41, 20);
+            this.lblType.Size = new System.Drawing.Size(58, 27);
             this.lblType.TabIndex = 148;
             this.lblType.Text = "Type";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -500,7 +503,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.lblAddress.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblAddress.Location = new System.Drawing.Point(80, 290);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(62, 20);
+            this.lblAddress.Size = new System.Drawing.Size(89, 27);
             this.lblAddress.TabIndex = 148;
             this.lblAddress.Text = "Address";
             this.lblAddress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -513,7 +516,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.lblResult.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblResult.Location = new System.Drawing.Point(170, 290);
             this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(50, 20);
+            this.lblResult.Size = new System.Drawing.Size(69, 27);
             this.lblResult.TabIndex = 148;
             this.lblResult.Text = "Result";
             this.lblResult.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -562,7 +565,7 @@ namespace Lead.CPrim.PrimRobotInovancePro
             "4"});
             this.cmbVer.Location = new System.Drawing.Point(630, 118);
             this.cmbVer.Name = "cmbVer";
-            this.cmbVer.Size = new System.Drawing.Size(150, 27);
+            this.cmbVer.Size = new System.Drawing.Size(150, 35);
             this.cmbVer.TabIndex = 135;
             // 
             // lblVer
@@ -572,16 +575,52 @@ namespace Lead.CPrim.PrimRobotInovancePro
             this.lblVer.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblVer.Location = new System.Drawing.Point(630, 90);
             this.lblVer.Name = "lblVer";
-            this.lblVer.Size = new System.Drawing.Size(31, 20);
+            this.lblVer.Size = new System.Drawing.Size(45, 27);
             this.lblVer.TabIndex = 148;
             this.lblVer.Text = "Ver";
             this.lblVer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblVer.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // btnEnable
+            // 
+            this.btnEnable.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEnable.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.btnEnable.Location = new System.Drawing.Point(440, 318);
+            this.btnEnable.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnEnable.Name = "btnEnable";
+            this.btnEnable.Size = new System.Drawing.Size(80, 35);
+            this.btnEnable.TabIndex = 175;
+            this.btnEnable.Text = "Enable";
+            this.btnEnable.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEnable.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
+            // 
+            // btnEnableSta
+            // 
+            this.btnEnableSta.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnEnableSta.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.btnEnableSta.Location = new System.Drawing.Point(530, 318);
+            this.btnEnableSta.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnEnableSta.Name = "btnEnableSta";
+            this.btnEnableSta.Size = new System.Drawing.Size(90, 35);
+            this.btnEnableSta.TabIndex = 176;
+            this.btnEnableSta.TabStop = false;
+            this.btnEnableSta.Text = "Unknown";
+            this.btnEnableSta.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEnableSta.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnEnableSta.Click += new System.EventHandler(this.btnEnableSta_Click);
+            // 
+            // tmrEnableSta
+            // 
+            this.tmrEnableSta.Interval = 1000;
+            this.tmrEnableSta.Tick += new System.EventHandler(this.tmrEnableSta_Tick);
+            // 
             // PrimConfigControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.btnEnableSta);
+            this.Controls.Add(this.btnEnable);
             this.Controls.Add(this.chkMonitor);
             this.Controls.Add(this.btnWrite);
             this.Controls.Add(this.btnRead);
@@ -662,5 +701,8 @@ namespace Lead.CPrim.PrimRobotInovancePro
         private CPrim.ProxyTools.SunnyUI.Controls.UILabel lblState;
         private System.Windows.Forms.ComboBox cmbVer;
         private CPrim.ProxyTools.SunnyUI.Controls.UILabel lblVer;
+        private ProxyTools.SunnyUI.Controls.UIButton btnEnable;
+        private ProxyTools.SunnyUI.Controls.UIButton btnEnableSta;
+        private System.Windows.Forms.Timer tmrEnableSta;
     }
 }

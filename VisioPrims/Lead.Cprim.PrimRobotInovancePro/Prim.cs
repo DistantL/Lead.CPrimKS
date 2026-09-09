@@ -39,6 +39,16 @@ using System.Xml;
 
 namespace Lead.CPrim.PrimRobotInovancePro
 {
+    /// <summary>
+    /// 机器人真实电机使能读取结果。
+    /// </summary>
+    internal enum MotorEnableStatus
+    {
+        Unknown,
+        Disabled,
+        Enabled
+    }
+
     public class Prim : IPrim, IIoModule, IRobotInovance, IMotionCard
     {
         #region Field
@@ -68,6 +78,11 @@ namespace Lead.CPrim.PrimRobotInovancePro
         /// 连接中标志
         /// </summary>
         bool _isConnecting = false;
+
+        /// <summary>
+        /// 电机使能状态访问锁，后续读写真实使能状态时共用。
+        /// </summary>
+        readonly object _motorEnableStatusLock = new object();
         #endregion
 
 
@@ -863,6 +878,70 @@ namespace Lead.CPrim.PrimRobotInovancePro
 
 
         #region Override IRobotInovance
+        /// <summary>
+        /// 读取机器人真实电机使能状态。
+        /// </summary>
+        /// <remarks>
+        /// 仅供配置界面状态展示使用，不写入基元配置，也不记录轮询日志。
+        /// </remarks>
+        internal MotorEnableStatus GetActualMotorEnableStatus()
+        {
+            try
+            {
+                lock (_motorEnableStatusLock)
+                {
+                    if (PrimRunStat != PrimRunState.Running ||
+                        PrimConnStat != PrimConnState.Connected ||
+                        IsConnecting)
+                    {
+                        return MotorEnableStatus.Unknown;
+                    }
+
+                    int enable = -1;
+                    int ret;
+                    RobotVer robotVer = this.RobotVer;
+                    int robotId = RobotId;
+                    switch (robotVer)
+                    {
+                        case RobotVer.S0321R20:
+                            ret = IMC100API_S0321R20.IMC100_Get_MotorSts(ref enable, robotId);
+                            break;
+
+                        case RobotVer.V4R24:
+                            ret = IMC100API_V4R24.IMC100_Get_MotorSts(ref enable, robotId);
+                            break;
+
+                        default:
+                            return MotorEnableStatus.Unknown;
+                    }
+
+                    if (ret != 0)
+                    {
+                        return MotorEnableStatus.Unknown;
+                    }
+
+                    if (enable == 1)
+                    {
+                        return MotorEnableStatus.Enabled;
+                    }
+
+                    if (enable == 0)
+                    {
+                        return MotorEnableStatus.Disabled;
+                    }
+
+                    return MotorEnableStatus.Unknown;
+                }
+            }
+            catch
+            {
+                return MotorEnableStatus.Unknown;
+            }
+        }
+
+        // TODO: 厂家确认 cmd 的双向定义后，在此处增加真实使能设置方法，
+        // 并按 RobotVer 调用 IMC100_MotorEnable(cmd, RobotId)，且复用 _motorEnableStatusLock。
+
         int IRobotInovance.RobotId { get => _config.RobotId; set => _config.RobotId = value; }
         public PrgState ProgramState => GetPrgState();
         public int PrgStart(int vel)

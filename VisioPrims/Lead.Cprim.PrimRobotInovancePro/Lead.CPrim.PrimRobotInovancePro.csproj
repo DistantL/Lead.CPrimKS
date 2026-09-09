@@ -122,6 +122,21 @@
       <Name>Lead.CPrim.Interfaces</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Lead.CPrim.Interfaces.StateMachine\Lead.CPrim.Interfaces.StateMachine.csproj">
+      <Project>{c25d88dd-7fcc-432e-a8f3-de209f733ab4}</Project>
+      <Name>Lead.CPrim.Interfaces.StateMachine</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SoftwareConfig\Lead.CPrim.StationCommon\Lead.CPrim.StationCommon.csproj">
+      <Project>{0e060597-6091-4be8-ab02-ca99544f1863}</Project>
+      <Name>Lead.CPrim.StationCommon</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Task\Lead.CPrim.TaskHelper\Lead.CPrim.TaskHelper.csproj">
+      <Project>{386644a0-fa83-4a87-8ea5-de77a546ea2d}</Project>
+      <Name>Lead.CPrim.TaskHelper</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\Tools\Lead.CPrim.ProxyTools\Lead.CPrim.ProxyTools.csproj">
       <Project>{8399edff-87f1-40e7-a251-5a49cdaf6f10}</Project>
       <Name>Lead.CPrim.ProxyTools</Name>
