@@ -16,14 +16,14 @@ namespace Lead.CPrim.View
         [STAThread]
         private static void Main()
         {
-            StartupDiagnostics.Start();
-
             //使用 ThreadException 事件来处理 UI 线程异常
             Application.ThreadException += ApplicationOnThreadException;
 
             //使用 UnhandledException 事件来处理非 UI 线程异常
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
+
+            StartupDiagnostics.Start();
 
             var openMoreEnable = Properties.Settings.Default.允许多开;
             var fi = new FileInfo(Application.ExecutablePath);
