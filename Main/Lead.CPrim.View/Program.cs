@@ -23,8 +23,6 @@ namespace Lead.CPrim.View
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
 
-            StartupDiagnostics.Start();
-
             var openMoreEnable = Properties.Settings.Default.允许多开;
             var fi = new FileInfo(Application.ExecutablePath);
             var ps = Process.GetProcessesByName(fi.Name.Replace(fi.Extension, ""));
@@ -44,10 +42,7 @@ namespace Lead.CPrim.View
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                StartupDiagnostics.Mark("程序入口");
-                StartupDiagnostics.Mark("进入WinForms消息循环");
                 Application.Run(new MainForm());
-                StartupDiagnostics.Mark("退出WinForms消息循环");
             }
         }
 

@@ -13,6 +13,7 @@ using Microsoft.Win32;
 using Spring.Context;
 using Spring.Context.Support;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -163,14 +164,11 @@ namespace Lead.CPrim.View
         #region 三部曲
         private void bgwInitialize_DoWork(object sender, DoWorkEventArgs e)
         {
-            StartupDiagnostics.Mark("欢迎页后台任务开始");
             int num = 0;
             //软件配置
             bgwInitialize.ReportProgress(0, "载入软件配置");
             //权限
             bgwInitialize.ReportProgress(5, "加载权限管理器");
-            Stopwatch stageStopwatch = StartupDiagnostics.StartStage("权限管理器初始化");
-            Thread.Sleep(100);
             try
             {
                 num = AuthorityManager.Instance.AuthorityManagerInit(_adminPwConfigPath, _otherPwConfigPath);
@@ -181,13 +179,8 @@ namespace Lead.CPrim.View
             }
             catch (Exception ex)
             {
-                StartupDiagnostics.Mark("权限管理器初始化异常", $"exception={ex.GetType().Name}");
                 AuthorityManager.Instance.ChangeLevel(OpLevel.Other);
                 MessageBox.Show("加载权限管理器出错，异常信息：" + ex.ToString());
-            }
-            finally
-            {
-                StartupDiagnostics.CompleteStage("权限管理器初始化", stageStopwatch);
             }
 
             //工站
@@ -227,8 +220,6 @@ namespace Lead.CPrim.View
             //}
 
             //元件
-            stageStopwatch = StartupDiagnostics.StartStage("元件管理器初始化");
-            Thread.Sleep(100);
             try
             {
                 if (SwManager.Instance.ElesConfigEnable && File.Exists(SwManager.Instance.ElesFile))
@@ -246,17 +237,10 @@ namespace Lead.CPrim.View
             }
             catch (Exception ex4)
             {
-                StartupDiagnostics.Mark("元件管理器初始化异常", $"exception={ex4.GetType().Name}");
                 MessageBox.Show("元件管理器加载失败：" + ex4.ToString());
-            }
-            finally
-            {
-                StartupDiagnostics.CompleteStage("元件管理器初始化", stageStopwatch);
             }
 
             //任务
-            stageStopwatch = StartupDiagnostics.StartStage("任务管理器初始化");
-            Thread.Sleep(100);
             try
             {
                 if (SwManager.Instance.TasksConfigEnable && File.Exists(SwManager.Instance.TasksFile))
@@ -271,16 +255,9 @@ namespace Lead.CPrim.View
             }
             catch (Exception ex5)
             {
-                StartupDiagnostics.Mark("任务管理器初始化异常", $"exception={ex5.GetType().Name}");
                 MessageBox.Show("任务管理器加载失败：" + ex5.ToString());
             }
-            finally
-            {
-                StartupDiagnostics.CompleteStage("任务管理器初始化", stageStopwatch);
-            }
 
-            stageStopwatch = StartupDiagnostics.StartStage("语言配置初始化");
-            Thread.Sleep(100);
             try
             {
                 LanguageManager.Instance.Init();
@@ -288,17 +265,10 @@ namespace Lead.CPrim.View
             }
             catch (Exception ep) 
             {
-                StartupDiagnostics.Mark("语言配置初始化异常", $"exception={ep.GetType().Name}");
                 MessageBox.Show("语言配置加载失败：" + ep.ToString());
-            }
-            finally
-            {
-                StartupDiagnostics.CompleteStage("语言配置初始化", stageStopwatch);
             }
 
             //脉冲比较触发
-            stageStopwatch = StartupDiagnostics.StartStage("脉冲比较触发初始化");
-            Thread.Sleep(100);
             try
             {
                 if (SwManager.Instance.CmpTrigConfigEnable && File.Exists(SwManager.Instance.CmpTrigFilePath))
@@ -312,17 +282,10 @@ namespace Lead.CPrim.View
             }
             catch (Exception ex6)
             {
-                StartupDiagnostics.Mark("脉冲比较触发初始化异常", $"exception={ex6.GetType().Name}");
                 MessageBox.Show("脉冲比较触发功能载入失败：" + ex6.ToString());
-            }
-            finally
-            {
-                StartupDiagnostics.CompleteStage("脉冲比较触发初始化", stageStopwatch, $"enabled={SwManager.Instance.CmpTrigConfigEnable}");
             }
 
             //FAI
-            stageStopwatch = StartupDiagnostics.StartStage("FAI配置初始化");
-            Thread.Sleep(100);
             try
             {
                 if (SwManager.Instance.FaiConfigEnable && File.Exists(SwManager.Instance.FaiConfigFilePath))
@@ -336,12 +299,7 @@ namespace Lead.CPrim.View
             }
             catch (Exception ex7)
             {
-                StartupDiagnostics.Mark("FAI配置初始化异常", $"exception={ex7.GetType().Name}");
                 MessageBox.Show("FAI配置载入失败：" + ex7.ToString());
-            }
-            finally
-            {
-                StartupDiagnostics.CompleteStage("FAI配置初始化", stageStopwatch, $"enabled={SwManager.Instance.FaiConfigEnable}");
             }
 
             //点胶
@@ -364,27 +322,19 @@ namespace Lead.CPrim.View
 
             //加载Tracking程序集
             bgwInitialize.ReportProgress(96, "加载Tracking程序集");
-            stageStopwatch = StartupDiagnostics.StartStage("Tracking程序集加载");
-            Thread.Sleep(100);
             try
             {
-                LoadAssemblies(_trackingAssemblyPath, "Tracking程序集反射加载");
+                LoadAssemblies(_trackingAssemblyPath);
                 Assembly.LoadFrom("ExtLibs\\Sys\\MongoDB\\MongoDB.Bson.dll");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                StartupDiagnostics.Mark("Tracking程序集加载异常", $"exception={ex.GetType().Name}");
-            }
-            finally
-            {
-                StartupDiagnostics.CompleteStage("Tracking程序集加载", stageStopwatch, $"enabled={SwManager.Instance.TrackingEnable}");
             }
 
             //初始化Spring和Wcf模块
             if (SwManager.Instance.TrackingEnable)
             {
                 bgwInitialize.ReportProgress(98, "初始化Spring和Wcf模块");
-                stageStopwatch = StartupDiagnostics.StartStage("Spring和Wcf初始化");
                 Thread.Sleep(100);
                 try
                 {
@@ -392,25 +342,15 @@ namespace Lead.CPrim.View
                 }
                 catch (Exception ex10)
                 {
-                    StartupDiagnostics.Mark("Spring和Wcf初始化异常", $"exception={ex10.GetType().Name}");
                     MessageBox.Show("Spring和Wcf模块载入失败：" + ex10.ToString());
                 }
-                finally
-                {
-                    StartupDiagnostics.CompleteStage("Spring和Wcf初始化", stageStopwatch);
-                }
-            }
-            else
-            {
-                StartupDiagnostics.Mark("Spring和Wcf初始化跳过", "enabled=False");
             }
 
             //第三方库
             bgwInitialize.ReportProgress(99, "加载其他程序集");
-            Thread.Sleep(100);
-            LoadAssemblies(_thirdLibsPath, "第三方程序集加载");
+            //补偿取料点位工具为独立手动窗体，框架启动时无需预加载。
+            LoadAssemblies(_thirdLibsPath, "ManualChangeCompesation.dll");
             bgwInitialize.ReportProgress(100, "软件初始化完成！");
-            StartupDiagnostics.Mark("欢迎页后台任务完成");
         }
 
         private void bgwInitialize_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -425,7 +365,6 @@ namespace Lead.CPrim.View
             {
                 MessageBox.Show(e.Error.ToString());
             }
-            StartupDiagnostics.Mark("欢迎页后台任务回调完成");
             Close();
         }
         #endregion
@@ -467,34 +406,25 @@ namespace Lead.CPrim.View
             }
         }
 
-        private void LoadAssemblies(string dirPath, string stageName)
+        private void LoadAssemblies(string dirPath, params string[] excludedAssemblyNames)
         {
-            Stopwatch stageStopwatch = StartupDiagnostics.StartStage(stageName, $"directory={dirPath}");
-            int dllCount = 0;
-            int successCount = 0;
-            int failureCount = 0;
+            var excludedAssemblies = new HashSet<string>(excludedAssemblyNames ?? new string[0], StringComparer.OrdinalIgnoreCase);
             DirectoryInfo directoryInfo = new DirectoryInfo(dirPath);
-            try
+            FileInfo[] files = directoryInfo.GetFiles("*.dll");
+            foreach (FileInfo fileInfo in files)
             {
-                FileInfo[] files = directoryInfo.GetFiles("*.dll");
-                dllCount = files.Length;
-                foreach (FileInfo fileInfo in files)
+                if (excludedAssemblies.Contains(fileInfo.Name))
                 {
-                    try
-                    {
-                        Assembly.LoadFrom(fileInfo.FullName);
-                        successCount++;
-                    }
-                    catch (Exception ex)
-                    {
-                        failureCount++;
-                        Debug.WriteLine(ex.ToString());
-                    }
+                    continue;
                 }
-            }
-            finally
-            {
-                StartupDiagnostics.CompleteStage(stageName, stageStopwatch, $"directory={dirPath}; dllCount={dllCount}; success={successCount}; failed={failureCount}");
+                try
+                {
+                    Assembly.LoadFrom(fileInfo.FullName);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                }
             }
         }
         #endregion
