@@ -17,7 +17,6 @@ namespace Lead.CPrim.View
         public static void Start()
         {
             TotalStopwatch.Restart();
-            Mark("程序入口");
         }
 
         /// <summary>

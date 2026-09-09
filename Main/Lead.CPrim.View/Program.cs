@@ -44,6 +44,7 @@ namespace Lead.CPrim.View
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
+                StartupDiagnostics.Mark("程序入口");
                 StartupDiagnostics.Mark("进入WinForms消息循环");
                 Application.Run(new MainForm());
                 StartupDiagnostics.Mark("退出WinForms消息循环");
