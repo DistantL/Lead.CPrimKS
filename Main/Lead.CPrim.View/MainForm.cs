@@ -284,6 +284,7 @@ namespace Lead.CPrim.View
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
+            StartupDiagnostics.Mark("主窗体加载开始");
             //UIStatusFormService.ShowStatusForm(100, "加载 -> 软件配置");
             //主题
             {
@@ -294,19 +295,20 @@ namespace Lead.CPrim.View
                 //    msTool.BackColor = SystemColors.ControlDark;
                 //}
             }
-
-
-
+            Stopwatch stageStopwatch = StartupDiagnostics.StartStage("Mongo服务检查");
             if (!ServiceHelper.MongoDBServiceIsRunning())
             {
+                StartupDiagnostics.CompleteStage("Mongo服务检查", stageStopwatch, "result=服务未运行");
                 UIMessageTip.ShowError("请开启MongoDB服务", -1, false, new Point(Width / 2, Height / 2), true);
                 await Task.Delay(3000);
                 Process.GetCurrentProcess().Kill();
                 Environment.Exit(0);
             }
+            StartupDiagnostics.CompleteStage("Mongo服务检查", stageStopwatch, "result=服务运行中");
 
             //软件配置
             {
+                stageStopwatch = StartupDiagnostics.StartStage("软件配置初始化");
                 try
                 {
                     if (AuthorityManager.Instance.GetSoftLockConfig() != 0)
@@ -351,13 +353,31 @@ namespace Lead.CPrim.View
                 }
                 catch (Exception ex)
                 {
+                    StartupDiagnostics.Mark("软件配置初始化异常", $"exception={ex.GetType().Name}");
                     LogAdd($"软件配置加载失败 => {ex.Message}", LogLevel.Warn);
+                }
+                finally
+                {
+                    StartupDiagnostics.CompleteStage("软件配置初始化", stageStopwatch);
                 }
             }
             //HiveManager初始化需要swmanager初始化，数据库服务开启
-            var site = SwManager.Instance.Site;
-            var @bool = SwManager.Instance.MasterControl == "PC";
-            HiveManagerV3.Instance.Init(site, (MasterControlEnum)Enum.Parse(typeof(MasterControlEnum),SwManager.Instance.MasterControl),SwManager.Instance.MasterIp);
+            stageStopwatch = StartupDiagnostics.StartStage("HIVE初始化");
+            try
+            {
+                var site = SwManager.Instance.Site;
+                var @bool = SwManager.Instance.MasterControl == "PC";
+                HiveManagerV3.Instance.Init(site, (MasterControlEnum)Enum.Parse(typeof(MasterControlEnum), SwManager.Instance.MasterControl), SwManager.Instance.MasterIp);
+            }
+            catch (Exception ex)
+            {
+                StartupDiagnostics.Mark("HIVE初始化异常", $"exception={ex.GetType().Name}");
+                throw;
+            }
+            finally
+            {
+                StartupDiagnostics.CompleteStage("HIVE初始化", stageStopwatch);
+            }
 
             //主界面增加登录模块
             {
@@ -369,11 +389,21 @@ namespace Lead.CPrim.View
 
             {
                 UIStatusFormService.SetInfo("加载 -> 工站", 10);
-                StationManager.Instance.Init();
+                stageStopwatch = StartupDiagnostics.StartStage("工站初始化");
+                try
+                {
+                    int stationInitResult = StationManager.Instance.Init();
+                    StartupDiagnostics.Mark("工站初始化返回", $"result={stationInitResult}");
+                }
+                finally
+                {
+                    StartupDiagnostics.CompleteStage("工站初始化", stageStopwatch);
+                }
             }
 
             //系统状态机
             {
+                stageStopwatch = StartupDiagnostics.StartStage("系统状态机初始化");
                 try
                 {
                     TaskSmManger.Instance.Init(StationManager.Instance.Stations.Keys.ToArray());
@@ -381,11 +411,17 @@ namespace Lead.CPrim.View
                 }
                 catch (Exception ex)
                 {
+                    StartupDiagnostics.Mark("系统状态机初始化异常", $"exception={ex.GetType().Name}");
                     this.ShowErrorDialog(NLocalizer.TaskStationMachineInitError + ex.Message);
+                }
+                finally
+                {
+                    StartupDiagnostics.CompleteStage("系统状态机初始化", stageStopwatch);
                 }
             }
 
             {
+                stageStopwatch = StartupDiagnostics.StartStage("基元加载与实例化");
                 try
                 {
                     UIStatusFormService.SetInfo("加载 -> 基元", 10);
@@ -416,12 +452,18 @@ namespace Lead.CPrim.View
                 }
                 catch (Exception ex)
                 {
+                    StartupDiagnostics.Mark("基元加载与实例化异常", $"exception={ex.GetType().Name}");
                     LogAdd($"基元加载失败，异常信息：{ex.Message}", LogLevel.Warn);
+                }
+                finally
+                {
+                    StartupDiagnostics.CompleteStage("基元加载与实例化", stageStopwatch);
                 }
             }
 
             //第三方Dll
             {
+                stageStopwatch = StartupDiagnostics.StartStage("第三方文件处理");
                 if (!UIGlobal.DefinePath.IsNullOrWhiteSpace() && Directory.Exists(UIGlobal.DefinePath))
                 {
                     string[] paths = Directory.GetFiles(UIGlobal.DefinePath, "*", SearchOption.TopDirectoryOnly);
@@ -441,9 +483,11 @@ namespace Lead.CPrim.View
                 {
                     Directory.CreateDirectory(UIGlobal.DefinePath);
                 }
+                StartupDiagnostics.CompleteStage("第三方文件处理", stageStopwatch);
             }
 
             {
+                stageStopwatch = StartupDiagnostics.StartStage("显示加载与实例化");
                 try
                 {
                     UIStatusFormService.SetInfo("加载 -> 显示", 10);
@@ -466,18 +510,26 @@ namespace Lead.CPrim.View
                 }
                 catch (Exception ex3)
                 {
+                    StartupDiagnostics.Mark("显示加载与实例化异常", $"exception={ex3.GetType().Name}");
                     LogAdd($"显示基元加载失败，异常信息：{ex3.Message}", LogLevel.Warn);
+                }
+                finally
+                {
+                    StartupDiagnostics.CompleteStage("显示加载与实例化", stageStopwatch);
                 }
             }
 
             //欢迎界面
             {
+                stageStopwatch = StartupDiagnostics.StartStage("欢迎页后台初始化");
                 var welcome = new WelcomeForm();
                 welcome.ShowDialog();
+                StartupDiagnostics.CompleteStage("欢迎页后台初始化", stageStopwatch);
             }
 
             //事件订阅
             {
+                stageStopwatch = StartupDiagnostics.StartStage("事件订阅与维护界面创建");
                 //权限
                 _mainFormButton.Clear();
                 _mainFormButton.Add(BtnEnum.BtnHome.ToString(), BtnHome);
@@ -536,6 +588,7 @@ namespace Lead.CPrim.View
                         WorkModeChange(HiveManagerV3.Instance.PlanedDowntimeSelect);
                     }
                 };
+                StartupDiagnostics.CompleteStage("事件订阅与维护界面创建", stageStopwatch);
             }
 
 
@@ -553,6 +606,7 @@ namespace Lead.CPrim.View
 
             //工站UI更新
             {
+                stageStopwatch = StartupDiagnostics.StartStage("主工站界面创建");
                 AddNewStationForm(StationManager.Instance.CurrentStation);
                 AlertFrm.Instance.OnAfterClrErrorInfo += mainForm.InstanceClrErr;
                 AlertFrm.Instance.OnBeforeDisplayAlertFrmDialog += InstanceShowAudioAlarm;
@@ -561,6 +615,7 @@ namespace Lead.CPrim.View
                 //InstanceToolStripStatus(HiveManager.GetCurrentHiveStatus());
                 HiveManagerV3.Instance.HiveStateChanged += InstanceToolStripStatus;
                 InstanceToolStripStatus(HiveManagerV3.Instance.GetCurrentHiveStatus());
+                StartupDiagnostics.CompleteStage("主工站界面创建", stageStopwatch);
             }
 
             //CPU、内存
@@ -585,6 +640,7 @@ namespace Lead.CPrim.View
 
             OnLanguageChanged();
             NLocalizer.LanguageChanged += OnLanguageChanged;
+            StartupDiagnostics.Mark("主窗体加载完成");
         }
 
         private void Instance_HiveStateChanged(StateInfo arg1, HiveTrigger arg2)

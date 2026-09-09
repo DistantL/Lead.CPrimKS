@@ -16,6 +16,8 @@ namespace Lead.CPrim.View
         [STAThread]
         private static void Main()
         {
+            StartupDiagnostics.Start();
+
             //使用 ThreadException 事件来处理 UI 线程异常
             Application.ThreadException += ApplicationOnThreadException;
 
@@ -42,7 +44,9 @@ namespace Lead.CPrim.View
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
+                StartupDiagnostics.Mark("进入WinForms消息循环");
                 Application.Run(new MainForm());
+                StartupDiagnostics.Mark("退出WinForms消息循环");
             }
         }
 

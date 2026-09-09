@@ -58,6 +58,18 @@ namespace Lead.CPrim.FormMain
 
         /// <summary>Vendor界面</summary>
         Vendor _vendor;
+
+        /// <summary>首次工站状态机初始化计时器</summary>
+        private Stopwatch _firstTaskInitStopwatch;
+
+        /// <summary>最近一次人工工站状态机初始化计时器</summary>
+        private Stopwatch _latestTaskInitStopwatch;
+
+        /// <summary>是否尚未发起首次工站状态机初始化</summary>
+        private bool _isFirstTaskInit = true;
+
+        /// <summary>工站状态机初始化次数</summary>
+        private int _taskInitSequence;
         #endregion
 
 
@@ -204,6 +216,19 @@ namespace Lead.CPrim.FormMain
 
             _station.StationMachineInited = success;
             _initing = false;
+
+            if (_firstTaskInitStopwatch != null)
+            {
+                _firstTaskInitStopwatch.Stop();
+                LogHelper.LogAdd(LogLevel.Info, $"[Startup] 工站状态机初始化完成 | station={_station.Name}; success={success}; elapsed={_firstTaskInitStopwatch.ElapsedMilliseconds}ms", PrimLogId.View.ToString(), LogClassification.Other);
+                _firstTaskInitStopwatch = null;
+            }
+            else if (_latestTaskInitStopwatch != null)
+            {
+                _latestTaskInitStopwatch.Stop();
+                LogHelper.LogAdd(LogLevel.Info, $"[TaskInit] 工站状态机初始化完成 | station={_station.Name}; success={success}; elapsed={_latestTaskInitStopwatch.ElapsedMilliseconds}ms", PrimLogId.View.ToString(), LogClassification.Other);
+                _latestTaskInitStopwatch = null;
+            }
 
             if (SwManager.Instance.BootRun)
             {
@@ -429,11 +454,37 @@ namespace Lead.CPrim.FormMain
         /// <param name="asyncMode">是否异步</param>
         public void TaskInit(bool asyncMode)
         {
+            _taskInitSequence++;
+            bool isFirstTaskInit = _isFirstTaskInit;
+            if (isFirstTaskInit)
+            {
+                _isFirstTaskInit = false;
+                _firstTaskInitStopwatch = Stopwatch.StartNew();
+                LogHelper.LogAdd(LogLevel.Info, $"[Startup] 工站状态机初始化开始 | station={_station.Name}; sequence={_taskInitSequence}; async={asyncMode}", PrimLogId.View.ToString(), LogClassification.Other);
+            }
+            else
+            {
+                _latestTaskInitStopwatch = Stopwatch.StartNew();
+                LogHelper.LogAdd(LogLevel.Info, $"[TaskInit] 工站状态机初始化开始 | station={_station.Name}; sequence={_taskInitSequence}; async={asyncMode}", PrimLogId.View.ToString(), LogClassification.Other);
+            }
+
             Action a = delegate
             {
                 SingleRecipeCfg currentRecipe = _station.CurrentRecipe;
                 if (currentRecipe.Tasks.Count < 1)
                 {
+                    if (isFirstTaskInit)
+                    {
+                        _firstTaskInitStopwatch?.Stop();
+                        LogHelper.LogAdd(LogLevel.Info, $"[Startup] 工站状态机初始化未发起 | station={_station.Name}; reason=任务成员为空; elapsed={_firstTaskInitStopwatch?.ElapsedMilliseconds ?? 0}ms", PrimLogId.View.ToString(), LogClassification.Other);
+                        _firstTaskInitStopwatch = null;
+                    }
+                    else
+                    {
+                        _latestTaskInitStopwatch?.Stop();
+                        LogHelper.LogAdd(LogLevel.Info, $"[TaskInit] 工站状态机初始化未发起 | station={_station.Name}; reason=任务成员为空; elapsed={_latestTaskInitStopwatch?.ElapsedMilliseconds ?? 0}ms", PrimLogId.View.ToString(), LogClassification.Other);
+                        _latestTaskInitStopwatch = null;
+                    }
                     Notification.ShowWarn(string.Format(NLocalizer.GetString("Lead_CPrim_FormMain_DevMainForm_ErrMsg_LoadConfigFail", "工站={0}未配置任务成员，请检查并重新配置！！！"), _station.Name));
                 }
                 else
