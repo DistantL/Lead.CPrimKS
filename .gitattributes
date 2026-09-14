@@ -1,0 +1,2 @@
+# Keep C# sources in Windows line-ending format in every checkout.
+*.cs text eol=crlf

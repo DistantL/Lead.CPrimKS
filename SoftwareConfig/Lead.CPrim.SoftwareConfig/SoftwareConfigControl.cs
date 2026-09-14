@@ -265,6 +265,33 @@ namespace Lead.CPrim.SoftwareConfig
                 tbMachineData.Text = text;
             }
         }
+        /// <summary>全局设置配置路径选择</summary>
+        private void btnBrowseGlobSettingConfigPath_Click(object sender, EventArgs e)
+        {
+            string text = tbGlobSettingConfigPath.Text;
+            if (FileHelper.OpenFileDialogMethod("", FilterType.JSON, false, ref text))
+            {
+                tbGlobSettingConfigPath.Text = text;
+            }
+        }
+        /// <summary>HashKey配置路径选择</summary>
+        private void btnBrowseHashKeyConfigPath_Click(object sender, EventArgs e)
+        {
+            string text = tbHashKeyConfigPath.Text;
+            if (FileHelper.OpenFileDialogMethod("", FilterType.JSON, false, ref text))
+            {
+                tbHashKeyConfigPath.Text = text;
+            }
+        }
+        /// <summary>权限管理配置路径选择</summary>
+        private void button1btnBrowseAdminitionConfigPath_Click(object sender, EventArgs e)
+        {
+            string text = tbAdministonConfigPath.Text;
+            if (FileHelper.OpenFileDialogMethod("", FilterType.CSV, false, ref text))
+            {
+                tbAdministonConfigPath.Text = text;
+            }
+        }
         #endregion
 
 
@@ -308,6 +335,9 @@ namespace Lead.CPrim.SoftwareConfig
                 _manager.ComplexQueryTaskFilePath = tbComplexQueryTaskFilePath.Text;
                 _manager.DispenserFilePath = tbDispenserConfigPath.Text;
                 _manager.DispenserConfigEnable = chkDisConfigEnable.Checked;
+                _manager.GlobalSettingConfigPath = tbGlobSettingConfigPath.Text.Trim();
+                _manager.HashKeyConfigPath = tbHashKeyConfigPath.Text.Trim();
+                _manager.AdministrationConfigPath = tbAdministonConfigPath.Text.Trim();
                 _manager.SFLPath = tbSFLPath.Text.Trim();
                 _manager.PDCAPath = tbPDCAPath.Text.Trim();
                 _manager.MachinePath = tbMachinePath.Text.Trim();
@@ -527,6 +557,9 @@ namespace Lead.CPrim.SoftwareConfig
             if (!string.IsNullOrEmpty(config.ComplexQueryTaskFilePath)) tbComplexQueryTaskFilePath.Text = config.ComplexQueryTaskFilePath;
             if (!string.IsNullOrEmpty(config.DispenserFilePath)) tbDispenserConfigPath.Text = config.DispenserFilePath;
             chkDisConfigEnable.Checked = config.DispenserConfigEnable;
+            tbGlobSettingConfigPath.Text = config.GlobalSettingConfigPath ?? string.Empty;
+            tbHashKeyConfigPath.Text = config.HashKeyConfigPath ?? string.Empty;
+            tbAdministonConfigPath.Text = config.AdministrationConfigPath ?? string.Empty;
 
             tbSFLPath.Text = string.IsNullOrEmpty(config.SFLPath) ? string.Empty : config.SFLPath;
             tbPDCAPath.Text = string.IsNullOrEmpty(config.PDCAPath) ? string.Empty : config.PDCAPath;
@@ -609,6 +642,9 @@ namespace Lead.CPrim.SoftwareConfig
             lb_Fai.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Fai", "FAI参数:");
             lb_ComplexFai.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_ComplexFai", "复杂查询任务路径:");
             lb_Dispensing.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Dispensing", "点胶:");
+            lb_GlobSetting.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_GlobalSettingConfigPath", "全局设置:");
+            lb_Hashkey.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_HashKeyConfigPath", "HashKey配置:");
+            lb_Administration.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_AdministrationConfigPath", "权限配置:");
             lb_Log_SFL.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Log_SFL", "SFL日志:");
             lb_Log_PDCA.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Log_PDCA", "PDCA日志:");
             lb_Log_Machine.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Log_Machine", "设备日志:");

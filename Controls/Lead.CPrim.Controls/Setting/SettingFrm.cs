@@ -73,11 +73,11 @@ namespace Lead.CPrim.Controls
         public SettingUse _setting = new SettingUse();
 
         /// <summary>Setting路径</summary>
-        private string _settingPath = @"D:\Config\Access Control\Setting.json";
+        private readonly string _settingPath;
 
-        private string _hashKeyPath = @"D:\Config\CPrimConfig\HashKey.json";
+        private readonly string _hashKeyPath;
 
-        private string _administrationPath = @"D:\Config\AdministrationConfig\Administration.csv";
+        private readonly string _administrationPath;
 
         private int _selAdministrationIndex = -1;
 
@@ -152,6 +152,9 @@ namespace Lead.CPrim.Controls
         public SettingFrm()
         {
             InitializeComponent();
+            _settingPath = SwManager.Instance.GlobalSettingConfigPath;
+            _hashKeyPath = SwManager.Instance.HashKeyConfigPath;
+            _administrationPath = SwManager.Instance.AdministrationConfigPath;
 
             pnlGeneral.SetStyle(Color.FromArgb(229, 229, 229), default(Color));
             tlpGeneral.BackColor = Color.FromArgb(229, 229, 229);

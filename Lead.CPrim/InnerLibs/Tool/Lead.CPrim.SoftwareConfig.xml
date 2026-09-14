@@ -73,6 +73,15 @@
         <member name="M:Lead.CPrim.SoftwareConfig.SoftwareConfigControl.btnBrowseMachineDataPath_Click(System.Object,System.EventArgs)">
             <summary>机台数据目录</summary>
         </member>
+        <member name="M:Lead.CPrim.SoftwareConfig.SoftwareConfigControl.btnBrowseGlobSettingConfigPath_Click(System.Object,System.EventArgs)">
+            <summary>全局设置配置路径选择</summary>
+        </member>
+        <member name="M:Lead.CPrim.SoftwareConfig.SoftwareConfigControl.btnBrowseHashKeyConfigPath_Click(System.Object,System.EventArgs)">
+            <summary>HashKey配置路径选择</summary>
+        </member>
+        <member name="M:Lead.CPrim.SoftwareConfig.SoftwareConfigControl.button1btnBrowseAdminitionConfigPath_Click(System.Object,System.EventArgs)">
+            <summary>权限管理配置路径选择</summary>
+        </member>
         <member name="M:Lead.CPrim.SoftwareConfig.SoftwareConfigControl.SaveSWParams">
             <summary>软件配置保存</summary>
         </member>
@@ -328,6 +337,15 @@
         </member>
         <member name="P:Lead.CPrim.Global.SwManager.DispenserConfigEnable">
             <summary>点胶使能</summary>
+        </member>
+        <member name="P:Lead.CPrim.Global.SwManager.GlobalSettingConfigPath">
+            <summary>全局设置配置文件</summary>
+        </member>
+        <member name="P:Lead.CPrim.Global.SwManager.HashKeyConfigPath">
+            <summary>HashKey配置文件</summary>
+        </member>
+        <member name="P:Lead.CPrim.Global.SwManager.AdministrationConfigPath">
+            <summary>权限管理配置文件</summary>
         </member>
         <member name="P:Lead.CPrim.Global.SwManager.SFLPath">
             <summary>SFL日志</summary>

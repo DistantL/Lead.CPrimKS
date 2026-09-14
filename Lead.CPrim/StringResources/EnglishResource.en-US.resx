@@ -8586,6 +8586,15 @@
   <data name="Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Dispensing" xml:space="preserve">
     <value>Glue dispensing:</value>
   </data>
+  <data name="Lead_CPrim_SoftwareConfig_SoftwareConfigControl_GlobalSettingConfigPath" xml:space="preserve">
+    <value>Global settings:</value>
+  </data>
+  <data name="Lead_CPrim_SoftwareConfig_SoftwareConfigControl_HashKeyConfigPath" xml:space="preserve">
+    <value>HashKey configuration:</value>
+  </data>
+  <data name="Lead_CPrim_SoftwareConfig_SoftwareConfigControl_AdministrationConfigPath" xml:space="preserve">
+    <value>Administration configuration:</value>
+  </data>
   <data name="Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Log_SFL" xml:space="preserve">
     <value>SFL log:</value>
   </data>

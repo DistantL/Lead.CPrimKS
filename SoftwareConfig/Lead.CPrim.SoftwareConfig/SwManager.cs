@@ -321,6 +321,12 @@ namespace Lead.CPrim.Global
         public string DispenserFilePath { get; set; }
         /// <summary>点胶使能</summary>
         public bool DispenserConfigEnable { get; set; }
+        /// <summary>全局设置配置文件</summary>
+        public string GlobalSettingConfigPath { get; set; } = @"D:\Config\Access Control\Setting.json";
+        /// <summary>HashKey配置文件</summary>
+        public string HashKeyConfigPath { get; set; } = @"D:\Config\CPrimConfig\HashKey.json";
+        /// <summary>权限管理配置文件</summary>
+        public string AdministrationConfigPath { get; set; } = @"D:\Config\AdministrationConfig\Administration.csv";
         /// <summary>SFL日志</summary>
         public string SFLPath { get; set; }
         /// <summary>PDCA日志</summary>
