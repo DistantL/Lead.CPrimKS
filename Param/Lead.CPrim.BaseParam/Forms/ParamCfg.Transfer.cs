@@ -61,8 +61,6 @@ namespace Lead.CPrim.BaseParam
                 var selected = SelectedTopLevelProperty();
                 if (TransferSession == null || selected == null) return;
                 TransferSession.CheckName(selected.Name);
-                if (TransferSession.Groups.Length == 0)
-                    throw new InvalidOperationException(NLocalizer.GetString("Param_TransferNoGroups", "当前产品没有可用分组，请先在换型参数中建立分组。"));
                 using (var dialog = new TransferPropertyForm(selected, TransferSession.Groups, TransferSession.Product))
                 {
                     if (dialog.ShowDialog(this) != DialogResult.OK) return;

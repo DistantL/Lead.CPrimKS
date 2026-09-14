@@ -12173,7 +12173,7 @@
   <data name="Param_TransferTitle" xml:space="preserve"><value>转移为换型参数</value></data>
   <data name="Param_TransferWarning" xml:space="preserve"><value>仅转移到当前产品。确定仅暂存，顶部保存后生效。保存后必须手动将相关全局参数读写改为换型参数读写，完成前请勿运行设备。</value></data>
   <data name="Param_TransferOK" xml:space="preserve"><value>确定</value></data>
-  <data name="Param_TransferSelectGroup" xml:space="preserve"><value>请选择当前产品已有分组。</value></data>
+  <data name="Param_TransferSelectGroup" xml:space="preserve"><value>请选择已有分组或输入新分组名。</value></data>
   <data name="Param_TransferNoGroups" xml:space="preserve"><value>当前产品没有可用分组，请先在换型参数中建立分组。</value></data>
   <data name="Param_TransferDiscard" xml:space="preserve"><value>放弃未保存的修改？待转移参数不会写入文件。</value></data>
 </root>

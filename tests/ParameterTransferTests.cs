@@ -92,7 +92,7 @@ internal static class ParameterTransferTests
         pair = new Pair();
         Reject(() => pair.Session.Stage(P("Existing"), "Product group"), "同名拒绝");
         Reject(() => pair.Session.Stage(P("运行模式"), "Product group"), "运行模式拒绝");
-        Reject(() => pair.Session.Stage(P("New"), "Missing"), "不存在分组拒绝");
+        Reject(() => pair.Session.Stage(P("New"), "   "), "空白分组拒绝");
         pair.Stage("Speed");
         Reject(() => pair.Session.Stage(P("Speed"), "Product group"), "重复待转移拒绝");
         File.AppendAllText(pair.Target, " ");
@@ -145,12 +145,39 @@ internal static class ParameterTransferTests
         Check((string)target.Element("Position").Element("Cartesian") == "XYZ", "轴组保留");
         Check(((List<Lead.CPrim.Interfaces.Ele.Pos>)((Property)target.Element("Position")).Value).Single().X == 1, "点位坐标保留");
 
+        pair = new Pair();
+        pair.Session.Stage(pair.Global.Element("Speed"), "  New group  ");
+        pair.Global.Element("Speed").Remove();
+        Check(pair.Session.Groups.Contains("New group"), "新分组进入待转移会话下拉选项");
+        Check(!XElement.Load(pair.Target).Elements().Any(p => (string)p.Element("Category") == "New group"), "暂存新组不写文件");
+        pair.Session.Stage(pair.Global.Element("Flag"), "New group");
+        pair.Global.Element("Flag").Remove();
+        pair.Session.Save(pair.Global);
+        Check(XElement.Load(pair.Target).Elements().Count(p => (string)p.Element("Category") == "New group") == 2, "保存创建新组且复用同组");
+        pair = new Pair();
+        new XElement("Para").Save(pair.Target);
+        pair.Session = new ParameterTransferSession(pair.Source, pair.Target, "AudioAirPods");
+        Check(pair.Session.Groups.Length == 0, "空产品无已有分组");
+        pair.Session.Stage(pair.Global.Element("Speed"), "First group");
+        pair.Global.Element("Speed").Remove();
+        pair.Session.Save(pair.Global);
+        Check((string)XElement.Load(pair.Target).Element("Speed").Element("Category") == "First group", "空产品也能新建分组");
+        pair = new Pair();
+
         using (var dialog = new TransferPropertyForm((Property)P("Speed"), new[] { "Product group" }, "AudioAirPods"))
         {
             Check(dialog.Text == "转移为换型参数", "弹窗标题");
-            Check(dialog.Controls.OfType<TextBox>().Count(t => t.ReadOnly) == 3, "三个身份字段只读");
-            Check(dialog.Controls.OfType<ComboBox>().Single().DropDownStyle == ComboBoxStyle.DropDownList, "分组只选不输入");
-            Check(dialog.SelectedGroup == null, "不自动选择目标分组");
+            Check(dialog.Controls.OfType<Lead.CPrim.ProxyTools.SunnyUI.Controls.UITextBox>().Count(t => t.ReadOnly) == 3, "三个身份字段只读");
+            var groupBox = dialog.Controls.OfType<Lead.CPrim.ProxyTools.SunnyUI.Controls.UIComboBox>().Single();
+            Check(groupBox.DropDownStyle == Sunny.UI.UIDropDownStyle.DropDown, "分组可选择和输入");
+            Check(string.IsNullOrEmpty(dialog.SelectedGroup), "不自动选择目标分组");
+            groupBox.SelectedIndex = 0;
+            Check(dialog.SelectedGroup == "Product group", "选择已有分组");
+            groupBox.Text = "  Typed group  ";
+            Check(dialog.SelectedGroup == "Typed group", "输入新分组并去除首尾空白");
+            using (var reference = new NewProperty())
+                Check(dialog.TitleColor == reference.TitleColor && dialog.BackColor == reference.BackColor
+                    && dialog.Font.Equals(reference.Font), "与修改属性窗体颜色字体一致");
             dialog.ShowInTaskbar = false;
             dialog.StartPosition = FormStartPosition.Manual;
             dialog.Location = new Point(-30000, -30000);

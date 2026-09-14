@@ -41,7 +41,7 @@ namespace Lead.CPrim.BaseParam
 
         public string[] Groups
         {
-            get { return Read(targetBytes).Elements().Select(p => (string)p.Element("Category"))
+            get { return Read(targetBytes).Elements().Concat(pending).Select(p => (string)p.Element("Category"))
                 .Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().ToArray(); }
         }
 
@@ -66,7 +66,8 @@ namespace Lead.CPrim.BaseParam
         {
             string name = (string)property.Element("Name");
             CheckName(name);
-            if (!Groups.Contains(group)) throw new InvalidOperationException("请选择当前产品已有分组。");
+            if (string.IsNullOrWhiteSpace(group)) throw new InvalidOperationException("请选择已有分组或输入新分组名。");
+            group = group.Trim();
             var copy = new XElement(property);
             copy.SetElementValue("Category", group);
             ValidateDocument(new XElement("Para", copy));

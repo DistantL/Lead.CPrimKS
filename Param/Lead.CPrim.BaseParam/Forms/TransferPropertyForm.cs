@@ -9,7 +9,7 @@ namespace Lead.CPrim.BaseParam
 {
     public partial class TransferPropertyForm : UIForm
     {
-        public string SelectedGroup { get { return cbGroup.SelectedItem as string; } }
+        public string SelectedGroup { get { return cbGroup.Text.Trim(); } }
         public TransferPropertyForm()
         {
             InitializeComponent();
@@ -37,9 +37,9 @@ namespace Lead.CPrim.BaseParam
         }
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (cbGroup.SelectedIndex < 0)
+            if (string.IsNullOrWhiteSpace(SelectedGroup))
             {
-                MessageBox.Show(NLocalizer.GetString("Param_TransferSelectGroup", "请选择当前产品已有分组。"));
+                MessageBox.Show(NLocalizer.GetString("Param_TransferSelectGroup", "请选择已有分组或输入新分组名。"));
                 return;
             }
             DialogResult = DialogResult.OK;
