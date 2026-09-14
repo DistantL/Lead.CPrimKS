@@ -107,6 +107,27 @@ internal static class ParameterUiSmokeTests
                 && XElement.Load(form.ActiveParameterPath).Elements("TransferValue").Count() == 1, "旧缓存不恢复全局或丢失产品变量");
             Check(form.ModeChange("正常生产") == 0 && (int)DynamicParam.Instance.TransferValue == 55, "模式切换保留新产品变量");
             Check(form.Init(dir, "正常生产") == 0 && (int)DynamicParam.Instance.TransferValue == 55, "重新加载保留转移结果");
+            Check(form.ModeChange("空运行模式") == 0, "切换到未引用 Speed 的模式");
+            bool modeBlocked = false;
+            try { form.ValidateTransferOutName("Speed"); } catch (InvalidOperationException) { modeBlocked = true; }
+            Check(modeBlocked, "非当前模式仍引用的变量也不可转移到全局");
+            form.ValidateTransferOutName("TransferValue");
+            var reverse = new Lead.CPrim.BaseParam.ParameterTransferSession(form.ActiveParameterPath, commonPath, "AudioAirPods", true);
+            reverse.ValidateTransferName = form.ValidateTransferOutName;
+            reverse.ValidateDocuments = (p, g) => form.ValidateTransferredParameters(p);
+            reverse.RefreshCommitted = (p, g) => { common.RefreshTransferredParameters(g); form.RefreshTransferredParameters(p); };
+            var productDocument = XElement.Load(form.ActiveParameterPath);
+            reverse.Stage(productDocument.Element("TransferValue"), "New global group");
+            productDocument.Element("TransferValue").Remove();
+            Check(!Lead.CPrim.CommonParam.CommonParam.Instance.IsPropertyContain("TransferValue"), "反向确定仅暂存");
+            reverse.Save(productDocument);
+            Check((int)Lead.CPrim.CommonParam.CommonParam.Instance.TransferValue == 55, "反向刷新全局值");
+            Check(((DynamicParam)DynamicParam.Instance).Node.Element("TransferValue") == null, "反向刷新移除产品值");
+            Check(common.Save(common.GetRunMode()) == 0 && form.Save(null, false) == 0, "反向转移后主页面保存");
+            Check(XElement.Load(commonPath).Elements("TransferValue").Count() == 1
+                && XElement.Load(form.ActiveParameterPath).Element("TransferValue") == null, "反向保存不恢复旧产品参数");
+            Check(form.ModeChange("正常生产") == 0 && form.Init(dir, "正常生产") == 0
+                && ((DynamicParam)DynamicParam.Instance).Node.Element("TransferValue") == null, "反向转移后切模式及重载");
             int notices = 0;
             manager.OnSoftwareConfigChangeCurrentProduct += (product, products) => notices++;
             manager.ChangeCurrentProduct("ProductB", false);

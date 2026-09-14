@@ -61,7 +61,7 @@ namespace Lead.CPrim.BaseParam
                 var selected = SelectedTopLevelProperty();
                 if (TransferSession == null || selected == null) return;
                 TransferSession.CheckName(selected.Name);
-                using (var dialog = new TransferPropertyForm(selected, TransferSession.Groups, TransferSession.Product))
+                using (var dialog = new TransferPropertyForm(selected, TransferSession.Groups, TransferSession.Product, TransferSession.ToGlobal))
                 {
                     if (dialog.ShowDialog(this) != DialogResult.OK) return;
                     TransferSession.Stage(GetEditedNode(selected), dialog.SelectedGroup);
@@ -70,7 +70,7 @@ namespace Lead.CPrim.BaseParam
                     propertyGrid1.SelectedObject = Pmc_St;
                 }
             }
-            catch (Exception ex) { MessageBox.Show(this, ex.Message, NLocalizer.GetString("Param_TransferTitle", "转移为换型参数")); }
+            catch (Exception ex) { MessageBox.Show(this, ex.Message, Text); }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

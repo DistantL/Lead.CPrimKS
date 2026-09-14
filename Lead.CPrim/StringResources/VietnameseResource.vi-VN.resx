@@ -12176,4 +12176,6 @@
   <data name="Param_TransferSelectGroup" xml:space="preserve"><value>Chọn nhóm hiện có hoặc nhập tên nhóm mới.</value></data>
   <data name="Param_TransferNoGroups" xml:space="preserve"><value>Chưa có nhóm. Hãy tạo nhóm trong tham số sản phẩm trước.</value></data>
   <data name="Param_TransferDiscard" xml:space="preserve"><value>Bỏ các thay đổi chưa lưu? Các tham số chờ chuyển sẽ không được ghi.</value></data>
+  <data name="Param_TransferGlobalTitle" xml:space="preserve"><value>Chuyển sang tham số toàn cục</value></data>
+  <data name="Param_TransferGlobalWarning" xml:space="preserve"><value>Chuyển từ sản phẩm hiện tại sang tham số toàn cục. Xác nhận chỉ lưu tạm; nhấn Lưu để áp dụng. Sửa các lệnh đọc và ghi thành tham số toàn cục trước khi chạy máy.</value></data>
 </root>

@@ -452,18 +452,20 @@ namespace Lead.CPrim.DynamicParam
         /// <param name="e"></param>
         private void tsbtnEdit_Click(object sender, EventArgs e)
         {
-            ParamCfg frm = new ParamCfg(_curParaPath)
-            {
-                CurSysDir = _curSysDirPaht
-            };
-            frm.ShowDialog();
             try
             {
-                LoadProductMode(_activeProduct, _currentMode);
+                var session = CreateTransferSession?.Invoke(_curParaPath);
+                using (var frm = new ParamCfg(_curParaPath))
+                {
+                    frm.CurSysDir = _curSysDirPaht;
+                    frm.TransferSession = session;
+                    frm.ShowDialog(this);
+                }
+                if (session == null) LoadProductMode(_activeProduct, _currentMode);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("重新加载换型参数失败：" + ex.Message);
+                MessageBox.Show("编辑换型参数失败：" + ex.Message);
             }
         }
 

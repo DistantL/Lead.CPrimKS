@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace Lead.CPrim.BaseParam
 {
-    /// <summary>一次全局参数编辑会话；只在 Save 时协调提交两份文件。</summary>
+    /// <summary>双向参数转移会话；回调参数始终按源文件、目标文件顺序传递。</summary>
     public sealed class ParameterTransferSession
     {
         private readonly string sourcePath;
@@ -15,14 +15,22 @@ namespace Lead.CPrim.BaseParam
         private byte[] targetBytes;
         private readonly List<XElement> pending = new List<XElement>();
         public Action ValidateContext { get; set; }
+        public Action<string> ValidateTransferName { get; set; }
         public Action<XElement, XElement> ValidateDocuments { get; set; }
         public Action<XElement, XElement> RefreshCommitted { get; set; }
         public string Product { get; private set; }
+        public bool ToGlobal { get; private set; }
         public bool HasPending { get { return pending.Count != 0; } }
         public string LastBackupPaths { get; private set; }
 
         public ParameterTransferSession(string source, string target, string product)
+            : this(source, target, product, false)
         {
+        }
+
+        public ParameterTransferSession(string source, string target, string product, bool toGlobal)
+        {
+            ToGlobal = toGlobal;
             sourcePath = Path.GetFullPath(source);
             targetPath = Path.GetFullPath(target);
             if (string.Equals(sourcePath, targetPath, StringComparison.OrdinalIgnoreCase))
@@ -59,7 +67,8 @@ namespace Lead.CPrim.BaseParam
             if (name == "运行模式") throw new InvalidOperationException("运行模式是框架保留参数，不可转移。");
             if (Read(targetBytes).Elements().Any(p => (string)p.Element("Name") == name)
                 || pending.Any(p => (string)p.Element("Name") == name))
-                throw new InvalidOperationException("当前产品或待转移清单已存在同索引名称：" + name);
+                throw new InvalidOperationException("目标参数或待转移清单已存在同索引名称：" + name);
+            ValidateTransferName?.Invoke(name);
         }
 
         public void Stage(XElement property, string group)
@@ -94,22 +103,23 @@ namespace Lead.CPrim.BaseParam
                 .ToString(SaveOptions.DisableFormatting);
         }
 
-        public void Save(XElement global)
+        public void Save(XElement source)
         {
             CheckCurrent();
-            var nextGlobal = new XElement(global);
-            var nextProduct = Read(targetBytes);
+            var nextSource = new XElement(source);
+            var nextTarget = Read(targetBytes);
             foreach (var item in pending)
             {
                 string name = (string)item.Element("Name");
-                if (nextGlobal.Elements().Any(p => (string)p.Element("Name") == name)
-                    || nextProduct.Elements().Any(p => (string)p.Element("Name") == name))
+                ValidateTransferName?.Invoke(name);
+                if (nextSource.Elements().Any(p => (string)p.Element("Name") == name)
+                    || nextTarget.Elements().Any(p => (string)p.Element("Name") == name))
                     throw new InvalidOperationException("待转移参数存在同名冲突：" + name);
-                nextProduct.Add(new XElement(item));
+                nextTarget.Add(new XElement(item));
             }
-            ValidateDocument(nextGlobal);
-            ValidateDocument(nextProduct);
-            ValidateDocuments?.Invoke(nextGlobal, nextProduct);
+            ValidateDocument(nextSource);
+            ValidateDocument(nextTarget);
+            ValidateDocuments?.Invoke(nextSource, nextTarget);
             string suffix = ".transfer-" + Guid.NewGuid().ToString("N");
             string sourceTemp = sourcePath + suffix + ".tmp";
             string targetTemp = targetPath + suffix + ".tmp";
@@ -120,16 +130,16 @@ namespace Lead.CPrim.BaseParam
             LastBackupPaths = sourceBackup + (transfer ? Environment.NewLine + targetBackup : "");
             try
             {
-                nextGlobal.Save(sourceTemp);
-                if (transfer) nextProduct.Save(targetTemp);
+                nextSource.Save(sourceTemp);
+                if (transfer) nextTarget.Save(targetTemp);
                 File.Copy(sourcePath, sourceBackup);
                 if (transfer) File.Copy(targetPath, targetBackup);
                 CheckCurrent();
-                // 先落目标文件，再移除全局定义；失败时利用备份恢复。
+                // 先落目标文件，再移除源定义；失败时利用备份恢复。
                 if (transfer) { File.Replace(targetTemp, targetPath, null); targetReplaced = true; }
                 File.Replace(sourceTemp, sourcePath, null);
                 sourceReplaced = true;
-                RefreshCommitted?.Invoke(new XElement(nextGlobal), new XElement(nextProduct));
+                RefreshCommitted?.Invoke(new XElement(nextSource), new XElement(nextTarget));
                 sourceBytes = File.ReadAllBytes(sourcePath);
                 targetBytes = File.ReadAllBytes(targetPath);
                 pending.Clear();

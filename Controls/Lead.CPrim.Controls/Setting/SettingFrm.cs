@@ -1391,6 +1391,8 @@ namespace Lead.CPrim.Controls
             }
             CommonParamForm.Instance.CreateTransferSession = SwManager.Instance.CommonDynamicParamEnable && SwManager.Instance.DynamicParamEnable
                 ? (Func<string, Lead.CPrim.BaseParam.ParameterTransferSession>)CreateParameterTransferSession : null;
+            _dynamicParamForm.CreateTransferSession = SwManager.Instance.CommonDynamicParamEnable && SwManager.Instance.DynamicParamEnable
+                ? (Func<string, Lead.CPrim.BaseParam.ParameterTransferSession>)CreateGlobalParameterTransferSession : null;
             tvHardwareSetting.ExpandAll();
         }
 

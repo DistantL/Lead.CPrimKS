@@ -164,6 +164,33 @@ internal static class ParameterTransferTests
         Check((string)XElement.Load(pair.Target).Element("Speed").Element("Category") == "First group", "空产品也能新建分组");
         pair = new Pair();
 
+        var reversePair = new Pair();
+        var reverse = new ParameterTransferSession(reversePair.Target, reversePair.Source, "AudioAirPods", true);
+        Check(reverse.ToGlobal && reverse.Groups.Contains("Global"), "反向会话使用目标全局分组");
+        Reject(() => reverse.Stage(P("Speed"), "Global"), "反向拒绝目标全局同名");
+        reverse.Stage(XElement.Load(reversePair.Target).Element("Existing"), "New global group");
+        var reverseSource = new XElement("Para");
+        var oldGlobal = File.ReadAllBytes(reversePair.Source);
+        var oldProduct = File.ReadAllBytes(reversePair.Target);
+        using (var lockedProduct = new FileStream(reversePair.Target, FileMode.Open, FileAccess.Read, FileShare.Read))
+            Reject(() => reverse.Save(reverseSource), "反向源替换失败");
+        Check(File.ReadAllBytes(reversePair.Source).SequenceEqual(oldGlobal)
+            && File.ReadAllBytes(reversePair.Target).SequenceEqual(oldProduct), "反向失败恢复两侧");
+        bool allowed = false;
+        reverse.ValidateTransferName = name => { if (!allowed) throw new InvalidOperationException("模式新增引用"); };
+        Reject(() => reverse.Save(reverseSource), "反向提交复查变量引用");
+        allowed = true;
+        reverse.Save(reverseSource);
+        Check(XElement.Load(reversePair.Target).Element("Existing") == null
+            && (string)XElement.Load(reversePair.Source).Element("Existing").Element("Category") == "New global group", "反向新增全局分组并移除产品变量");
+        reverse.Save(reverseSource);
+        Check(XElement.Load(reversePair.Source).Elements("Existing").Count() == 1, "反向重复保存不重复");
+        using (var globalDialog = new TransferPropertyForm((Property)P("Speed"), new[] { "Global" }, "AudioAirPods", true))
+        {
+            Check(globalDialog.Text == "转移为全局参数", "反向弹窗标题");
+            Check(globalDialog.Controls.Find("lbWarning", false).Single().Text.Contains("换型参数读写改为全局参数读写"), "反向调用警告");
+        }
+
         using (var dialog = new TransferPropertyForm((Property)P("Speed"), new[] { "Product group" }, "AudioAirPods"))
         {
             Check(dialog.Text == "转移为换型参数", "弹窗标题");

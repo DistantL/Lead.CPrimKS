@@ -14,6 +14,16 @@ namespace Lead.CPrim.Controls
     {
         private ParameterTransferSession CreateParameterTransferSession(string sourcePath)
         {
+            return CreateParameterTransferSession(sourcePath, false);
+        }
+
+        private ParameterTransferSession CreateGlobalParameterTransferSession(string sourcePath)
+        {
+            return CreateParameterTransferSession(sourcePath, true);
+        }
+
+        private ParameterTransferSession CreateParameterTransferSession(string sourcePath, bool toGlobal)
+        {
             var common = CommonParamForm.Instance;
             Action checkEditable = () =>
             {
@@ -26,27 +36,41 @@ namespace Lead.CPrim.Controls
             };
             checkEditable();
             string product = _dynamicParamForm.ActiveProduct;
-            string target = _dynamicParamForm.ActiveParameterPath;
+            string productPath = _dynamicParamForm.ActiveParameterPath;
+            string globalPath = common.ActiveParameterPath;
+            string target = toGlobal ? globalPath : productPath;
             if (string.IsNullOrWhiteSpace(product) || string.IsNullOrWhiteSpace(target))
                 throw new InvalidOperationException("当前产品参数尚未加载。");
+            if (!string.Equals(Path.GetFullPath(sourcePath), Path.GetFullPath(toGlobal ? productPath : globalPath), StringComparison.OrdinalIgnoreCase))
+                throw new InvalidOperationException("参数编辑路径与当前已加载路径不一致。");
             string modePath = _dynamicParamForm.ActiveModePath;
             byte[] modeBytes = File.ReadAllBytes(modePath);
-            var session = new ParameterTransferSession(sourcePath, target, product);
+            var modeSnapshots = (toGlobal ? _dynamicParamForm.ProductModePaths : new[] { modePath })
+                .ToDictionary(path => path, path => File.Exists(path) ? File.ReadAllBytes(path) : null);
+            var session = new ParameterTransferSession(sourcePath, target, product, toGlobal);
             session.ValidateContext = () =>
             {
                 checkEditable();
                 if (product != _dynamicParamForm.ActiveProduct || product != SwManager.Instance.CurrentProduct
-                    || !string.Equals(target, _dynamicParamForm.ActiveParameterPath, StringComparison.OrdinalIgnoreCase)
+                    || !string.Equals(productPath, _dynamicParamForm.ActiveParameterPath, StringComparison.OrdinalIgnoreCase)
+                    || !string.Equals(globalPath, common.ActiveParameterPath, StringComparison.OrdinalIgnoreCase)
                     || !string.Equals(modePath, _dynamicParamForm.ActiveModePath, StringComparison.OrdinalIgnoreCase)
                     || !File.ReadAllBytes(modePath).SequenceEqual(modeBytes))
                     throw new InvalidOperationException("产品、模式或模式文件已变化，请放弃当前编辑并重新打开。");
+                foreach (var snapshot in modeSnapshots)
+                    if (snapshot.Value == null ? File.Exists(snapshot.Key)
+                        : !File.Exists(snapshot.Key) || !File.ReadAllBytes(snapshot.Key).SequenceEqual(snapshot.Value))
+                        throw new InvalidOperationException("模式文件已变化，请重新打开编辑器：" + snapshot.Key);
             };
-            session.ValidateDocuments = (global, productDocument) =>
-                _dynamicParamForm.ValidateTransferredParameters(productDocument);
-            session.RefreshCommitted = (global, productDocument) =>
+            if (toGlobal) session.ValidateTransferName = _dynamicParamForm.ValidateTransferOutName;
+            session.ValidateDocuments = (source, destination) =>
             {
-                common.RefreshTransferredParameters(global);
-                _dynamicParamForm.RefreshTransferredParameters(productDocument);
+                _dynamicParamForm.ValidateTransferredParameters(toGlobal ? source : destination);
+            };
+            session.RefreshCommitted = (source, destination) =>
+            {
+                common.RefreshTransferredParameters(toGlobal ? destination : source);
+                _dynamicParamForm.RefreshTransferredParameters(toGlobal ? source : destination);
             };
             session.CheckCurrent();
             return session;

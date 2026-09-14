@@ -12176,4 +12176,6 @@
   <data name="Param_TransferSelectGroup" xml:space="preserve"><value>Select an existing group or enter a new group name.</value></data>
   <data name="Param_TransferNoGroups" xml:space="preserve"><value>No groups are available. Create a group in the product parameters first.</value></data>
   <data name="Param_TransferDiscard" xml:space="preserve"><value>Discard unsaved changes? Pending transfers will not be written.</value></data>
+  <data name="Param_TransferGlobalTitle" xml:space="preserve"><value>Transfer to global parameters</value></data>
+  <data name="Param_TransferGlobalWarning" xml:space="preserve"><value>Transfer from the current product to global parameters. OK stages the transfer; use Save to apply it. Update related product parameter reads and writes to global parameters before running the machine.</value></data>
 </root>

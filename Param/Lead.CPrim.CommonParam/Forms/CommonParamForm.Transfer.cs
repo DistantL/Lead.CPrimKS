@@ -12,6 +12,7 @@ namespace Lead.CPrim.CommonParam
     public partial class CommonParamForm
     {
         public Func<string, ParameterTransferSession> CreateTransferSession { get; set; }
+        public string ActiveParameterPath { get { return CurParaPath; } }
         private string transferBaseline;
         public bool ParameterEditingAllowed { get { return tsTitle.Enabled && pg.Enabled; } }
         public bool HasUnsavedParameterChanges
