@@ -292,6 +292,12 @@ namespace Lead.CPrim.SoftwareConfig
                 tbAdministonConfigPath.Text = text;
             }
         }
+        private void btnBrowseAlertConfigPath_Click(object sender, EventArgs e)
+        {
+            string path = tbAlertConfigPath.Text;
+            if (FileHelper.OpenFileDialogMethod("", FilterType.CSV, false, ref path))
+                tbAlertConfigPath.Text = path;
+        }
         #endregion
 
 
@@ -314,7 +320,6 @@ namespace Lead.CPrim.SoftwareConfig
                     throw new Exception(NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_ErrMsg_PathIsEmpty", "软件路径路径不能为空"));
                 }
                 _manager.ConfigFilePath = path;
-                _manager.ExportSWConfigToPath(path);
 
                 //功能路径
                 _manager.PrimsFile = tbPrimsConfigPath.Text;
@@ -338,6 +343,7 @@ namespace Lead.CPrim.SoftwareConfig
                 _manager.GlobalSettingConfigPath = tbGlobSettingConfigPath.Text.Trim();
                 _manager.HashKeyConfigPath = tbHashKeyConfigPath.Text.Trim();
                 _manager.AdministrationConfigPath = tbAdministonConfigPath.Text.Trim();
+                _manager.AlertConfigPath = tbAlertConfigPath.Text.Trim();
                 _manager.SFLPath = tbSFLPath.Text.Trim();
                 _manager.PDCAPath = tbPDCAPath.Text.Trim();
                 _manager.MachinePath = tbMachinePath.Text.Trim();
@@ -427,6 +433,7 @@ namespace Lead.CPrim.SoftwareConfig
                 _manager.AccessaryNames = tb_AccessaryNames.Text;
                 _manager.AccessaryCodeLength = tb_AccessaryCodeLength.Text;
                 _manager.TossingReasons = tb_TossingReason.Text;
+                _manager.ExportSWConfigToPath(path);
             }
             catch (Exception ex)
             {
@@ -560,6 +567,7 @@ namespace Lead.CPrim.SoftwareConfig
             tbGlobSettingConfigPath.Text = config.GlobalSettingConfigPath ?? string.Empty;
             tbHashKeyConfigPath.Text = config.HashKeyConfigPath ?? string.Empty;
             tbAdministonConfigPath.Text = config.AdministrationConfigPath ?? string.Empty;
+            tbAlertConfigPath.Text = config.AlertConfigPath ?? string.Empty;
 
             tbSFLPath.Text = string.IsNullOrEmpty(config.SFLPath) ? string.Empty : config.SFLPath;
             tbPDCAPath.Text = string.IsNullOrEmpty(config.PDCAPath) ? string.Empty : config.PDCAPath;
@@ -645,6 +653,7 @@ namespace Lead.CPrim.SoftwareConfig
             lb_GlobSetting.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_GlobalSettingConfigPath", "全局设置:");
             lb_Hashkey.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_HashKeyConfigPath", "HashKey配置:");
             lb_Administration.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_AdministrationConfigPath", "权限配置:");
+            lbAlertConfigPath.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_AlertConfigPath", "报警配置文件:");
             lb_Log_SFL.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Log_SFL", "SFL日志:");
             lb_Log_PDCA.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Log_PDCA", "PDCA日志:");
             lb_Log_Machine.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Log_Machine", "设备日志:");

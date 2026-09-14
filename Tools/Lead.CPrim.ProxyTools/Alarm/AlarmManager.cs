@@ -55,7 +55,18 @@ namespace Lead.CPrim.ProxyTools
         /// <summary>
         /// 外置配置报警信息的文件路径
         /// </summary>
-        private string _filePath = @"D:\Config\AlertConfig\AlertInfo.csv";
+        private readonly string _filePath;
+        private static string _startupConfigPath = @"D:\Config\AlertConfig\AlertInfo.csv";
+
+        /// <summary>在首次访问 Instance 前配置路径；运行中不切换已加载的报警文件。</summary>
+        public static void ConfigureStartupPath(string path)
+        {
+            if (_instance != null)
+                throw new InvalidOperationException("报警配置已加载，修改路径需重启软件。");
+            if (string.IsNullOrWhiteSpace(path))
+                throw new ArgumentException("报警配置文件路径不能为空。", nameof(path));
+            _startupConfigPath = path;
+        }
 
         private bool _isDisableEarlyAlarm;
 
@@ -99,6 +110,7 @@ namespace Lead.CPrim.ProxyTools
         #region Ctor
         private AlarmManager()
         {
+            _filePath = _startupConfigPath;
             if (!GetAlertConfigData(_filePath, out string msg))
             {
                 MessageBox.Show(NLocalizer.GetString("Lead_CPrim_Controls_UIAlarmInfo_ErrMsg_ReadAlarmInfoFileFail", "读取报警配置文件失败:") + msg);

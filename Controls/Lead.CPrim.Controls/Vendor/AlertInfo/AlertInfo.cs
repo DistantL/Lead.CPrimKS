@@ -24,7 +24,7 @@ namespace Lead.CPrim.Controls
             NLocalizer.LanguageChanged += OnLanguageChanged;
 
             string msg;
-            if (!GetAlertConfigData(@"D:\Config\AlertConfig\AlertInfo.csv", out msg))
+            if (!GetAlertConfigData(AlarmManager.Instance.ConfigFilePath, out msg))
             {
                 MessageBox.Show(NLocalizer.GetString("Lead_CPrim_Controls_UIAlertInfo_ErrMsg_ReadAlertInfoFileFail", "读取报警配置文件失败:") + msg);
             }

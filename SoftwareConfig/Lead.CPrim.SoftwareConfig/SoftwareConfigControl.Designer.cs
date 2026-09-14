@@ -888,6 +888,26 @@ namespace Lead.CPrim.SoftwareConfig
             // tpPath
             // 
             this.tpPath.AutoScroll = true;
+            this.lbAlertConfigPath = new Label();
+            this.tbAlertConfigPath = new TextBox();
+            this.btnBrowseAlertConfigPath = new Button();
+            this.lbAlertConfigPath.AutoSize = true;
+            this.lbAlertConfigPath.Location = new System.Drawing.Point(30, 1045);
+            this.lbAlertConfigPath.Name = "lbAlertConfigPath";
+            this.lbAlertConfigPath.Text = "报警配置文件:";
+            this.tbAlertConfigPath.Location = new System.Drawing.Point(212, 1040);
+            this.tbAlertConfigPath.Name = "tbAlertConfigPath";
+            this.tbAlertConfigPath.Size = new System.Drawing.Size(522, 31);
+            this.tbAlertConfigPath.TabIndex = 410;
+            this.btnBrowseAlertConfigPath.Location = new System.Drawing.Point(741, 1040);
+            this.btnBrowseAlertConfigPath.Name = "btnBrowseAlertConfigPath";
+            this.btnBrowseAlertConfigPath.Size = new System.Drawing.Size(52, 36);
+            this.btnBrowseAlertConfigPath.TabIndex = 411;
+            this.btnBrowseAlertConfigPath.Text = "...";
+            this.btnBrowseAlertConfigPath.Click += new System.EventHandler(this.btnBrowseAlertConfigPath_Click);
+            this.tpPath.Controls.Add(this.lbAlertConfigPath);
+            this.tpPath.Controls.Add(this.tbAlertConfigPath);
+            this.tpPath.Controls.Add(this.btnBrowseAlertConfigPath);
             this.tpPath.Controls.Add(this.button1btnBrowseAdminitionConfigPath);
             this.tpPath.Controls.Add(this.tbAdministonConfigPath);
             this.tpPath.Controls.Add(this.lb_Administration);
@@ -1764,5 +1784,8 @@ namespace Lead.CPrim.SoftwareConfig
         private Button button1btnBrowseAdminitionConfigPath;
         private TextBox tbAdministonConfigPath;
         private Label lb_Administration;
+        private Label lbAlertConfigPath;
+        private TextBox tbAlertConfigPath;
+        private Button btnBrowseAlertConfigPath;
     }
 }

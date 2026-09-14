@@ -321,6 +321,8 @@ namespace Lead.CPrim.View
                         throw new Exception("软件配置对象为Null");
                     }
 
+                    AlarmManager.ConfigureStartupPath(SwManager.Instance.AlertConfigPath);
+
                     if (SwManager.Instance.HasAccessary)
                     {
                         string[] strs = SwManager.Instance.AccessaryNames.Trim(';').Split(';');

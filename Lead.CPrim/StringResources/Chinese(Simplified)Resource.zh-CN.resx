@@ -12159,4 +12159,7 @@
   <data name="Lead_CPrim_Language_LanguageConfigSaveSuccess" xml:space="preserve">
     <value>语言配置保存成功</value>
   </data>
+  <data name="Lead_CPrim_SoftwareConfig_SoftwareConfigControl_AlertConfigPath" xml:space="preserve">
+    <value>报警配置文件:</value>
+  </data>
 </root>

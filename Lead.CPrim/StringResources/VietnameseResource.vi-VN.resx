@@ -12159,4 +12159,7 @@
   <data name="Lead_CPrim_Language_LanguageConfigSaveSuccess" xml:space="preserve">
     <value />
   </data>
+  <data name="Lead_CPrim_SoftwareConfig_SoftwareConfigControl_AlertConfigPath" xml:space="preserve">
+    <value>Tệp cấu hình cảnh báo:</value>
+  </data>
 </root>

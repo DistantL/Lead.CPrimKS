@@ -327,6 +327,8 @@ namespace Lead.CPrim.Global
         public string HashKeyConfigPath { get; set; } = @"D:\Config\CPrimConfig\HashKey.json";
         /// <summary>权限管理配置文件</summary>
         public string AdministrationConfigPath { get; set; } = @"D:\Config\AdministrationConfig\Administration.csv";
+
+        public string AlertConfigPath { get; set; } = @"D:\Config\AlertConfig\AlertInfo.csv";
         /// <summary>SFL日志</summary>
         public string SFLPath { get; set; }
         /// <summary>PDCA日志</summary>
