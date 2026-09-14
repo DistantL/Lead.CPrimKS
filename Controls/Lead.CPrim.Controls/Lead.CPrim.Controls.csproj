@@ -212,6 +212,7 @@
     <Compile Include="Vendor\ProductQuery\ProductQuery.Designer.cs">
       <DependentUpon>ProductQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Setting\SettingFrm.ParameterTransfer.cs" />
     <Compile Include="Setting\SettingFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -344,6 +345,10 @@
       <Project>{f83c7fbb-7e02-416e-afa4-a7c3e5d0d0e4}</Project>
       <Name>Lead.CPrim.Interfaces</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Param\Lead.CPrim.BaseParam\Lead.CPrim.BaseParam.csproj">
+      <Project>{6FAD000C-269E-43CE-AD16-2943C600896A}</Project>
+      <Name>Lead.CPrim.BaseParam</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Param\Lead.CPrim.CommonParam\Lead.CPrim.CommonParam.csproj">
       <Project>{bbffcb6c-9e8e-44cd-b30a-2929016bc1e0}</Project>

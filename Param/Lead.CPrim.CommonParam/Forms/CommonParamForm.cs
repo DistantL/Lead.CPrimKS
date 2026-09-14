@@ -199,12 +199,19 @@ namespace Lead.CPrim.CommonParam
         /// <summary>编辑参数</summary>
         private void 修改参数类型ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ParamCfg frm = new ParamCfg(CurParaPath)
+            try
             {
-                CurSysDir = CurSysDirPaht
-            };
-            frm.ShowDialog();
-            LoadAndUpdateUI(false);
+                var session = CreateTransferSession?.Invoke(CurParaPath);
+                using (var frm = new ParamCfg(CurParaPath))
+                {
+                    frm.CurSysDir = CurSysDirPaht;
+                    frm.TransferSession = session;
+                    frm.ShowDialog(this);
+                }
+                if (session == null) LoadAndUpdateUI(false);
+                // 转移会话已在保存回调刷新；取消时不重载、不保存。
+            }
+            catch (Exception ex) { MessageBox.Show(this, ex.Message, "参数配置"); }
         }
 
         private void tsBtnEditUdt_Click(object sender, EventArgs e)
@@ -297,6 +304,7 @@ namespace Lead.CPrim.CommonParam
                 }
                 CommonParam.Instance.Load(xel);
                 CommonParam.Instance.Save(CurParaPath);
+                CaptureTransferBaseline();
 
                 return 0;
             }
@@ -390,6 +398,7 @@ namespace Lead.CPrim.CommonParam
             Pmcls.Clear();
             xel.Elements().ToList().ForEach(p => Pmcls.Add((Property)p));
             ChangeMode(mode);
+            CaptureTransferBaseline();
         }
 
         /// <summary>只更新运行模式状态，不加载或覆盖任何全局模式参数。</summary>

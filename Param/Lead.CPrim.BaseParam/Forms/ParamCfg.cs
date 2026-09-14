@@ -20,6 +20,8 @@ namespace Lead.CPrim.BaseParam
 		{
 			this.InitializeComponent();
 
+            InitializeTransferMenu();
+
 			OnLanguageChanged();
 			NLocalizer.LanguageChanged += OnLanguageChanged;
 		}
@@ -29,6 +31,8 @@ namespace Lead.CPrim.BaseParam
 		public ParamCfg(string path)
 		{
 			this.InitializeComponent();
+
+            InitializeTransferMenu();
 			this.Text = Path.GetFileNameWithoutExtension(path);
 			try
 			{
@@ -133,8 +137,13 @@ namespace Lead.CPrim.BaseParam
         /// <summary>保存</summary>
         private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			this.UpdateParam();
-			this.xel.Save(this.CurParaPath);
+            try
+            {
+                this.UpdateParam();
+                if (TransferSession == null) this.xel.Save(this.CurParaPath);
+                else TransferSession.Save(this.xel);
+            }
+            catch (Exception ex) { MessageBox.Show(this, ex.Message, Text); }
 		}
 
 		/// <summary>保存下拉框_加载参数</summary>
@@ -196,12 +205,13 @@ namespace Lead.CPrim.BaseParam
 		/// <summary>刷新Param数值</summary>
 		public void UpdateParam()
 		{
-			this.xel = new XElement("Para", "");
+			var updated = new XElement(xel.Name, xel.Attributes());
 			foreach (object obj in this.Pmc_St)
 			{
 				Property p = (Property)obj;
-				this.xel.Add(p.PropToXElment());
+				updated.Add(GetEditedNode(p));
 			}
+            this.xel = updated;
 		}
 
 		/// <summary>XML元素</summary>

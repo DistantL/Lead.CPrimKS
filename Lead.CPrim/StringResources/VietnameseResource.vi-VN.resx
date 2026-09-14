@@ -12169,4 +12169,11 @@
   <data name="Param_ProductMode" xml:space="preserve"><value>Tham số chế độ sản phẩm</value></data>
   <data name="Param_AddMode" xml:space="preserve"><value>Thêm vào chế độ hiện tại</value></data>
   <data name="Param_RemoveMode" xml:space="preserve"><value>Xóa khỏi chế độ hiện tại</value></data>
+  <data name="Param_TransferMenu" xml:space="preserve"><value>Chuyển biến</value></data>
+  <data name="Param_TransferTitle" xml:space="preserve"><value>Chuyển sang tham số sản phẩm</value></data>
+  <data name="Param_TransferWarning" xml:space="preserve"><value>Chỉ áp dụng cho sản phẩm hiện tại. Xác nhận chỉ lưu tạm; nhấn Lưu trong trình chỉnh sửa để áp dụng. Sửa các lệnh đọc và ghi tham số toàn cục thành tham số sản phẩm trước khi chạy máy.</value></data>
+  <data name="Param_TransferOK" xml:space="preserve"><value>Xác nhận</value></data>
+  <data name="Param_TransferSelectGroup" xml:space="preserve"><value>Chọn nhóm hiện có của sản phẩm hiện tại.</value></data>
+  <data name="Param_TransferNoGroups" xml:space="preserve"><value>Chưa có nhóm. Hãy tạo nhóm trong tham số sản phẩm trước.</value></data>
+  <data name="Param_TransferDiscard" xml:space="preserve"><value>Bỏ các thay đổi chưa lưu? Các tham số chờ chuyển sẽ không được ghi.</value></data>
 </root>

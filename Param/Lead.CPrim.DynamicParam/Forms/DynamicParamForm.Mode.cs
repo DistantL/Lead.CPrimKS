@@ -103,6 +103,7 @@ namespace Lead.CPrim.DynamicParam
             UpdateUi(merged);
             BtnRefresh_Click(null, null);
             RefreshModeEditor();
+            CaptureTransferBaseline();
         }
 
         public int ModeChange(string mode)

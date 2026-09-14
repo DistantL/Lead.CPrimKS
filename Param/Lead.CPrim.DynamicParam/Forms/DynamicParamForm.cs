@@ -302,6 +302,7 @@ namespace Lead.CPrim.DynamicParam
             merged.Save(path);
             DynamicParam.Instance.Load(merged);
             UpdateUi(merged);
+            CaptureTransferBaseline();
 
             BtnRefresh_Click(null, null);
             if (isManual)

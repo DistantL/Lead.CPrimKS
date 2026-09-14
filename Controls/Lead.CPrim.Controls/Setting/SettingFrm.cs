@@ -1389,6 +1389,8 @@ namespace Lead.CPrim.Controls
                 _dynamicParamForm.Init(_productParameterDir, CommonParamForm.Instance.GetRunMode());
                 treeNodeParam.Nodes.Add(treeNodeDynamicParam);
             }
+            CommonParamForm.Instance.CreateTransferSession = SwManager.Instance.CommonDynamicParamEnable && SwManager.Instance.DynamicParamEnable
+                ? (Func<string, Lead.CPrim.BaseParam.ParameterTransferSession>)CreateParameterTransferSession : null;
             tvHardwareSetting.ExpandAll();
         }
 

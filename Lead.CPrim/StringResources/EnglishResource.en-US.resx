@@ -12169,4 +12169,11 @@
   <data name="Param_ProductMode" xml:space="preserve"><value>Product mode parameters</value></data>
   <data name="Param_AddMode" xml:space="preserve"><value>Add to current mode</value></data>
   <data name="Param_RemoveMode" xml:space="preserve"><value>Remove from current mode</value></data>
+  <data name="Param_TransferMenu" xml:space="preserve"><value>Transfer variable</value></data>
+  <data name="Param_TransferTitle" xml:space="preserve"><value>Transfer to product parameters</value></data>
+  <data name="Param_TransferWarning" xml:space="preserve"><value>Current product only. OK stages the transfer; use Save in the parameter editor to apply it. Update all related global parameter reads and writes to product parameters before running the machine.</value></data>
+  <data name="Param_TransferOK" xml:space="preserve"><value>OK</value></data>
+  <data name="Param_TransferSelectGroup" xml:space="preserve"><value>Select an existing group in the current product.</value></data>
+  <data name="Param_TransferNoGroups" xml:space="preserve"><value>No groups are available. Create a group in the product parameters first.</value></data>
+  <data name="Param_TransferDiscard" xml:space="preserve"><value>Discard unsaved changes? Pending transfers will not be written.</value></data>
 </root>
