@@ -12162,4 +12162,11 @@
   <data name="Lead_CPrim_SoftwareConfig_SoftwareConfigControl_AlertConfigPath" xml:space="preserve">
     <value>Tệp cấu hình cảnh báo:</value>
   </data>
+  <data name="Config_GlobalParamDir" xml:space="preserve"><value>Thư mục tham số chung:</value></data>
+  <data name="Config_ProductParamDir" xml:space="preserve"><value>Thư mục tham số sản phẩm:</value></data>
+  <data name="Config_LeadVersionFile" xml:space="preserve"><value>Tệp phiên bản phần mềm:</value></data>
+  <data name="Config_TossingStatisticsFile" xml:space="preserve"><value>Tệp thống kê loại bỏ:</value></data>
+  <data name="Param_ProductMode" xml:space="preserve"><value>Tham số chế độ sản phẩm</value></data>
+  <data name="Param_AddMode" xml:space="preserve"><value>Thêm vào chế độ hiện tại</value></data>
+  <data name="Param_RemoveMode" xml:space="preserve"><value>Xóa khỏi chế độ hiện tại</value></data>
 </root>

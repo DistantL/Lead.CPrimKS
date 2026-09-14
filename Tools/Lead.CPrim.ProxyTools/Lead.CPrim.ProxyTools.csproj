@@ -201,6 +201,7 @@
     <Compile Include="Language\D.cs" />
     <Compile Include="MES\MesManager.cs" />
     <Compile Include="Common\AudioSwVersion.cs" />
+    <Compile Include="Common\RuntimeConfigPaths.cs" />
     <Compile Include="Common\Chart\ChartArgumentChartArea.cs" />
     <Compile Include="Common\Chart\ChartArgumentChartAreaAxis.cs" />
     <Compile Include="Common\Chart\ChartArgumentChartAreaAxisLableStyle.cs" />

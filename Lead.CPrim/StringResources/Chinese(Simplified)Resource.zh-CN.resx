@@ -12162,4 +12162,11 @@
   <data name="Lead_CPrim_SoftwareConfig_SoftwareConfigControl_AlertConfigPath" xml:space="preserve">
     <value>报警配置文件:</value>
   </data>
+  <data name="Config_GlobalParamDir" xml:space="preserve"><value>全局参数目录:</value></data>
+  <data name="Config_ProductParamDir" xml:space="preserve"><value>换型参数目录:</value></data>
+  <data name="Config_LeadVersionFile" xml:space="preserve"><value>软件版本文件:</value></data>
+  <data name="Config_TossingStatisticsFile" xml:space="preserve"><value>抛料统计文件:</value></data>
+  <data name="Param_ProductMode" xml:space="preserve"><value>模式换型参数</value></data>
+  <data name="Param_AddMode" xml:space="preserve"><value>加入当前模式参数</value></data>
+  <data name="Param_RemoveMode" xml:space="preserve"><value>从当前模式参数移除</value></data>
 </root>

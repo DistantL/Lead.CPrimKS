@@ -56,7 +56,8 @@ namespace Lead.CPrim.ProxyTools
         public const string StateMachinePcDb = "StateMachinePcDb";
 
         /// <summary>软件版本</summary>
-        public static readonly string Version = AudioSwVersion.Instance.Main_SW_versionName; //3.3.23.0101
+        // 保留字段接口；启动配置加载后刷新，避免提前初始化时缓存旧目录的版本。
+        public static string Version = AudioSwVersion.Instance.Main_SW_versionName;
 
         /// <summary>
         /// 自定义文件夹

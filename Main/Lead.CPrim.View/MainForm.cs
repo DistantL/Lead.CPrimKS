@@ -181,7 +181,7 @@ namespace Lead.CPrim.View
                         {
                             if (ok &&
                             !string.IsNullOrWhiteSpace(AuthorityManager.Instance.CurrentOperatorID) &&
-                            CommonParamForm.Instance.ModeChange(value.ToString()) == 0)
+                            setting.ChangeParameterMode(value.ToString()) == 0)
                             {
                                 UIWaitFormService.ShowWaitForm(NLocalizer.ModeChangePleaseWait);
                                 SpinWait.SpinUntil(() => HiveManagerV3.Instance.GetCurrentHiveStatus() == HiveStatus.Plan_DT, 2 * 1000);
@@ -322,6 +322,8 @@ namespace Lead.CPrim.View
                     }
 
                     AlarmManager.ConfigureStartupPath(SwManager.Instance.AlertConfigPath);
+                    RuntimeConfigPaths.Configure(SwManager.Instance.LeadVersionFilePath,
+                        SwManager.Instance.TossingStatisticsFilePath);
 
                     if (SwManager.Instance.HasAccessary)
                     {
@@ -513,6 +515,7 @@ namespace Lead.CPrim.View
 
                 //参数
                 setting = new SettingFrm();
+                setting.OnParameterProductChanged += InstanceDynamicParamChangeCurrentProduct;
                 setting.OnInformationChange += InstanceInformationChange;
                 InstanceInformationChange(4, setting._setting.CurrentStation);
                 _configForm = new ConfigForm();
@@ -1154,7 +1157,8 @@ namespace Lead.CPrim.View
                 return;
             }
             //软件配置管理器切换产品
-            SwManager.Instance.ChangeCurrentProduct(currentParam, false);
+            if (SwManager.Instance.CurrentProduct != currentParam)
+                SwManager.Instance.ChangeCurrentProduct(currentParam, false);
             //主界面切换产品
             mainForm.ChangeCurrentProduct(currentParam);
         }
@@ -1317,7 +1321,7 @@ namespace Lead.CPrim.View
         {
             if (index == 4)
             {
-                string dir = @"D:\Config\Image";
+                string dir = Path.Combine(Application.StartupPath, "Images", "StationImage");
                 if (!Directory.Exists(dir))
                 {
                     Directory.CreateDirectory(dir);

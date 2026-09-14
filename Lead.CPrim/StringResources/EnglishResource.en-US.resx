@@ -12162,4 +12162,11 @@
   <data name="Lead_CPrim_SoftwareConfig_SoftwareConfigControl_AlertConfigPath" xml:space="preserve">
     <value>Alarm config file:</value>
   </data>
+  <data name="Config_GlobalParamDir" xml:space="preserve"><value>Global parameter folder:</value></data>
+  <data name="Config_ProductParamDir" xml:space="preserve"><value>Product parameter folder:</value></data>
+  <data name="Config_LeadVersionFile" xml:space="preserve"><value>Software version file:</value></data>
+  <data name="Config_TossingStatisticsFile" xml:space="preserve"><value>Tossing statistics file:</value></data>
+  <data name="Param_ProductMode" xml:space="preserve"><value>Product mode parameters</value></data>
+  <data name="Param_AddMode" xml:space="preserve"><value>Add to current mode</value></data>
+  <data name="Param_RemoveMode" xml:space="preserve"><value>Remove from current mode</value></data>
 </root>

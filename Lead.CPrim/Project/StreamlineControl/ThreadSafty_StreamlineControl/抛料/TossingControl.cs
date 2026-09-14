@@ -11,7 +11,7 @@ namespace ThreadSafty_StreamlineControl
 {
     /// <summary>
     /// 抛料管理<br/>
-    /// 配置文件路径D:\Config\IniConfig\TossingStaticitsInfo.ini<br/>
+    /// 配置文件路径由启动时的软件配置提供。<br/>
     /// </summary>
     public class TossingControl
     {
@@ -35,7 +35,16 @@ namespace ThreadSafty_StreamlineControl
         private int 累计抛料计数 = 0;
         private int 累计抛料阈值 = 2;
 
-        private FileInfo tossingStaticits_FileInfo = new FileInfo(@"D:\Config\IniConfig\TossingStaticitsInfo.ini");
+        private FileInfo _statisticsFile;
+        private FileInfo tossingStaticits_FileInfo
+        {
+            get
+            {
+                if (_statisticsFile == null)
+                    _statisticsFile = new FileInfo(Lead.CPrim.ProxyTools.RuntimeConfigPaths.TossingStatisticsFilePath);
+                return _statisticsFile;
+            }
+        }
         private INIHelper iNIHelper = new INIHelper();
         /// <summary>
         /// INI区域名称

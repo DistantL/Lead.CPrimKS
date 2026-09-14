@@ -155,6 +155,10 @@ namespace Lead.CPrim.Controls
             _settingPath = SwManager.Instance.GlobalSettingConfigPath;
             _hashKeyPath = SwManager.Instance.HashKeyConfigPath;
             _administrationPath = SwManager.Instance.AdministrationConfigPath;
+            _globalParameterDir = SwManager.Instance.GlobalParamDirPath;
+            _productParameterDir = SwManager.Instance.ProductParamDirPath;
+            _dynamicParamForm.OnDynamicParamChangeCurrentProduct += (product, products) =>
+                OnParameterProductChanged?.Invoke(product);
 
             pnlGeneral.SetStyle(Color.FromArgb(229, 229, 229), default(Color));
             tlpGeneral.BackColor = Color.FromArgb(229, 229, 229);
@@ -1371,7 +1375,7 @@ namespace Lead.CPrim.Controls
             {
                 try
                 {
-                    CommonParamForm.Instance.Init(SwManager.Instance.DynamicParamDirPath);
+                    CommonParamForm.Instance.Init(_globalParameterDir);
                 }
                 catch (Exception ex)
                 {
@@ -1382,7 +1386,7 @@ namespace Lead.CPrim.Controls
             }
             if (SwManager.Instance.DynamicParamEnable)
             {
-                _dynamicParamForm.Init(SwManager.Instance.DynamicParamDirPath);
+                _dynamicParamForm.Init(_productParameterDir, CommonParamForm.Instance.GetRunMode());
                 treeNodeParam.Nodes.Add(treeNodeDynamicParam);
             }
             tvHardwareSetting.ExpandAll();
@@ -1401,8 +1405,20 @@ namespace Lead.CPrim.Controls
         {
             if (SwManager.Instance != null && SwManager.Instance.DynamicParamEnable)
             {
-                _dynamicParamForm.Init(SwManager.Instance.DynamicParamDirPath);
+                if (_dynamicParamForm.Init(_productParameterDir, CommonParamForm.Instance.GetRunMode()) != 0)
+                    throw new InvalidOperationException("换型参数加载失败，请检查产品及模式文件。");
             }
+        }
+
+        private readonly string _globalParameterDir;
+        private readonly string _productParameterDir;
+        public event Action<string> OnParameterProductChanged;
+
+        public int ChangeParameterMode(string mode)
+        {
+            if (SwManager.Instance.DynamicParamEnable && _dynamicParamForm.ModeChange(mode) != 0)
+                return -1;
+            return CommonParamForm.Instance.ModeChange(mode);
         }
 
         public Color GetColorOfCurrentProductionType()

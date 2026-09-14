@@ -45,8 +45,6 @@ namespace Lead.CPrim.CommonParam
         /// </summary>
         public Dictionary<string, string> DicCartesian = new Dictionary<string, string>();
 
-        /// <summary>换型参数目录</summary>
-        private string ProductsCfgDir;
 
         /// <summary>用户自定义类目录</summary>
         private string UserDefineDir;
@@ -61,8 +59,6 @@ namespace Lead.CPrim.CommonParam
         private static CommonParamForm _instance = new CommonParamForm();
 
 
-        /// <summary>属性表绑定对象</summary>
-        private PropertyManageCls runMode_CommonParam_InPG = new PropertyManageCls();
 
         /// <summary>
         /// 上次运行模式
@@ -92,6 +88,11 @@ namespace Lead.CPrim.CommonParam
         private CommonParamForm()
         {
             InitializeComponent();
+            // 模式参数编辑已迁至换型参数页，全局参数仅保留模式状态通知。
+            tlpMain.Controls.Remove(groupBox1);
+            groupBox1.Dispose();
+            pg.ContextMenuStrip = null;
+            tlpMain.SetColumnSpan(pg, 2);
             AuthorityManager.OnUpdateLevel += InstanceUpdateLevel;
             pg.MouseWheel += Pg_CommonParamBase_MouseWheel;
 
@@ -153,27 +154,17 @@ namespace Lead.CPrim.CommonParam
             tsBtnEdit.Text = NLocalizer.GetString("Lead_CPrim_CommonParam_CommonParamForm_EditParam", "编辑参数");
             tsBtnNewUdt.Text = NLocalizer.GetString("Lead_CPrim_CommonParam_CommonParamForm_CreateUserdefinedType", "新建自定义类型");
             tsBtnEditUdt.Text = NLocalizer.GetString("Lead_CPrim_CommonParam_CommonParamForm_EditUserdefinedType", "编辑自定义类型");
-            groupBox1.Text = NLocalizer.GetString("", "模式切换时需要切换的全局参数");
-            lb_RunModeList.Text = NLocalizer.GetString("", "当前模式") + ":";
+
+
 
             foreach (Property item in Pmcls)
             {
                 item.Category = NLocalizer.GetString(item.Category, item.Category);
                 item.DisplayName = NLocalizer.GetString(item.Name, item.DisplayName);
                 item.CombMsg = NLocalizer.GetString(item.CombMsg, item.CombMsg);
-                foreach (Property property in runMode_CommonParam_InPG)
-                {
-                    if (item.Name == property.Name)
-                    {
-                        property.Category = item.Category;
-                        property.DisplayName = item.DisplayName;
-                        property.CombMsg = item.CombMsg;
-                        break;
-                    }
-                }
+
             }
             pg.SelectedObject = Pmcls;
-            pg_RunMode_CommonParam.SelectedObject = runMode_CommonParam_InPG;
         }
 
         /// <summary>
@@ -246,77 +237,6 @@ namespace Lead.CPrim.CommonParam
             }
         }
 
-        private void 添加到选择的运行模式的全局参数列表中ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (pg.SelectedGridItem == null || pg.SelectedGridItem.PropertyDescriptor == null)
-            {
-                MessageBox.Show("请选择需要添加的参数");
-                return;
-            }
-
-            if (pg.SelectedGridItem.PropertyDescriptor.Name == "运行模式")
-            {
-                MessageBox.Show("无法选择[运行模式]参数");
-                return;
-            }
-
-            if (pg.SelectedGridItem.PropertyDescriptor.DisplayName.Contains("启用工位"))
-            {
-                string str = pg.SelectedGridItem.PropertyDescriptor.DisplayName.Substring(pg.SelectedGridItem.PropertyDescriptor.DisplayName.IndexOf("启用工位"));
-                if (str.Remove(0, 4).IsNumber())
-                {
-                    MessageBox.Show("无法选择[启用工位]参数");
-                    return;
-                }
-            }
-
-            foreach (Property p in Pmcls)
-            {
-                if (p.Name == pg.SelectedGridItem.PropertyDescriptor.Name)
-                {
-                    if (p.ReadOnly == true)
-                    {
-                        MessageBox.Show("选择的参数[" + pg.SelectedGridItem.Label + "]的状态为不可添加状态");
-                        return;
-                    }
-                    p.ReadOnly = true;
-                    runMode_CommonParam_InPG.Add(new Property(p));
-                    break;
-                }
-            }
-            pg.SelectedObject = Pmcls;
-            pg_RunMode_CommonParam.SelectedObject = runMode_CommonParam_InPG;
-        }
-
-        private void 从选择ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (pg_RunMode_CommonParam.SelectedGridItem == null || pg.SelectedGridItem.PropertyDescriptor == null)
-            {
-                MessageBox.Show("请选择需要删除的参数");
-                return;
-            }
-
-            foreach (Property p in Pmcls)
-            {
-                if (p.Name == pg_RunMode_CommonParam.SelectedGridItem.PropertyDescriptor.Name)
-                {
-                    p.ReadOnly = false;
-
-                    for (int i = 0; i < runMode_CommonParam_InPG.Count; i++)
-                    {
-                        if (runMode_CommonParam_InPG[i].Name == pg_RunMode_CommonParam.SelectedGridItem.PropertyDescriptor.Name)
-                        {
-                            runMode_CommonParam_InPG.Remove(runMode_CommonParam_InPG[i]);
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-
-            pg.SelectedObject = Pmcls;
-            pg_RunMode_CommonParam.SelectedObject = runMode_CommonParam_InPG;
-        }
         #endregion
 
 
@@ -340,7 +260,6 @@ namespace Lead.CPrim.CommonParam
             }
 
             UserDefineDir = dir + "\\UserDefineStruct";
-            ProductsCfgDir = dir + "\\ProductCfg";
             CurParaPath = dir + "\\CommonParam.para";
             LoadAndUpdateUI(true);
             return 0;
@@ -359,7 +278,6 @@ namespace Lead.CPrim.CommonParam
 
             lock (CommonParam.LockPara)
             {
-                SaveMode(mode);
                 XElement xel = new XElement("参数", "");
                 List<Property> properties = new List<Property>();
                 foreach (Property p in Pmcls)
@@ -396,7 +314,6 @@ namespace Lead.CPrim.CommonParam
             {
                 pg.Enabled = enable;
                 tsTitle.Enabled = enable;
-                groupBox1.Enabled = enable;
             }
         }
 
@@ -406,13 +323,21 @@ namespace Lead.CPrim.CommonParam
         /// <param name="mode"></param>
         public int ModeChange(string mode)
         {
-            ChangeMode(mode);
-            return Save(mode);
+            try
+            {
+                ChangeMode(mode);
+                return string.IsNullOrEmpty(CurParaPath) ? 0 : Save(mode);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Warn(ex.ToString());
+                return -1;
+            }
         }
 
         public string GetRunMode()
         {
-            return tbxRunMode.Text.Trim();
+            return runModeLast;
         }
         #endregion
 
@@ -467,107 +392,22 @@ namespace Lead.CPrim.CommonParam
             ChangeMode(mode);
         }
 
-        public bool SaveMode(string mode)
-        {
-            XElement node = new XElement("参数", "");
-            List<Property> properties = new List<Property>();
-            foreach (Property p in runMode_CommonParam_InPG)
-            {
-                properties.Add(p);
-            }
-            properties.Sort(
-                (x, y) =>
-                {
-                    string x_str = x.Category + x.DisplayName;
-                    string y_str = y.Category + y.DisplayName;
-                    return x_str.CompareTo(y_str);
-                });
-            foreach (Property p in properties)
-            {
-                node.Add(p.PropToXElment());
-            }
-
-            string runMode_ParamPath = "D:\\Config\\CPrimConfig\\DynamicParam\\CommonParam_" + mode + ".para";
-            if (!File.Exists(runMode_ParamPath))
-            {
-                if (File.Exists(Application.StartupPath + "\\Configs\\Template.para"))
-                {
-                    File.Copy(Application.StartupPath + "\\Configs\\Template.para", runMode_ParamPath);
-                }
-                else
-                {
-                    File.Create(runMode_ParamPath).Close();
-                }
-            }
-
-            node.Save(runMode_ParamPath);
-            return true;
-        }
-
-        /// <summary>模式切换时发生</summary>
-        /// <param name="mode"></param>
+        /// <summary>只更新运行模式状态，不加载或覆盖任何全局模式参数。</summary>
         void ChangeMode(string mode)
         {
-            string runMode_ParamPath = "D:\\Config\\CPrimConfig\\DynamicParam\\CommonParam_" + mode + ".para";
-            if (!File.Exists(runMode_ParamPath))
+            foreach (Property item in Pmcls)
             {
-                if (File.Exists(Application.StartupPath + "\\Configs\\Template.para"))
+                if (item.Name == "运行模式")
                 {
-                    File.Copy(Application.StartupPath + "\\Configs\\Template.para", runMode_ParamPath);
-                }
-                else
-                {
-                    File.Create(runMode_ParamPath).Close();
+                    item.ReadOnly = true;
+                    item.Value = mode;
                 }
             }
-
-            try
-            {
-                runMode_CommonParam_InPG = new PropertyManageCls();
-                XElement.Load(runMode_ParamPath).Elements().ToList().ForEach(p => runMode_CommonParam_InPG.Add((Property)p));
-
-                foreach (Property item in Pmcls)
-                {
-                    if (item.Name == "运行模式")
-                    {
-                        item.ReadOnly = true;
-                        item.Value = mode;
-                        OnModeSwitchView?.Invoke(mode);
-                        OnModeSwitch?.Invoke(mode);
-                        continue;
-                    }
-
-                    item.ReadOnly = !item.Visible;
-                    if (item.DisplayName.Contains("启用工位"))
-                    {
-                        string str = item.DisplayName.Substring(item.DisplayName.IndexOf("启用工位"));
-                        if (str.Remove(0, 4).IsNumber())
-                        {
-                            item.ReadOnly = HiveManagerV3.Instance.GetCurrentHiveStatus() != HiveStatus.DT;
-                        }
-                    }
-
-                    foreach (Property property in runMode_CommonParam_InPG)
-                    {
-                        if (item.Name == property.Name)
-                        {
-                            item.ReadOnly = true;
-                            item.Value = property.Value;
-                            break;
-                        }
-                    }
-                }
-
-                //显示模式列表中
-                pg.SelectedObject = Pmcls;
-                pg_RunMode_CommonParam.SelectedObject = runMode_CommonParam_InPG;
-                tbxRunMode.Text = mode;
-                runModeLast = mode;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("切换运行模式[" + mode + "]的全局参数加载失败:" + e.Message + e.StackTrace);
-            }
+            OnHiveChangeToDT(HiveManagerV3.Instance.GetCurrentHiveStatus() == HiveStatus.DT);
+            pg.SelectedObject = Pmcls;
+            runModeLast = mode;
+            OnModeSwitchView?.Invoke(mode);
+            OnModeSwitch?.Invoke(mode);
         }
 
         void LoadAndUpdateUI(bool isInit)
@@ -579,10 +419,6 @@ namespace Lead.CPrim.CommonParam
                     Directory.CreateDirectory(UserDefineDir);
                 }
 
-                if (!Directory.Exists(ProductsCfgDir))
-                {
-                    Directory.CreateDirectory(ProductsCfgDir);
-                }
 
                 if (!File.Exists(CurParaPath))
                 {
@@ -592,8 +428,7 @@ namespace Lead.CPrim.CommonParam
                     }
                     else
                     {
-                        File.Create(CurParaPath).Close();
-                        Thread.Sleep(1);
+                        new XElement("参数").Save(CurParaPath);
                     }
                 }
 

@@ -164,8 +164,11 @@ namespace Lead.CPrim.Global
                 {
                     return;
                 }
-                _currentProduct = value;
-                ChangeCurrentProduct(value);
+                // 反序列化只设置新对象；运行中的实例才通知换型。
+                if (ReferenceEquals(this, _instance) && _softwareConfigUi != null)
+                    ChangeCurrentProduct(value);
+                else
+                    _currentProduct = value;
             }
         }
         /// <summary>语言</summary>
@@ -307,6 +310,28 @@ namespace Lead.CPrim.Global
         public bool CmpTrigConfigEnable { get; set; }
         /// <summary>参数目录</summary>
         public string DynamicParamDirPath { get; set; }
+
+        private string _globalParamDirPath;
+        private string _productParamDirPath;
+
+        /// <summary>全局参数目录；缺少新字段时兼容旧版参数根目录。</summary>
+        public string GlobalParamDirPath
+        {
+            get => _globalParamDirPath ?? (string.IsNullOrWhiteSpace(DynamicParamDirPath)
+                ? @"D:\Config\CPrimConfig\DynamicParam" : DynamicParamDirPath);
+            set => _globalParamDirPath = value;
+        }
+
+        /// <summary>直接存放产品及产品模式参数的目录。</summary>
+        public string ProductParamDirPath
+        {
+            get => _productParamDirPath ?? Path.Combine(string.IsNullOrWhiteSpace(DynamicParamDirPath)
+                ? @"D:\Config\CPrimConfig\DynamicParam" : DynamicParamDirPath, "ProductCfg");
+            set => _productParamDirPath = value;
+        }
+
+        public string LeadVersionFilePath { get; set; } = @"D:\Config\IniConfig\Lead.ini";
+        public string TossingStatisticsFilePath { get; set; } = @"D:\Config\IniConfig\TossingStaticitsInfo.ini";
         /// <summary>换型参数使能</summary>
         public bool DynamicParamEnable { get; set; }
         /// <summary>全局参数使能</summary>
@@ -458,11 +483,19 @@ namespace Lead.CPrim.Global
                 return (int)SoftWareAlarm.SoftwareConfig_当前产品为空;
             }
 
-            _instance.CurrentProduct = productName;
-            ((SoftwareConfigControl)_softwareConfigUi).RefreshCurrentProduct(productName);
-            if (eventNotice)
+            string previousProduct = _instance._currentProduct;
+            _instance._currentProduct = productName;
+            try
             {
-                _instance.OnSoftwareConfigChangeCurrentProduct?.Invoke(productName, Products);
+                if (eventNotice)
+                    _instance.OnSoftwareConfigChangeCurrentProduct?.Invoke(productName, Products);
+                ((SoftwareConfigControl)_softwareConfigUi).RefreshCurrentProduct(productName);
+            }
+            catch
+            {
+                _instance._currentProduct = previousProduct;
+                ((SoftwareConfigControl)_softwareConfigUi).RefreshCurrentProduct(previousProduct);
+                throw;
             }
 
             return ExportSWConfigToPath(_instance.ConfigFilePath);

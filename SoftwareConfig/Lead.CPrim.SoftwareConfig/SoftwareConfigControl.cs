@@ -292,6 +292,21 @@ namespace Lead.CPrim.SoftwareConfig
                 tbAdministonConfigPath.Text = text;
             }
         }
+        private void btnBrowseProductParamDirPath_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new FolderBrowserDialog { SelectedPath = tbProductParamDirPath.Text })
+                if (dialog.ShowDialog() == DialogResult.OK)
+                    tbProductParamDirPath.Text = dialog.SelectedPath;
+        }
+
+        private void btnBrowseIniFile_Click(object sender, EventArgs e)
+        {
+            var target = sender == btnBrowseLeadVersionFilePath ? tbLeadVersionFilePath : tbTossingStatisticsFilePath;
+            using (var dialog = new OpenFileDialog { Filter = "INI files|*.ini", CheckFileExists = true })
+                if (dialog.ShowDialog() == DialogResult.OK)
+                    target.Text = dialog.FileName;
+        }
+
         private void btnBrowseAlertConfigPath_Click(object sender, EventArgs e)
         {
             string path = tbAlertConfigPath.Text;
@@ -332,7 +347,10 @@ namespace Lead.CPrim.SoftwareConfig
                 _manager.TasksConfigEnable = chkTasksConfigEnable.Checked;
                 _manager.CmpTrigFilePath = tbCmpTrigsConfigPath.Text;
                 _manager.CmpTrigConfigEnable = chkCmpTrigConfigEnable.Checked;
-                _manager.DynamicParamDirPath = tbDynamicParamDirPath.Text;
+                _manager.GlobalParamDirPath = tbDynamicParamDirPath.Text.Trim();
+                _manager.ProductParamDirPath = tbProductParamDirPath.Text.Trim();
+                _manager.LeadVersionFilePath = tbLeadVersionFilePath.Text.Trim();
+                _manager.TossingStatisticsFilePath = tbTossingStatisticsFilePath.Text.Trim();
                 _manager.DynamicParamEnable = chkDynamicParamEnable.Checked;
                 _manager.CommonDynamicParamEnable = chkCommonDynamicParamEnable.Checked;
                 _manager.FaiConfigFilePath = tbFaiConfigPath.Text;
@@ -370,20 +388,20 @@ namespace Lead.CPrim.SoftwareConfig
                     _manager.Products.Add(p.ToString());
                 }
 
-                if (_manager.DynamicParamEnable && !string.IsNullOrEmpty(_manager.DynamicParamDirPath))
+                if (_manager.DynamicParamEnable && !string.IsNullOrEmpty(_manager.ProductParamDirPath))
                 {
-                    string tempPath = _manager.DynamicParamDirPath + "\\ProductCfg";
+                    string tempPath = _manager.ProductParamDirPath;
                     if (!Directory.Exists(tempPath))
                     {
-                        Directory.CreateDirectory(_manager.DynamicParamDirPath + "\\ProductCfg");
+                        Directory.CreateDirectory(_manager.ProductParamDirPath);
                     }
                     if (File.Exists(Application.StartupPath + "\\Configs\\Template.para"))
                     {
                         foreach (string product in _manager.Products)
                         {
-                            if (!File.Exists(_manager.DynamicParamDirPath + "\\ProductCfg\\" + product + ".para"))
+                            if (!File.Exists(Path.Combine(_manager.ProductParamDirPath, product + ".para")))
                             {
-                                File.Copy(Application.StartupPath + "\\Configs\\Template.para", _manager.DynamicParamDirPath + "\\ProductCfg\\" + product + ".para");
+                                File.Copy(Application.StartupPath + "\\Configs\\Template.para", Path.Combine(_manager.ProductParamDirPath, product + ".para"));
                             }
                         }
                     }
@@ -556,7 +574,10 @@ namespace Lead.CPrim.SoftwareConfig
             chkTasksConfigEnable.Checked = config.TasksConfigEnable;
             if (!string.IsNullOrEmpty(config.CmpTrigFilePath)) tbCmpTrigsConfigPath.Text = config.CmpTrigFilePath;
             chkCmpTrigConfigEnable.Checked = config.CmpTrigConfigEnable;
-            if (!string.IsNullOrEmpty(config.DynamicParamDirPath)) tbDynamicParamDirPath.Text = config.DynamicParamDirPath;
+            tbDynamicParamDirPath.Text = config.GlobalParamDirPath;
+            tbProductParamDirPath.Text = config.ProductParamDirPath;
+            tbLeadVersionFilePath.Text = config.LeadVersionFilePath;
+            tbTossingStatisticsFilePath.Text = config.TossingStatisticsFilePath;
             chkDynamicParamEnable.Checked = config.DynamicParamEnable;
             chkCommonDynamicParamEnable.Checked = config.CommonDynamicParamEnable;
             if (!string.IsNullOrEmpty(config.FaiConfigFilePath)) tbFaiConfigPath.Text = config.FaiConfigFilePath;
@@ -646,7 +667,10 @@ namespace Lead.CPrim.SoftwareConfig
             lb_Element.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Element", "元件:");
             lb_Task.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Task", "任务:");
             lb_Trig.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Trig", "脉冲比较功能:");
-            lb_ParameterFilePath.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_ParameterFilePath", "参数目录:");
+            lb_ParameterFilePath.Text = NLocalizer.GetString("Config_GlobalParamDir", "全局参数目录:");
+            lbProductParamDirPath.Text = NLocalizer.GetString("Config_ProductParamDir", "换型参数目录:");
+            lbLeadVersionFilePath.Text = NLocalizer.GetString("Config_LeadVersionFile", "软件版本文件:");
+            lbTossingStatisticsFilePath.Text = NLocalizer.GetString("Config_TossingStatisticsFile", "抛料统计文件:");
             lb_Fai.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Fai", "FAI参数:");
             lb_ComplexFai.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_ComplexFai", "复杂查询任务路径:");
             lb_Dispensing.Text = NLocalizer.GetString("Lead_CPrim_SoftwareConfig_SoftwareConfigControl_Dispensing", "点胶:");

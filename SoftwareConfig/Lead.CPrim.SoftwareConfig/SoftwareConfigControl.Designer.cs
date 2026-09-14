@@ -888,6 +888,27 @@ namespace Lead.CPrim.SoftwareConfig
             // tpPath
             // 
             this.tpPath.AutoScroll = true;
+            this.lbProductParamDirPath = new Label { AutoSize = true, Location = new System.Drawing.Point(30, 1091), Name = "lbProductParamDirPath", Text = "换型参数目录:" };
+            this.tbProductParamDirPath = new TextBox { Location = new System.Drawing.Point(212, 1086), Name = "tbProductParamDirPath", Size = new System.Drawing.Size(522, 31), TabIndex = 412 };
+            this.btnBrowseProductParamDirPath = new Button { Location = new System.Drawing.Point(741, 1086), Name = "btnBrowseProductParamDirPath", Size = new System.Drawing.Size(52, 36), Text = "...", TabIndex = 413 };
+            this.btnBrowseProductParamDirPath.Click += new System.EventHandler(this.btnBrowseProductParamDirPath_Click);
+            this.tpPath.Controls.Add(this.lbProductParamDirPath);
+            this.tpPath.Controls.Add(this.tbProductParamDirPath);
+            this.tpPath.Controls.Add(this.btnBrowseProductParamDirPath);
+            this.lbLeadVersionFilePath = new Label { AutoSize = true, Location = new System.Drawing.Point(30, 1137), Name = "lbLeadVersionFilePath", Text = "软件版本文件:" };
+            this.tbLeadVersionFilePath = new TextBox { Location = new System.Drawing.Point(212, 1132), Name = "tbLeadVersionFilePath", Size = new System.Drawing.Size(522, 31), TabIndex = 414 };
+            this.btnBrowseLeadVersionFilePath = new Button { Location = new System.Drawing.Point(741, 1132), Name = "btnBrowseLeadVersionFilePath", Size = new System.Drawing.Size(52, 36), Text = "...", TabIndex = 415 };
+            this.btnBrowseLeadVersionFilePath.Click += new System.EventHandler(this.btnBrowseIniFile_Click);
+            this.tpPath.Controls.Add(this.lbLeadVersionFilePath);
+            this.tpPath.Controls.Add(this.tbLeadVersionFilePath);
+            this.tpPath.Controls.Add(this.btnBrowseLeadVersionFilePath);
+            this.lbTossingStatisticsFilePath = new Label { AutoSize = true, Location = new System.Drawing.Point(30, 1183), Name = "lbTossingStatisticsFilePath", Text = "抛料统计文件:" };
+            this.tbTossingStatisticsFilePath = new TextBox { Location = new System.Drawing.Point(212, 1178), Name = "tbTossingStatisticsFilePath", Size = new System.Drawing.Size(522, 31), TabIndex = 416 };
+            this.btnBrowseTossingStatisticsFilePath = new Button { Location = new System.Drawing.Point(741, 1178), Name = "btnBrowseTossingStatisticsFilePath", Size = new System.Drawing.Size(52, 36), Text = "...", TabIndex = 417 };
+            this.btnBrowseTossingStatisticsFilePath.Click += new System.EventHandler(this.btnBrowseIniFile_Click);
+            this.tpPath.Controls.Add(this.lbTossingStatisticsFilePath);
+            this.tpPath.Controls.Add(this.tbTossingStatisticsFilePath);
+            this.tpPath.Controls.Add(this.btnBrowseTossingStatisticsFilePath);
             this.lbAlertConfigPath = new Label();
             this.tbAlertConfigPath = new TextBox();
             this.btnBrowseAlertConfigPath = new Button();
@@ -1785,6 +1806,15 @@ namespace Lead.CPrim.SoftwareConfig
         private TextBox tbAdministonConfigPath;
         private Label lb_Administration;
         private Label lbAlertConfigPath;
+        private Label lbProductParamDirPath;
+        private TextBox tbProductParamDirPath;
+        private Button btnBrowseProductParamDirPath;
+        private Label lbLeadVersionFilePath;
+        private TextBox tbLeadVersionFilePath;
+        private Button btnBrowseLeadVersionFilePath;
+        private Label lbTossingStatisticsFilePath;
+        private TextBox tbTossingStatisticsFilePath;
+        private Button btnBrowseTossingStatisticsFilePath;
         private TextBox tbAlertConfigPath;
         private Button btnBrowseAlertConfigPath;
     }

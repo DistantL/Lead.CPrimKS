@@ -82,7 +82,6 @@ namespace Lead.CPrim.CommonParam
             this.添加到选择的运行模式的全局参数列表中ToolStripMenuItem.Name = "添加到选择的运行模式的全局参数列表中ToolStripMenuItem";
             this.添加到选择的运行模式的全局参数列表中ToolStripMenuItem.Size = new System.Drawing.Size(348, 24);
             this.添加到选择的运行模式的全局参数列表中ToolStripMenuItem.Text = "添加到选择的运行模式的全局参数列表中";
-            this.添加到选择的运行模式的全局参数列表中ToolStripMenuItem.Click += new System.EventHandler(this.添加到选择的运行模式的全局参数列表中ToolStripMenuItem_Click);
             // 
             // tlpMain
             // 
@@ -159,7 +158,6 @@ namespace Lead.CPrim.CommonParam
             this.从选择ToolStripMenuItem.Name = "从选择ToolStripMenuItem";
             this.从选择ToolStripMenuItem.Size = new System.Drawing.Size(348, 24);
             this.从选择ToolStripMenuItem.Text = "从选择的运行模式的全局参数列表中删除";
-            this.从选择ToolStripMenuItem.Click += new System.EventHandler(this.从选择ToolStripMenuItem_Click);
             // 
             // panel1
             // 

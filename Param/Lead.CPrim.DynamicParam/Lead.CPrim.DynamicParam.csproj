@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DynamicParam.cs" />
+    <Compile Include="ProductModeFiles.cs" />
+    <Compile Include="Forms\DynamicParamForm.Mode.cs" />
     <Compile Include="Forms\DynamicParamForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -61,7 +61,7 @@ namespace Lead.CPrim.Global
                 try
                 {
                     string version = "";
-                    using (StreamReader sr = new StreamReader(@"D:\Config\IniConfig\Lead.ini"))
+                    using (StreamReader sr = new StreamReader(RuntimeConfigPaths.LeadVersionFilePath))
                     {
                         version = sr.ReadLine();
                     }
