@@ -14,6 +14,7 @@ namespace Lead.CPrim.DynamicParam
     {
         private string _currentMode = 运行模式.正常生产.ToString();
         private string _activeProduct;
+        private XElement savedModeValues = new XElement("Para");
         private PropertyManageCls _modeProperties = new PropertyManageCls();
         private readonly GroupBox _modeGroup = new GroupBox { Dock = DockStyle.Fill };
         private readonly PropertyGrid _modeGrid = new PropertyGrid { Dock = DockStyle.Fill };
@@ -79,31 +80,36 @@ namespace Lead.CPrim.DynamicParam
                 .OrderBy(p => p.Category + p.DisplayName).Select(p => p.PropToXElment()));
         }
 
-        private void LoadProductMode(string product, string mode)
+        private void LoadProductMode(string product, string mode, bool useCurrent = false)
         {
-            string path = ProductModeFiles.ProductPath(_productsCfgDir, product);
-            var productNode = XElement.Load(path);
-            var modeNode = ProductModeFiles.ReadMode(_productsCfgDir, product, mode);
-            var merged = ProductModeFiles.Apply(productNode, modeNode);
-            // 在更新文件或运行参数前完成类型解析，失败时保留原产品/模式。
-            var parsed = merged.Elements().Select(p => (Property)p).ToList();
-            var modeProperties = new PropertyManageCls();
-            foreach (var element in modeNode.Elements())
+            lock (((DynamicParam)DynamicParam.Instance).Updates.SyncRoot)
             {
-                var property = (Property)element;
-                property.ReadOnly = false;
-                modeProperties.Add(property);
+                string path = ProductModeFiles.ProductPath(_productsCfgDir, product);
+                FlushParameterAssignments();
+                var productNode = useCurrent && product == _activeProduct ? CurrentParameterDocument() : XElement.Load(path);
+                var modeNode = ProductModeFiles.ReadMode(_productsCfgDir, product, mode);
+                var merged = ProductModeFiles.Apply(productNode, modeNode);
+                // 只更新运行缓存；在切换前完成类型解析，不写参数文件。
+                var parsed = merged.Elements().Select(p => (Property)p).ToList();
+                var modeProperties = new PropertyManageCls();
+                foreach (var element in modeNode.Elements())
+                {
+                    var property = (Property)element;
+                    property.ReadOnly = false;
+                    modeProperties.Add(property);
+                }
+                DynamicParam.Instance.LoadSnapshot(merged, path);
+                _curParaPath = path;
+                _activeProduct = product;
+                _currentMode = mode;
+                _modeProperties = modeProperties;
+                UpdateUi(merged);
+                BtnRefresh_Click(null, null);
+                RefreshModeEditor();
+                savedModeValues = CurrentModeValues();
+                parameterBinding.AcceptLoaded();
+                CaptureTransferBaseline();
             }
-            merged.Save(path);
-            DynamicParam.Instance.Load(path);
-            _curParaPath = path;
-            _activeProduct = product;
-            _currentMode = mode;
-            _modeProperties = modeProperties;
-            UpdateUi(merged);
-            BtnRefresh_Click(null, null);
-            RefreshModeEditor();
-            CaptureTransferBaseline();
         }
 
         public int ModeChange(string mode)
@@ -111,7 +117,7 @@ namespace Lead.CPrim.DynamicParam
             try
             {
                 if (string.IsNullOrWhiteSpace(_activeProduct)) return -1;
-                LoadProductMode(_activeProduct, mode);
+                LoadProductMode(_activeProduct, mode, true);
                 return 0;
             }
             catch (Exception ex)

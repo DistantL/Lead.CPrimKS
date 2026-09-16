@@ -32,7 +32,7 @@ namespace Lead.CPrim.DynamicParam
         {
             string path = ModePath(directory, product, mode);
             if (!File.Exists(path))
-                new XElement("Para").Save(path);
+                return new XElement("Para");
             return XElement.Load(path);
         }
 
@@ -57,6 +57,21 @@ namespace Lead.CPrim.DynamicParam
                 target.SetElementValue("ReadOnly", true);
             }
             return result;
+        }
+
+        /// <summary>保存时仅应用人工新增/改值的模式项；未修改的模式项只保持只读标记。</summary>
+        public static XElement ApplyEdited(XElement product, XElement mode, XElement baseline)
+        {
+            var validated = Apply(product, mode);
+            foreach (var item in product.Elements())
+                validated.Element(item.Name).Element("Value").ReplaceWith(new XElement(item.Element("Value")));
+            foreach (var item in mode.Elements())
+            {
+                var previous = baseline.Element(item.Name);
+                if (previous == null || !XNode.DeepEquals(previous.Element("Value"), item.Element("Value")))
+                    validated.Element(item.Name).Element("Value").ReplaceWith(new XElement(item.Element("Value")));
+            }
+            return validated;
         }
     }
 }

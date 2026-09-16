@@ -20,6 +20,7 @@ namespace Lead.CPrim.CommonParam
         /// 更新参数时发生
         /// </summary>
         public static Action<Property> OnUpdateProperty;
+        public readonly ParameterChangeFeed Updates = new ParameterChangeFeed(LockPara);
         #endregion
 
 
@@ -48,6 +49,19 @@ namespace Lead.CPrim.CommonParam
         #endregion
 
 
+
+
+        private void AssignChild(Property owner, string[] path, object value)
+        {
+            Property notification;
+            lock (Updates.SyncRoot)
+            {
+                if (!xElementPropList.Contains(owner)) throw new InvalidOperationException("参数已重新加载，不能通过旧对象赋值。");
+                notification = ParameterChangeFeed.Assign(owner, Node.Elements().First(p => (string)p.Element("Name") == owner.Name), path, value);
+                Updates.Publish(notification);
+            }
+            OnUpdateProperty?.Invoke(ParameterChangeFeed.Clone(notification));
+        }
 
         #region Ctor
         private CommonParam()
@@ -99,13 +113,13 @@ namespace Lead.CPrim.CommonParam
         /// <param name="node"></param>
         public void Load(XElement node)
         {
-            Node = node;
-
-            xElementPropList = new List<Property>();
-            foreach (XElement element in GetParaMembers())
+            lock (Updates.SyncRoot)
             {
-                Property p = (Property)element;
-                xElementPropList.Add(p);
+                var copy = new XElement(node);
+                var parsed = copy.Elements().Select(p => (Property)p).ToList();
+                Node = copy;
+                xElementPropList = parsed;
+                Updates.Reset();
             }
         }
 
@@ -124,7 +138,7 @@ namespace Lead.CPrim.CommonParam
         /// <param name="path">路径</param>
         public void Save(string path)
         {
-            Node.Save(path);
+            lock (Updates.SyncRoot) new XElement(Node).Save(path);
         }
 
         /// <summary>值获取</summary>
@@ -133,32 +147,18 @@ namespace Lead.CPrim.CommonParam
         /// <returns>bool</returns>
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            lock (LockPara)
+            lock (Updates.SyncRoot)
             {
-                if (Node == null)
+                var property = xElementPropList?.FirstOrDefault(p => p.Name == binder.Name);
+                if (property == null) { result = null; return false; }
+                var children = property.Value as List<Property>;
+                if (children == null) result = property.Value;
+                else
                 {
-                    MessageBox.Show(binder.ToString() + "Param未加载！");
-                    result = 0;
-                    return false;
+                    var owner = property;
+                    result = ParameterChangeFeed.Proxy(children, (path, value) => AssignChild(owner, path, value));
                 }
-                Property p = xElementPropList.FirstOrDefault((Property x) => x.Name == binder.Name);
-                if (p != null)
-                {
-                    if (!(p.Value is List<Property>))
-                    {
-                        result = p.Value;
-                    }
-                    else
-                    {
-                        MyPropList list = new MyPropList(binder.Name);
-                        list.OnPropChanged += UpdateElementOnMyPropListChanged;
-                        list.PropertyList = (List<Property>)p.Value;
-                        result = list;
-                    }
-                    return true;
-                }
-                result = null;
-                return false;
+                return true;
             }
         }
 
@@ -168,19 +168,17 @@ namespace Lead.CPrim.CommonParam
         /// <returns>bool</returns>
         public bool SetMember(string str, object value)
         {
-            lock (LockPara)
+            Property notification;
+            lock (Updates.SyncRoot)
             {
-                Property p = xElementPropList.FirstOrDefault((Property x) => x.Name == str);
-                if (p != null)
-                {
-                    p.Value = value;
-                    OnUpdateProperty?.Invoke(p);
-                    //Node.Elements().FirstOrDefault((XElement x) => x.Name == str).Remove();
-                    //Node.Add(p.PropToXElment());
-                    return true;
-                }
-                return false;
+                var property = xElementPropList?.FirstOrDefault(p => p.Name == str);
+                if (property == null) return false;
+                var snapshot = Node.Elements().First(p => (string)p.Element("Name") == property.Name);
+                notification = ParameterChangeFeed.Assign(property, snapshot, new string[0], value);
+                Updates.Publish(notification);
             }
+            OnUpdateProperty?.Invoke(ParameterChangeFeed.Clone(notification));
+            return true;
         }
 
         /// <summary>
@@ -231,16 +229,8 @@ namespace Lead.CPrim.CommonParam
 
         private void UpdateElementOnMyPropListChanged(Property p, string ownName)
         {
-            XElement elementOwn = GetXElementByName(Node, ownName);
-            if (elementOwn != null)
-            {
-                XElement element = GetXElementByName(elementOwn, p.Name);
-                if (element != null)
-                {
-                    element.Remove();
-                    elementOwn.Add(p.PropToXElment());
-                }
-            }
+            var owner = xElementPropList?.FirstOrDefault(item => item.Name == ownName);
+            if (owner != null) AssignChild(owner, new[] { p.Name }, p.Value);
         }
         #endregion
     }

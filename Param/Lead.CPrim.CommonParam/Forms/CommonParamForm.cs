@@ -100,6 +100,9 @@ namespace Lead.CPrim.CommonParam
             HiveManagerV3.Instance.HiveStateChanged += (info, trigger) => HiveManager_OnHiveChange(info.ChangeToStatus == HiveStatus.DT);
 
             CommonParam.OnUpdateProperty += InstanceUpdateProperty;
+            Disposed += (sender, args) => CommonParam.OnUpdateProperty -= InstanceUpdateProperty;
+            parameterBinding = new ParameterUiBinding(this, pg, ((CommonParam)CommonParam.Instance).Updates,
+                () => Pmcls.Cast<Property>(), RefreshAssignedPoints);
         }
         #endregion
 
@@ -173,22 +176,7 @@ namespace Lead.CPrim.CommonParam
         /// <param name="property"></param>
         void InstanceUpdateProperty(Property property)
         {
-            if (pg.InvokeRequired)
-            {
-                BeginInvoke(new Action<Property>(InstanceUpdateProperty), property);
-            }
-            else
-            {
-                foreach (Property p in Pmcls)
-                {
-                    if (p.Name == property.Name)
-                    {
-                        p.Value = property.Value;
-                        break;
-                    }
-                }
-                pg.SelectedObject = Pmcls;
-            }
+            parameterBinding?.RequestRefresh();
         }
         #endregion
 
@@ -201,14 +189,27 @@ namespace Lead.CPrim.CommonParam
         {
             try
             {
+                FlushParameterAssignments();
                 var session = CreateTransferSession?.Invoke(CurParaPath);
+                long editorVersion = ParameterVersion;
                 using (var frm = new ParamCfg(CurParaPath))
                 {
                     frm.CurSysDir = CurSysDirPaht;
                     frm.TransferSession = session;
+                    frm.SetDocument(CurrentParameterDocument());
+                    frm.SaveGuard = save =>
+                    {
+                        lock (((CommonParam)CommonParam.Instance).Updates.SyncRoot)
+                        {
+                            ValidateEditorVersion(editorVersion);
+                            save();
+                            RefreshTransferredParameters(XElement.Load(CurParaPath));
+                            editorVersion = ParameterVersion;
+                        }
+                    };
                     frm.ShowDialog(this);
                 }
-                if (session == null) LoadAndUpdateUI(false);
+                // 保存回调已刷新；关闭/取消不能从磁盘重载旧值。
                 // 转移会话已在保存回调刷新；取消时不重载、不保存。
             }
             catch (Exception ex) { MessageBox.Show(this, ex.Message, "参数配置"); }
@@ -278,34 +279,17 @@ namespace Lead.CPrim.CommonParam
         /// <param name="mode"></param>
         public int Save(string mode)
         {
-            if (string.IsNullOrWhiteSpace(mode))
+            if (string.IsNullOrWhiteSpace(mode) || !ParameterEditingAllowed) return -1;
+            var manager = (CommonParam)CommonParam.Instance;
+            lock (manager.Updates.SyncRoot)
             {
-                return -1;
-            }
-
-            lock (CommonParam.LockPara)
-            {
-                XElement xel = new XElement("参数", "");
-                List<Property> properties = new List<Property>();
-                foreach (Property p in Pmcls)
-                {
-                    properties.Add(p);
-                }
-                properties.Sort(
-                    (x, y) =>
-                    {
-                        string x_str = x.Category + x.DisplayName;
-                        string y_str = y.Category + y.DisplayName;
-                        return x_str.CompareTo(y_str);
-                    });
-                foreach (Property p in properties)
-                {
-                    xel.Add(p.PropToXElment());
-                }
-                CommonParam.Instance.Load(xel);
-                CommonParam.Instance.Save(CurParaPath);
+                FlushParameterAssignments();
+                var document = CurrentParameterDocument();
+                ParameterTransferSession.ValidateDocument(document);
+                ParameterFileCommit.Save(CurParaPath, document);
+                manager.Load(document);
+                parameterBinding.AcceptLoaded();
                 CaptureTransferBaseline();
-
                 return 0;
             }
         }
@@ -320,6 +304,7 @@ namespace Lead.CPrim.CommonParam
             }
             else
             {
+                if (enable) FlushParameterAssignments();
                 pg.Enabled = enable;
                 tsTitle.Enabled = enable;
             }
@@ -334,7 +319,7 @@ namespace Lead.CPrim.CommonParam
             try
             {
                 ChangeMode(mode);
-                return string.IsNullOrEmpty(CurParaPath) ? 0 : Save(mode);
+                return 0;
             }
             catch (Exception ex)
             {
@@ -357,53 +342,58 @@ namespace Lead.CPrim.CommonParam
         /// </summary>
         void UpdateUi(string mode, bool isInit)
         {
-            if (pg.InvokeRequired)
+            lock (((CommonParam)CommonParam.Instance).Updates.SyncRoot)
             {
-                pg.BeginInvoke(new Action<string, bool>(UpdateUi), mode, isInit);
-                return;
+                if (pg.InvokeRequired)
+                {
+                    pg.BeginInvoke(new Action<string, bool>(UpdateUi), mode, isInit);
+                    return;
+                }
+
+                XElement xel = XElement.Load(CurParaPath);
+                if (xel == null)
+                {
+                    return;
+                }
+
+                string[] modes = Enum.GetNames(typeof(运行模式));
+                Property temp = null;
+                XElement element = xel.Elements().ToList().FirstOrDefault(p => p.Name == nameof(运行模式));
+                if (element != null)
+                {
+                    temp = (Property)element;
+                    element.Remove();
+                }
+
+                Property prop = new Property()
+                {
+                    Category = "00 设备",
+                    Name = nameof(运行模式),
+                    Value = isInit || element == null ? 运行模式.正常生产.ToString() : temp.Value.ToString(),
+                    valType = BaseParam.DataType.Comb,
+                    DisplayName = nameof(运行模式),
+                    CombMsg = string.Join(",", modes),
+                    ReadOnly = true,
+                    Visible = true
+                };
+
+                xel.Add(prop.PropToXElment());
+                CommonParam.Instance.Load(xel);
+
+
+                Pmcls.Clear();
+                xel.Elements().ToList().ForEach(p => Pmcls.Add((Property)p));
+                parameterBinding.AcceptLoaded();
+                ChangeMode(mode);
+                CaptureTransferBaseline();
             }
-
-            CommonParam.Instance.Load(CurParaPath);
-            XElement xel = CommonParam.Instance.Node;
-            if (xel == null)
-            {
-                return;
-            }
-
-            string[] modes = Enum.GetNames(typeof(运行模式));
-            Property temp = null;
-            XElement element = xel.Elements().ToList().FirstOrDefault(p => p.Name == nameof(运行模式));
-            if (element != null)
-            {
-                temp = (Property)element;
-                element.Remove();
-            }
-
-            Property prop = new Property()
-            {
-                Category = "00 设备",
-                Name = nameof(运行模式),
-                Value = isInit || element == null ? 运行模式.正常生产.ToString() : temp.Value.ToString(),
-                valType = BaseParam.DataType.Comb,
-                DisplayName = nameof(运行模式),
-                CombMsg = string.Join(",", modes),
-                ReadOnly = true,
-                Visible = true
-            };
-
-            xel.Add(prop.PropToXElment());
-            CommonParam.Instance.Load(xel);
-            CommonParam.Instance.Save(CurParaPath);
-
-            Pmcls.Clear();
-            xel.Elements().ToList().ForEach(p => Pmcls.Add((Property)p));
-            ChangeMode(mode);
-            CaptureTransferBaseline();
         }
 
         /// <summary>只更新运行模式状态，不加载或覆盖任何全局模式参数。</summary>
         void ChangeMode(string mode)
         {
+            FlushParameterAssignments();
+            CommonParam.Instance.SetMember("运行模式", mode);
             foreach (Property item in Pmcls)
             {
                 if (item.Name == "运行模式")
@@ -429,24 +419,15 @@ namespace Lead.CPrim.CommonParam
                 }
 
 
-                if (!File.Exists(CurParaPath))
-                {
-                    if (File.Exists(Application.StartupPath + "\\Configs\\Template.para"))
-                    {
-                        File.Copy(Application.StartupPath + "\\Configs\\Template.para", CurParaPath);
-                    }
-                    else
-                    {
-                        new XElement("参数").Save(CurParaPath);
-                    }
-                }
+                if (!File.Exists(CurParaPath)) throw new FileNotFoundException("全局参数文件不存在。", CurParaPath);
 
                 UpdateUi(runModeLast, isInit);
                 OnLanguageChanged();
             }
             catch (Exception ex)
             {
-                CommonParam.Instance.LogAdd(NLocalizer.GetString("Lead_CPrim_CommonParam_CommonParamForm_ErrMsg_LoadFail", "全局变量界面加载失败:") + ex.Message, (LogLevel)3);
+                CommonParam.LogAdd(NLocalizer.GetString("Lead_CPrim_CommonParam_CommonParamForm_ErrMsg_LoadFail", "全局变量界面加载失败:") + ex.Message, (LogLevel)3);
+                throw;
             }
         }
 

@@ -14,7 +14,8 @@ namespace Lead.CPrim.CommonParam
         public Func<string, ParameterTransferSession> CreateTransferSession { get; set; }
         public string ActiveParameterPath { get { return CurParaPath; } }
         private string transferBaseline;
-        public bool ParameterEditingAllowed { get { return tsTitle.Enabled && pg.Enabled; } }
+        public Func<bool> CanSaveParameters { get; set; }
+        public bool ParameterEditingAllowed { get { return tsTitle.Enabled && pg.Enabled && (CanSaveParameters?.Invoke() ?? true); } }
         public bool HasUnsavedParameterChanges
         {
             get { return transferBaseline == null || transferBaseline != ParameterTransferSession.ValueSnapshot(Pmcls.Cast<Property>()); }
@@ -43,6 +44,7 @@ namespace Lead.CPrim.CommonParam
             }
             pg.SelectedObject = Pmcls;
             pg.Refresh();
+            parameterBinding.AcceptLoaded();
             CaptureTransferBaseline();
         }
     }

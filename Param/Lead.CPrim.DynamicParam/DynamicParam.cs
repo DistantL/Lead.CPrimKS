@@ -21,7 +21,18 @@ namespace Lead.CPrim.DynamicParam
         /// 更新参数时发生
         /// </summary>
         public static Action<Property> OnUpdateProperty;
+        public readonly ParameterChangeFeed Updates = new ParameterChangeFeed(new object());
         #endregion
+
+        public void LoadSnapshot(XElement document, string path)
+        {
+            lock (Updates.SyncRoot)
+            {
+                Load(document);
+                _paramPath = Path.GetDirectoryName(path);
+                _currentProduct = Path.GetFileNameWithoutExtension(path);
+            }
+        }
 
 
 
@@ -45,6 +56,19 @@ namespace Lead.CPrim.DynamicParam
 
 
 
+
+        private void AssignChild(Property owner, string[] path, object value)
+        {
+            Property notification;
+            lock (Updates.SyncRoot)
+            {
+                if (!_xElementPropList.Contains(owner)) throw new InvalidOperationException("参数已重新加载，不能通过旧对象赋值。");
+                notification = ParameterChangeFeed.Assign(owner, Node.Elements().First(p => (string)p.Element("Name") == owner.Name), path, value);
+                Updates.Publish(notification);
+            }
+            OnUpdateProperty?.Invoke(ParameterChangeFeed.Clone(notification));
+        }
+
         #region Ctor
         private DynamicParam()
         {
@@ -62,39 +86,20 @@ namespace Lead.CPrim.DynamicParam
 		/// <returns></returns>
 		public override bool TryGetMember(GetMemberBinder binder, out object result)
 		{
-			bool result2;
-			if (Node == null)
-			{
-				MessageBox.Show(binder.ToString() + NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParam_ErrMsg_DynamicParamNoLoad", "换型参数未加载!"));
-				result = 0;
-				result2 = false;
-			}
-			else
-			{
-				Property p = this._xElementPropList.FirstOrDefault((Property x) => x.Name == binder.Name);
-				if (p != null)
-				{
-					if (!(p.Value is List<Property> l))
-					{
-						result = p.Value;
-					}
-					else
-					{
-						MyPropList list = new MyPropList(binder.Name);
-						list.OnPropChanged += this.UpdateElementOnMyPropListChanged;
-						list.PropertyList = l;
-						result = list;
-					}
-					result2 = true;
-				}
-				else
-				{
-					result = null;
-					result2 = false;
-				}
-			}
-			return result2;
-		}
+            lock (Updates.SyncRoot)
+            {
+                var property = _xElementPropList?.FirstOrDefault(p => p.Name == binder.Name);
+                if (property == null) { result = null; return false; }
+                var children = property.Value as List<Property>;
+                if (children == null) result = property.Value;
+                else
+                {
+                    var owner = property;
+                    result = ParameterChangeFeed.Proxy(children, (path, value) => AssignChild(owner, path, value));
+                }
+                return true;
+            }
+        }
 
 		/// <summary>
 		/// 设置参数
@@ -125,17 +130,16 @@ namespace Lead.CPrim.DynamicParam
 		/// </summary>
 		public void Load()
 		{
-			try
-			{
-				_currentProduct = SwManager.Instance.CurrentProduct;
-				Node = XElement.Load(_paramPath + "\\" + _currentProduct + ".para");
-				Load(Node);
-			}
-			catch (Exception e)
-			{
-				LogAdd(NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParam_ErrMsg_DynamicParamLoadFail", "换型参数加载失败:") + e.Message, LogLevel.Warn, 0, false);
-			}
-		}
+            try
+            {
+                string path = Path.Combine(_paramPath, SwManager.Instance.CurrentProduct + ".para");
+                LoadSnapshot(XElement.Load(path), path);
+            }
+            catch (Exception e)
+            {
+                LogAdd(NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParam_ErrMsg_DynamicParamLoadFail", "换型参数加载失败:") + e.Message, LogLevel.Warn, 0, false);
+            }
+        }
 
 		/// <summary>
 		/// 根据路径获取参数
@@ -145,8 +149,7 @@ namespace Lead.CPrim.DynamicParam
 		{
 			try
 			{
-				Node = XElement.Load(path);
-				Load(Node);
+				Load(XElement.Load(path));
 
 				_paramPath = Path.GetDirectoryName(path);
 				_currentProduct = Path.GetFileNameWithoutExtension(path);
@@ -161,16 +164,17 @@ namespace Lead.CPrim.DynamicParam
 		/// 根据XElement获取参数
 		/// </summary>
 		/// <param name="CurNode"></param>
-		public void Load(XElement CurNode)
+        public void Load(XElement CurNode)
 		{
-			Node = CurNode;
-			_xElementPropList = new List<Property>();
-			foreach (XElement element in Node.Elements().ToList<XElement>())
-			{
-				Property p = (Property)element;
-				_xElementPropList.Add(p);
-			}
-		}
+            lock (Updates.SyncRoot)
+            {
+                var copy = new XElement(CurNode);
+                var parsed = copy.Elements().Select(p => (Property)p).ToList();
+                Node = copy;
+                _xElementPropList = parsed;
+                Updates.Reset();
+            }
+        }
 
 		/// <summary>
 		/// 保存
@@ -178,7 +182,7 @@ namespace Lead.CPrim.DynamicParam
 		/// <param name="path"></param>
 		public void Save(string path)
 		{
-			Node.Save(path);
+			lock (Updates.SyncRoot) new XElement(Node).Save(path);
 		}
 
 		/// <summary>
@@ -189,23 +193,18 @@ namespace Lead.CPrim.DynamicParam
 		/// <returns>bool</returns>
 		public bool SetMember(string propertyName, object value)
 		{
-			bool result = true;
-
-			Property p = _xElementPropList.FirstOrDefault(x => x.Name == propertyName);
-			if (p != null)
-			{
-				p.Value = value;
-				OnUpdateProperty?.Invoke(p);
-				//Node.Elements().FirstOrDefault(x => x.Name == propertyName).Remove();
-				//Node.Add(p.PropToXElment());
-			}
-			else
-			{
-				result = false;
-			}
-
-			return result;
-		}
+            Property notification;
+            lock (Updates.SyncRoot)
+            {
+                var property = _xElementPropList?.FirstOrDefault(p => p.Name == propertyName);
+                if (property == null) return false;
+                var snapshot = Node.Elements().First(p => (string)p.Element("Name") == property.Name);
+                notification = ParameterChangeFeed.Assign(property, snapshot, new string[0], value);
+                Updates.Publish(notification);
+            }
+            OnUpdateProperty?.Invoke(ParameterChangeFeed.Clone(notification));
+            return true;
+        }
 
 		/// <summary>
 		/// true：包含属性；false：不包含属性；
@@ -276,16 +275,8 @@ namespace Lead.CPrim.DynamicParam
 
         private void UpdateElementOnMyPropListChanged(Property p, string ownName)
         {
-            XElement elementOwn = this.GetXElementByName(this.Node, ownName);
-            if (elementOwn != null)
-            {
-                XElement element = this.GetXElementByName(elementOwn, p.Name);
-                if (element != null)
-                {
-                    element.Remove();
-                    elementOwn.Add(p.PropToXElment());
-                }
-            }
+            var owner = _xElementPropList?.FirstOrDefault(item => item.Name == ownName);
+            if (owner != null) AssignChild(owner, new[] { p.Name }, p.Value);
         } 
         #endregion
     }

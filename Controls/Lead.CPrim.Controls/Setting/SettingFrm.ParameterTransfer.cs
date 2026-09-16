@@ -34,7 +34,11 @@ namespace Lead.CPrim.Controls
                 if (common.HasUnsavedParameterChanges || _dynamicParamForm.HasUnsavedParameterChanges)
                     throw new InvalidOperationException("全局或换型参数页面存在未保存修改，请先保存，再重新进入编辑参数。");
             };
+            common.FlushParameterAssignments();
+            _dynamicParamForm.FlushParameterAssignments();
             checkEditable();
+            long globalVersion = common.ParameterVersion;
+            long productVersion = _dynamicParamForm.ParameterVersion;
             string product = _dynamicParamForm.ActiveProduct;
             string productPath = _dynamicParamForm.ActiveParameterPath;
             string globalPath = common.ActiveParameterPath;
@@ -44,18 +48,28 @@ namespace Lead.CPrim.Controls
             if (!string.Equals(Path.GetFullPath(sourcePath), Path.GetFullPath(toGlobal ? productPath : globalPath), StringComparison.OrdinalIgnoreCase))
                 throw new InvalidOperationException("参数编辑路径与当前已加载路径不一致。");
             string modePath = _dynamicParamForm.ActiveModePath;
-            byte[] modeBytes = File.ReadAllBytes(modePath);
+
             var modeSnapshots = (toGlobal ? _dynamicParamForm.ProductModePaths : new[] { modePath })
                 .ToDictionary(path => path, path => File.Exists(path) ? File.ReadAllBytes(path) : null);
             var session = new ParameterTransferSession(sourcePath, target, product, toGlobal);
+            session.SetViewSnapshots(toGlobal ? _dynamicParamForm.ParameterSnapshot : common.ParameterSnapshot,
+                toGlobal ? common.ParameterSnapshot : _dynamicParamForm.ParameterSnapshot);
+            session.CommitGuard = commit =>
+            {
+                lock (((Lead.CPrim.CommonParam.CommonParam)Lead.CPrim.CommonParam.CommonParam.Instance).Updates.SyncRoot)
+                lock (((Lead.CPrim.DynamicParam.DynamicParam)Lead.CPrim.DynamicParam.DynamicParam.Instance).Updates.SyncRoot)
+                    commit();
+            };
             session.ValidateContext = () =>
             {
+                if (globalVersion != common.ParameterVersion || productVersion != _dynamicParamForm.ParameterVersion)
+                    throw new InvalidOperationException("脚本已修改参数，请关闭编辑器并重新打开。");
                 checkEditable();
                 if (product != _dynamicParamForm.ActiveProduct || product != SwManager.Instance.CurrentProduct
                     || !string.Equals(productPath, _dynamicParamForm.ActiveParameterPath, StringComparison.OrdinalIgnoreCase)
                     || !string.Equals(globalPath, common.ActiveParameterPath, StringComparison.OrdinalIgnoreCase)
                     || !string.Equals(modePath, _dynamicParamForm.ActiveModePath, StringComparison.OrdinalIgnoreCase)
-                    || !File.ReadAllBytes(modePath).SequenceEqual(modeBytes))
+                    )
                     throw new InvalidOperationException("产品、模式或模式文件已变化，请放弃当前编辑并重新打开。");
                 foreach (var snapshot in modeSnapshots)
                     if (snapshot.Value == null ? File.Exists(snapshot.Key)
@@ -71,6 +85,8 @@ namespace Lead.CPrim.Controls
             {
                 common.RefreshTransferredParameters(toGlobal ? destination : source);
                 _dynamicParamForm.RefreshTransferredParameters(toGlobal ? source : destination);
+                globalVersion = common.ParameterVersion;
+                productVersion = _dynamicParamForm.ParameterVersion;
             };
             session.CheckCurrent();
             return session;

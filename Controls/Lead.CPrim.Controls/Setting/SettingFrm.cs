@@ -1393,6 +1393,10 @@ namespace Lead.CPrim.Controls
                 ? (Func<string, Lead.CPrim.BaseParam.ParameterTransferSession>)CreateParameterTransferSession : null;
             _dynamicParamForm.CreateTransferSession = SwManager.Instance.CommonDynamicParamEnable && SwManager.Instance.DynamicParamEnable
                 ? (Func<string, Lead.CPrim.BaseParam.ParameterTransferSession>)CreateGlobalParameterTransferSession : null;
+            Func<bool> canSaveParameters = () => !TaskSmManger.Instance.TaskSMs.Any(p =>
+                p.Value.State == SmStates.Running || p.Value.State == SmStates.Resetting);
+            CommonParamForm.Instance.CanSaveParameters = canSaveParameters;
+            _dynamicParamForm.CanSaveParameters = canSaveParameters;
             tvHardwareSetting.ExpandAll();
         }
 

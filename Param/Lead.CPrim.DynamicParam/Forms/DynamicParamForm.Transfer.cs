@@ -28,7 +28,8 @@ namespace Lead.CPrim.DynamicParam
         public string ActiveProduct { get { return _activeProduct; } }
         public string ActiveParameterPath { get { return _curParaPath; } }
         public string ActiveModePath { get { return ProductModeFiles.ModePath(_productsCfgDir, _activeProduct, _currentMode); } }
-        public bool ParameterEditingAllowed { get { return tsTitle.Enabled && pg.Enabled; } }
+        public Func<bool> CanSaveParameters { get; set; }
+        public bool ParameterEditingAllowed { get { return tsTitle.Enabled && pg.Enabled && (CanSaveParameters?.Invoke() ?? true); } }
         public bool HasUnsavedParameterChanges
         {
             get
@@ -47,15 +48,17 @@ namespace Lead.CPrim.DynamicParam
         {
             ParameterTransferSession.ValidateDocument(ProductModeFiles.Apply(product, CurrentModeValues()));
         }
-        /// <summary>刷新提交结果；不调用会写回产品文件的 LoadProductMode。</summary>
+        /// <summary>刷新提交结果；不重新应用模式覆盖。</summary>
         public void RefreshTransferredParameters(XElement product)
         {
-            var merged = ProductModeFiles.Apply(product, CurrentModeValues());
+            ProductModeFiles.Apply(product, CurrentModeValues()); // 仅验证模式引用，不应用旧值。
+            var merged = new XElement(product);
             ParameterTransferSession.ValidateDocument(merged);
-            DynamicParam.Instance.Load(new XElement(merged));
+            DynamicParam.Instance.LoadSnapshot(new XElement(merged), _curParaPath);
             UpdateUi(merged);
             BtnRefresh_Click(null, null);
             RefreshModeEditor();
+            parameterBinding.AcceptLoaded();
             CaptureTransferBaseline();
         }
     }

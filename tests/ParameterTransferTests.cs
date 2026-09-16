@@ -164,6 +164,28 @@ internal static class ParameterTransferTests
         Check((string)XElement.Load(pair.Target).Element("Speed").Element("Category") == "First group", "空产品也能新建分组");
         pair = new Pair();
 
+        var viewPair = new Pair();
+        var targetView = XElement.Load(viewPair.Target);
+        targetView.Element("Existing").SetElementValue("Value", 999);
+        viewPair.Session.SetViewSnapshots(viewPair.Global, targetView);
+        viewPair.Stage("Speed");
+        viewPair.Session.Save(viewPair.Global);
+        Check((int)XElement.Load(viewPair.Target).Element("Existing").Element("Value") == 999, "转移保留目标内存模式值而非磁盘旧值");
+        viewPair = new Pair();
+        targetView = XElement.Load(viewPair.Target);
+        targetView.Element("Existing").SetElementValue("Value", 888);
+        viewPair.Session.SetViewSnapshots(viewPair.Global, targetView);
+        viewPair.Stage("Speed");
+        int viewRefreshes = 0;
+        XElement restoredView = null;
+        viewPair.Session.RefreshCommitted = (s, t) =>
+        {
+            if (++viewRefreshes == 1) throw new Exception("UI故障");
+            restoredView = t;
+        };
+        Reject(() => viewPair.Session.Save(viewPair.Global), "快照会话刷新失败");
+        Check((int)restoredView.Element("Existing").Element("Value") == 888
+            && (int)XElement.Load(viewPair.Target).Element("Existing").Element("Value") == 42, "失败分别恢复内存快照与原文件");
         var reversePair = new Pair();
         var reverse = new ParameterTransferSession(reversePair.Target, reversePair.Source, "AudioAirPods", true);
         Check(reverse.ToGlobal && reverse.Groups.Contains("Global"), "反向会话使用目标全局分组");

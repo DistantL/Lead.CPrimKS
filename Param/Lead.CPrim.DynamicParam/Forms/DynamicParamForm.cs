@@ -91,6 +91,9 @@ namespace Lead.CPrim.DynamicParam
             NLocalizer.LanguageChanged += OnLanguageChanged;
 
             DynamicParam.OnUpdateProperty += InstanceUpdateProperty;
+            Disposed += (sender, args) => DynamicParam.OnUpdateProperty -= InstanceUpdateProperty;
+            parameterBinding = new ParameterUiBinding(this, pg, ((DynamicParam)DynamicParam.Instance).Updates,
+                () => Pmcls.Cast<Property>(), RefreshAssignedPoints);
         }
         #endregion
 
@@ -117,22 +120,7 @@ namespace Lead.CPrim.DynamicParam
         /// <param name="property"></param>
         void InstanceUpdateProperty(Property property)
         {
-            if (pg.InvokeRequired)
-            {
-                BeginInvoke(new Action<Property>(InstanceUpdateProperty), property);
-            }
-            else
-            {
-                foreach (Property p in Pmcls)
-                {
-                    if (p.Name == property.Name)
-                    {
-                        p.Value = property.Value;
-                        break;
-                    }
-                }
-                pg.SelectedObject = Pmcls;
-            }
+            parameterBinding?.RequestRefresh();
         }
 
         private void pnlMain_ControlRemoved(object sender, EventArgs e)
@@ -222,12 +210,6 @@ namespace Lead.CPrim.DynamicParam
                 foreach (string product in SwManager.Instance.Products)
                 {
                     string path = ProductModeFiles.ProductPath(_productsCfgDir, product);
-                    if (!File.Exists(path))
-                    {
-                        string template = Path.Combine(Application.StartupPath, "Configs", "Template.para");
-                        if (File.Exists(template)) File.Copy(template, path);
-                        else new XElement("Para").Save(path);
-                    }
                     tscboProducts.Items.Add(product);
                 }
                 string current = SwManager.Instance.CurrentProduct;
@@ -285,32 +267,28 @@ namespace Lead.CPrim.DynamicParam
         /// <param name="path"></param>
         public int Save(string path = null, bool isManual = true)
         {
-            if (!tsTitle.Enabled)
-            {
-                //	((UIPage)this).ShowWarningDialog("不允许进行参数保存", false);
-                return -1;
-            }
-
-            if (string.IsNullOrEmpty(_activeProduct)) return -1;
+            if (!ParameterEditingAllowed || string.IsNullOrEmpty(_activeProduct)) return -1;
             if (StringEx.IsNullOrEmpty(path)) path = _curParaPath;
-            var values = new XElement("Para", Pmcls.Cast<Property>().Select(p => p.PropToXElment()));
-            var modeValues = CurrentModeValues();
-            var merged = ProductModeFiles.Apply(values, modeValues);
-            // 与原全局模式保存方式一致：覆盖值写回产品文件。
-            merged.Elements().Select(p => (Property)p).ToList();
-            modeValues.Save(ProductModeFiles.ModePath(_productsCfgDir, _activeProduct, _currentMode));
-            merged.Save(path);
-            DynamicParam.Instance.Load(merged);
-            UpdateUi(merged);
-            CaptureTransferBaseline();
-
-            BtnRefresh_Click(null, null);
-            if (isManual)
+            var manager = (DynamicParam)DynamicParam.Instance;
+            lock (manager.Updates.SyncRoot)
             {
-                UIMessageTip.ShowOk(NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_DynamicParamSaveSuccess", "换型参数保存成功"));
+                FlushParameterAssignments();
+                var modeValues = CurrentModeValues();
+                var values = ProductModeFiles.ApplyEdited(CurrentParameterDocument(), modeValues, savedModeValues);
+                ParameterTransferSession.ValidateDocument(values);
+                bool modeChanged = ParameterTransferSession.ValueSnapshot(modeValues.Elements().Select(p => (Property)p))
+                    != ParameterTransferSession.ValueSnapshot(savedModeValues.Elements().Select(p => (Property)p));
+                // 复用备份/回滚写入，两份文件成功后才更新运行内存。
+                ParameterFileCommit.Save(path, values, modeChanged ? ActiveModePath : null, modeValues);
+                manager.LoadSnapshot(values, path);
+                savedModeValues = new XElement(modeValues);
+                UpdateUi(values);
+                parameterBinding.AcceptLoaded();
+                CaptureTransferBaseline();
+                BtnRefresh_Click(null, null);
+                if (isManual) UIMessageTip.ShowOk(NLocalizer.GetString("Lead_CPrim_DynamicParam_DynamicParamForm_DynamicParamSaveSuccess", "换型参数保存成功"));
+                return 0;
             }
-
-            return 0;
         }
 
         /// <summary>属性编辑_控制</summary>
@@ -323,6 +301,7 @@ namespace Lead.CPrim.DynamicParam
             }
             else
             {
+                if (enable) FlushParameterAssignments();
                 pg.Enabled = enable;
                 tsTitle.Enabled = enable;
                 gbPos.Enabled = enable;
@@ -339,7 +318,7 @@ namespace Lead.CPrim.DynamicParam
             DicCartesian.Clear();
             cmbTreePos.Nodes.Clear();
             Dictionary<string, List<string>> dicGroups = new Dictionary<string, List<string>>();
-            foreach (object item2 in DynamicParam.Instance._xElementPropList)
+            foreach (object item2 in Pmcls)
             {
                 Property item = (Property)item2;
                 if (item.Value is List<Pos> list)
@@ -454,14 +433,27 @@ namespace Lead.CPrim.DynamicParam
         {
             try
             {
+                FlushParameterAssignments();
                 var session = CreateTransferSession?.Invoke(_curParaPath);
+                long editorVersion = ParameterVersion;
                 using (var frm = new ParamCfg(_curParaPath))
                 {
                     frm.CurSysDir = _curSysDirPaht;
                     frm.TransferSession = session;
+                    frm.SetDocument(CurrentParameterDocument());
+                    frm.SaveGuard = save =>
+                    {
+                        lock (((DynamicParam)DynamicParam.Instance).Updates.SyncRoot)
+                        {
+                            ValidateEditorVersion(editorVersion);
+                            save();
+                            RefreshTransferredParameters(XElement.Load(_curParaPath));
+                            editorVersion = ParameterVersion;
+                        }
+                    };
                     frm.ShowDialog(this);
                 }
-                if (session == null) LoadProductMode(_activeProduct, _currentMode);
+                // 保存回调已刷新；关闭/取消不能从磁盘重载旧值。
             }
             catch (Exception ex)
             {
@@ -565,6 +557,7 @@ namespace Lead.CPrim.DynamicParam
             }
             pg.SelectedObject = Pmcls;
             OnLanguageChanged();
+            parameterBinding?.AcceptLoaded();
         } 
         #endregion
     }

@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="CommonParam.cs" />
     <Compile Include="Forms\CommonParamForm.Transfer.cs" />
+    <Compile Include="Forms\CommonParamForm.Assignments.cs" />
     <Compile Include="Forms\CommonParamForm.cs">
       <SubType>Form</SubType>
     </Compile>

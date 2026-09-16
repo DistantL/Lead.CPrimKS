@@ -10,6 +10,12 @@ namespace Lead.CPrim.BaseParam
     {
         private ToolStripMenuItem transferItem;
         public ParameterTransferSession TransferSession { get; set; }
+        public Action<Action> SaveGuard { get; set; }
+        public void SetDocument(XElement document)
+        {
+            xel = new XElement(document);
+            UpdateUi();
+        }
 
         private void InitializeTransferMenu()
         {

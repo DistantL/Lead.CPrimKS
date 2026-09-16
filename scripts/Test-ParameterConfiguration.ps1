@@ -20,3 +20,7 @@ if ($LASTEXITCODE) { throw 'ParameterUiSmokeTests 失败' }
 if ($LASTEXITCODE) { throw 'ParameterTransferTests 编译失败' }
 & "$build\ParameterTransferTests.exe" $repoRoot
 if ($LASTEXITCODE) { throw 'ParameterTransferTests 失败' }
+& $csc /nologo /target:exe "/out:$build\ParameterAssignmentTests.exe" /r:System.Xml.Linq.dll /r:System.Windows.Forms.dll /r:System.Drawing.dll /r:Microsoft.CSharp.dll @refs (Join-Path $repoRoot 'tests\ParameterAssignmentTests.cs')
+if ($LASTEXITCODE) { throw 'ParameterAssignmentTests 编译失败' }
+& "$build\ParameterAssignmentTests.exe" $repoRoot
+if ($LASTEXITCODE) { throw 'ParameterAssignmentTests 失败' }

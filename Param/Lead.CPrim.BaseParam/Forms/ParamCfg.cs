@@ -140,8 +140,9 @@ namespace Lead.CPrim.BaseParam
             try
             {
                 this.UpdateParam();
-                if (TransferSession == null) this.xel.Save(this.CurParaPath);
-                else TransferSession.Save(this.xel);
+                if (TransferSession != null) TransferSession.Save(this.xel);
+                else if (SaveGuard != null) SaveGuard(() => ParameterFileCommit.Save(CurParaPath, xel));
+                else ParameterFileCommit.Save(CurParaPath, xel);
             }
             catch (Exception ex) { MessageBox.Show(this, ex.Message, Text); }
 		}

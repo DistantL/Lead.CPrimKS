@@ -31,7 +31,8 @@ internal static class ParameterUiSmokeTests
             if (!File.Exists(path)) path = libs.FirstOrDefault(p => Path.GetFileName(p) == name);
             return path == null ? null : Assembly.LoadFrom(path);
         };
-        Run(output);
+        try { Run(output); }
+        catch (Exception ex) { Console.WriteLine(ex.GetType().Name + ": " + ex.Message + "\n" + ex.StackTrace); Environment.ExitCode = 1; }
     }
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void Run(string output)
@@ -90,7 +91,7 @@ internal static class ParameterUiSmokeTests
             commonProperties.Cast<Lead.CPrim.BaseParam.Property>().First(p => p.Name == "TransferValue").Value = 56;
             Check(common.HasUnsavedParameterChanges, "全局未保存值可检测");
             commonProperties.Cast<Lead.CPrim.BaseParam.Property>().First(p => p.Name == "TransferValue").Value = 55;
-            byte[] modeBeforeTransfer = File.ReadAllBytes(form.ActiveModePath);
+            byte[] modeBeforeTransfer = File.Exists(form.ActiveModePath) ? File.ReadAllBytes(form.ActiveModePath) : null;
             var transfer = new Lead.CPrim.BaseParam.ParameterTransferSession(commonPath, form.ActiveParameterPath, "AudioAirPods");
             transfer.ValidateDocuments = (g, p) => form.ValidateTransferredParameters(p);
             transfer.RefreshCommitted = (g, p) => { common.RefreshTransferredParameters(g); form.RefreshTransferredParameters(p); };
@@ -101,7 +102,8 @@ internal static class ParameterUiSmokeTests
             Check(!Lead.CPrim.CommonParam.CommonParam.Instance.IsPropertyContain("TransferValue"), "刷新后全局运行实例移除");
             Check((int)DynamicParam.Instance.TransferValue == 55, "刷新后产品运行实例新增");
             Check(!common.HasUnsavedParameterChanges && !form.HasUnsavedParameterChanges, "提交后两侧基线同步");
-            Check(File.ReadAllBytes(form.ActiveModePath).SequenceEqual(modeBeforeTransfer), "转移不修改模式文件");
+            Check(modeBeforeTransfer == null ? !File.Exists(form.ActiveModePath)
+                : File.ReadAllBytes(form.ActiveModePath).SequenceEqual(modeBeforeTransfer), "转移不修改模式文件");
             Check(common.Save(common.GetRunMode()) == 0 && form.Save(null, false) == 0, "主页面再次保存");
             Check(XElement.Load(commonPath).Element("TransferValue") == null
                 && XElement.Load(form.ActiveParameterPath).Elements("TransferValue").Count() == 1, "旧缓存不恢复全局或丢失产品变量");

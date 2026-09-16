@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ParameterTransferSession.cs" />
+    <Compile Include="ParameterChangeFeed.cs" />
+    <Compile Include="ParameterUiBinding.cs" />
+    <Compile Include="ParameterFileCommit.cs" />
     <Compile Include="Forms\ParamCfg.Transfer.cs">
       <DependentUpon>ParamCfg.cs</DependentUpon>
     </Compile>

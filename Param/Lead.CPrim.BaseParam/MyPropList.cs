@@ -13,6 +13,8 @@ namespace Lead.CPrim.BaseParam
 		public event Action<Property, string> OnPropChanged;
 
 		public List<Property> PropertyList { get; set; } = new List<Property>();
+        public Action<string, object> ExplicitSetter { get; set; }
+        public Func<string, List<Property>, MyPropList> NestedGetter { get; set; }
 
 		public MyPropList()
 		{
@@ -29,7 +31,8 @@ namespace Lead.CPrim.BaseParam
 			bool result2;
 			if (prop != null)
 			{
-				result = prop.Value;
+                result = prop.Value is List<Property> children && NestedGetter != null
+                    ? NestedGetter(binder.Name, children) : prop.Value;
 				result2 = true;
 			}
 			else
@@ -46,8 +49,12 @@ namespace Lead.CPrim.BaseParam
 			bool result;
 			if (prop != null)
 			{
-				prop.Value = value;
-				this.OnPropChanged(prop, this.ownName);
+                if (ExplicitSetter != null) ExplicitSetter(binder.Name, value);
+                else
+                {
+                    prop.Value = value;
+                    this.OnPropChanged?.Invoke(prop, this.ownName);
+                }
 				result = true;
 			}
 			else

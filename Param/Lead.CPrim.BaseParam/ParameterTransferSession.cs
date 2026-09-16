@@ -13,8 +13,17 @@ namespace Lead.CPrim.BaseParam
         private readonly string targetPath;
         private byte[] sourceBytes;
         private byte[] targetBytes;
+        private XElement sourceView;
+        private XElement targetView;
+        public void SetViewSnapshots(XElement source, XElement target)
+        {
+            if (HasPending) throw new InvalidOperationException("不能替换已有待转移会话的数据。");
+            ValidateDocument(source); ValidateDocument(target);
+            sourceView = new XElement(source); targetView = new XElement(target);
+        }
         private readonly List<XElement> pending = new List<XElement>();
         public Action ValidateContext { get; set; }
+        public Action<Action> CommitGuard { get; set; }
         public Action<string> ValidateTransferName { get; set; }
         public Action<XElement, XElement> ValidateDocuments { get; set; }
         public Action<XElement, XElement> RefreshCommitted { get; set; }
@@ -49,7 +58,7 @@ namespace Lead.CPrim.BaseParam
 
         public string[] Groups
         {
-            get { return Read(targetBytes).Elements().Concat(pending).Select(p => (string)p.Element("Category"))
+            get { return (targetView ?? Read(targetBytes)).Elements().Concat(pending).Select(p => (string)p.Element("Category"))
                 .Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().ToArray(); }
         }
 
@@ -65,7 +74,7 @@ namespace Lead.CPrim.BaseParam
         {
             CheckCurrent();
             if (name == "运行模式") throw new InvalidOperationException("运行模式是框架保留参数，不可转移。");
-            if (Read(targetBytes).Elements().Any(p => (string)p.Element("Name") == name)
+            if ((targetView ?? Read(targetBytes)).Elements().Any(p => (string)p.Element("Name") == name)
                 || pending.Any(p => (string)p.Element("Name") == name))
                 throw new InvalidOperationException("目标参数或待转移清单已存在同索引名称：" + name);
             ValidateTransferName?.Invoke(name);
@@ -105,9 +114,15 @@ namespace Lead.CPrim.BaseParam
 
         public void Save(XElement source)
         {
+            if (CommitGuard == null) SaveCore(source);
+            else CommitGuard(() => SaveCore(source));
+        }
+
+        private void SaveCore(XElement source)
+        {
             CheckCurrent();
             var nextSource = new XElement(source);
-            var nextTarget = Read(targetBytes);
+            var nextTarget = new XElement(targetView ?? Read(targetBytes));
             foreach (var item in pending)
             {
                 string name = (string)item.Element("Name");
@@ -142,6 +157,8 @@ namespace Lead.CPrim.BaseParam
                 RefreshCommitted?.Invoke(new XElement(nextSource), new XElement(nextTarget));
                 sourceBytes = File.ReadAllBytes(sourcePath);
                 targetBytes = File.ReadAllBytes(targetPath);
+                sourceView = new XElement(nextSource);
+                targetView = new XElement(nextTarget);
                 pending.Clear();
             }
             catch (Exception error)
@@ -150,7 +167,8 @@ namespace Lead.CPrim.BaseParam
                 if (sourceReplaced) TryRecover(() => File.Copy(sourceBackup, sourcePath, true), recovery);
                 if (targetReplaced) TryRecover(() => File.Copy(targetBackup, targetPath, true), recovery);
                 if (sourceReplaced || targetReplaced)
-                    TryRecover(() => RefreshCommitted?.Invoke(Read(sourceBytes), Read(targetBytes)), recovery);
+                    TryRecover(() => RefreshCommitted?.Invoke(new XElement(sourceView ?? Read(sourceBytes)),
+                        new XElement(targetView ?? Read(targetBytes))), recovery);
                 throw new IOException("参数保存失败，待转移内容保留。" + error.Message
                     + "\n备份位置（若已生成）：\n" + LastBackupPaths
                     + (recovery.Count == 0 ? "" : "\n恢复失败，请勿运行设备：" + string.Join("; ", recovery)), error);
