@@ -212,7 +212,9 @@
     <Compile Include="Vendor\ProductQuery\ProductQuery.Designer.cs">
       <DependentUpon>ProductQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="Setting\SettingFrm.ParameterTransfer.cs" />
+    <Compile Include="Setting\SettingFrm.ParameterTransfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Setting\SettingFrm.cs">
       <SubType>Form</SubType>
     </Compile>

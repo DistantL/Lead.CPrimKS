@@ -80,6 +80,9 @@ namespace Lead.CPrim.DynamicParam
         {
             InitializeComponent();
             InitializeModeEditor();
+            HiveManagerV3.Instance.HiveStateChanged += StationSwitchHiveStateChanged;
+            HandleCreated += (sender, args) => RefreshStationSwitchProtection();
+            Disposed += (sender, args) => HiveManagerV3.Instance.HiveStateChanged -= StationSwitchHiveStateChanged;
             cmbTreePos.Style = UIStyle.Gray;
             cmbTreePos.TreeView.Style = UIStyle.Gray;
             cmbTreePos.TreeView.RectColor = Color.Gray;
@@ -279,7 +282,7 @@ namespace Lead.CPrim.DynamicParam
                 ParameterTransferSession.ValidateDocument(values);
                 bool modeChanged = ParameterTransferSession.ValueSnapshot(modeValues.Elements().Select(p => (Property)p))
                     != ParameterTransferSession.ValueSnapshot(savedModeValues.Elements().Select(p => (Property)p));
-                // 复用备份/回滚写入，两份文件成功后才更新运行内存。
+                // 直接覆盖，无备份或回滚；全部写入成功后才更新运行内存。
                 ParameterFileCommit.Save(path, values, modeChanged ? ActiveModePath : null, modeValues);
                 manager.LoadSnapshot(values, path);
                 savedModeValues = new XElement(modeValues);

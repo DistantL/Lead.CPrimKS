@@ -55,6 +55,7 @@ namespace Lead.CPrim.SoftwareConfig
             this.lb_VisionSoftwareName = new System.Windows.Forms.Label();
             this.txtVisionHashCode = new System.Windows.Forms.TextBox();
             this.lb_VS_Hash = new System.Windows.Forms.Label();
+            this.btnCreateHash = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UISymbolButton();
             this.txtSoftWareHashCode = new System.Windows.Forms.TextBox();
             this.txtConfigFrmBindFaiName = new System.Windows.Forms.TextBox();
             this.tbTaskVer = new System.Windows.Forms.TextBox();
@@ -101,6 +102,29 @@ namespace Lead.CPrim.SoftwareConfig
             this.tbPressPrimName = new System.Windows.Forms.TextBox();
             this.lb_Tip_RestartSoftware = new System.Windows.Forms.Label();
             this.tpPath = new System.Windows.Forms.TabPage();
+            this.lbProductParamDirPath = new System.Windows.Forms.Label();
+            this.tbProductParamDirPath = new System.Windows.Forms.TextBox();
+            this.btnBrowseProductParamDirPath = new System.Windows.Forms.Button();
+            this.lbLeadVersionFilePath = new System.Windows.Forms.Label();
+            this.tbLeadVersionFilePath = new System.Windows.Forms.TextBox();
+            this.btnBrowseLeadVersionFilePath = new System.Windows.Forms.Button();
+            this.lbTossingStatisticsFilePath = new System.Windows.Forms.Label();
+            this.tbTossingStatisticsFilePath = new System.Windows.Forms.TextBox();
+            this.btnBrowseTossingStatisticsFilePath = new System.Windows.Forms.Button();
+            this.lbAlertConfigPath = new System.Windows.Forms.Label();
+            this.tbAlertConfigPath = new System.Windows.Forms.TextBox();
+            this.btnBrowseAlertConfigPath = new System.Windows.Forms.Button();
+            this.button1btnBrowseAdminitionConfigPath = new System.Windows.Forms.Button();
+            this.tbAdministonConfigPath = new System.Windows.Forms.TextBox();
+            this.lb_Administration = new System.Windows.Forms.Label();
+            this.btnBrowseHashKeyConfigPath = new System.Windows.Forms.Button();
+            this.tbHashKeyConfigPath = new System.Windows.Forms.TextBox();
+            this.lb_Hashkey = new System.Windows.Forms.Label();
+            this.btnBrowseGlobSettingConfigPath = new System.Windows.Forms.Button();
+            this.tbGlobSettingConfigPath = new System.Windows.Forms.TextBox();
+            this.lb_GlobSetting = new System.Windows.Forms.Label();
+            this.dudDirectory2 = new Sunny.UI.UIDoubleUpDown();
+            this.dudDirectory1 = new Sunny.UI.UIDoubleUpDown();
             this.lb_Prims = new System.Windows.Forms.Label();
             this.chkDisConfigEnable = new System.Windows.Forms.CheckBox();
             this.btnBrowsePDCAPath = new System.Windows.Forms.Button();
@@ -154,30 +178,6 @@ namespace Lead.CPrim.SoftwareConfig
             this.lb_ComplexFai = new System.Windows.Forms.Label();
             this.lb_Fai = new System.Windows.Forms.Label();
             this.tmrOneHour = new System.Windows.Forms.Timer(this.components);
-            this.btnCreateHash = new Lead.CPrim.ProxyTools.SunnyUI.Controls.UISymbolButton();
-            this.dudDirectory2 = new Sunny.UI.UIDoubleUpDown();
-            this.dudDirectory1 = new Sunny.UI.UIDoubleUpDown();
-            this.btnBrowseGlobSettingConfigPath = new System.Windows.Forms.Button();
-            this.tbGlobSettingConfigPath = new System.Windows.Forms.TextBox();
-            this.lb_GlobSetting = new System.Windows.Forms.Label();
-            this.btnBrowseHashKeyConfigPath = new System.Windows.Forms.Button();
-            this.tbHashKeyConfigPath = new System.Windows.Forms.TextBox();
-            this.lb_Hashkey = new System.Windows.Forms.Label();
-            this.button1btnBrowseAdminitionConfigPath = new System.Windows.Forms.Button();
-            this.tbAdministonConfigPath = new System.Windows.Forms.TextBox();
-            this.lb_Administration = new System.Windows.Forms.Label();
-            this.lbAlertConfigPath = new System.Windows.Forms.Label();
-            this.tbAlertConfigPath = new System.Windows.Forms.TextBox();
-            this.btnBrowseAlertConfigPath = new System.Windows.Forms.Button();
-            this.lbProductParamDirPath = new System.Windows.Forms.Label();
-            this.tbProductParamDirPath = new System.Windows.Forms.TextBox();
-            this.btnBrowseProductParamDirPath = new System.Windows.Forms.Button();
-            this.lbLeadVersionFilePath = new System.Windows.Forms.Label();
-            this.tbLeadVersionFilePath = new System.Windows.Forms.TextBox();
-            this.btnBrowseLeadVersionFilePath = new System.Windows.Forms.Button();
-            this.lbTossingStatisticsFilePath = new System.Windows.Forms.Label();
-            this.tbTossingStatisticsFilePath = new System.Windows.Forms.TextBox();
-            this.btnBrowseTossingStatisticsFilePath = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.tsStationsConfig.SuspendLayout();
             this.tabSwConfig.SuspendLayout();
@@ -196,7 +196,7 @@ namespace Lead.CPrim.SoftwareConfig
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMain.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
-            this.tlpMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tlpMain.Margin = new System.Windows.Forms.Padding(4);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 2;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
@@ -270,7 +270,7 @@ namespace Lead.CPrim.SoftwareConfig
             this.tabSwConfig.Controls.Add(this.tpPath);
             this.tabSwConfig.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabSwConfig.Location = new System.Drawing.Point(4, 49);
-            this.tabSwConfig.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabSwConfig.Margin = new System.Windows.Forms.Padding(4);
             this.tabSwConfig.Name = "tabSwConfig";
             this.tabSwConfig.SelectedIndex = 1;
             this.tabSwConfig.Size = new System.Drawing.Size(1906, 923);
@@ -324,7 +324,7 @@ namespace Lead.CPrim.SoftwareConfig
             this.tpConfig.Controls.Add(this.tbSuperClientName);
             this.tpConfig.Controls.Add(this.lb_ChangeRepiceSuperClientName);
             this.tpConfig.Location = new System.Drawing.Point(4, 33);
-            this.tpConfig.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpConfig.Margin = new System.Windows.Forms.Padding(4);
             this.tpConfig.MinimumSize = new System.Drawing.Size(74, 74);
             this.tpConfig.Name = "tpConfig";
             this.tpConfig.Size = new System.Drawing.Size(1898, 886);
@@ -334,7 +334,7 @@ namespace Lead.CPrim.SoftwareConfig
             // txtMasterIP
             // 
             this.txtMasterIP.Location = new System.Drawing.Point(536, 416);
-            this.txtMasterIP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMasterIP.Margin = new System.Windows.Forms.Padding(2);
             this.txtMasterIP.Name = "txtMasterIP";
             this.txtMasterIP.Size = new System.Drawing.Size(198, 31);
             this.txtMasterIP.TabIndex = 345;
@@ -343,7 +343,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbVisionVer
             // 
             this.tbVisionVer.Location = new System.Drawing.Point(1086, 326);
-            this.tbVisionVer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbVisionVer.Margin = new System.Windows.Forms.Padding(2);
             this.tbVisionVer.Name = "tbVisionVer";
             this.tbVisionVer.Size = new System.Drawing.Size(146, 31);
             this.tbVisionVer.TabIndex = 344;
@@ -362,7 +362,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbVisionPath
             // 
             this.tbVisionPath.Location = new System.Drawing.Point(758, 370);
-            this.tbVisionPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbVisionPath.Margin = new System.Windows.Forms.Padding(2);
             this.tbVisionPath.Name = "tbVisionPath";
             this.tbVisionPath.Size = new System.Drawing.Size(355, 31);
             this.tbVisionPath.TabIndex = 342;
@@ -381,7 +381,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbVisionName
             // 
             this.tbVisionName.Location = new System.Drawing.Point(758, 326);
-            this.tbVisionName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbVisionName.Margin = new System.Windows.Forms.Padding(2);
             this.tbVisionName.Name = "tbVisionName";
             this.tbVisionName.Size = new System.Drawing.Size(164, 31);
             this.tbVisionName.TabIndex = 340;
@@ -400,7 +400,7 @@ namespace Lead.CPrim.SoftwareConfig
             // txtVisionHashCode
             // 
             this.txtVisionHashCode.Location = new System.Drawing.Point(177, 656);
-            this.txtVisionHashCode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVisionHashCode.Margin = new System.Windows.Forms.Padding(2);
             this.txtVisionHashCode.Name = "txtVisionHashCode";
             this.txtVisionHashCode.ReadOnly = true;
             this.txtVisionHashCode.Size = new System.Drawing.Size(487, 31);
@@ -418,10 +418,26 @@ namespace Lead.CPrim.SoftwareConfig
             this.lb_VS_Hash.Text = "视觉Hash码：";
             this.lb_VS_Hash.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btnCreateHash
+            // 
+            this.btnCreateHash.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCreateHash.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCreateHash.Location = new System.Drawing.Point(693, 610);
+            this.btnCreateHash.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCreateHash.MinimumSize = new System.Drawing.Size(2, 2);
+            this.btnCreateHash.Name = "btnCreateHash";
+            this.btnCreateHash.Size = new System.Drawing.Size(111, 80);
+            this.btnCreateHash.TabIndex = 336;
+            this.btnCreateHash.Text = "生成";
+            this.btnCreateHash.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCreateHash.Visible = false;
+            this.btnCreateHash.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnCreateHash.Click += new System.EventHandler(this.btnCreateHash_Click);
+            // 
             // txtSoftWareHashCode
             // 
             this.txtSoftWareHashCode.Location = new System.Drawing.Point(177, 610);
-            this.txtSoftWareHashCode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSoftWareHashCode.Margin = new System.Windows.Forms.Padding(2);
             this.txtSoftWareHashCode.Name = "txtSoftWareHashCode";
             this.txtSoftWareHashCode.ReadOnly = true;
             this.txtSoftWareHashCode.Size = new System.Drawing.Size(487, 31);
@@ -431,7 +447,7 @@ namespace Lead.CPrim.SoftwareConfig
             // txtConfigFrmBindFaiName
             // 
             this.txtConfigFrmBindFaiName.Location = new System.Drawing.Point(314, 550);
-            this.txtConfigFrmBindFaiName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtConfigFrmBindFaiName.Margin = new System.Windows.Forms.Padding(2);
             this.txtConfigFrmBindFaiName.Name = "txtConfigFrmBindFaiName";
             this.txtConfigFrmBindFaiName.Size = new System.Drawing.Size(198, 31);
             this.txtConfigFrmBindFaiName.TabIndex = 335;
@@ -439,7 +455,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbTaskVer
             // 
             this.tbTaskVer.Location = new System.Drawing.Point(432, 326);
-            this.tbTaskVer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbTaskVer.Margin = new System.Windows.Forms.Padding(2);
             this.tbTaskVer.Name = "tbTaskVer";
             this.tbTaskVer.Size = new System.Drawing.Size(148, 31);
             this.tbTaskVer.TabIndex = 335;
@@ -492,7 +508,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.tbSWDescription.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbSWDescription.Location = new System.Drawing.Point(146, 26);
-            this.tbSWDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbSWDescription.Margin = new System.Windows.Forms.Padding(4);
             this.tbSWDescription.Name = "tbSWDescription";
             this.tbSWDescription.Size = new System.Drawing.Size(222, 31);
             this.tbSWDescription.TabIndex = 276;
@@ -535,7 +551,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkRemoteRecipeShiftEnable.AutoSize = true;
             this.chkRemoteRecipeShiftEnable.Location = new System.Drawing.Point(30, 285);
-            this.chkRemoteRecipeShiftEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkRemoteRecipeShiftEnable.Margin = new System.Windows.Forms.Padding(4);
             this.chkRemoteRecipeShiftEnable.Name = "chkRemoteRecipeShiftEnable";
             this.chkRemoteRecipeShiftEnable.Size = new System.Drawing.Size(180, 28);
             this.chkRemoteRecipeShiftEnable.TabIndex = 294;
@@ -556,7 +572,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbSwName
             // 
             this.tbSwName.Location = new System.Drawing.Point(144, 326);
-            this.tbSwName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbSwName.Margin = new System.Windows.Forms.Padding(2);
             this.tbSwName.Name = "tbSwName";
             this.tbSwName.Size = new System.Drawing.Size(158, 31);
             this.tbSwName.TabIndex = 298;
@@ -570,7 +586,7 @@ namespace Lead.CPrim.SoftwareConfig
             "ByEveryDay",
             "ByEveryWeek"});
             this.cbDataSave.Location = new System.Drawing.Point(314, 504);
-            this.cbDataSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbDataSave.Margin = new System.Windows.Forms.Padding(4);
             this.cbDataSave.Name = "cbDataSave";
             this.cbDataSave.Size = new System.Drawing.Size(198, 32);
             this.cbDataSave.TabIndex = 302;
@@ -580,7 +596,7 @@ namespace Lead.CPrim.SoftwareConfig
             this.cbMasterControl.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMasterControl.DropDownWidth = 85;
             this.cbMasterControl.Location = new System.Drawing.Point(314, 414);
-            this.cbMasterControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbMasterControl.Margin = new System.Windows.Forms.Padding(4);
             this.cbMasterControl.Name = "cbMasterControl";
             this.cbMasterControl.Size = new System.Drawing.Size(198, 32);
             this.cbMasterControl.TabIndex = 302;
@@ -605,7 +621,7 @@ namespace Lead.CPrim.SoftwareConfig
             "2",
             "4"});
             this.cbTaskLogUINo.Location = new System.Drawing.Point(314, 459);
-            this.cbTaskLogUINo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbTaskLogUINo.Margin = new System.Windows.Forms.Padding(4);
             this.cbTaskLogUINo.Name = "cbTaskLogUINo";
             this.cbTaskLogUINo.Size = new System.Drawing.Size(198, 32);
             this.cbTaskLogUINo.TabIndex = 302;
@@ -614,7 +630,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkBootInit.AutoSize = true;
             this.chkBootInit.Location = new System.Drawing.Point(30, 210);
-            this.chkBootInit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkBootInit.Margin = new System.Windows.Forms.Padding(4);
             this.chkBootInit.Name = "chkBootInit";
             this.chkBootInit.Size = new System.Drawing.Size(126, 28);
             this.chkBootInit.TabIndex = 291;
@@ -624,7 +640,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkBootRun.AutoSize = true;
             this.chkBootRun.Location = new System.Drawing.Point(300, 210);
-            this.chkBootRun.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkBootRun.Margin = new System.Windows.Forms.Padding(4);
             this.chkBootRun.Name = "chkBootRun";
             this.chkBootRun.Size = new System.Drawing.Size(108, 28);
             this.chkBootRun.TabIndex = 292;
@@ -634,7 +650,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkTrackingEnable.AutoSize = true;
             this.chkTrackingEnable.Location = new System.Drawing.Point(30, 248);
-            this.chkTrackingEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkTrackingEnable.Margin = new System.Windows.Forms.Padding(4);
             this.chkTrackingEnable.Name = "chkTrackingEnable";
             this.chkTrackingEnable.Size = new System.Drawing.Size(182, 28);
             this.chkTrackingEnable.TabIndex = 293;
@@ -659,7 +675,7 @@ namespace Lead.CPrim.SoftwareConfig
             "中文",
             "English"});
             this.cmbLanguage.Location = new System.Drawing.Point(146, 159);
-            this.cmbLanguage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbLanguage.Margin = new System.Windows.Forms.Padding(4);
             this.cmbLanguage.Name = "cmbLanguage";
             this.cmbLanguage.Size = new System.Drawing.Size(222, 32);
             this.cmbLanguage.TabIndex = 290;
@@ -680,7 +696,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.cmbProducts.DropDownWidth = 85;
             this.cmbProducts.Location = new System.Drawing.Point(146, 114);
-            this.cmbProducts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbProducts.Margin = new System.Windows.Forms.Padding(4);
             this.cmbProducts.Name = "cmbProducts";
             this.cmbProducts.Size = new System.Drawing.Size(222, 32);
             this.cmbProducts.TabIndex = 285;
@@ -690,7 +706,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.btnAddProduct.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnAddProduct.Location = new System.Drawing.Point(382, 114);
-            this.btnAddProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddProduct.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddProduct.Name = "btnAddProduct";
             this.btnAddProduct.Size = new System.Drawing.Size(60, 38);
             this.btnAddProduct.TabIndex = 286;
@@ -701,7 +717,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.btnRemoveProduct.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRemoveProduct.Location = new System.Drawing.Point(446, 114);
-            this.btnRemoveProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRemoveProduct.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemoveProduct.Name = "btnRemoveProduct";
             this.btnRemoveProduct.Size = new System.Drawing.Size(60, 38);
             this.btnRemoveProduct.TabIndex = 287;
@@ -727,7 +743,7 @@ namespace Lead.CPrim.SoftwareConfig
             "Server",
             "Client"});
             this.cmbSWType.Location = new System.Drawing.Point(146, 69);
-            this.cmbSWType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbSWType.Margin = new System.Windows.Forms.Padding(4);
             this.cmbSWType.Name = "cmbSWType";
             this.cmbSWType.Size = new System.Drawing.Size(222, 32);
             this.cmbSWType.TabIndex = 278;
@@ -736,7 +752,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkRemoteQualificationEnable.AutoSize = true;
             this.chkRemoteQualificationEnable.Location = new System.Drawing.Point(382, 27);
-            this.chkRemoteQualificationEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkRemoteQualificationEnable.Margin = new System.Windows.Forms.Padding(4);
             this.chkRemoteQualificationEnable.Name = "chkRemoteQualificationEnable";
             this.chkRemoteQualificationEnable.Size = new System.Drawing.Size(290, 28);
             this.chkRemoteQualificationEnable.TabIndex = 283;
@@ -745,7 +761,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbExitPermissionTime
             // 
             this.tbExitPermissionTime.Location = new System.Drawing.Point(314, 370);
-            this.tbExitPermissionTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbExitPermissionTime.Margin = new System.Windows.Forms.Padding(2);
             this.tbExitPermissionTime.Name = "tbExitPermissionTime";
             this.tbExitPermissionTime.Size = new System.Drawing.Size(198, 31);
             this.tbExitPermissionTime.TabIndex = 300;
@@ -753,7 +769,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbSuperClientName
             // 
             this.tbSuperClientName.Location = new System.Drawing.Point(536, 284);
-            this.tbSuperClientName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbSuperClientName.Margin = new System.Windows.Forms.Padding(2);
             this.tbSuperClientName.Name = "tbSuperClientName";
             this.tbSuperClientName.Size = new System.Drawing.Size(142, 31);
             this.tbSuperClientName.TabIndex = 296;
@@ -783,7 +799,7 @@ namespace Lead.CPrim.SoftwareConfig
             this.tpDisplayParam.Controls.Add(this.tbPressPrimName);
             this.tpDisplayParam.Controls.Add(this.lb_Tip_RestartSoftware);
             this.tpDisplayParam.Location = new System.Drawing.Point(4, 33);
-            this.tpDisplayParam.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpDisplayParam.Margin = new System.Windows.Forms.Padding(4);
             this.tpDisplayParam.Name = "tpDisplayParam";
             this.tpDisplayParam.Size = new System.Drawing.Size(1898, 886);
             this.tpDisplayParam.TabIndex = 2;
@@ -804,7 +820,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tb_AccessaryCodeLength
             // 
             this.tb_AccessaryCodeLength.Location = new System.Drawing.Point(315, 183);
-            this.tb_AccessaryCodeLength.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_AccessaryCodeLength.Margin = new System.Windows.Forms.Padding(2);
             this.tb_AccessaryCodeLength.Name = "tb_AccessaryCodeLength";
             this.tb_AccessaryCodeLength.Size = new System.Drawing.Size(560, 31);
             this.tb_AccessaryCodeLength.TabIndex = 366;
@@ -813,7 +829,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.cb_AccessaryNames.AutoSize = true;
             this.cb_AccessaryNames.Location = new System.Drawing.Point(166, 129);
-            this.cb_AccessaryNames.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cb_AccessaryNames.Margin = new System.Windows.Forms.Padding(4);
             this.cb_AccessaryNames.Name = "cb_AccessaryNames";
             this.cb_AccessaryNames.Size = new System.Drawing.Size(126, 28);
             this.cb_AccessaryNames.TabIndex = 365;
@@ -835,7 +851,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tb_AccessaryNames
             // 
             this.tb_AccessaryNames.Location = new System.Drawing.Point(315, 128);
-            this.tb_AccessaryNames.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_AccessaryNames.Margin = new System.Windows.Forms.Padding(2);
             this.tb_AccessaryNames.Name = "tb_AccessaryNames";
             this.tb_AccessaryNames.Size = new System.Drawing.Size(560, 31);
             this.tb_AccessaryNames.TabIndex = 363;
@@ -843,7 +859,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tb_TossingReason
             // 
             this.tb_TossingReason.Location = new System.Drawing.Point(315, 237);
-            this.tb_TossingReason.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_TossingReason.Margin = new System.Windows.Forms.Padding(2);
             this.tb_TossingReason.Name = "tb_TossingReason";
             this.tb_TossingReason.Size = new System.Drawing.Size(560, 31);
             this.tb_TossingReason.TabIndex = 362;
@@ -852,7 +868,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.cbPressPrimEnable.AutoSize = true;
             this.cbPressPrimEnable.Location = new System.Drawing.Point(93, 26);
-            this.cbPressPrimEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbPressPrimEnable.Margin = new System.Windows.Forms.Padding(4);
             this.cbPressPrimEnable.Name = "cbPressPrimEnable";
             this.cbPressPrimEnable.Size = new System.Drawing.Size(198, 28);
             this.cbPressPrimEnable.TabIndex = 361;
@@ -862,7 +878,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbServicePrimName
             // 
             this.tbServicePrimName.Location = new System.Drawing.Point(315, 75);
-            this.tbServicePrimName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbServicePrimName.Margin = new System.Windows.Forms.Padding(2);
             this.tbServicePrimName.Name = "tbServicePrimName";
             this.tbServicePrimName.Size = new System.Drawing.Size(208, 31);
             this.tbServicePrimName.TabIndex = 357;
@@ -881,7 +897,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbPressPrimName
             // 
             this.tbPressPrimName.Location = new System.Drawing.Point(315, 22);
-            this.tbPressPrimName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbPressPrimName.Margin = new System.Windows.Forms.Padding(2);
             this.tbPressPrimName.Name = "tbPressPrimName";
             this.tbPressPrimName.Size = new System.Drawing.Size(560, 31);
             this.tbPressPrimName.TabIndex = 337;
@@ -900,71 +916,15 @@ namespace Lead.CPrim.SoftwareConfig
             // tpPath
             // 
             this.tpPath.AutoScroll = true;
-            this.lbProductParamDirPath.AutoSize = true;
-            this.lbProductParamDirPath.Location = new System.Drawing.Point(30, 1091);
-            this.lbProductParamDirPath.Name = "lbProductParamDirPath";
-            this.lbProductParamDirPath.Text = "换型参数目录:";
-            this.tbProductParamDirPath.Location = new System.Drawing.Point(212, 1086);
-            this.tbProductParamDirPath.Name = "tbProductParamDirPath";
-            this.tbProductParamDirPath.Size = new System.Drawing.Size(522, 31);
-            this.tbProductParamDirPath.TabIndex = 412;
-            this.btnBrowseProductParamDirPath.Location = new System.Drawing.Point(741, 1086);
-            this.btnBrowseProductParamDirPath.Name = "btnBrowseProductParamDirPath";
-            this.btnBrowseProductParamDirPath.Size = new System.Drawing.Size(52, 36);
-            this.btnBrowseProductParamDirPath.Text = "...";
-            this.btnBrowseProductParamDirPath.TabIndex = 413;
-            this.btnBrowseProductParamDirPath.Click += new System.EventHandler(this.btnBrowseProductParamDirPath_Click);
             this.tpPath.Controls.Add(this.lbProductParamDirPath);
             this.tpPath.Controls.Add(this.tbProductParamDirPath);
             this.tpPath.Controls.Add(this.btnBrowseProductParamDirPath);
-            this.lbLeadVersionFilePath.AutoSize = true;
-            this.lbLeadVersionFilePath.Location = new System.Drawing.Point(30, 1137);
-            this.lbLeadVersionFilePath.Name = "lbLeadVersionFilePath";
-            this.lbLeadVersionFilePath.Text = "软件版本文件:";
-            this.tbLeadVersionFilePath.Location = new System.Drawing.Point(212, 1132);
-            this.tbLeadVersionFilePath.Name = "tbLeadVersionFilePath";
-            this.tbLeadVersionFilePath.Size = new System.Drawing.Size(522, 31);
-            this.tbLeadVersionFilePath.TabIndex = 414;
-            this.btnBrowseLeadVersionFilePath.Location = new System.Drawing.Point(741, 1132);
-            this.btnBrowseLeadVersionFilePath.Name = "btnBrowseLeadVersionFilePath";
-            this.btnBrowseLeadVersionFilePath.Size = new System.Drawing.Size(52, 36);
-            this.btnBrowseLeadVersionFilePath.Text = "...";
-            this.btnBrowseLeadVersionFilePath.TabIndex = 415;
-            this.btnBrowseLeadVersionFilePath.Click += new System.EventHandler(this.btnBrowseIniFile_Click);
             this.tpPath.Controls.Add(this.lbLeadVersionFilePath);
             this.tpPath.Controls.Add(this.tbLeadVersionFilePath);
             this.tpPath.Controls.Add(this.btnBrowseLeadVersionFilePath);
-            this.lbTossingStatisticsFilePath.AutoSize = true;
-            this.lbTossingStatisticsFilePath.Location = new System.Drawing.Point(30, 1183);
-            this.lbTossingStatisticsFilePath.Name = "lbTossingStatisticsFilePath";
-            this.lbTossingStatisticsFilePath.Text = "抛料统计文件:";
-            this.tbTossingStatisticsFilePath.Location = new System.Drawing.Point(212, 1178);
-            this.tbTossingStatisticsFilePath.Name = "tbTossingStatisticsFilePath";
-            this.tbTossingStatisticsFilePath.Size = new System.Drawing.Size(522, 31);
-            this.tbTossingStatisticsFilePath.TabIndex = 416;
-            this.btnBrowseTossingStatisticsFilePath.Location = new System.Drawing.Point(741, 1178);
-            this.btnBrowseTossingStatisticsFilePath.Name = "btnBrowseTossingStatisticsFilePath";
-            this.btnBrowseTossingStatisticsFilePath.Size = new System.Drawing.Size(52, 36);
-            this.btnBrowseTossingStatisticsFilePath.Text = "...";
-            this.btnBrowseTossingStatisticsFilePath.TabIndex = 417;
-            this.btnBrowseTossingStatisticsFilePath.Click += new System.EventHandler(this.btnBrowseIniFile_Click);
             this.tpPath.Controls.Add(this.lbTossingStatisticsFilePath);
             this.tpPath.Controls.Add(this.tbTossingStatisticsFilePath);
             this.tpPath.Controls.Add(this.btnBrowseTossingStatisticsFilePath);
-            this.lbAlertConfigPath.AutoSize = true;
-            this.lbAlertConfigPath.Location = new System.Drawing.Point(30, 1045);
-            this.lbAlertConfigPath.Name = "lbAlertConfigPath";
-            this.lbAlertConfigPath.Text = "报警配置文件:";
-            this.tbAlertConfigPath.Location = new System.Drawing.Point(212, 1040);
-            this.tbAlertConfigPath.Name = "tbAlertConfigPath";
-            this.tbAlertConfigPath.Size = new System.Drawing.Size(522, 31);
-            this.tbAlertConfigPath.TabIndex = 410;
-            this.btnBrowseAlertConfigPath.Location = new System.Drawing.Point(741, 1040);
-            this.btnBrowseAlertConfigPath.Name = "btnBrowseAlertConfigPath";
-            this.btnBrowseAlertConfigPath.Size = new System.Drawing.Size(52, 36);
-            this.btnBrowseAlertConfigPath.TabIndex = 411;
-            this.btnBrowseAlertConfigPath.Text = "...";
-            this.btnBrowseAlertConfigPath.Click += new System.EventHandler(this.btnBrowseAlertConfigPath_Click);
             this.tpPath.Controls.Add(this.lbAlertConfigPath);
             this.tpPath.Controls.Add(this.tbAlertConfigPath);
             this.tpPath.Controls.Add(this.btnBrowseAlertConfigPath);
@@ -1032,12 +992,235 @@ namespace Lead.CPrim.SoftwareConfig
             this.tpPath.Controls.Add(this.lb_ComplexFai);
             this.tpPath.Controls.Add(this.lb_Fai);
             this.tpPath.Location = new System.Drawing.Point(4, 33);
-            this.tpPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpPath.Margin = new System.Windows.Forms.Padding(4);
             this.tpPath.MinimumSize = new System.Drawing.Size(74, 74);
             this.tpPath.Name = "tpPath";
             this.tpPath.Size = new System.Drawing.Size(1898, 886);
             this.tpPath.TabIndex = 1;
             this.tpPath.Text = "功能路径";
+            // 
+            // lbProductParamDirPath
+            // 
+            this.lbProductParamDirPath.AutoSize = true;
+            this.lbProductParamDirPath.Location = new System.Drawing.Point(29, 622);
+            this.lbProductParamDirPath.Name = "lbProductParamDirPath";
+            this.lbProductParamDirPath.Size = new System.Drawing.Size(122, 24);
+            this.lbProductParamDirPath.TabIndex = 0;
+            this.lbProductParamDirPath.Text = "换型参数目录:";
+            // 
+            // tbProductParamDirPath
+            // 
+            this.tbProductParamDirPath.Location = new System.Drawing.Point(211, 617);
+            this.tbProductParamDirPath.Name = "tbProductParamDirPath";
+            this.tbProductParamDirPath.Size = new System.Drawing.Size(522, 31);
+            this.tbProductParamDirPath.TabIndex = 412;
+            // 
+            // btnBrowseProductParamDirPath
+            // 
+            this.btnBrowseProductParamDirPath.Location = new System.Drawing.Point(740, 617);
+            this.btnBrowseProductParamDirPath.Name = "btnBrowseProductParamDirPath";
+            this.btnBrowseProductParamDirPath.Size = new System.Drawing.Size(52, 36);
+            this.btnBrowseProductParamDirPath.TabIndex = 413;
+            this.btnBrowseProductParamDirPath.Text = "...";
+            this.btnBrowseProductParamDirPath.Click += new System.EventHandler(this.btnBrowseProductParamDirPath_Click);
+            // 
+            // lbLeadVersionFilePath
+            // 
+            this.lbLeadVersionFilePath.AutoSize = true;
+            this.lbLeadVersionFilePath.Location = new System.Drawing.Point(29, 668);
+            this.lbLeadVersionFilePath.Name = "lbLeadVersionFilePath";
+            this.lbLeadVersionFilePath.Size = new System.Drawing.Size(122, 24);
+            this.lbLeadVersionFilePath.TabIndex = 414;
+            this.lbLeadVersionFilePath.Text = "软件版本文件:";
+            // 
+            // tbLeadVersionFilePath
+            // 
+            this.tbLeadVersionFilePath.Location = new System.Drawing.Point(211, 663);
+            this.tbLeadVersionFilePath.Name = "tbLeadVersionFilePath";
+            this.tbLeadVersionFilePath.Size = new System.Drawing.Size(522, 31);
+            this.tbLeadVersionFilePath.TabIndex = 414;
+            // 
+            // btnBrowseLeadVersionFilePath
+            // 
+            this.btnBrowseLeadVersionFilePath.Location = new System.Drawing.Point(740, 663);
+            this.btnBrowseLeadVersionFilePath.Name = "btnBrowseLeadVersionFilePath";
+            this.btnBrowseLeadVersionFilePath.Size = new System.Drawing.Size(52, 36);
+            this.btnBrowseLeadVersionFilePath.TabIndex = 415;
+            this.btnBrowseLeadVersionFilePath.Text = "...";
+            this.btnBrowseLeadVersionFilePath.Click += new System.EventHandler(this.btnBrowseIniFile_Click);
+            // 
+            // lbTossingStatisticsFilePath
+            // 
+            this.lbTossingStatisticsFilePath.AutoSize = true;
+            this.lbTossingStatisticsFilePath.Location = new System.Drawing.Point(29, 714);
+            this.lbTossingStatisticsFilePath.Name = "lbTossingStatisticsFilePath";
+            this.lbTossingStatisticsFilePath.Size = new System.Drawing.Size(122, 24);
+            this.lbTossingStatisticsFilePath.TabIndex = 416;
+            this.lbTossingStatisticsFilePath.Text = "抛料统计文件:";
+            // 
+            // tbTossingStatisticsFilePath
+            // 
+            this.tbTossingStatisticsFilePath.Location = new System.Drawing.Point(211, 709);
+            this.tbTossingStatisticsFilePath.Name = "tbTossingStatisticsFilePath";
+            this.tbTossingStatisticsFilePath.Size = new System.Drawing.Size(522, 31);
+            this.tbTossingStatisticsFilePath.TabIndex = 416;
+            // 
+            // btnBrowseTossingStatisticsFilePath
+            // 
+            this.btnBrowseTossingStatisticsFilePath.Location = new System.Drawing.Point(740, 709);
+            this.btnBrowseTossingStatisticsFilePath.Name = "btnBrowseTossingStatisticsFilePath";
+            this.btnBrowseTossingStatisticsFilePath.Size = new System.Drawing.Size(52, 36);
+            this.btnBrowseTossingStatisticsFilePath.TabIndex = 417;
+            this.btnBrowseTossingStatisticsFilePath.Text = "...";
+            this.btnBrowseTossingStatisticsFilePath.Click += new System.EventHandler(this.btnBrowseIniFile_Click);
+            // 
+            // lbAlertConfigPath
+            // 
+            this.lbAlertConfigPath.AutoSize = true;
+            this.lbAlertConfigPath.Location = new System.Drawing.Point(29, 576);
+            this.lbAlertConfigPath.Name = "lbAlertConfigPath";
+            this.lbAlertConfigPath.Size = new System.Drawing.Size(122, 24);
+            this.lbAlertConfigPath.TabIndex = 418;
+            this.lbAlertConfigPath.Text = "报警配置文件:";
+            // 
+            // tbAlertConfigPath
+            // 
+            this.tbAlertConfigPath.Location = new System.Drawing.Point(211, 571);
+            this.tbAlertConfigPath.Name = "tbAlertConfigPath";
+            this.tbAlertConfigPath.Size = new System.Drawing.Size(522, 31);
+            this.tbAlertConfigPath.TabIndex = 410;
+            // 
+            // btnBrowseAlertConfigPath
+            // 
+            this.btnBrowseAlertConfigPath.Location = new System.Drawing.Point(740, 571);
+            this.btnBrowseAlertConfigPath.Name = "btnBrowseAlertConfigPath";
+            this.btnBrowseAlertConfigPath.Size = new System.Drawing.Size(52, 36);
+            this.btnBrowseAlertConfigPath.TabIndex = 411;
+            this.btnBrowseAlertConfigPath.Text = "...";
+            this.btnBrowseAlertConfigPath.Click += new System.EventHandler(this.btnBrowseAlertConfigPath_Click);
+            // 
+            // button1btnBrowseAdminitionConfigPath
+            // 
+            this.button1btnBrowseAdminitionConfigPath.Location = new System.Drawing.Point(741, 526);
+            this.button1btnBrowseAdminitionConfigPath.Margin = new System.Windows.Forms.Padding(4);
+            this.button1btnBrowseAdminitionConfigPath.Name = "button1btnBrowseAdminitionConfigPath";
+            this.button1btnBrowseAdminitionConfigPath.Size = new System.Drawing.Size(52, 36);
+            this.button1btnBrowseAdminitionConfigPath.TabIndex = 410;
+            this.button1btnBrowseAdminitionConfigPath.Text = "...";
+            this.button1btnBrowseAdminitionConfigPath.Click += new System.EventHandler(this.button1btnBrowseAdminitionConfigPath_Click);
+            // 
+            // tbAdministonConfigPath
+            // 
+            this.tbAdministonConfigPath.Location = new System.Drawing.Point(211, 526);
+            this.tbAdministonConfigPath.Margin = new System.Windows.Forms.Padding(2);
+            this.tbAdministonConfigPath.Name = "tbAdministonConfigPath";
+            this.tbAdministonConfigPath.Size = new System.Drawing.Size(522, 31);
+            this.tbAdministonConfigPath.TabIndex = 409;
+            // 
+            // lb_Administration
+            // 
+            this.lb_Administration.AutoSize = true;
+            this.lb_Administration.Location = new System.Drawing.Point(29, 530);
+            this.lb_Administration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lb_Administration.Name = "lb_Administration";
+            this.lb_Administration.Size = new System.Drawing.Size(64, 24);
+            this.lb_Administration.TabIndex = 408;
+            this.lb_Administration.Text = "用户：";
+            this.lb_Administration.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnBrowseHashKeyConfigPath
+            // 
+            this.btnBrowseHashKeyConfigPath.Location = new System.Drawing.Point(742, 477);
+            this.btnBrowseHashKeyConfigPath.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBrowseHashKeyConfigPath.Name = "btnBrowseHashKeyConfigPath";
+            this.btnBrowseHashKeyConfigPath.Size = new System.Drawing.Size(52, 36);
+            this.btnBrowseHashKeyConfigPath.TabIndex = 407;
+            this.btnBrowseHashKeyConfigPath.Text = "...";
+            this.btnBrowseHashKeyConfigPath.Click += new System.EventHandler(this.btnBrowseHashKeyConfigPath_Click);
+            // 
+            // tbHashKeyConfigPath
+            // 
+            this.tbHashKeyConfigPath.Location = new System.Drawing.Point(212, 477);
+            this.tbHashKeyConfigPath.Margin = new System.Windows.Forms.Padding(2);
+            this.tbHashKeyConfigPath.Name = "tbHashKeyConfigPath";
+            this.tbHashKeyConfigPath.Size = new System.Drawing.Size(522, 31);
+            this.tbHashKeyConfigPath.TabIndex = 406;
+            // 
+            // lb_Hashkey
+            // 
+            this.lb_Hashkey.AutoSize = true;
+            this.lb_Hashkey.Location = new System.Drawing.Point(30, 481);
+            this.lb_Hashkey.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lb_Hashkey.Name = "lb_Hashkey";
+            this.lb_Hashkey.Size = new System.Drawing.Size(102, 24);
+            this.lb_Hashkey.TabIndex = 405;
+            this.lb_Hashkey.Text = "HashKey：";
+            this.lb_Hashkey.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnBrowseGlobSettingConfigPath
+            // 
+            this.btnBrowseGlobSettingConfigPath.Location = new System.Drawing.Point(742, 429);
+            this.btnBrowseGlobSettingConfigPath.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBrowseGlobSettingConfigPath.Name = "btnBrowseGlobSettingConfigPath";
+            this.btnBrowseGlobSettingConfigPath.Size = new System.Drawing.Size(52, 36);
+            this.btnBrowseGlobSettingConfigPath.TabIndex = 404;
+            this.btnBrowseGlobSettingConfigPath.Text = "...";
+            this.btnBrowseGlobSettingConfigPath.Click += new System.EventHandler(this.btnBrowseGlobSettingConfigPath_Click);
+            // 
+            // tbGlobSettingConfigPath
+            // 
+            this.tbGlobSettingConfigPath.Location = new System.Drawing.Point(212, 429);
+            this.tbGlobSettingConfigPath.Margin = new System.Windows.Forms.Padding(2);
+            this.tbGlobSettingConfigPath.Name = "tbGlobSettingConfigPath";
+            this.tbGlobSettingConfigPath.Size = new System.Drawing.Size(522, 31);
+            this.tbGlobSettingConfigPath.TabIndex = 403;
+            // 
+            // lb_GlobSetting
+            // 
+            this.lb_GlobSetting.AutoSize = true;
+            this.lb_GlobSetting.Location = new System.Drawing.Point(30, 433);
+            this.lb_GlobSetting.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lb_GlobSetting.Name = "lb_GlobSetting";
+            this.lb_GlobSetting.Size = new System.Drawing.Size(100, 24);
+            this.lb_GlobSetting.TabIndex = 402;
+            this.lb_GlobSetting.Text = "通用设置：";
+            this.lb_GlobSetting.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // dudDirectory2
+            // 
+            this.dudDirectory2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.dudDirectory2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.dudDirectory2.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.dudDirectory2.Location = new System.Drawing.Point(741, 1071);
+            this.dudDirectory2.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.dudDirectory2.MinimumSize = new System.Drawing.Size(150, 0);
+            this.dudDirectory2.Name = "dudDirectory2";
+            this.dudDirectory2.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
+            this.dudDirectory2.ShowText = false;
+            this.dudDirectory2.Size = new System.Drawing.Size(150, 39);
+            this.dudDirectory2.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Gray;
+            this.dudDirectory2.TabIndex = 401;
+            this.dudDirectory2.Text = "uiDoubleUpDown1";
+            this.dudDirectory2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dudDirectory2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // dudDirectory1
+            // 
+            this.dudDirectory1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.dudDirectory1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.dudDirectory1.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.dudDirectory1.Location = new System.Drawing.Point(741, 988);
+            this.dudDirectory1.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.dudDirectory1.MinimumSize = new System.Drawing.Size(150, 0);
+            this.dudDirectory1.Name = "dudDirectory1";
+            this.dudDirectory1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
+            this.dudDirectory1.ShowText = false;
+            this.dudDirectory1.Size = new System.Drawing.Size(150, 39);
+            this.dudDirectory1.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Gray;
+            this.dudDirectory1.TabIndex = 401;
+            this.dudDirectory1.Text = "uiDoubleUpDown1";
+            this.dudDirectory1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dudDirectory1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // lb_Prims
             // 
@@ -1054,7 +1237,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkDisConfigEnable.AutoSize = true;
             this.chkDisConfigEnable.Location = new System.Drawing.Point(800, 390);
-            this.chkDisConfigEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkDisConfigEnable.Margin = new System.Windows.Forms.Padding(4);
             this.chkDisConfigEnable.Name = "chkDisConfigEnable";
             this.chkDisConfigEnable.Size = new System.Drawing.Size(72, 28);
             this.chkDisConfigEnable.TabIndex = 388;
@@ -1062,8 +1245,8 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             // btnBrowsePDCAPath
             // 
-            this.btnBrowsePDCAPath.Location = new System.Drawing.Point(741, 716);
-            this.btnBrowsePDCAPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowsePDCAPath.Location = new System.Drawing.Point(741, 825);
+            this.btnBrowsePDCAPath.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowsePDCAPath.Name = "btnBrowsePDCAPath";
             this.btnBrowsePDCAPath.Size = new System.Drawing.Size(52, 36);
             this.btnBrowsePDCAPath.TabIndex = 400;
@@ -1074,7 +1257,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkFaiConfigEnable.AutoSize = true;
             this.chkFaiConfigEnable.Location = new System.Drawing.Point(800, 298);
-            this.chkFaiConfigEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkFaiConfigEnable.Margin = new System.Windows.Forms.Padding(4);
             this.chkFaiConfigEnable.Name = "chkFaiConfigEnable";
             this.chkFaiConfigEnable.Size = new System.Drawing.Size(72, 28);
             this.chkFaiConfigEnable.TabIndex = 387;
@@ -1082,8 +1265,8 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             // btnBrowseSFLPath
             // 
-            this.btnBrowseSFLPath.Location = new System.Drawing.Point(741, 670);
-            this.btnBrowseSFLPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseSFLPath.Location = new System.Drawing.Point(741, 779);
+            this.btnBrowseSFLPath.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseSFLPath.Name = "btnBrowseSFLPath";
             this.btnBrowseSFLPath.Size = new System.Drawing.Size(52, 36);
             this.btnBrowseSFLPath.TabIndex = 399;
@@ -1094,7 +1277,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkCommonDynamicParamEnable.AutoSize = true;
             this.chkCommonDynamicParamEnable.Location = new System.Drawing.Point(954, 254);
-            this.chkCommonDynamicParamEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkCommonDynamicParamEnable.Margin = new System.Windows.Forms.Padding(4);
             this.chkCommonDynamicParamEnable.Name = "chkCommonDynamicParamEnable";
             this.chkCommonDynamicParamEnable.Size = new System.Drawing.Size(144, 28);
             this.chkCommonDynamicParamEnable.TabIndex = 386;
@@ -1102,8 +1285,8 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             // btnBrowseMachineDataPath
             // 
-            this.btnBrowseMachineDataPath.Location = new System.Drawing.Point(741, 806);
-            this.btnBrowseMachineDataPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseMachineDataPath.Location = new System.Drawing.Point(741, 915);
+            this.btnBrowseMachineDataPath.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseMachineDataPath.Name = "btnBrowseMachineDataPath";
             this.btnBrowseMachineDataPath.Size = new System.Drawing.Size(52, 36);
             this.btnBrowseMachineDataPath.TabIndex = 398;
@@ -1114,7 +1297,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkDynamicParamEnable.AutoSize = true;
             this.chkDynamicParamEnable.Location = new System.Drawing.Point(800, 252);
-            this.chkDynamicParamEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkDynamicParamEnable.Margin = new System.Windows.Forms.Padding(4);
             this.chkDynamicParamEnable.Name = "chkDynamicParamEnable";
             this.chkDynamicParamEnable.Size = new System.Drawing.Size(144, 28);
             this.chkDynamicParamEnable.TabIndex = 385;
@@ -1122,8 +1305,8 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             // btnBrowseMachinePath
             // 
-            this.btnBrowseMachinePath.Location = new System.Drawing.Point(741, 760);
-            this.btnBrowseMachinePath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseMachinePath.Location = new System.Drawing.Point(741, 869);
+            this.btnBrowseMachinePath.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseMachinePath.Name = "btnBrowseMachinePath";
             this.btnBrowseMachinePath.Size = new System.Drawing.Size(52, 36);
             this.btnBrowseMachinePath.TabIndex = 397;
@@ -1134,7 +1317,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkCmpTrigConfigEnable.AutoSize = true;
             this.chkCmpTrigConfigEnable.Location = new System.Drawing.Point(800, 206);
-            this.chkCmpTrigConfigEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkCmpTrigConfigEnable.Margin = new System.Windows.Forms.Padding(4);
             this.chkCmpTrigConfigEnable.Name = "chkCmpTrigConfigEnable";
             this.chkCmpTrigConfigEnable.Size = new System.Drawing.Size(72, 28);
             this.chkCmpTrigConfigEnable.TabIndex = 384;
@@ -1142,8 +1325,8 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             // txtDirectory2
             // 
-            this.txtDirectory2.Location = new System.Drawing.Point(211, 944);
-            this.txtDirectory2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDirectory2.Location = new System.Drawing.Point(211, 1053);
+            this.txtDirectory2.Margin = new System.Windows.Forms.Padding(2);
             this.txtDirectory2.Multiline = true;
             this.txtDirectory2.Name = "txtDirectory2";
             this.txtDirectory2.Size = new System.Drawing.Size(522, 73);
@@ -1151,8 +1334,8 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             // txtDirectory1
             // 
-            this.txtDirectory1.Location = new System.Drawing.Point(211, 861);
-            this.txtDirectory1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDirectory1.Location = new System.Drawing.Point(211, 970);
+            this.txtDirectory1.Margin = new System.Windows.Forms.Padding(2);
             this.txtDirectory1.Multiline = true;
             this.txtDirectory1.Name = "txtDirectory1";
             this.txtDirectory1.Size = new System.Drawing.Size(522, 73);
@@ -1160,8 +1343,8 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             // tbMachineData
             // 
-            this.tbMachineData.Location = new System.Drawing.Point(211, 806);
-            this.tbMachineData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbMachineData.Location = new System.Drawing.Point(211, 915);
+            this.tbMachineData.Margin = new System.Windows.Forms.Padding(2);
             this.tbMachineData.Name = "tbMachineData";
             this.tbMachineData.Size = new System.Drawing.Size(522, 31);
             this.tbMachineData.TabIndex = 396;
@@ -1170,7 +1353,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkTasksConfigEnable.AutoSize = true;
             this.chkTasksConfigEnable.Location = new System.Drawing.Point(800, 162);
-            this.chkTasksConfigEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkTasksConfigEnable.Margin = new System.Windows.Forms.Padding(4);
             this.chkTasksConfigEnable.Name = "chkTasksConfigEnable";
             this.chkTasksConfigEnable.Size = new System.Drawing.Size(72, 28);
             this.chkTasksConfigEnable.TabIndex = 383;
@@ -1178,8 +1361,8 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             // tbSFLPath
             // 
-            this.tbSFLPath.Location = new System.Drawing.Point(211, 672);
-            this.tbSFLPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbSFLPath.Location = new System.Drawing.Point(211, 781);
+            this.tbSFLPath.Margin = new System.Windows.Forms.Padding(2);
             this.tbSFLPath.Name = "tbSFLPath";
             this.tbSFLPath.Size = new System.Drawing.Size(522, 31);
             this.tbSFLPath.TabIndex = 395;
@@ -1188,7 +1371,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkElesConfigEnable.AutoSize = true;
             this.chkElesConfigEnable.Location = new System.Drawing.Point(800, 118);
-            this.chkElesConfigEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkElesConfigEnable.Margin = new System.Windows.Forms.Padding(4);
             this.chkElesConfigEnable.Name = "chkElesConfigEnable";
             this.chkElesConfigEnable.Size = new System.Drawing.Size(72, 28);
             this.chkElesConfigEnable.TabIndex = 382;
@@ -1196,8 +1379,8 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             // tbMachinePath
             // 
-            this.tbMachinePath.Location = new System.Drawing.Point(211, 762);
-            this.tbMachinePath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbMachinePath.Location = new System.Drawing.Point(211, 871);
+            this.tbMachinePath.Margin = new System.Windows.Forms.Padding(2);
             this.tbMachinePath.Name = "tbMachinePath";
             this.tbMachinePath.Size = new System.Drawing.Size(522, 31);
             this.tbMachinePath.TabIndex = 394;
@@ -1206,7 +1389,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkShowConfigEnable.AutoSize = true;
             this.chkShowConfigEnable.Location = new System.Drawing.Point(800, 72);
-            this.chkShowConfigEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkShowConfigEnable.Margin = new System.Windows.Forms.Padding(4);
             this.chkShowConfigEnable.Name = "chkShowConfigEnable";
             this.chkShowConfigEnable.Size = new System.Drawing.Size(72, 28);
             this.chkShowConfigEnable.TabIndex = 381;
@@ -1214,8 +1397,8 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             // tbPDCAPath
             // 
-            this.tbPDCAPath.Location = new System.Drawing.Point(211, 718);
-            this.tbPDCAPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbPDCAPath.Location = new System.Drawing.Point(211, 827);
+            this.tbPDCAPath.Margin = new System.Windows.Forms.Padding(2);
             this.tbPDCAPath.Name = "tbPDCAPath";
             this.tbPDCAPath.Size = new System.Drawing.Size(522, 31);
             this.tbPDCAPath.TabIndex = 393;
@@ -1224,7 +1407,7 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.chkPrimsConfigEnable.AutoSize = true;
             this.chkPrimsConfigEnable.Location = new System.Drawing.Point(800, 26);
-            this.chkPrimsConfigEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkPrimsConfigEnable.Margin = new System.Windows.Forms.Padding(4);
             this.chkPrimsConfigEnable.Name = "chkPrimsConfigEnable";
             this.chkPrimsConfigEnable.Size = new System.Drawing.Size(72, 28);
             this.chkPrimsConfigEnable.TabIndex = 380;
@@ -1233,7 +1416,7 @@ namespace Lead.CPrim.SoftwareConfig
             // lb_Log_PDCA
             // 
             this.lb_Log_PDCA.AutoSize = true;
-            this.lb_Log_PDCA.Location = new System.Drawing.Point(29, 722);
+            this.lb_Log_PDCA.Location = new System.Drawing.Point(29, 831);
             this.lb_Log_PDCA.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_Log_PDCA.Name = "lb_Log_PDCA";
             this.lb_Log_PDCA.Size = new System.Drawing.Size(114, 24);
@@ -1244,7 +1427,7 @@ namespace Lead.CPrim.SoftwareConfig
             // btnBrowseDisConfigPath
             // 
             this.btnBrowseDisConfigPath.Location = new System.Drawing.Point(742, 386);
-            this.btnBrowseDisConfigPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseDisConfigPath.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseDisConfigPath.Name = "btnBrowseDisConfigPath";
             this.btnBrowseDisConfigPath.Size = new System.Drawing.Size(52, 36);
             this.btnBrowseDisConfigPath.TabIndex = 379;
@@ -1254,7 +1437,7 @@ namespace Lead.CPrim.SoftwareConfig
             // lblDirectory2
             // 
             this.lblDirectory2.AutoSize = true;
-            this.lblDirectory2.Location = new System.Drawing.Point(29, 969);
+            this.lblDirectory2.Location = new System.Drawing.Point(29, 1078);
             this.lblDirectory2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDirectory2.Name = "lblDirectory2";
             this.lblDirectory2.Size = new System.Drawing.Size(147, 24);
@@ -1265,7 +1448,7 @@ namespace Lead.CPrim.SoftwareConfig
             // lblDirectory1
             // 
             this.lblDirectory1.AutoSize = true;
-            this.lblDirectory1.Location = new System.Drawing.Point(29, 886);
+            this.lblDirectory1.Location = new System.Drawing.Point(29, 995);
             this.lblDirectory1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDirectory1.Name = "lblDirectory1";
             this.lblDirectory1.Size = new System.Drawing.Size(147, 24);
@@ -1276,7 +1459,7 @@ namespace Lead.CPrim.SoftwareConfig
             // lb_ProductionData
             // 
             this.lb_ProductionData.AutoSize = true;
-            this.lb_ProductionData.Location = new System.Drawing.Point(29, 812);
+            this.lb_ProductionData.Location = new System.Drawing.Point(29, 921);
             this.lb_ProductionData.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_ProductionData.Name = "lb_ProductionData";
             this.lb_ProductionData.Size = new System.Drawing.Size(100, 24);
@@ -1287,7 +1470,7 @@ namespace Lead.CPrim.SoftwareConfig
             // btnBrowseComplexQueryTaskFilePath
             // 
             this.btnBrowseComplexQueryTaskFilePath.Location = new System.Drawing.Point(742, 338);
-            this.btnBrowseComplexQueryTaskFilePath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseComplexQueryTaskFilePath.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseComplexQueryTaskFilePath.Name = "btnBrowseComplexQueryTaskFilePath";
             this.btnBrowseComplexQueryTaskFilePath.Size = new System.Drawing.Size(52, 36);
             this.btnBrowseComplexQueryTaskFilePath.TabIndex = 378;
@@ -1297,7 +1480,7 @@ namespace Lead.CPrim.SoftwareConfig
             // lb_Log_Machine
             // 
             this.lb_Log_Machine.AutoSize = true;
-            this.lb_Log_Machine.Location = new System.Drawing.Point(29, 766);
+            this.lb_Log_Machine.Location = new System.Drawing.Point(29, 875);
             this.lb_Log_Machine.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_Log_Machine.Name = "lb_Log_Machine";
             this.lb_Log_Machine.Size = new System.Drawing.Size(138, 24);
@@ -1308,7 +1491,7 @@ namespace Lead.CPrim.SoftwareConfig
             // btnBrowseFaiConfigPath
             // 
             this.btnBrowseFaiConfigPath.Location = new System.Drawing.Point(742, 296);
-            this.btnBrowseFaiConfigPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseFaiConfigPath.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseFaiConfigPath.Name = "btnBrowseFaiConfigPath";
             this.btnBrowseFaiConfigPath.Size = new System.Drawing.Size(52, 36);
             this.btnBrowseFaiConfigPath.TabIndex = 377;
@@ -1318,7 +1501,7 @@ namespace Lead.CPrim.SoftwareConfig
             // lb_Log_SFL
             // 
             this.lb_Log_SFL.AutoSize = true;
-            this.lb_Log_SFL.Location = new System.Drawing.Point(29, 676);
+            this.lb_Log_SFL.Location = new System.Drawing.Point(29, 785);
             this.lb_Log_SFL.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_Log_SFL.Name = "lb_Log_SFL";
             this.lb_Log_SFL.Size = new System.Drawing.Size(93, 24);
@@ -1329,7 +1512,7 @@ namespace Lead.CPrim.SoftwareConfig
             // btnBrowseDynamicParamDir
             // 
             this.btnBrowseDynamicParamDir.Location = new System.Drawing.Point(742, 250);
-            this.btnBrowseDynamicParamDir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseDynamicParamDir.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseDynamicParamDir.Name = "btnBrowseDynamicParamDir";
             this.btnBrowseDynamicParamDir.Size = new System.Drawing.Size(52, 36);
             this.btnBrowseDynamicParamDir.TabIndex = 376;
@@ -1339,7 +1522,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbDispenserConfigPath
             // 
             this.tbDispenserConfigPath.Location = new System.Drawing.Point(212, 386);
-            this.tbDispenserConfigPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbDispenserConfigPath.Margin = new System.Windows.Forms.Padding(2);
             this.tbDispenserConfigPath.Name = "tbDispenserConfigPath";
             this.tbDispenserConfigPath.Size = new System.Drawing.Size(522, 31);
             this.tbDispenserConfigPath.TabIndex = 370;
@@ -1347,7 +1530,7 @@ namespace Lead.CPrim.SoftwareConfig
             // btnBrowseCmpTrigFile
             // 
             this.btnBrowseCmpTrigFile.Location = new System.Drawing.Point(742, 204);
-            this.btnBrowseCmpTrigFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseCmpTrigFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseCmpTrigFile.Name = "btnBrowseCmpTrigFile";
             this.btnBrowseCmpTrigFile.Size = new System.Drawing.Size(52, 36);
             this.btnBrowseCmpTrigFile.TabIndex = 375;
@@ -1357,7 +1540,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbComplexQueryTaskFilePath
             // 
             this.tbComplexQueryTaskFilePath.Location = new System.Drawing.Point(212, 340);
-            this.tbComplexQueryTaskFilePath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbComplexQueryTaskFilePath.Margin = new System.Windows.Forms.Padding(4);
             this.tbComplexQueryTaskFilePath.Name = "tbComplexQueryTaskFilePath";
             this.tbComplexQueryTaskFilePath.Size = new System.Drawing.Size(522, 31);
             this.tbComplexQueryTaskFilePath.TabIndex = 369;
@@ -1365,7 +1548,7 @@ namespace Lead.CPrim.SoftwareConfig
             // btnBrowseTasksFile
             // 
             this.btnBrowseTasksFile.Location = new System.Drawing.Point(742, 158);
-            this.btnBrowseTasksFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseTasksFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseTasksFile.Name = "btnBrowseTasksFile";
             this.btnBrowseTasksFile.Size = new System.Drawing.Size(52, 36);
             this.btnBrowseTasksFile.TabIndex = 374;
@@ -1375,7 +1558,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbFaiConfigPath
             // 
             this.tbFaiConfigPath.Location = new System.Drawing.Point(212, 296);
-            this.tbFaiConfigPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbFaiConfigPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbFaiConfigPath.Name = "tbFaiConfigPath";
             this.tbFaiConfigPath.Size = new System.Drawing.Size(522, 31);
             this.tbFaiConfigPath.TabIndex = 368;
@@ -1383,7 +1566,7 @@ namespace Lead.CPrim.SoftwareConfig
             // btnBrowseElesFile
             // 
             this.btnBrowseElesFile.Location = new System.Drawing.Point(742, 114);
-            this.btnBrowseElesFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseElesFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseElesFile.Name = "btnBrowseElesFile";
             this.btnBrowseElesFile.Size = new System.Drawing.Size(52, 36);
             this.btnBrowseElesFile.TabIndex = 373;
@@ -1393,7 +1576,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbDynamicParamDirPath
             // 
             this.tbDynamicParamDirPath.Location = new System.Drawing.Point(212, 250);
-            this.tbDynamicParamDirPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbDynamicParamDirPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbDynamicParamDirPath.Name = "tbDynamicParamDirPath";
             this.tbDynamicParamDirPath.Size = new System.Drawing.Size(522, 31);
             this.tbDynamicParamDirPath.TabIndex = 367;
@@ -1401,7 +1584,7 @@ namespace Lead.CPrim.SoftwareConfig
             // btnBrowseDisplayFile
             // 
             this.btnBrowseDisplayFile.Location = new System.Drawing.Point(742, 70);
-            this.btnBrowseDisplayFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseDisplayFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseDisplayFile.Name = "btnBrowseDisplayFile";
             this.btnBrowseDisplayFile.Size = new System.Drawing.Size(52, 36);
             this.btnBrowseDisplayFile.TabIndex = 372;
@@ -1411,7 +1594,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbCmpTrigsConfigPath
             // 
             this.tbCmpTrigsConfigPath.Location = new System.Drawing.Point(212, 206);
-            this.tbCmpTrigsConfigPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCmpTrigsConfigPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbCmpTrigsConfigPath.Name = "tbCmpTrigsConfigPath";
             this.tbCmpTrigsConfigPath.Size = new System.Drawing.Size(522, 31);
             this.tbCmpTrigsConfigPath.TabIndex = 366;
@@ -1419,7 +1602,7 @@ namespace Lead.CPrim.SoftwareConfig
             // btnBrowsePrimsFile
             // 
             this.btnBrowsePrimsFile.Location = new System.Drawing.Point(742, 24);
-            this.btnBrowsePrimsFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowsePrimsFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowsePrimsFile.Name = "btnBrowsePrimsFile";
             this.btnBrowsePrimsFile.Size = new System.Drawing.Size(52, 36);
             this.btnBrowsePrimsFile.TabIndex = 371;
@@ -1429,7 +1612,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbTasksConfigPath
             // 
             this.tbTasksConfigPath.Location = new System.Drawing.Point(212, 160);
-            this.tbTasksConfigPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbTasksConfigPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbTasksConfigPath.Name = "tbTasksConfigPath";
             this.tbTasksConfigPath.Size = new System.Drawing.Size(522, 31);
             this.tbTasksConfigPath.TabIndex = 365;
@@ -1448,7 +1631,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbElesConfigPath
             // 
             this.tbElesConfigPath.Location = new System.Drawing.Point(212, 116);
-            this.tbElesConfigPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbElesConfigPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbElesConfigPath.Name = "tbElesConfigPath";
             this.tbElesConfigPath.Size = new System.Drawing.Size(522, 31);
             this.tbElesConfigPath.TabIndex = 364;
@@ -1467,7 +1650,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbShowConfigPath
             // 
             this.tbShowConfigPath.Location = new System.Drawing.Point(212, 70);
-            this.tbShowConfigPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbShowConfigPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbShowConfigPath.Name = "tbShowConfigPath";
             this.tbShowConfigPath.Size = new System.Drawing.Size(522, 31);
             this.tbShowConfigPath.TabIndex = 363;
@@ -1486,7 +1669,7 @@ namespace Lead.CPrim.SoftwareConfig
             // tbPrimsConfigPath
             // 
             this.tbPrimsConfigPath.Location = new System.Drawing.Point(212, 26);
-            this.tbPrimsConfigPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPrimsConfigPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbPrimsConfigPath.Name = "tbPrimsConfigPath";
             this.tbPrimsConfigPath.Size = new System.Drawing.Size(522, 31);
             this.tbPrimsConfigPath.TabIndex = 362;
@@ -1550,152 +1733,13 @@ namespace Lead.CPrim.SoftwareConfig
             // 
             this.tmrOneHour.Tick += new System.EventHandler(this.tmrOneHour_Tick);
             // 
-            // btnCreateHash
-            // 
-            this.btnCreateHash.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCreateHash.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCreateHash.Location = new System.Drawing.Point(693, 610);
-            this.btnCreateHash.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCreateHash.MinimumSize = new System.Drawing.Size(2, 2);
-            this.btnCreateHash.Name = "btnCreateHash";
-            this.btnCreateHash.Size = new System.Drawing.Size(111, 80);
-            this.btnCreateHash.TabIndex = 336;
-            this.btnCreateHash.Text = "生成";
-            this.btnCreateHash.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCreateHash.Visible = false;
-            this.btnCreateHash.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnCreateHash.Click += new System.EventHandler(this.btnCreateHash_Click);
-            // 
-            // dudDirectory2
-            // 
-            this.dudDirectory2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.dudDirectory2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.dudDirectory2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.dudDirectory2.Location = new System.Drawing.Point(741, 962);
-            this.dudDirectory2.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.dudDirectory2.MinimumSize = new System.Drawing.Size(150, 0);
-            this.dudDirectory2.Name = "dudDirectory2";
-            this.dudDirectory2.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
-            this.dudDirectory2.ShowText = false;
-            this.dudDirectory2.Size = new System.Drawing.Size(150, 39);
-            this.dudDirectory2.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Gray;
-            this.dudDirectory2.TabIndex = 401;
-            this.dudDirectory2.Text = "uiDoubleUpDown1";
-            this.dudDirectory2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.dudDirectory2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // dudDirectory1
-            // 
-            this.dudDirectory1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.dudDirectory1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.dudDirectory1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.dudDirectory1.Location = new System.Drawing.Point(741, 879);
-            this.dudDirectory1.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.dudDirectory1.MinimumSize = new System.Drawing.Size(150, 0);
-            this.dudDirectory1.Name = "dudDirectory1";
-            this.dudDirectory1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
-            this.dudDirectory1.ShowText = false;
-            this.dudDirectory1.Size = new System.Drawing.Size(150, 39);
-            this.dudDirectory1.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Gray;
-            this.dudDirectory1.TabIndex = 401;
-            this.dudDirectory1.Text = "uiDoubleUpDown1";
-            this.dudDirectory1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.dudDirectory1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // btnBrowseGlobSettingConfigPath
-            // 
-            this.btnBrowseGlobSettingConfigPath.Location = new System.Drawing.Point(742, 429);
-            this.btnBrowseGlobSettingConfigPath.Margin = new System.Windows.Forms.Padding(4);
-            this.btnBrowseGlobSettingConfigPath.Name = "btnBrowseGlobSettingConfigPath";
-            this.btnBrowseGlobSettingConfigPath.Size = new System.Drawing.Size(52, 36);
-            this.btnBrowseGlobSettingConfigPath.TabIndex = 404;
-            this.btnBrowseGlobSettingConfigPath.Text = "...";
-            this.btnBrowseGlobSettingConfigPath.Click += new System.EventHandler(this.btnBrowseGlobSettingConfigPath_Click);
-            // 
-            // tbGlobSettingConfigPath
-            // 
-            this.tbGlobSettingConfigPath.Location = new System.Drawing.Point(212, 429);
-            this.tbGlobSettingConfigPath.Margin = new System.Windows.Forms.Padding(2);
-            this.tbGlobSettingConfigPath.Name = "tbGlobSettingConfigPath";
-            this.tbGlobSettingConfigPath.Size = new System.Drawing.Size(522, 31);
-            this.tbGlobSettingConfigPath.TabIndex = 403;
-            // 
-            // lb_GlobSetting
-            // 
-            this.lb_GlobSetting.AutoSize = true;
-            this.lb_GlobSetting.Location = new System.Drawing.Point(30, 433);
-            this.lb_GlobSetting.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lb_GlobSetting.Name = "lb_GlobSetting";
-            this.lb_GlobSetting.Size = new System.Drawing.Size(100, 24);
-            this.lb_GlobSetting.TabIndex = 402;
-            this.lb_GlobSetting.Text = "通用设置：";
-            this.lb_GlobSetting.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnBrowseHashKeyConfigPath
-            // 
-            this.btnBrowseHashKeyConfigPath.Location = new System.Drawing.Point(742, 477);
-            this.btnBrowseHashKeyConfigPath.Margin = new System.Windows.Forms.Padding(4);
-            this.btnBrowseHashKeyConfigPath.Name = "btnBrowseHashKeyConfigPath";
-            this.btnBrowseHashKeyConfigPath.Size = new System.Drawing.Size(52, 36);
-            this.btnBrowseHashKeyConfigPath.TabIndex = 407;
-            this.btnBrowseHashKeyConfigPath.Text = "...";
-            this.btnBrowseHashKeyConfigPath.Click += new System.EventHandler(this.btnBrowseHashKeyConfigPath_Click);
-            // 
-            // tbHashKeyConfigPath
-            // 
-            this.tbHashKeyConfigPath.Location = new System.Drawing.Point(212, 477);
-            this.tbHashKeyConfigPath.Margin = new System.Windows.Forms.Padding(2);
-            this.tbHashKeyConfigPath.Name = "tbHashKeyConfigPath";
-            this.tbHashKeyConfigPath.Size = new System.Drawing.Size(522, 31);
-            this.tbHashKeyConfigPath.TabIndex = 406;
-            // 
-            // lb_Hashkey
-            // 
-            this.lb_Hashkey.AutoSize = true;
-            this.lb_Hashkey.Location = new System.Drawing.Point(30, 481);
-            this.lb_Hashkey.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lb_Hashkey.Name = "lb_Hashkey";
-            this.lb_Hashkey.Size = new System.Drawing.Size(102, 24);
-            this.lb_Hashkey.TabIndex = 405;
-            this.lb_Hashkey.Text = "HashKey：";
-            this.lb_Hashkey.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // button1btnBrowseAdminitionConfigPath
-            // 
-            this.button1btnBrowseAdminitionConfigPath.Location = new System.Drawing.Point(741, 526);
-            this.button1btnBrowseAdminitionConfigPath.Margin = new System.Windows.Forms.Padding(4);
-            this.button1btnBrowseAdminitionConfigPath.Name = "button1btnBrowseAdminitionConfigPath";
-            this.button1btnBrowseAdminitionConfigPath.Size = new System.Drawing.Size(52, 36);
-            this.button1btnBrowseAdminitionConfigPath.TabIndex = 410;
-            this.button1btnBrowseAdminitionConfigPath.Text = "...";
-            this.button1btnBrowseAdminitionConfigPath.Click += new System.EventHandler(this.button1btnBrowseAdminitionConfigPath_Click);
-            // 
-            // tbAdministonConfigPath
-            // 
-            this.tbAdministonConfigPath.Location = new System.Drawing.Point(211, 526);
-            this.tbAdministonConfigPath.Margin = new System.Windows.Forms.Padding(2);
-            this.tbAdministonConfigPath.Name = "tbAdministonConfigPath";
-            this.tbAdministonConfigPath.Size = new System.Drawing.Size(522, 31);
-            this.tbAdministonConfigPath.TabIndex = 409;
-            // 
-            // lb_Administration
-            // 
-            this.lb_Administration.AutoSize = true;
-            this.lb_Administration.Location = new System.Drawing.Point(29, 530);
-            this.lb_Administration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lb_Administration.Name = "lb_Administration";
-            this.lb_Administration.Size = new System.Drawing.Size(64, 24);
-            this.lb_Administration.TabIndex = 408;
-            this.lb_Administration.Text = "用户：";
-            this.lb_Administration.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // SoftwareConfigControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.tlpMain);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SoftwareConfigControl";
             this.Size = new System.Drawing.Size(1914, 976);
             this.Load += new System.EventHandler(this.TrigTableControl_Load);

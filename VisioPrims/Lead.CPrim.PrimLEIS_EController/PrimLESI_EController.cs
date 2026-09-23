@@ -3315,6 +3315,12 @@ namespace Lead.CPrim.PrimLESI_EController
             return 0;
         }
 
+        /// <summary>当前驱动未实现轴 PT 运动，不能返回虚假的 FIFO 剩余空间。</summary>
+        public short GetPTSpace(int axisId, short fifo = 0, short card = 0)
+        {
+            throw new NotSupportedException("Lead.CPrim.PrimLEIS_EController 尚未实现轴 PT 运动及 FIFO 空间查询。");
+        }
+
         public int AxisPTMove(int axisId, List<PtData> ptdatas, short fifo = 0, short card = 0)
         {
             throw new NotImplementedException();

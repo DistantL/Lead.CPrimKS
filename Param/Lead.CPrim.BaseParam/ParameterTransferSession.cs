@@ -30,7 +30,7 @@ namespace Lead.CPrim.BaseParam
         public string Product { get; private set; }
         public bool ToGlobal { get; private set; }
         public bool HasPending { get { return pending.Count != 0; } }
-        public string LastBackupPaths { get; private set; }
+        public bool IsFaulted { get; private set; }
 
         public ParameterTransferSession(string source, string target, string product)
             : this(source, target, product, false)
@@ -64,6 +64,7 @@ namespace Lead.CPrim.BaseParam
 
         public void CheckCurrent()
         {
+            if (IsFaulted) throw new InvalidOperationException("此前直接保存或刷新失败，请检查文件并关闭当前窗口后重新加载，不可直接重试。");
             ValidateContext?.Invoke();
             if (!File.ReadAllBytes(sourcePath).SequenceEqual(sourceBytes)
                 || !File.ReadAllBytes(targetPath).SequenceEqual(targetBytes))
@@ -135,25 +136,13 @@ namespace Lead.CPrim.BaseParam
             ValidateDocument(nextSource);
             ValidateDocument(nextTarget);
             ValidateDocuments?.Invoke(nextSource, nextTarget);
-            string suffix = ".transfer-" + Guid.NewGuid().ToString("N");
-            string sourceTemp = sourcePath + suffix + ".tmp";
-            string targetTemp = targetPath + suffix + ".tmp";
-            string sourceBackup = sourcePath + suffix + ".bak";
-            string targetBackup = targetPath + suffix + ".bak";
-            bool sourceReplaced = false, targetReplaced = false;
             bool transfer = HasPending;
-            LastBackupPaths = sourceBackup + (transfer ? Environment.NewLine + targetBackup : "");
+            CheckCurrent();
             try
             {
-                nextSource.Save(sourceTemp);
-                if (transfer) nextTarget.Save(targetTemp);
-                File.Copy(sourcePath, sourceBackup);
-                if (transfer) File.Copy(targetPath, targetBackup);
-                CheckCurrent();
-                // 先落目标文件，再移除源定义；失败时利用备份恢复。
-                if (transfer) { File.Replace(targetTemp, targetPath, null); targetReplaced = true; }
-                File.Replace(sourceTemp, sourcePath, null);
-                sourceReplaced = true;
+                // 先写目标再写源；直接覆盖无回滚，中途失败可能留下重复定义或损坏文件。
+                if (transfer) ParameterFileCommit.Save(targetPath, nextTarget, sourcePath, nextSource);
+                else ParameterFileCommit.Save(sourcePath, nextSource);
                 RefreshCommitted?.Invoke(new XElement(nextSource), new XElement(nextTarget));
                 sourceBytes = File.ReadAllBytes(sourcePath);
                 targetBytes = File.ReadAllBytes(targetPath);
@@ -163,27 +152,12 @@ namespace Lead.CPrim.BaseParam
             }
             catch (Exception error)
             {
-                var recovery = new List<string>();
-                if (sourceReplaced) TryRecover(() => File.Copy(sourceBackup, sourcePath, true), recovery);
-                if (targetReplaced) TryRecover(() => File.Copy(targetBackup, targetPath, true), recovery);
-                if (sourceReplaced || targetReplaced)
-                    TryRecover(() => RefreshCommitted?.Invoke(new XElement(sourceView ?? Read(sourceBytes)),
-                        new XElement(targetView ?? Read(targetBytes))), recovery);
-                throw new IOException("参数保存失败，待转移内容保留。" + error.Message
-                    + "\n备份位置（若已生成）：\n" + LastBackupPaths
-                    + (recovery.Count == 0 ? "" : "\n恢复失败，请勿运行设备：" + string.Join("; ", recovery)), error);
+                IsFaulted = true;
+                throw new IOException("参数保存或刷新失败，待转移内容保留但当前会话已锁定。"
+                    + "\n未生成备份、未回滚。以下文件可能已部分或全部更新，请勿运行设备，检查后关闭窗口并重新加载："
+                    + "\n" + sourcePath + (transfer ? "\n" + targetPath : "")
+                    + "\n" + error.Message, error);
             }
-            finally
-            {
-                // 只清理本次唯一命名的临时文件；备份保留用于人工恢复。
-                TryRecover(() => { if (File.Exists(sourceTemp)) File.Delete(sourceTemp); }, new List<string>());
-                TryRecover(() => { if (File.Exists(targetTemp)) File.Delete(targetTemp); }, new List<string>());
-            }
-        }
-
-        private static void TryRecover(Action action, List<string> failures)
-        {
-            try { action(); } catch (Exception ex) { failures.Add(ex.Message); }
         }
     }
 }

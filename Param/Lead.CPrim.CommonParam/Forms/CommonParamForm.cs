@@ -91,7 +91,6 @@ namespace Lead.CPrim.CommonParam
             pg.MouseWheel += Pg_CommonParamBase_MouseWheel;
 
             NLocalizer.LanguageChanged += OnLanguageChanged;
-            HiveManagerV3.Instance.HiveStateChanged += (info, trigger) => HiveManager_OnHiveChange(info.ChangeToStatus == HiveStatus.DT);
 
             CommonParam.OnUpdateProperty += InstanceUpdateProperty;
             Disposed += (sender, args) => CommonParam.OnUpdateProperty -= InstanceUpdateProperty;
@@ -136,10 +135,6 @@ namespace Lead.CPrim.CommonParam
             }
         }
 
-        private void HiveManager_OnHiveChange(bool flag)
-        {
-            OnHiveChangeToDT(flag);
-        }
 
         private void Pg_CommonParamBase_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -341,7 +336,6 @@ namespace Lead.CPrim.CommonParam
                 Pmcls.Clear();
                 xel.Elements().ToList().ForEach(p => Pmcls.Add((Property)p));
                 parameterBinding.AcceptLoaded();
-                OnHiveChangeToDT(HiveManagerV3.Instance.GetCurrentHiveStatus() == HiveStatus.DT);
                 CaptureTransferBaseline();
             }
         }
@@ -370,42 +364,6 @@ namespace Lead.CPrim.CommonParam
             }
         }
 
-        private void OnHiveChangeToDT(bool flag)
-        {
-            try
-            {
-                if (pg.InvokeRequired)
-                {
-                    pg.BeginInvoke(new Action<bool>(OnHiveChangeToDT), flag);
-                    return;
-                }
-
-                foreach (Property p in Pmcls)
-                {
-                    if (p.DisplayName.Contains("启用工位"))
-                    {
-                        string str = p.DisplayName.Substring(p.DisplayName.IndexOf("启用工位"));
-                        if (str.Remove(0, 4).IsNumber())
-                        {
-                            if (flag)
-                            {
-                                p.ReadOnly = false;
-                            }
-                            else
-                            {
-                                p.ReadOnly = true;
-                            }
-                        }
-                    }
-                }
-
-                pg.SelectedObject = Pmcls;
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Warn(ex.ToString());
-            }
-        }
         #endregion
     }
 }

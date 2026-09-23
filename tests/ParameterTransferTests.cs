@@ -67,7 +67,8 @@ internal static class ParameterTransferTests
             if (!File.Exists(path)) path = libs.FirstOrDefault(p => Path.GetFileName(p) == name);
             return path == null ? null : Assembly.LoadFrom(path);
         };
-        Run(output);
+        try { Run(output); }
+        catch (Exception ex) { Console.WriteLine(ex.GetType().Name + ": " + ex.Message + "\n" + ex.StackTrace); Environment.ExitCode = 1; }
     }
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void Run(string output)
@@ -87,7 +88,7 @@ internal static class ParameterTransferTests
         Check((string)speed.Element("Value") == "42" && (string)speed.Element("DisplayName") == "显示 Speed", "值和显示名称保留");
         pair.Session.Save(pair.Global);
         Check(XElement.Load(pair.Target).Elements("Speed").Count() == 1, "再次保存不重复");
-        Check(File.Exists(pair.Session.LastBackupPaths), "保存保留备份");
+        Check(Directory.GetFiles(Path.GetDirectoryName(pair.Source)).Length == 2, "保存不生成备份或临时文件");
 
         pair = new Pair();
         Reject(() => pair.Session.Stage(P("Existing"), "Product group"), "同名拒绝");
@@ -105,10 +106,11 @@ internal static class ParameterTransferTests
         byte[] targetBefore = File.ReadAllBytes(pair.Target);
         using (var lockedSource = new FileStream(pair.Source, FileMode.Open, FileAccess.Read, FileShare.Read))
             Reject(() => pair.Session.Save(pair.Global), "第二份文件替换失败");
-        Check(File.ReadAllBytes(pair.Source).SequenceEqual(before) && File.ReadAllBytes(pair.Target).SequenceEqual(targetBefore), "文件失败回滚两侧");
-        Check(pair.Session.HasPending, "失败后可重试");
-        pair.Session.Save(pair.Global);
-        Check(!pair.Session.HasPending, "重试成功");
+        Check(File.ReadAllBytes(pair.Source).SequenceEqual(before) && !File.ReadAllBytes(pair.Target).SequenceEqual(targetBefore), "失败不回滚已写入的目标");
+        Check(pair.Session.HasPending && pair.Session.IsFaulted, "失败保留清单并锁定会话");
+        Reject(() => pair.Session.Save(pair.Global), "失败会话不可重试");
+        Reject(() => pair.Session.Stage(P("NewValue"), "Product group"), "失败会话不可继续暂存");
+        Check(Directory.GetFiles(Path.GetDirectoryName(pair.Source)).Length == 2, "失败不生成备份和临时文件");
 
         pair = new Pair();
         pair.Stage("Speed");
@@ -117,8 +119,9 @@ internal static class ParameterTransferTests
         int refreshed = 0;
         pair.Session.RefreshCommitted = (g, p) => { if (++refreshed == 1) throw new Exception("刷新失败模拟"); };
         Reject(() => pair.Session.Save(pair.Global), "刷新失败不报成功");
-        Check(refreshed == 2 && File.ReadAllBytes(pair.Source).SequenceEqual(before)
-            && File.ReadAllBytes(pair.Target).SequenceEqual(targetBefore), "刷新失败恢复文件并刷新旧值");
+        Check(refreshed == 1 && !File.ReadAllBytes(pair.Source).SequenceEqual(before)
+            && !File.ReadAllBytes(pair.Target).SequenceEqual(targetBefore), "刷新失败不回滚已保存文件或刷新旧值");
+        Check(pair.Session.IsFaulted, "刷新失败会话锁定");
 
         pair = new Pair();
         pair.Stage("Speed");
@@ -184,8 +187,8 @@ internal static class ParameterTransferTests
             restoredView = t;
         };
         Reject(() => viewPair.Session.Save(viewPair.Global), "快照会话刷新失败");
-        Check((int)restoredView.Element("Existing").Element("Value") == 888
-            && (int)XElement.Load(viewPair.Target).Element("Existing").Element("Value") == 42, "失败分别恢复内存快照与原文件");
+        Check(restoredView == null && viewRefreshes == 1 && viewPair.Session.IsFaulted
+            && (int)XElement.Load(viewPair.Target).Element("Existing").Element("Value") == 888, "刷新失败不回滚内存快照或文件");
         var reversePair = new Pair();
         var reverse = new ParameterTransferSession(reversePair.Target, reversePair.Source, "AudioAirPods", true);
         Check(reverse.ToGlobal && reverse.Groups.Contains("Global"), "反向会话使用目标全局分组");
@@ -196,8 +199,13 @@ internal static class ParameterTransferTests
         var oldProduct = File.ReadAllBytes(reversePair.Target);
         using (var lockedProduct = new FileStream(reversePair.Target, FileMode.Open, FileAccess.Read, FileShare.Read))
             Reject(() => reverse.Save(reverseSource), "反向源替换失败");
-        Check(File.ReadAllBytes(reversePair.Source).SequenceEqual(oldGlobal)
-            && File.ReadAllBytes(reversePair.Target).SequenceEqual(oldProduct), "反向失败恢复两侧");
+        Check(!File.ReadAllBytes(reversePair.Source).SequenceEqual(oldGlobal)
+            && File.ReadAllBytes(reversePair.Target).SequenceEqual(oldProduct), "反向失败不回滚先写入的全局文件");
+        Check(reverse.IsFaulted && reverse.HasPending, "反向失败会话锁定");
+        Reject(() => reverse.Save(reverseSource), "反向失败不可直接重试");
+        reversePair = new Pair();
+        reverse = new ParameterTransferSession(reversePair.Target, reversePair.Source, "AudioAirPods", true);
+        reverse.Stage(XElement.Load(reversePair.Target).Element("Existing"), "New global group");
         bool allowed = false;
         reverse.ValidateTransferName = name => { if (!allowed) throw new InvalidOperationException("模式新增引用"); };
         Reject(() => reverse.Save(reverseSource), "反向提交复查变量引用");

@@ -158,6 +158,22 @@ internal static class ParameterAssignmentTests
                 Reject(() => common.Save(), "保存失败可报告");
             Check(originalGlobal.SequenceEqual(File.ReadAllBytes(globalPath)) && (int)CommonParam.Instance.Count == 1234, "失败不丢运行新值");
         }
+        // 所有文件先校验，直接覆盖的第二份失败时第一份不回滚。
+        var directFirst = Path.Combine(dir, "direct-first.para");
+        var directSecond = Path.Combine(dir, "direct-second.para");
+        var original = new XElement("Para", P("Value", 1, DataType.INT));
+        var changed = new XElement("Para", P("Value", 2, DataType.INT));
+        original.Save(directFirst);
+        original.Save(directSecond);
+        using (var locked = new FileStream(directSecond, FileMode.Open, FileAccess.Read, FileShare.Read))
+            Reject(() => ParameterFileCommit.Save(directFirst, changed, directSecond, changed), "直接覆盖第二份失败");
+        Check((int)XElement.Load(directFirst).Element("Value").Element("Value") == 2
+            && (int)XElement.Load(directSecond).Element("Value").Element("Value") == 1, "直接覆盖不回滚第一份");
+        var invalid = new XElement("Para", P("Value", 2, DataType.INT), P("Value", 3, DataType.INT));
+        Reject(() => ParameterFileCommit.Save(directFirst, original, directSecond, invalid), "第二份无效内容在写入前拒绝");
+        Check((int)XElement.Load(directFirst).Element("Value").Element("Value") == 2, "校验失败不写第一份");
+        Check(!Directory.GetFiles(dir, "*.bak", SearchOption.AllDirectories).Any()
+            && !Directory.GetFiles(dir, "*.tmp", SearchOption.AllDirectories).Any(), "普通保存不生成备份或临时文件");
         // 基础类型共用入口，分别验证快照的序列化往返。
         var types = new[] { DataType.BOOL, DataType.INT, DataType.BYTE, DataType.DOUBLE, DataType.STRING, DataType.Comb, DataType.PathString, DataType.DirPath };
         object[] values = { false, 7, (byte)3, 1.25, "new", "B", @"C:\test.txt", @"C:\test" };

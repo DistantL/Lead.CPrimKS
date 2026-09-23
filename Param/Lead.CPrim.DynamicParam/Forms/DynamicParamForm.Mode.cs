@@ -71,6 +71,7 @@ namespace Lead.CPrim.DynamicParam
             _modeLabel.Text = (_activeProduct ?? "") + " / " + _currentMode;
             _addModeItem.Text = NLocalizer.GetString("Param_AddMode", "加入当前模式参数");
             _removeModeItem.Text = NLocalizer.GetString("Param_RemoveMode", "从当前模式参数移除");
+            ApplyStationSwitchReadOnly(HiveManagerV3.Instance.GetCurrentHiveStatus() == HiveStatus.DT);
             _modeGrid.SelectedObject = _modeProperties;
             _modeGrid.Refresh();
             pg.Refresh();

@@ -217,6 +217,41 @@ internal static class ParameterUiSmokeTests
             catch (TargetInvocationException ex) { rejectedLoad = ex.InnerException is InvalidDataException; }
             Check(rejectedLoad && form.ParameterVersion == versionBeforeFailure
                 && form.ParameterSnapshot.ToString() == beforeFailure && form.GetRunMode() == "正常生产", "错误模式文件不改变产品值或模式状态");
+            // 工位开关保护按索引而非显示名称识别，并服从模式覆盖和页面禁用。
+            var protectedDoc = form.ParameterSnapshot;
+            for (int station = 1; station <= 4; station++)
+            {
+                var flag = new XElement(speed);
+                flag.Name = "启用工位" + station;
+                flag.SetElementValue("Name", flag.Name.LocalName);
+                flag.SetElementValue("DisplayName", "任意修改显示名称" + station);
+                flag.SetElementValue("valType", "BOOL");
+                flag.SetElementValue("Value", "true");
+                protectedDoc.Add(flag);
+            }
+            form.RefreshTransferredParameters(protectedDoc);
+            var protection = typeof(DynamicParamForm).GetMethod("ApplyStationSwitchReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
+            protection.Invoke(form, new object[] { false });
+            Check(form.ParameterSnapshot.Elements().Where(p => ((string)p.Element("Name")).StartsWith("启用工位")).All(p => (bool)p.Element("ReadOnly")), "非 DT 所有工位开关只读");
+            protection.Invoke(form, new object[] { true });
+            Check(form.ParameterSnapshot.Elements().Where(p => ((string)p.Element("Name")).StartsWith("启用工位")).All(p => !(bool)p.Element("ReadOnly")), "DT 可编辑且不依赖显示名称");
+            var modes = (Lead.CPrim.BaseParam.PropertyManageCls)typeof(DynamicParamForm)
+                .GetField("_modeProperties", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(form);
+            modes.Add((Lead.CPrim.BaseParam.Property)new XElement(form.ParameterSnapshot.Element("启用工位1")));
+            protection.Invoke(form, new object[] { true });
+            Check((bool)form.ParameterSnapshot.Element("启用工位1").Element("ReadOnly")
+                && !modes.Cast<Lead.CPrim.BaseParam.Property>().First(p => p.Name == "启用工位1").ReadOnly, "DT 不解锁已被模式覆盖的主参数");
+            protection.Invoke(form, new object[] { false });
+            Check(modes.Cast<Lead.CPrim.BaseParam.Property>().First(p => p.Name == "启用工位1").ReadOnly, "模式开关非 DT 也只读");
+            form.UIShow(false);
+            protection.Invoke(form, new object[] { true });
+            var stationGrid = (PropertyGrid)typeof(DynamicParamForm).GetField("pg", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(form);
+            Check(!stationGrid.Enabled && form.Save(null, false) == -1, "DT 不绕过运行禁用");
+            form.UIShow(true);
+            form.CanSaveParameters = () => false;
+            Check(form.Save(null, false) == -1, "DT 不绕过保存权限上下文");
+            form.CanSaveParameters = null;
+            Check(form.Init(dir, form.GetRunMode()) == 0, "工位保护测试后重新加载");
             int notices = 0;
             manager.OnSoftwareConfigChangeCurrentProduct += (product, products) => notices++;
             manager.ChangeCurrentProduct("ProductB", false);

@@ -34,7 +34,6 @@ namespace Lead.CPrim.CommonParam
             Pmcls.Clear();
             foreach (var item in document.Elements()) Pmcls.Add((Property)item);
             OnLanguageChanged();
-            OnHiveChangeToDT(HiveManagerV3.Instance.GetCurrentHiveStatus() == HiveStatus.DT);
             DicPos.Clear();
             DicCartesian.Clear();
             foreach (Property property in Pmcls)

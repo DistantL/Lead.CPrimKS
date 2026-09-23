@@ -50,9 +50,19 @@
   <ItemGroup>
     <Compile Include="DynamicParam.cs" />
     <Compile Include="ProductModeFiles.cs" />
-    <Compile Include="Forms\DynamicParamForm.Mode.cs" />
-    <Compile Include="Forms\DynamicParamForm.Transfer.cs" />
-    <Compile Include="Forms\DynamicParamForm.Assignments.cs" />
+    <Compile Include="Forms\DynamicParamForm.StationSwitches.cs">
+      <DependentUpon>DynamicParamForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DynamicParamForm.Mode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DynamicParamForm.Transfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DynamicParamForm.Assignments.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\DynamicParamForm.cs">
       <SubType>Form</SubType>
     </Compile>
