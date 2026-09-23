@@ -45,6 +45,8 @@ namespace Lead.CPrim.TaskCommon
 
 
         #region Prop
+        internal string PendingTaskSpacePath => tbTaskSpacePath.Text.Trim();
+
         /// <summary>已选择任务</summary>
         public ITask CurTask
         {
@@ -79,6 +81,7 @@ namespace Lead.CPrim.TaskCommon
         public TaskConfigForm()
         {
             InitializeComponent();
+            tbTaskSpacePath.Text = TasksManager.Instance.TaskSpacePath;
             //this.DockHandler.HideOnClose = true;
             flpTask.SetDoubleBuffered();
 
@@ -134,7 +137,6 @@ namespace Lead.CPrim.TaskCommon
             if (FileHelper.OpenFolderDialogMethod(ref text))
             {
                 tbTaskSpacePath.Text = text;
-                TasksManager.Instance.TaskSpacePath = text;
             }
         }
         /// <summary>新建任务</summary>
@@ -275,12 +277,6 @@ namespace Lead.CPrim.TaskCommon
                 if (!AuthorityManager.Instance.VerifyLevel3Permission(true))
                 {
                     return;
-                }
-
-                DirectoryInfo spaceDir = new DirectoryInfo(TasksManager.Instance.TaskSpacePath);
-                if (!spaceDir.Exists)
-                {
-                    throw new Exception(NLocalizer.GetString("Lead_CPrim_TaskCommon_TaskConfigForm_ErrMsg_TaskDirPathNoExist", "任务脚本路径不存在"));
                 }
 
                 if (IsRepeat(TasksManager.Instance.ListTask))

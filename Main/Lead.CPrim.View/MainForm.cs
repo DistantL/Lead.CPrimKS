@@ -422,7 +422,7 @@ namespace Lead.CPrim.View
                 }
             }
 
-            //第三方Dll
+            //第三方Dll：仅处理已有目录，启动时不自动创建 DLL/Reference。
             {
                 if (!UIGlobal.DefinePath.IsNullOrWhiteSpace() && Directory.Exists(UIGlobal.DefinePath))
                 {
@@ -438,10 +438,6 @@ namespace Lead.CPrim.View
                         }
                         File.Move(info.FullName, pathTmp);
                     }
-                }
-                else if (!UIGlobal.DefinePath.IsNullOrWhiteSpace())
-                {
-                    Directory.CreateDirectory(UIGlobal.DefinePath);
                 }
             }
 

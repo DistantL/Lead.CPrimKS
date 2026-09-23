@@ -1358,6 +1358,12 @@ namespace Lead.CPrim.PrimFinsNet
             try
             {
                 string dir = UIGlobal.DefinePath.Substring(0, UIGlobal.DefinePath.LastIndexOf("\\"));
+                // 启动时只向已有目录导出，避免间接创建 D:\Config\DLL。
+                if (!Directory.Exists(dir))
+                {
+                    return;
+                }
+
                 string pathDll = Path.Combine(dir, $"{Name}.dll");
                 string pathCode = Path.Combine(dir, $"{Name}.cs");
                 if (!File.Exists(pathDll))

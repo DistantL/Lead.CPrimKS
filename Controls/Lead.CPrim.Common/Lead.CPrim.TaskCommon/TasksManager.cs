@@ -162,26 +162,62 @@ namespace Lead.CPrim.Global
             {
 				return -1;
             }
-			int iRet = 0;
-			TaskConfigSave taskInfoSave = new TaskConfigSave();
-			taskInfoSave.TaskSpacePath = _taskSpacePath;
+            string oldRoot = _taskSpacePath;
+            var oldPaths = ListTask.Select(task => task.TaskFolderPath).ToArray();
+            try
+            {
+                // 文本框只暂存编辑，点击保存后才同步运行路径和持久化配置。
+                string root = _tasksConfigForm?.PendingTaskSpacePath ?? _taskSpacePath;
+                if (string.IsNullOrWhiteSpace(root) || !Path.IsPathRooted(root))
+                    throw new IOException("任务路径必须是有效的绝对路径。");
+                root = Path.GetFullPath(root);
+                if (!Directory.Exists(root))
+                    throw new DirectoryNotFoundException("任务脚本路径不存在：" + root);
+                if (ListTask.GroupBy(task => task.Name).Any(group => group.Count() > 1) ||
+                    ListTask.GroupBy(task => task.Idx).Any(group => group.Count() > 1))
+                    throw new InvalidOperationException("任务列表中有重复的任务序号或任务名。");
 
-			ITask curTask = _tasksConfigForm.CurTask;
-			taskInfoSave.Id = ((curTask != null) ? curTask.Id : Guid.Empty);
+                var paths = new List<string>();
+                foreach (ITask task in ListTask)
+                {
+                    if (string.IsNullOrWhiteSpace(task.Name) || task.Name == "." || task.Name == ".." ||
+                        task.Name.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+                        throw new InvalidOperationException("任务名称无效：" + task.Name);
+                    string path = Path.Combine(root, task.Name);
+                    if (!Directory.Exists(path))
+                        throw new DirectoryNotFoundException("任务脚本目录不存在：" + path);
+                    paths.Add(path);
+                }
 
-			taskInfoSave.ListTaskInfo = new List<XmlNode>();
-			taskInfoSave.ListTaskInfo.Clear();
-			foreach (ITask task in ListTask)
-			{
-				XmlNode node = task.IEleExportConfigXml();
-				taskInfoSave.ListTaskInfo.Add(node);
-				if (task.Members != null)
-				{
-					JsonHelper.SerializeObjectToFile(task.Members, task.TaskFolderPath + "\\" + task.Name + ".json", null);
-				}
-			}
-            XmlSerializerHelper.WriteXML(taskInfoSave, _taskConfigPath, typeof(TaskConfigSave));
-			return iRet;
+                var taskInfoSave = new TaskConfigSave
+                {
+                    TaskSpacePath = root,
+                    Id = _tasksConfigForm?.CurTask?.Id ?? Guid.Empty,
+                    ListTaskInfo = new List<XmlNode>()
+                };
+                for (int i = 0; i < ListTask.Count; i++)
+                {
+                    ITask task = ListTask[i];
+                    task.TaskFolderPath = paths[i];
+                    taskInfoSave.ListTaskInfo.Add(task.IEleExportConfigXml());
+                    if (task.Members != null &&
+                        !JsonHelper.SerializeObjectToFile(task.Members, Path.Combine(paths[i], task.Name + ".json"), null))
+                        throw new IOException("任务成员配置保存失败：" + paths[i]);
+                }
+                if (!XmlSerializerHelper.WriteXML(taskInfoSave, _taskConfigPath, typeof(TaskConfigSave)))
+                    throw new IOException("任务配置保存失败：" + _taskConfigPath);
+
+                _taskSpacePath = root;
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                _taskSpacePath = oldRoot;
+                for (int i = 0; i < ListTask.Count; i++)
+                    ListTask[i].TaskFolderPath = oldPaths[i];
+                LogAdd("保存任务失败：" + ex.Message, LogLevel.Warn, true);
+                return -1;
+            }
 		}
 
 		/// <summary>任务初始化</summary>
