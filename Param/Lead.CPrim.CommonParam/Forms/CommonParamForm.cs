@@ -233,6 +233,7 @@ namespace Lead.CPrim.CommonParam
             if (frm.DialogResult == DialogResult.OK)
             {
                 string newName = frm.TagString;
+                Directory.CreateDirectory(UserDefineDir);
                 string newUdtPath = UserDefineDir + "\\" + newName + ".udt";
                 File.Create(newUdtPath).Dispose();
                 UdtCfg frmConfig = new UdtCfg(newUdtPath);
@@ -346,12 +347,6 @@ namespace Lead.CPrim.CommonParam
         {
             try
             {
-                if (!Directory.Exists(UserDefineDir))
-                {
-                    Directory.CreateDirectory(UserDefineDir);
-                }
-
-
                 if (!File.Exists(CurParaPath)) throw new FileNotFoundException("全局参数文件不存在。", CurParaPath);
 
                 UpdateUi();

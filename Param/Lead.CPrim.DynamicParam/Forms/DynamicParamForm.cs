@@ -207,7 +207,6 @@ namespace Lead.CPrim.DynamicParam
                 _productsCfgDir = productParamDir;
                 _userDefineDir = Path.Combine(productParamDir, "UserDefineStruct");
                 Directory.CreateDirectory(_productsCfgDir);
-                Directory.CreateDirectory(_userDefineDir);
                 if (SwManager.Instance.Products == null || SwManager.Instance.Products.Count == 0) return -10;
                 tscboProducts.Items.Clear();
                 foreach (string product in SwManager.Instance.Products)
@@ -495,6 +494,7 @@ namespace Lead.CPrim.DynamicParam
             if (f.DialogResult == DialogResult.OK)
             {
                 string newName = f.TagString;
+                Directory.CreateDirectory(_userDefineDir);
                 string newUdtPath = _userDefineDir + "\\" + newName + ".udt";
                 File.Create(newUdtPath).Dispose();
                 UdtCfg frmConfig = new UdtCfg(newUdtPath);

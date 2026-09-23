@@ -114,11 +114,12 @@ namespace Lead.CPrim.BaseParam
                     case BaseParam.DataType.UserDefine:
                         {
                             string path = this.UserDefinePath;
-                            DirectoryInfo root = new DirectoryInfo(path);
-                            FileInfo[] files = root.GetFiles();
+                            FileInfo[] files = Directory.Exists(path)
+                                ? new DirectoryInfo(path).GetFiles("*.udt")
+                                : new FileInfo[0];
+                            this.cmbUdt.Items.Clear();
                             if (files.Length != 0)
                             {
-                                this.cmbUdt.Items.Clear();
                                 foreach (FileInfo a in files)
                                 {
                                     this.cmbUdt.Items.Add(a.Name);
@@ -183,6 +184,11 @@ namespace Lead.CPrim.BaseParam
                 string Group = this.cmbGroup.Text;
                 string CombTxt = this.txbComb.Text;
                 string UDTPath = string.Empty;
+                if (type == BaseParam.DataType.UserDefine.ToString() && cmbUdt.SelectedItem == null)
+                {
+                    MessageBox.Show("请先通过“新建自定义类型”创建类型文件，再选择该类型。");
+                    return;
+                }
                 string Cartesian = (this.cmb_Cartesian.SelectedItem ?? string.Empty).ToString();
                 if (cmbUdt.SelectedItem != null)
                 {

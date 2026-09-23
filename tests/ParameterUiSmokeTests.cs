@@ -71,6 +71,7 @@ internal static class ParameterUiSmokeTests
         using (var form = new DynamicParamForm())
         {
             Check(form.Init(dir, "正常生产") == 0, "参数界面初始化");
+            Check(!Directory.Exists(Path.Combine(dir, "UserDefineStruct")), "换型初始化不创建自定义类型目录");
             Check((int)DynamicParam.Instance.Speed == 30, "模式值进入运行实例");
             Check(form.ModeChange("空运行模式") == 0 && (int)DynamicParam.Instance.Speed == 30, "空模式保留已写回值");
             Check(!form.HasUnsavedParameterChanges, "换型页面加载后无未保存值");
@@ -84,6 +85,7 @@ internal static class ParameterUiSmokeTests
             string commonPath = Path.Combine(globalDir, "CommonParam.para");
             new XElement("Para", transferValue).Save(commonPath);
             common.Init(globalDir);
+            Check(!Directory.Exists(Path.Combine(globalDir, "UserDefineStruct")), "全局初始化不创建自定义类型目录");
             Check(!common.HasUnsavedParameterChanges, "全局页面加载后无未保存值");
             var commonGrid = (PropertyGrid)typeof(Lead.CPrim.CommonParam.CommonParamForm)
                 .GetField("pg", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(common);
