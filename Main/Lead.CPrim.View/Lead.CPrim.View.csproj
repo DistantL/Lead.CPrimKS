@@ -318,6 +318,11 @@
       <Name>Lead.CPrim.Interfaces.Ele</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\Param\Lead.CPrim.DynamicParam\Lead.CPrim.DynamicParam.csproj">
+      <Project>{9B647775-1359-43D7-9B11-F78CEE4E38C6}</Project>
+      <Name>Lead.CPrim.DynamicParam</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\Param\Lead.CPrim.CommonParam\Lead.CPrim.CommonParam.csproj">
       <Project>{bbffcb6c-9e8e-44cd-b30a-2929016bc1e0}</Project>
       <Name>Lead.CPrim.CommonParam</Name>

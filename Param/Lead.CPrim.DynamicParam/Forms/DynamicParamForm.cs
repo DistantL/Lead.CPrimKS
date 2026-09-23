@@ -216,6 +216,7 @@ namespace Lead.CPrim.DynamicParam
                 if (!tscboProducts.Items.Contains(current)) return -10;
                 LoadProductMode(current, mode ?? _currentMode);
                 tscboProducts.SelectedItem = current;
+                DynamicParam.NotifyModeChanged(_currentMode);
                 return 0;
             }
             catch (Exception ex)
@@ -257,7 +258,7 @@ namespace Lead.CPrim.DynamicParam
             foreach (Property p in Pmcls)
             {
                 p.Category = NLocalizer.GetString(p.Category, p.Category);
-                p.DisplayName = NLocalizer.GetString(p.Name, p.DisplayName);
+                // 显示名称以参数文件中的配置为准，不用索引名称对应的翻译覆盖。
             }
             pg.SelectedObject = Pmcls;
             RefreshModeEditor();
@@ -274,7 +275,7 @@ namespace Lead.CPrim.DynamicParam
             {
                 FlushParameterAssignments();
                 var modeValues = CurrentModeValues();
-                var values = ProductModeFiles.ApplyEdited(CurrentParameterDocument(), modeValues, savedModeValues);
+                var values = ProductModeFiles.ApplyEdited(PrepareParameterDocument(CurrentParameterDocument()), modeValues, savedModeValues);
                 ParameterTransferSession.ValidateDocument(values);
                 bool modeChanged = ParameterTransferSession.ValueSnapshot(modeValues.Elements().Select(p => (Property)p))
                     != ParameterTransferSession.ValueSnapshot(savedModeValues.Elements().Select(p => (Property)p));
@@ -440,6 +441,7 @@ namespace Lead.CPrim.DynamicParam
                 {
                     frm.CurSysDir = _curSysDirPaht;
                     frm.TransferSession = session;
+                    frm.PrepareDocument = PrepareParameterDocument;
                     frm.SetDocument(CurrentParameterDocument());
                     frm.SaveGuard = save =>
                     {

@@ -365,8 +365,9 @@ namespace Lead.CPrim.View
                 AuthorityManager.Instance.LvlShowUI.Dock = DockStyle.Fill;
                 panelAuthority.Controls.Add(AuthorityManager.Instance.LvlShowUI);
             }
-            //全局参数加载
-            CommonParamForm.Instance.OnModeSwitchView += InstanceOnModeSwitch;
+            //换型参数模式通知
+            Lead.CPrim.DynamicParam.DynamicParam.OnModeSwitchView += InstanceOnModeSwitch;
+            Disposed += (sender, args) => Lead.CPrim.DynamicParam.DynamicParam.OnModeSwitchView -= InstanceOnModeSwitch;
 
             {
                 UIStatusFormService.SetInfo("加载 -> 工站", 10);

@@ -27,6 +27,8 @@ namespace Lead.CPrim.CommonParam
         /// <summary>仅刷新已提交内容，不写文件、不触发模式切换。</summary>
         public void RefreshTransferredParameters(XElement document)
         {
+            document = new XElement(document);
+            CommonParam.RemoveLegacyRunMode(document);
             ParameterTransferSession.ValidateDocument(document);
             CommonParam.Instance.Load(new XElement(document));
             Pmcls.Clear();

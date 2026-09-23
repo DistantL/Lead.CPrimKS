@@ -317,6 +317,12 @@
         <member name="P:Lead.CPrim.Global.SwManager.DynamicParamDirPath">
             <summary>参数目录</summary>
         </member>
+        <member name="P:Lead.CPrim.Global.SwManager.GlobalParamDirPath">
+            <summary>全局参数目录；缺少新字段时兼容旧版参数根目录。</summary>
+        </member>
+        <member name="P:Lead.CPrim.Global.SwManager.ProductParamDirPath">
+            <summary>直接存放产品及产品模式参数的目录。</summary>
+        </member>
         <member name="P:Lead.CPrim.Global.SwManager.DynamicParamEnable">
             <summary>换型参数使能</summary>
         </member>

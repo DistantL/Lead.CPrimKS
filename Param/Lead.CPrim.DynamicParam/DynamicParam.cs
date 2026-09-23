@@ -21,6 +21,39 @@ namespace Lead.CPrim.DynamicParam
         /// 更新参数时发生
         /// </summary>
         public static Action<Property> OnUpdateProperty;
+        public static event Action<string> OnModeSwitch;
+        public static event Action<string> OnModeSwitchView;
+
+        // 仅在产品及模式参数完整加载成功后通知；观察者异常不能把成功切换报告为失败。
+        internal static void NotifyModeChanged(string mode)
+        {
+            foreach (var handler in new[] { OnModeSwitchView, OnModeSwitch })
+            {
+                if (handler == null) continue;
+                foreach (Action<string> callback in handler.GetInvocationList())
+                {
+                    try { callback(mode); }
+                    catch (Exception ex) { LogHelper.Warn("运行模式通知失败：" + ex); }
+                }
+            }
+        }
+
+        internal static XElement WithRunMode(XElement document, string mode)
+        {
+            if (string.IsNullOrWhiteSpace(mode)) throw new ArgumentException("运行模式不能为空。", nameof(mode));
+            var result = new XElement(document);
+            var existing = result.Elements().FirstOrDefault(p => p.Name.LocalName == "运行模式" || (string)p.Element("Name") == "运行模式");
+            var property = new Property
+            {
+                Name = "运行模式", DisplayName = (string)existing?.Element("DisplayName") ?? "运行模式",
+                Category = (string)existing?.Element("Category") ?? "00 设备",
+                Value = mode, valType = BaseParam.DataType.Comb, ReadOnly = true, Visible = true,
+                CombMsg = string.Join(",", Enum.GetNames(typeof(运行模式)))
+            };
+            result.Elements().Where(p => p.Name.LocalName == "运行模式" || (string)p.Element("Name") == "运行模式").Remove();
+            result.Add(property.PropToXElment());
+            return result;
+        }
         public readonly ParameterChangeFeed Updates = new ParameterChangeFeed(new object());
         #endregion
 

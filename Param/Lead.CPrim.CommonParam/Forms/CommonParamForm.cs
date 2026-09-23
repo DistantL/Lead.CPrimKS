@@ -25,10 +25,7 @@ namespace Lead.CPrim.CommonParam
     public partial class CommonParamForm : UIPage
     {
         #region Event_Define
-        /// <summary>模式切换时发生</summary>
-        public event Action<string> OnModeSwitch;
 
-        public event Action<string> OnModeSwitchView;
         #endregion
 
 
@@ -60,10 +57,7 @@ namespace Lead.CPrim.CommonParam
 
 
 
-        /// <summary>
-        /// 上次运行模式
-        /// </summary>
-        string runModeLast = 运行模式.正常生产.ToString();
+
         #endregion
 
 
@@ -88,7 +82,7 @@ namespace Lead.CPrim.CommonParam
         private CommonParamForm()
         {
             InitializeComponent();
-            // 模式参数编辑已迁至换型参数页，全局参数仅保留模式状态通知。
+            // 模式参数编辑已迁至换型参数页，全局参数不再管理运行模式。
             tlpMain.Controls.Remove(groupBox1);
             groupBox1.Dispose();
             pg.ContextMenuStrip = null;
@@ -163,7 +157,7 @@ namespace Lead.CPrim.CommonParam
             foreach (Property item in Pmcls)
             {
                 item.Category = NLocalizer.GetString(item.Category, item.Category);
-                item.DisplayName = NLocalizer.GetString(item.Name, item.DisplayName);
+                // 显示名称是用户配置数据，不能按索引名称翻译后覆盖，否则编辑保存后会恢复旧名称。
                 item.CombMsg = NLocalizer.GetString(item.CombMsg, item.CombMsg);
 
             }
@@ -196,6 +190,12 @@ namespace Lead.CPrim.CommonParam
                 {
                     frm.CurSysDir = CurSysDirPaht;
                     frm.TransferSession = session;
+                    frm.PrepareDocument = document =>
+                    {
+                        var copy = new XElement(document);
+                        CommonParam.RemoveLegacyRunMode(copy);
+                        return copy;
+                    };
                     frm.SetDocument(CurrentParameterDocument());
                     frm.SaveGuard = save =>
                     {
@@ -269,17 +269,16 @@ namespace Lead.CPrim.CommonParam
 
             UserDefineDir = dir + "\\UserDefineStruct";
             CurParaPath = dir + "\\CommonParam.para";
-            LoadAndUpdateUI(true);
+            LoadAndUpdateUI();
             return 0;
         }
 
         /// <summary>
         /// 保存
         /// </summary>
-        /// <param name="mode"></param>
-        public int Save(string mode)
+        public int Save()
         {
-            if (string.IsNullOrWhiteSpace(mode) || !ParameterEditingAllowed) return -1;
+            if (!ParameterEditingAllowed) return -1;
             var manager = (CommonParam)CommonParam.Instance;
             lock (manager.Updates.SyncRoot)
             {
@@ -310,28 +309,7 @@ namespace Lead.CPrim.CommonParam
             }
         }
 
-        /// <summary>
-        /// 变更模式
-        /// </summary>
-        /// <param name="mode"></param>
-        public int ModeChange(string mode)
-        {
-            try
-            {
-                ChangeMode(mode);
-                return 0;
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Warn(ex.ToString());
-                return -1;
-            }
-        }
 
-        public string GetRunMode()
-        {
-            return runModeLast;
-        }
         #endregion
 
 
@@ -340,13 +318,13 @@ namespace Lead.CPrim.CommonParam
         /// <summary>
         /// 刷新属性表显示（参数初始化/）
         /// </summary>
-        void UpdateUi(string mode, bool isInit)
+        void UpdateUi()
         {
             lock (((CommonParam)CommonParam.Instance).Updates.SyncRoot)
             {
                 if (pg.InvokeRequired)
                 {
-                    pg.BeginInvoke(new Action<string, bool>(UpdateUi), mode, isInit);
+                    pg.BeginInvoke(new Action(UpdateUi));
                     return;
                 }
 
@@ -356,60 +334,21 @@ namespace Lead.CPrim.CommonParam
                     return;
                 }
 
-                string[] modes = Enum.GetNames(typeof(运行模式));
-                Property temp = null;
-                XElement element = xel.Elements().ToList().FirstOrDefault(p => p.Name == nameof(运行模式));
-                if (element != null)
-                {
-                    temp = (Property)element;
-                    element.Remove();
-                }
-
-                Property prop = new Property()
-                {
-                    Category = "00 设备",
-                    Name = nameof(运行模式),
-                    Value = isInit || element == null ? 运行模式.正常生产.ToString() : temp.Value.ToString(),
-                    valType = BaseParam.DataType.Comb,
-                    DisplayName = nameof(运行模式),
-                    CombMsg = string.Join(",", modes),
-                    ReadOnly = true,
-                    Visible = true
-                };
-
-                xel.Add(prop.PropToXElment());
+                CommonParam.RemoveLegacyRunMode(xel);
                 CommonParam.Instance.Load(xel);
 
 
                 Pmcls.Clear();
                 xel.Elements().ToList().ForEach(p => Pmcls.Add((Property)p));
                 parameterBinding.AcceptLoaded();
-                ChangeMode(mode);
+                OnHiveChangeToDT(HiveManagerV3.Instance.GetCurrentHiveStatus() == HiveStatus.DT);
                 CaptureTransferBaseline();
             }
         }
 
-        /// <summary>只更新运行模式状态，不加载或覆盖任何全局模式参数。</summary>
-        void ChangeMode(string mode)
-        {
-            FlushParameterAssignments();
-            CommonParam.Instance.SetMember("运行模式", mode);
-            foreach (Property item in Pmcls)
-            {
-                if (item.Name == "运行模式")
-                {
-                    item.ReadOnly = true;
-                    item.Value = mode;
-                }
-            }
-            OnHiveChangeToDT(HiveManagerV3.Instance.GetCurrentHiveStatus() == HiveStatus.DT);
-            pg.SelectedObject = Pmcls;
-            runModeLast = mode;
-            OnModeSwitchView?.Invoke(mode);
-            OnModeSwitch?.Invoke(mode);
-        }
 
-        void LoadAndUpdateUI(bool isInit)
+
+        void LoadAndUpdateUI()
         {
             try
             {
@@ -421,7 +360,7 @@ namespace Lead.CPrim.CommonParam
 
                 if (!File.Exists(CurParaPath)) throw new FileNotFoundException("全局参数文件不存在。", CurParaPath);
 
-                UpdateUi(runModeLast, isInit);
+                UpdateUi();
                 OnLanguageChanged();
             }
             catch (Exception ex)

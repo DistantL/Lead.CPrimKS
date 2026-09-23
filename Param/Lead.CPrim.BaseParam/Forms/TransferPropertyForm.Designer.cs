@@ -80,7 +80,7 @@ namespace Lead.CPrim.BaseParam
             this.tbDisplay.Name = "tbDisplay";
             this.tbDisplay.Location = new System.Drawing.Point(20, 165);
             this.tbDisplay.Size = new System.Drawing.Size(133, 27);
-            this.tbDisplay.ReadOnly = true;
+            this.tbDisplay.ReadOnly = false;
             // lbGroup
             this.lbGroup.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbGroup.Style = Lead.CPrim.ProxyTools.SunnyUI.Style.UIStyle.Custom;

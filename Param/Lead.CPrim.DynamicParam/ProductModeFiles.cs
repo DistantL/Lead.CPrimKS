@@ -42,10 +42,12 @@ namespace Lead.CPrim.DynamicParam
             var result = new XElement(product);
             var values = result.Elements().ToDictionary(p => p.Name);
             foreach (var item in result.Elements())
-                item.SetElementValue("ReadOnly", !((bool?)item.Element("Visible") ?? true));
+                item.SetElementValue("ReadOnly", (string)item.Element("Name") == "运行模式" || item.Name.LocalName == "运行模式" || !((bool?)item.Element("Visible") ?? true));
             var seen = new System.Collections.Generic.HashSet<XName>();
             foreach (var item in mode.Elements())
             {
+                if (item.Name.LocalName == "运行模式" || (string)item.Element("Name") == "运行模式")
+                    throw new InvalidDataException("运行模式是框架状态，不能加入模式覆盖文件。");
                 XElement target;
                 if (!seen.Add(item.Name) || !values.TryGetValue(item.Name, out target))
                     throw new InvalidDataException("模式参数重复或不属于当前产品：" + item.Name);

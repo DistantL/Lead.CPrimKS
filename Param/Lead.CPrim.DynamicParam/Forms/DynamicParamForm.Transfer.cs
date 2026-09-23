@@ -46,13 +46,15 @@ namespace Lead.CPrim.DynamicParam
         }
         public void ValidateTransferredParameters(XElement product)
         {
-            ParameterTransferSession.ValidateDocument(ProductModeFiles.Apply(product, CurrentModeValues()));
+            var normalized = PrepareParameterDocument(product);
+            ParameterTransferSession.ValidateDocument(ProductModeFiles.Apply(normalized, CurrentModeValues()));
+            product.ReplaceNodes(normalized.Nodes());
         }
         /// <summary>刷新提交结果；不重新应用模式覆盖。</summary>
         public void RefreshTransferredParameters(XElement product)
         {
             ProductModeFiles.Apply(product, CurrentModeValues()); // 仅验证模式引用，不应用旧值。
-            var merged = new XElement(product);
+            var merged = PrepareParameterDocument(product);
             ParameterTransferSession.ValidateDocument(merged);
             DynamicParam.Instance.LoadSnapshot(new XElement(merged), _curParaPath);
             UpdateUi(merged);

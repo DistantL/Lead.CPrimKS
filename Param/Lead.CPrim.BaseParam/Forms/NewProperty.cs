@@ -80,6 +80,8 @@ namespace Lead.CPrim.BaseParam
                 if (_property.Name.ToString() == "运行模式")
                 {
                     txbName.Enabled = false;
+                    cmbVariableType.Enabled = false;
+                    txbComb.ReadOnly = true;
                 }
             }
         }

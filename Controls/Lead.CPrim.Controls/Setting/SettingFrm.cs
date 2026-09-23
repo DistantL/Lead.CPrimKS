@@ -1256,7 +1256,7 @@ namespace Lead.CPrim.Controls
                     //全局参数
                     if (node.Name == "全局参数")
                     {
-                        if (CommonParamForm.Instance.Save(CommonParamForm.Instance.GetRunMode()) == 0)
+                        if (CommonParamForm.Instance.Save() == 0)
                         {
                             UIMessageTip.ShowOk(NLocalizer.GetString("Lead_CPrim_CommonParam_CommonParamForm_CommonParamSaveSuccess", "全局参数保存成功"));
                             msg += "全局参数保存成功, ";
@@ -1386,8 +1386,13 @@ namespace Lead.CPrim.Controls
             }
             if (SwManager.Instance.DynamicParamEnable)
             {
-                _dynamicParamForm.Init(_productParameterDir, CommonParamForm.Instance.GetRunMode());
+                if (_dynamicParamForm.Init(_productParameterDir, _dynamicParamForm.GetRunMode()) != 0)
+                    throw new InvalidOperationException("运行模式初始化失败：请检查当前产品及换型参数文件。");
                 treeNodeParam.Nodes.Add(treeNodeDynamicParam);
+            }
+            else
+            {
+                throw new InvalidOperationException("运行模式已归属换型参数，必须启用换型参数并配置当前产品后重启。");
             }
             CommonParamForm.Instance.CreateTransferSession = SwManager.Instance.CommonDynamicParamEnable && SwManager.Instance.DynamicParamEnable
                 ? (Func<string, Lead.CPrim.BaseParam.ParameterTransferSession>)CreateParameterTransferSession : null;
@@ -1413,7 +1418,7 @@ namespace Lead.CPrim.Controls
         {
             if (SwManager.Instance != null && SwManager.Instance.DynamicParamEnable)
             {
-                if (_dynamicParamForm.Init(_productParameterDir, CommonParamForm.Instance.GetRunMode()) != 0)
+                if (_dynamicParamForm.Init(_productParameterDir, _dynamicParamForm.GetRunMode()) != 0)
                     throw new InvalidOperationException("换型参数加载失败，请检查产品及模式文件。");
             }
         }
@@ -1424,9 +1429,12 @@ namespace Lead.CPrim.Controls
 
         public int ChangeParameterMode(string mode)
         {
-            if (SwManager.Instance.DynamicParamEnable && _dynamicParamForm.ModeChange(mode) != 0)
+            if (!SwManager.Instance.DynamicParamEnable)
+            {
+                MessageBox.Show("运行模式已归属换型参数，请启用换型参数并加载当前产品。");
                 return -1;
-            return CommonParamForm.Instance.ModeChange(mode);
+            }
+            return _dynamicParamForm.ModeChange(mode);
         }
 
         public Color GetColorOfCurrentProductionType()

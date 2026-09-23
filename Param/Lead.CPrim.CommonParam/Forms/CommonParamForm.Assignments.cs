@@ -24,7 +24,7 @@ namespace Lead.CPrim.CommonParam
         }
         private XElement CurrentParameterDocument()
         {
-            return new XElement("Para", Pmcls.Cast<Property>().Select(p => p.PropToXElment()));
+            return new XElement("Para", Pmcls.Cast<Property>().Where(p => p.Name != "运行模式").Select(p => p.PropToXElment()));
         }
         private void ValidateEditorVersion(long version)
         {

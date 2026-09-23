@@ -82,7 +82,7 @@ internal static class ParameterAssignmentTests
             var unusedHandles = new[] { common.Handle, product.Handle };
             common.UIShow(false); product.UIShow(false);
             Task.Run(() => { CommonParam.Instance.Flag = false; DynamicParam.Instance.Flag = false; }).GetAwaiter().GetResult();
-            Check(common.Save(common.GetRunMode()) == -1 && product.Save(null, false) == -1, "运行禁用时不能保存");
+            Check(common.Save() == -1 && product.Save(null, false) == -1, "运行禁用时不能保存");
             common.UIShow(true); product.UIShow(true);
             Check(!(bool)Ui(common, "Flag").Value && !(bool)Ui(product, "Flag").Value, "暂停前排空脚本通知");
             Ui(common, "Flag").Value = true;
@@ -93,7 +93,7 @@ internal static class ParameterAssignmentTests
             Check(globalBefore.SequenceEqual(File.ReadAllBytes(globalPath)) && productBefore.SequenceEqual(File.ReadAllBytes(productPath)), "脚本赋值不写文件");
             var modeProps = (PropertyManageCls)typeof(DynamicParamForm).GetField("_modeProperties", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(product);
             Check((bool)modeProps.Cast<Property>().First(p => p.Name == "Flag").Value, "脚本不修改模式表");
-            Check(common.Save(common.GetRunMode()) == 0 && product.Save(null, false) == 0, "暂停手动保存");
+            Check(common.Save() == 0 && product.Save(null, false) == 0, "暂停手动保存");
             Check(!(bool)XElement.Load(productPath).Element("Flag").Element("Value"), "普通保存不应用未改模式值");
             Check(modeBefore.SequenceEqual(File.ReadAllBytes(modePath)), "未改模式文件保持原字节");
             modeProps.Cast<Property>().First(p => p.Name == "Flag").DisplayName = "Localized flag";
@@ -121,7 +121,7 @@ internal static class ParameterAssignmentTests
                 cfg.NestedPoints = nested;
                 Check(((List<Pos>)((List<Property>)Ui(form, "Config").Value).First(p => p.Name == "NestedPoints").Value)[0].X == 222,
                     "嵌套点位显式赋值同步");
-                if (isGlobal) common.Save(common.GetRunMode()); else product.Save(null, false);
+                if (isGlobal) common.Save(); else product.Save(null, false);
                 var saved = (Property)XElement.Load(isGlobal ? globalPath : productPath).Element("Points");
                 Check(((List<Pos>)saved.Value)[0].X == 100, "保存不夹带未赋值坐标200");
             }
@@ -149,13 +149,13 @@ internal static class ParameterAssignmentTests
                 .Invoke(product, new object[] { version }), "旧编辑器版本拒绝保存");
 
             Task.Run(() => { for (int i = 0; i < 100; i++) CommonParam.Instance.Count = i; }).GetAwaiter().GetResult();
-            Check(common.Save(common.GetRunMode()) == 0 && (int)XElement.Load(globalPath).Element("Count").Element("Value") == 99,
+            Check(common.Save() == 0 && (int)XElement.Load(globalPath).Element("Count").Element("Value") == 99,
                 "不等待异步队列也保存最后一次赋值");
 
             var originalGlobal = File.ReadAllBytes(globalPath);
             CommonParam.Instance.Count = 1234;
             using (var locked = new FileStream(globalPath, FileMode.Open, FileAccess.Read, FileShare.Read))
-                Reject(() => common.Save(common.GetRunMode()), "保存失败可报告");
+                Reject(() => common.Save(), "保存失败可报告");
             Check(originalGlobal.SequenceEqual(File.ReadAllBytes(globalPath)) && (int)CommonParam.Instance.Count == 1234, "失败不丢运行新值");
         }
         // 基础类型共用入口，分别验证快照的序列化往返。

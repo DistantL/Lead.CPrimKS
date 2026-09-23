@@ -11,6 +11,7 @@ namespace Lead.CPrim.BaseParam
     {
         private bool toGlobal;
         public string SelectedGroup { get { return cbGroup.Text.Trim(); } }
+        public string SelectedDisplayName { get { return tbDisplay.Text; } }
         public TransferPropertyForm()
         {
             InitializeComponent();

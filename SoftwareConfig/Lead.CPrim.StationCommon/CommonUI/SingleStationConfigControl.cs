@@ -91,7 +91,8 @@ namespace Lead.CPrim.StationCommon.CommonUI
             NLocalizer.LanguageChanged += OnLanguageChanged;
 
             //全局参数加载
-            CommonParamForm.Instance.OnModeSwitch += InstanceOnModeSwitch;
+            Lead.CPrim.DynamicParam.DynamicParam.OnModeSwitch += InstanceOnModeSwitch;
+            Disposed += (sender, args) => Lead.CPrim.DynamicParam.DynamicParam.OnModeSwitch -= InstanceOnModeSwitch;
         }
         #endregion
 
@@ -149,9 +150,9 @@ namespace Lead.CPrim.StationCommon.CommonUI
             if (_selectedRecipe != null)
             {
                 dgvTasks.Rows.Clear();
-                if (_selectedRecipe.RunMode_Tasks.ContainsKey(CommonParam.CommonParam.Instance.运行模式))
+                if (_selectedRecipe.RunMode_Tasks.ContainsKey(Lead.CPrim.DynamicParam.DynamicParam.Instance.运行模式))
                 {
-                    _selectedRecipe.Tasks = _selectedRecipe.RunMode_Tasks[CommonParam.CommonParam.Instance.运行模式];
+                    _selectedRecipe.Tasks = _selectedRecipe.RunMode_Tasks[Lead.CPrim.DynamicParam.DynamicParam.Instance.运行模式];
                 }
                 foreach (var task in _selectedRecipe.Tasks)
                 {
@@ -416,13 +417,13 @@ namespace Lead.CPrim.StationCommon.CommonUI
                         temp.TryAdd(item.Key, new TaskMember(item.Value.TaskName, item.Value.Statup, item.Value.Task));
                     }
 
-                    if (_station.Recipes[_selectedRecipe.Name].RunMode_Tasks.ContainsKey(CommonParam.CommonParam.Instance.运行模式))
+                    if (_station.Recipes[_selectedRecipe.Name].RunMode_Tasks.ContainsKey(Lead.CPrim.DynamicParam.DynamicParam.Instance.运行模式))
                     {
-                        _station.Recipes[_selectedRecipe.Name].RunMode_Tasks[CommonParam.CommonParam.Instance.运行模式] = temp;
+                        _station.Recipes[_selectedRecipe.Name].RunMode_Tasks[Lead.CPrim.DynamicParam.DynamicParam.Instance.运行模式] = temp;
                     }
                     else
                     {
-                        _station.Recipes[_selectedRecipe.Name].RunMode_Tasks.TryAdd(CommonParam.CommonParam.Instance.运行模式, temp);
+                        _station.Recipes[_selectedRecipe.Name].RunMode_Tasks.TryAdd(Lead.CPrim.DynamicParam.DynamicParam.Instance.运行模式, temp);
                     }
                 }
 

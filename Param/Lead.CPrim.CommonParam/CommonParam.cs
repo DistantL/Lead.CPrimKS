@@ -111,11 +111,17 @@ namespace Lead.CPrim.CommonParam
         /// 更新Node及xElementPropList<br/>
         /// </summary>
         /// <param name="node"></param>
+        internal static void RemoveLegacyRunMode(XElement node)
+        {
+            node.Elements().Where(p => p.Name.LocalName == "运行模式" || (string)p.Element("Name") == "运行模式").Remove();
+        }
+
         public void Load(XElement node)
         {
             lock (Updates.SyncRoot)
             {
                 var copy = new XElement(node);
+                RemoveLegacyRunMode(copy);
                 var parsed = copy.Elements().Select(p => (Property)p).ToList();
                 Node = copy;
                 xElementPropList = parsed;

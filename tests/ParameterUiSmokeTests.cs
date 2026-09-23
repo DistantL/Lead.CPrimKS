@@ -96,15 +96,19 @@ internal static class ParameterUiSmokeTests
             transfer.ValidateDocuments = (g, p) => form.ValidateTransferredParameters(p);
             transfer.RefreshCommitted = (g, p) => { common.RefreshTransferredParameters(g); form.RefreshTransferredParameters(p); };
             var commonDocument = XElement.Load(commonPath);
-            transfer.Stage(commonDocument.Element("TransferValue"), "Test");
+            var stagedValue = new XElement(commonDocument.Element("TransferValue"));
+            stagedValue.SetElementValue("DisplayName", "转入换型时修改的名称");
+            transfer.Stage(stagedValue, "Test");
+            Check((string)XElement.Load(commonPath).Element("TransferValue").Element("DisplayName") != "转入换型时修改的名称", "暂存修改显示名称不修改源文件");
             commonDocument.Element("TransferValue").Remove();
             transfer.Save(commonDocument);
             Check(!Lead.CPrim.CommonParam.CommonParam.Instance.IsPropertyContain("TransferValue"), "刷新后全局运行实例移除");
             Check((int)DynamicParam.Instance.TransferValue == 55, "刷新后产品运行实例新增");
+            Check((string)form.ParameterSnapshot.Element("TransferValue").Element("DisplayName") == "转入换型时修改的名称", "转入换型保留修改后的显示名称");
             Check(!common.HasUnsavedParameterChanges && !form.HasUnsavedParameterChanges, "提交后两侧基线同步");
             Check(modeBeforeTransfer == null ? !File.Exists(form.ActiveModePath)
                 : File.ReadAllBytes(form.ActiveModePath).SequenceEqual(modeBeforeTransfer), "转移不修改模式文件");
-            Check(common.Save(common.GetRunMode()) == 0 && form.Save(null, false) == 0, "主页面再次保存");
+            Check(common.Save() == 0 && form.Save(null, false) == 0, "主页面再次保存");
             Check(XElement.Load(commonPath).Element("TransferValue") == null
                 && XElement.Load(form.ActiveParameterPath).Elements("TransferValue").Count() == 1, "旧缓存不恢复全局或丢失产品变量");
             Check(form.ModeChange("正常生产") == 0 && (int)DynamicParam.Instance.TransferValue == 55, "模式切换保留新产品变量");
@@ -119,17 +123,100 @@ internal static class ParameterUiSmokeTests
             reverse.ValidateDocuments = (p, g) => form.ValidateTransferredParameters(p);
             reverse.RefreshCommitted = (p, g) => { common.RefreshTransferredParameters(g); form.RefreshTransferredParameters(p); };
             var productDocument = XElement.Load(form.ActiveParameterPath);
-            reverse.Stage(productDocument.Element("TransferValue"), "New global group");
+            var reverseValue = new XElement(productDocument.Element("TransferValue"));
+            reverseValue.SetElementValue("DisplayName", "转入全局时修改的名称");
+            reverse.Stage(reverseValue, "New global group");
             productDocument.Element("TransferValue").Remove();
             Check(!Lead.CPrim.CommonParam.CommonParam.Instance.IsPropertyContain("TransferValue"), "反向确定仅暂存");
             reverse.Save(productDocument);
             Check((int)Lead.CPrim.CommonParam.CommonParam.Instance.TransferValue == 55, "反向刷新全局值");
+            Check((string)common.ParameterSnapshot.Element("TransferValue").Element("DisplayName") == "转入全局时修改的名称", "转入全局保留修改后的显示名称");
             Check(((DynamicParam)DynamicParam.Instance).Node.Element("TransferValue") == null, "反向刷新移除产品值");
-            Check(common.Save(common.GetRunMode()) == 0 && form.Save(null, false) == 0, "反向转移后主页面保存");
+            Check(common.Save() == 0 && form.Save(null, false) == 0, "反向转移后主页面保存");
             Check(XElement.Load(commonPath).Elements("TransferValue").Count() == 1
                 && XElement.Load(form.ActiveParameterPath).Element("TransferValue") == null, "反向保存不恢复旧产品参数");
             Check(form.ModeChange("正常生产") == 0 && form.Init(dir, "正常生产") == 0
                 && ((DynamicParam)DynamicParam.Instance).Node.Element("TransferValue") == null, "反向转移后切模式及重载");
+            // 使用已有多语言资源键复现：索引不变，用户只修改显示名称。
+            Check(Lead.CPrim.ProxyTools.NLocalizer.GetString("启用MES上传", "__missing__") != "__missing__", "回归参数具有旧翻译资源");
+            var labelParameter = new XElement(speed);
+            labelParameter.Name = "启用MES上传";
+            labelParameter.SetElementValue("Name", "启用MES上传");
+            labelParameter.SetElementValue("DisplayName", "自定义全局名称");
+            var globalLabels = common.ParameterSnapshot;
+            globalLabels.Add(labelParameter);
+            common.RefreshTransferredParameters(globalLabels);
+            common.OnLanguageChanged();
+            Check((string)common.ParameterSnapshot.Element("启用MES上传").Element("DisplayName") == "自定义全局名称", "全局刷新不覆盖自定义显示名称");
+            Check(common.Save() == 0, "全局新名称保存");
+            common.Init(globalDir);
+            Check((string)common.ParameterSnapshot.Element("启用MES上传").Element("DisplayName") == "自定义全局名称", "全局新名称重新加载后保留");
+            labelParameter.SetElementValue("DisplayName", "自定义换型名称");
+            var productLabels = form.ParameterSnapshot;
+            productLabels.Add(new XElement(labelParameter));
+            form.RefreshTransferredParameters(productLabels);
+            form.OnLanguageChanged();
+            Check((string)form.ParameterSnapshot.Element("启用MES上传").Element("DisplayName") == "自定义换型名称", "换型刷新不覆盖自定义显示名称");
+            Check(form.Save(null, false) == 0 && form.Init(dir, "正常生产") == 0, "换型新名称保存并重载");
+            Check((string)form.ParameterSnapshot.Element("启用MES上传").Element("DisplayName") == "自定义换型名称", "换型新名称重新加载后保留");
+            Check(!common.ParameterSnapshot.Elements().Any(p => (string)p.Element("Name") == "运行模式"), "全局页面不再生成运行模式");
+            Check((string)form.ParameterSnapshot.Element("运行模式").Element("Value") == "正常生产", "产品缺少运行模式时自动补齐");
+            Check((bool)form.ParameterSnapshot.Element("运行模式").Element("ReadOnly"), "产品运行模式只读");
+            var oldGlobal = XElement.Load(commonPath);
+            var legacyMode = new XElement(form.ParameterSnapshot.Element("运行模式"));
+            legacyMode.SetElementValue("Value", "点检模式");
+            oldGlobal.Add(legacyMode);
+            oldGlobal.Save(commonPath);
+            byte[] legacyBytes = File.ReadAllBytes(commonPath);
+            common.Init(globalDir);
+            Check(!Lead.CPrim.CommonParam.CommonParam.Instance.IsPropertyContain("运行模式"), "旧全局运行模式不进入运行集合");
+            Check(File.ReadAllBytes(commonPath).SequenceEqual(legacyBytes), "旧全局配置加载不自动写盘");
+            Check(common.Save() == 0 && XElement.Load(commonPath).Element("运行模式") == null, "手动保存移除旧全局模式");
+            byte[] beforeMode = File.ReadAllBytes(form.ActiveParameterPath);
+            int modeNotices = 0;
+            Action<string> observeMode = mode =>
+            {
+                Check((string)DynamicParam.Instance.运行模式 == mode && form.GetRunMode() == mode, "通知时产品运行模式已同步");
+                modeNotices++;
+            };
+            DynamicParam.OnModeSwitch += observeMode;
+            try { Check(form.ModeChange("点检模式") == 0, "产品拥有模式切换"); }
+            finally { DynamicParam.OnModeSwitch -= observeMode; }
+            Check(modeNotices == 1, "成功切换发出一次工站通知");
+            Check(File.ReadAllBytes(form.ActiveParameterPath).SequenceEqual(beforeMode), "模式切换不自动写盘");
+            Check(form.Save(null, false) == 0 && (string)XElement.Load(form.ActiveParameterPath).Element("运行模式").Element("Value") == "点检模式", "模式状态随产品主文件保存");
+            var illegalMode = new XElement("Para", form.ParameterSnapshot.Element("运行模式"));
+            bool forbiddenMode = false;
+            try { ProductModeFiles.Apply(form.ParameterSnapshot, illegalMode); }
+            catch (InvalidDataException) { forbiddenMode = true; }
+            Check(forbiddenMode, "运行模式不能被模式表覆盖");
+            var clearedEditor = form.PrepareParameterDocument(new XElement("Para"));
+            Check((string)clearedEditor.Element("运行模式").Element("Value") == "点检模式", "编辑器清空不能移除框架模式状态");
+            Check(form.Init(dir, "正常生产") == 0 && (string)DynamicParam.Instance.运行模式 == "正常生产", "重启初始化不沿用文件中的旧运行状态");
+            manager.Products.Add("ProductB");
+            var productBPath = Path.Combine(dir, "ProductB.para");
+            var productB = new XElement(form.ParameterSnapshot);
+            productB.Element("运行模式").SetElementValue("Value", "标定模式");
+            productB.Save(productBPath);
+            byte[] productBBytes = File.ReadAllBytes(productBPath);
+            manager.ChangeCurrentProduct("ProductB", false);
+            Check(form.Init(dir, form.GetRunMode()) == 0 && (string)DynamicParam.Instance.运行模式 == "正常生产", "换产品保留当前模式不采用产品文件旧状态");
+            Check(File.ReadAllBytes(productBPath).SequenceEqual(productBBytes), "换产品不自动保存");
+            manager.ChangeCurrentProduct("AudioAirPods", false);
+            Check(form.Init(dir, form.GetRunMode()) == 0, "切回原产品");
+            var badModePath = ProductModeFiles.ModePath(dir, "AudioAirPods", "无效测试模式");
+            illegalMode.Save(badModePath);
+            var beforeFailure = form.ParameterSnapshot.ToString();
+            long versionBeforeFailure = form.ParameterVersion;
+            bool rejectedLoad = false;
+            try
+            {
+                typeof(DynamicParamForm).GetMethod("LoadProductMode", BindingFlags.NonPublic | BindingFlags.Instance)
+                    .Invoke(form, new object[] { "AudioAirPods", "无效测试模式", true });
+            }
+            catch (TargetInvocationException ex) { rejectedLoad = ex.InnerException is InvalidDataException; }
+            Check(rejectedLoad && form.ParameterVersion == versionBeforeFailure
+                && form.ParameterSnapshot.ToString() == beforeFailure && form.GetRunMode() == "正常生产", "错误模式文件不改变产品值或模式状态");
             int notices = 0;
             manager.OnSoftwareConfigChangeCurrentProduct += (product, products) => notices++;
             manager.ChangeCurrentProduct("ProductB", false);

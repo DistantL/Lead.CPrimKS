@@ -12,6 +12,8 @@ namespace Lead.CPrim.DynamicParam
 {
     public partial class DynamicParamForm
     {
+        public string GetRunMode() { return _currentMode; }
+        public XElement PrepareParameterDocument(XElement document) { return DynamicParam.WithRunMode(document, _currentMode); }
         private string _currentMode = 运行模式.正常生产.ToString();
         private string _activeProduct;
         private XElement savedModeValues = new XElement("Para");
@@ -63,7 +65,7 @@ namespace Lead.CPrim.DynamicParam
             foreach (Property item in _modeProperties)
             {
                 item.Category = NLocalizer.GetString(item.Category, item.Category);
-                item.DisplayName = NLocalizer.GetString(item.Name, item.DisplayName);
+                // 模式参数同样保留用户配置的显示名称。
             }
             _modeGroup.Text = NLocalizer.GetString("Param_ProductMode", "模式换型参数");
             _modeLabel.Text = (_activeProduct ?? "") + " / " + _currentMode;
@@ -88,7 +90,7 @@ namespace Lead.CPrim.DynamicParam
                 FlushParameterAssignments();
                 var productNode = useCurrent && product == _activeProduct ? CurrentParameterDocument() : XElement.Load(path);
                 var modeNode = ProductModeFiles.ReadMode(_productsCfgDir, product, mode);
-                var merged = ProductModeFiles.Apply(productNode, modeNode);
+                var merged = DynamicParam.WithRunMode(ProductModeFiles.Apply(productNode, modeNode), mode);
                 // 只更新运行缓存；在切换前完成类型解析，不写参数文件。
                 var parsed = merged.Elements().Select(p => (Property)p).ToList();
                 var modeProperties = new PropertyManageCls();
@@ -118,6 +120,7 @@ namespace Lead.CPrim.DynamicParam
             {
                 if (string.IsNullOrWhiteSpace(_activeProduct)) return -1;
                 LoadProductMode(_activeProduct, mode, true);
+                DynamicParam.NotifyModeChanged(mode);
                 return 0;
             }
             catch (Exception ex)

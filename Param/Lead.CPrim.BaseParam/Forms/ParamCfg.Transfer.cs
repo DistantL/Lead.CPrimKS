@@ -11,6 +11,7 @@ namespace Lead.CPrim.BaseParam
         private ToolStripMenuItem transferItem;
         public ParameterTransferSession TransferSession { get; set; }
         public Action<Action> SaveGuard { get; set; }
+        public Func<XElement, XElement> PrepareDocument { get; set; }
         public void SetDocument(XElement document)
         {
             xel = new XElement(document);
@@ -70,7 +71,9 @@ namespace Lead.CPrim.BaseParam
                 using (var dialog = new TransferPropertyForm(selected, TransferSession.Groups, TransferSession.Product, TransferSession.ToGlobal))
                 {
                     if (dialog.ShowDialog(this) != DialogResult.OK) return;
-                    TransferSession.Stage(GetEditedNode(selected), dialog.SelectedGroup);
+                    var transferred = GetEditedNode(selected);
+                    transferred.SetElementValue("DisplayName", dialog.SelectedDisplayName);
+                    TransferSession.Stage(transferred, dialog.SelectedGroup);
                     Pmc_St.Remove(selected.Name);
                     propertyGrid1.SelectedObject = null;
                     propertyGrid1.SelectedObject = Pmc_St;

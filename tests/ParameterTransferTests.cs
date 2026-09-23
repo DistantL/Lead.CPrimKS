@@ -216,7 +216,11 @@ internal static class ParameterTransferTests
         using (var dialog = new TransferPropertyForm((Property)P("Speed"), new[] { "Product group" }, "AudioAirPods"))
         {
             Check(dialog.Text == "转移为换型参数", "弹窗标题");
-            Check(dialog.Controls.OfType<Lead.CPrim.ProxyTools.SunnyUI.Controls.UITextBox>().Count(t => t.ReadOnly) == 3, "三个身份字段只读");
+            Check(dialog.Controls.OfType<Lead.CPrim.ProxyTools.SunnyUI.Controls.UITextBox>().Count(t => t.ReadOnly) == 2, "类型和索引名称只读");
+            var displayBox = (Lead.CPrim.ProxyTools.SunnyUI.Controls.UITextBox)dialog.Controls.Find("tbDisplay", false).Single();
+            Check(!displayBox.ReadOnly, "转移显示名称可编辑");
+            displayBox.Text = "转移后的显示名称";
+            Check(dialog.SelectedDisplayName == "转移后的显示名称", "转移读取编辑后的显示名称");
             var groupBox = dialog.Controls.OfType<Lead.CPrim.ProxyTools.SunnyUI.Controls.UIComboBox>().Single();
             Check(groupBox.DropDownStyle == Sunny.UI.UIDropDownStyle.DropDown, "分组可选择和输入");
             Check(string.IsNullOrEmpty(dialog.SelectedGroup), "不自动选择目标分组");
