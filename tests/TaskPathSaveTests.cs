@@ -22,7 +22,7 @@ internal static class TaskPathSaveTests
     {
         target.GetType().GetField(field, BindingFlags.NonPublic | BindingFlags.Instance).SetValue(target, value);
     }
-    public static void Main()
+    public static void Main(string[] args)
     {
         string root = Path.Combine(Path.GetTempPath(), "TaskPathSaveTests-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);
@@ -65,6 +65,55 @@ internal static class TaskPathSaveTests
             form.PendingTaskSpacePath = newRoot;
             task.Name = "..";
             Check(manager.Save() != 0, "Invalid task name must be rejected");
+            task.Name = "TaskA";
+            var second = new ITask { Name = "TaskB", Idx = task.Idx, Id = Guid.NewGuid(), TaskFolderPath = "old" };
+            Directory.CreateDirectory(Path.Combine(newRoot, second.Name));
+            manager.ListTask.Add(second);
+            Check(manager.Save() == 0, "Legacy duplicate indices must not block saving");
+            Check(second.Idx == task.Idx, "Saving must not silently renumber existing tasks");
+            second.Idx = 19;
+            Check(manager.GetNextTaskIndex() == 20, "New index must use maximum instead of task count");
+            second.Name = "taska";
+            Check(manager.Save() != 0, "Actual duplicate names must still be rejected");
+            second.Name = "TaskB";
+            form.PendingTaskSpacePath = oldRoot;
+            Check(TasksManager.GetTaskFolderPath(form.PendingTaskSpacePath, task.Name) == Path.Combine(oldRoot, "TaskA"), "Opening must resolve the unsaved textbox root");
+            Check(task.TaskFolderPath == Path.Combine(newRoot, "TaskA"), "Opening must not persist the unsaved root");
+            var fresh = new TasksManager();
+            string freshConfig = Path.Combine(root, "MissingConfig.xml");
+            Check(fresh.TasksManagerInit(freshConfig, "unused") == 0 && !File.Exists(freshConfig), "Missing configuration must not create an empty invalid XML file on load");
+            fresh.TasksConfigForm.PendingTaskSpacePath = newRoot;
+            Check(fresh.Save() == 0 && File.Exists(freshConfig), "Explicit save must create a missing configuration file");
+
+            // Replay the real task list in a temporary tree; never modify the supplied configuration.
+            if (args.Length > 0)
+            {
+                string original = File.ReadAllText(args[0]);
+                var doc = new XmlDocument(); doc.LoadXml(original);
+                var replay = new TasksManager { TaskSpacePath = oldRoot };
+                var replayForm = new TaskConfigForm { PendingTaskSpacePath = newRoot };
+                Set(replay, "_tasksConfigForm", replayForm);
+                string replayFile = Path.Combine(root, "Replay.xml");
+                Set(replay, "_taskConfigPath", replayFile);
+                foreach (XmlNode node in doc.SelectNodes("//DefaultTaskConfig"))
+                {
+                    var item = new ITask { Name = node["Name"].InnerText, Idx = int.Parse(node["Idx"].InnerText),
+                        Id = Guid.Parse(node["Id"].InnerText), TaskFolderPath = node["TaskFolderPath"].InnerText };
+                    Directory.CreateDirectory(Path.Combine(newRoot, item.Name));
+                    replay.ListTask.Add(item);
+                }
+                Check(replay.ListTask.Count == 19, "Expected onsite fixture with 19 tasks");
+                Check(replay.Save() == 0, "Onsite configuration must save despite duplicate indices 18 and 19");
+                var added = new ITask { Name = "NewTask", Id = Guid.NewGuid(), Idx = replay.GetNextTaskIndex() };
+                Directory.CreateDirectory(Path.Combine(newRoot, added.Name));
+                replay.ListTask.Add(added);
+                Check(replay.Save() == 0, "Adding a unique task must save with legacy duplicate indices");
+                replay.ListTask.Remove(added);
+                Check(replay.Save() == 0, "Deleting a task must save with legacy duplicate indices");
+                var reloaded = (TaskConfigSave)XmlSerializerHelper.ReadXML(replayFile, typeof(TaskConfigSave));
+                Check(reloaded.TaskSpacePath == newRoot && reloaded.ListTaskInfo.Count == 19, "Reload must preserve updated task root and deletions");
+                Check(File.ReadAllText(args[0]) == original, "Onsite configuration must remain untouched by tests");
+            }
             Console.WriteLine("PASS: " + checks + " checks");
         }
         finally { Directory.Delete(root, true); }

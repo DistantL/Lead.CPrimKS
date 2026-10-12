@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
  * CPrim
  * CopyRight (C) 2020-2022.
  * If you use this code, please keep this note.
@@ -19,10 +19,10 @@ using Lead.CPrim.ProxyTools.SunnyUI.Style;
 using Lead.CPrim.TaskCommon.TaskEdit;
 using Microsoft.VisualBasic.FileIO;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -54,7 +54,7 @@ namespace Lead.CPrim.TaskCommon
             set
             {
                 _curTask = value;
-                _curTask.IsSelected = true;
+                if (_curTask != null) _curTask.IsSelected = true;
             }
         }
         #endregion
@@ -151,7 +151,7 @@ namespace Lead.CPrim.TaskCommon
                     return;
                 }
 
-                DirectoryInfo spaceDir = new DirectoryInfo(TasksManager.Instance.TaskSpacePath);
+                DirectoryInfo spaceDir = new DirectoryInfo(GetPendingTaskRoot());
                 if (!spaceDir.Exists)
                 {
                     throw new Exception(NLocalizer.GetString("Lead_CPrim_TaskCommon_TaskConfigForm_ErrMsg_TaskDirPathNoExist", "任务脚本路径不存在"));
@@ -164,22 +164,24 @@ namespace Lead.CPrim.TaskCommon
                     return;
                 }
 
-                string taskName = f.GetTaskName();
-                string taskFolderDst = TasksManager.Instance.TaskSpacePath + "\\" + taskName;
-                if (Directory.Exists(taskFolderDst))
+                string taskName = f.GetTaskName().Trim();
+                string taskFolderDst = GetPendingTaskFolder(taskName);
+                if (TasksManager.Instance.ListTask.Any(t => string.Equals(t.Name, taskName, StringComparison.OrdinalIgnoreCase)))
                 {
                     throw new Exception(NLocalizer.GetString("Lead_CPrim_TaskCommon_TaskConfigForm_ErrMsg_TaskNameExist", "该任务名称已存在"));
                 }
 
+                bool existingFolder = Directory.Exists(taskFolderDst);
                 Directory.CreateDirectory(taskFolderDst);
                 string taskTemplatePathSrc = _curDominStartPath + "\\TaskTemplates";
-                if (Directory.Exists(taskTemplatePathSrc))
+                if (!existingFolder && Directory.Exists(taskTemplatePathSrc))
                 {
                     //CopyOldLabFilesToNewLab(taskTemplatePathSrc, taskFolderDst, taskName);
                     FileHelper.CopyDirectory(taskTemplatePathSrc, taskFolderDst, false);
                 }
 
                 ITask task = TasksManager.Instance.CreateTask();
+                if (task == null) throw new InvalidOperationException("创建任务实例失败。");
                 if (task != null)
                 {
                     task.Name = taskName;
@@ -187,16 +189,20 @@ namespace Lead.CPrim.TaskCommon
                     task.CurStep = -1;
                     task.LastStep = -1;
                     task.Id = Guid.NewGuid();
-                    task.Idx = TasksManager.Instance.ListTask.Count + 1;
+                    task.Idx = TasksManager.Instance.GetNextTaskIndex();
                     task.Info = "Proc Task";
                     task.IsSelected = false;
                     task.Type = (TaskFileType)0;
-                    task.TaskFolderPath = TasksManager.Instance.TaskSpacePath + "\\" + taskName;
-                    task.OnTaskSelected += InstanceOnTaskSelected;
-                    flpTask.Controls.Add(task.TaskConfigUI);
+                    task.TaskFolderPath = taskFolderDst;
                     TasksManager.Instance.ListTask.Add(task);
                 }
-                tStripBtnSave_Click(null, null);
+                if (TasksManager.Instance.Save() != 0)
+                {
+                    TasksManager.Instance.ListTask.Remove(task);
+                    return;
+                }
+                task.OnTaskSelected += InstanceOnTaskSelected;
+                flpTask.Controls.Add(task.TaskConfigUI);
                 TasksManager.Instance.LogAdd(
     string.Format(
             NLocalizer.GetString("Lead_CPrim_TaskCommon_TaskConfigForm_Tip_TaskAddSuccess", "新增任务：[{0}]成功"), taskName)
@@ -219,11 +225,9 @@ namespace Lead.CPrim.TaskCommon
                     return;
                 }
 
-                DirectoryInfo spaceDir = new DirectoryInfo(TasksManager.Instance.TaskSpacePath);
-                if (!spaceDir.Exists)
-                {
-                    throw new Exception(NLocalizer.GetString("Lead_CPrim_TaskCommon_TaskConfigForm_ErrMsg_TaskDirPathNoExist", "任务脚本路径不存在"));
-                }
+                ITask task = TasksManager.Instance.ListTask.FirstOrDefault(t => t.IsSelected);
+                if (task == null) return;
+                string path = GetPendingTaskFolder(task.Name);
 
                 if (!UIMessageDialog.ShowMessageDialog(
                     NLocalizer.GetString("Lead_CPrim_TaskCommon_TaskConfigForm_Tip_ConfirmToDeleteTask", "确定要删除该任务吗?")
@@ -236,34 +240,32 @@ namespace Lead.CPrim.TaskCommon
                     return;
                 }
 
-                foreach (ITask task in TasksManager.Instance.ListTask)
+                int index = TasksManager.Instance.ListTask.IndexOf(task);
+                ITask selectedTask = CurTask;
+                TasksManager.Instance.ListTask.RemoveAt(index);
+                CurTask = null;
+                if (TasksManager.Instance.Save() != 0)
                 {
-                    if (!task.IsSelected)
-                    {
-                        continue;
-                    }
-
-                    flpTask.Controls.Remove(task.TaskConfigUI);
-                    TasksManager.Instance.ListTask.Remove(task);
-
-                    foreach (DirectoryInfo t in spaceDir.GetDirectories())
-                    {
-                        if (t.Name.Contains(task.Name))
-                        {
-                            string path = Path.Combine(TasksManager.Instance.TaskSpacePath, task.Name);
-                            if (Directory.Exists(path))
-                            {
-                                FileSystem.DeleteDirectory(path, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                            }
-                        }
-                    }
-                    tStripBtnSave_Click(null, null);
-                    TasksManager.Instance.LogAdd(
-                        string.Format(
-                                NLocalizer.GetString("Lead_CPrim_TaskCommon_TaskConfigForm_Tip_TaskDeleteSuccess", "删除任务：[{0}]成功"), task.Name)
-                        , LogLevel.Trace);
-                    break;
+                    TasksManager.Instance.ListTask.Insert(index, task);
+                    CurTask = selectedTask;
+                    return;
                 }
+                flpTask.Controls.Remove(task.TaskConfigUI);
+                task.OnTaskSelected -= InstanceOnTaskSelected;
+                try
+                {
+                    if (Directory.Exists(path))
+                        FileSystem.DeleteDirectory(path, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                }
+                catch (Exception ex)
+                {
+                    TasksManager.Instance.LogAdd("任务配置已删除，但脚本目录未删除：" + path + "；" + ex.Message, LogLevel.Warn, true);
+                    return;
+                }
+                TasksManager.Instance.LogAdd(
+                    string.Format(
+                            NLocalizer.GetString("Lead_CPrim_TaskCommon_TaskConfigForm_Tip_TaskDeleteSuccess", "删除任务：[{0}]成功"), task.Name)
+                    , LogLevel.Trace);
             }
             catch (Exception ex)
             {
@@ -277,11 +279,6 @@ namespace Lead.CPrim.TaskCommon
                 if (!AuthorityManager.Instance.VerifyLevel3Permission(true))
                 {
                     return;
-                }
-
-                if (IsRepeat(TasksManager.Instance.ListTask))
-                {
-                    throw new Exception(NLocalizer.GetString("Lead_CPrim_TaskCommon_TaskConfigForm_ErrMsg_TaskIndexOrTaskNameRepeat", "任务列表中有重复的任务序号或任务名"));
                 }
 
                 TasksManager.Instance.Save();
@@ -305,7 +302,7 @@ namespace Lead.CPrim.TaskCommon
 
                 bool exist = true;
                 IntPtr findPtr = FindWindow(null, "LeadDevelop");
-                _scriptInfoDic = getScriptDic(_curTask.TaskFolderPath);
+                _scriptInfoDic = getScriptDic(GetPendingTaskFolder(_curTask.Name));
                 if (findPtr.ToInt32() == 0)
                 {
                     exist = false;
@@ -367,23 +364,14 @@ namespace Lead.CPrim.TaskCommon
             }
             return fileName;
         }
-        /// <summary>检查任务名称与序号是否重复</summary>
-        /// <param name="tasks">任务集合</param>
-        /// <returns>true：重复；false：无重复</returns>
-        private bool IsRepeat(List<ITask> tasks)
+        private string GetPendingTaskRoot()
         {
-            Hashtable htName = new Hashtable();
-            Hashtable htIdx = new Hashtable();
-            foreach (ITask t in tasks)
-            {
-                if (htName.Contains(t.Name) || htIdx.Contains(t.Idx))
-                {
-                    return true;
-                }
-                htName.Add(t.Name, t.Name);
-                htIdx.Add(t.Idx, t.Idx);
-            }
-            return false;
+            return TasksManager.GetTaskRootPath(PendingTaskSpacePath);
+        }
+
+        private string GetPendingTaskFolder(string taskName)
+        {
+            return TasksManager.GetTaskFolderPath(PendingTaskSpacePath, taskName);
         }
         #endregion
 

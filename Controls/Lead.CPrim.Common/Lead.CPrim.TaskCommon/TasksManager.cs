@@ -154,9 +154,35 @@ namespace Lead.CPrim.Global
 			return 0;
 		}
 
-		/// <summary>任务保存</summary>
+		/// <summary>校验任务根目录</summary>
 		/// <returns></returns>
-		public int Save()
+        public static string GetTaskRootPath(string root)
+        {
+            if (string.IsNullOrWhiteSpace(root) || !Path.IsPathRooted(root.Trim()))
+                throw new IOException("任务路径必须是有效的绝对路径。");
+            root = Path.GetFullPath(root.Trim());
+            if (!Directory.Exists(root))
+                throw new DirectoryNotFoundException("任务脚本路径不存在：" + root);
+            return root;
+        }
+
+        public static string GetTaskFolderPath(string root, string name)
+        {
+            root = GetTaskRootPath(root);
+            if (string.IsNullOrWhiteSpace(name) || name == "." || name == ".." ||
+                name != name.Trim() || name.EndsWith(".") ||
+                name.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+                throw new InvalidOperationException("任务名称无效：" + name);
+            return Path.Combine(root, name);
+        }
+
+        public int GetNextTaskIndex()
+        {
+            return checked(Math.Max(0, ListTask.Select(task => task.Idx).DefaultIfEmpty(0).Max()) + 1);
+        }
+
+        /// <summary>保存文本框中的任务路径及任务配置。</summary>
+        public int Save()
 		{
 			if(!AuthorityManager.Instance.VerifyLevel3Permission(true))
             {
@@ -168,22 +194,17 @@ namespace Lead.CPrim.Global
             {
                 // 文本框只暂存编辑，点击保存后才同步运行路径和持久化配置。
                 string root = _tasksConfigForm?.PendingTaskSpacePath ?? _taskSpacePath;
-                if (string.IsNullOrWhiteSpace(root) || !Path.IsPathRooted(root))
-                    throw new IOException("任务路径必须是有效的绝对路径。");
-                root = Path.GetFullPath(root);
-                if (!Directory.Exists(root))
-                    throw new DirectoryNotFoundException("任务脚本路径不存在：" + root);
-                if (ListTask.GroupBy(task => task.Name).Any(group => group.Count() > 1) ||
-                    ListTask.GroupBy(task => task.Idx).Any(group => group.Count() > 1))
-                    throw new InvalidOperationException("任务列表中有重复的任务序号或任务名。");
+                root = GetTaskRootPath(root);
+                var duplicate = ListTask.GroupBy(task => task.Name, StringComparer.OrdinalIgnoreCase)
+                    .FirstOrDefault(group => group.Count() > 1);
+                if (duplicate != null)
+                    throw new InvalidOperationException("任务名称重复：" + duplicate.Key);
+                // 历史配置存在重复显示序号，任务以 GUID 标识，不因此阻断路径保存。
 
                 var paths = new List<string>();
                 foreach (ITask task in ListTask)
                 {
-                    if (string.IsNullOrWhiteSpace(task.Name) || task.Name == "." || task.Name == ".." ||
-                        task.Name.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
-                        throw new InvalidOperationException("任务名称无效：" + task.Name);
-                    string path = Path.Combine(root, task.Name);
+                    string path = GetTaskFolderPath(root, task.Name);
                     if (!Directory.Exists(path))
                         throw new DirectoryNotFoundException("任务脚本目录不存在：" + path);
                     paths.Add(path);
@@ -233,7 +254,8 @@ namespace Lead.CPrim.Global
 			_taskConfigPath = taskConfigPath;
 			if (!File.Exists(_taskConfigPath))
 			{
-				File.Create(_taskConfigPath).Close();
+				_tasksConfigForm = new TaskConfigForm();
+                LogAdd("任务配置文件不存在，将在点击保存后创建：" + _taskConfigPath, LogLevel.Warn);
 				return iRet;
 			}
 			Guid curId;
