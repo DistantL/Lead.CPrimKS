@@ -8,6 +8,10 @@
 
 # Build results
 
+# Local runtime/output tree and documentation are not versioned.
+/Lead.CPrim/
+/docs/
+
 [Dd]ebug/
 [Rr]elease/
 x64/
